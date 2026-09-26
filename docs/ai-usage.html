@@ -40,6 +40,85 @@
 
       <h1>AI-usage log</h1>
 
+      
+      <article class="entry" id="ai-2026-09-26-df88-new">
+        <h3>2026-09-26 · session <code>arena/01a0dfc9-learngemsdoe</code> — Pass 1-3 re-verification, clean UI rebuild, site audit</h3>
+        <p><strong>Tool.</strong> Arena.ai Agent Mode — coding agent with web fetch (fetch_page), file read/write, shell execution (bash) in this repository. No other generative-AI service called. No image/audio/video generation. No prediction GeoTIFF produced, scored, submitted, no weekly slot used. No DrivenData account created or credentials stored.</p>
+
+        <p><strong>Did — source verification (fetched and read, not recalled) — Pass 1</strong></p>
+        <ul>
+          <li>Competition hub <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">hub</a>: deadline Dec 3 2026 11:59 p.m. UTC, prize $300k split, eligibility summary, 6 how-to steps — verified today.</li>
+          <li>Problem description page 967 both chunks <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a>: structure Initial $50k fixed private + Final $250k expanded via expert review, datasets GeoDAWN + INGENIOUS + 1m_DEM_links.csv, features list, labels USGS+INGENIOUS, external data licence, metric DTI α=0.2 β=0.8 R=300 m kernel (1-d/R)+, worked example TPw 3.00 FPw 1.89 FNw 2.00 TIw 0.60, submission format EPSG:32611 100 m float32 [0,1] same bounds null/nan — verified today.</li>
+          <li>About/resources page 968 <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">page 968</a>: sponsor DOE OG, GeoDAWN 149,030 line-km 51,857 km² EarthMRI, lidar via 3DEP coordinated similar extent, fault definition trace/zone, detection methods field+seismic+gravity/magnetic+remote sensing+edge/Hough/DL, subtle/hidden quote, Mattéo 2021 DOI 10.1029/2020JB021269 + Hermant 2025 PDF — verified today.</li>
+          <li>Rules page <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">rules</a> → HeroX 2274 — verified today.</li>
+          <li>Official rules PDF NLR <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">docs.nlr.gov/docs/fy26osti/96647.pdf</a> (redirect from nlr.gov) all 7 chunks re-read today: Preface change-log empty, §1.1 prize, §1.2 defers dates to website, §1.3 eligibility full, §2 background GeoDAWN lidar/magnetic/radiometric + USGS 1 m DEM + labels USGS QFFD + new faults NLR/USGS experts, §3.2 single GeoTIFF entirety GeoDAWN 100 m 3 per week AI disclosure verbatim, §3.3 INGENIOUS labels, §3.6 public leaderboard may not equal final blind selection, §A.1 5 p.m. ET flagged, §A.2 ACH/W-9, §A.3 single-entity, §A.4 public vs confidential, §A.10 FOIA, §A.12 risk review not appealable may select no winners, §A.13 program policy factors — verified today.</li>
+          <li>Reference solution <a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a>: author Prof John Lipor, env CPU/GPU CUDA 12.6/13.0, notebook ensemble U-Net multi split Tversky loss weighted FN&gt;FP, filenames numeric_features.tif labels.tif, preprocessing &lt; -1e38→NaN per-channel min-max [0,1] — verified today.</li>
+          <li>Forum category JSON <a href="https://community.drivendata.org/c/gems-prize-challenge/111.json">111.json</a> both chunks re-read today: 11 topics newest 11543 (2026-09-25) 1 post, 11540 1 post, 11527 10 posts, 11528 2 posts, 11536 2 posts, 11529 2 posts, 11516 4 posts, 11531 1 post, 11526 1 post, 11524 2 posts, 11499 pinned 2 posts — no new topic since 11543.</li>
+          <li>Forum threads JSON re-read today: 11516 post4 pixel-exact mask identical to training labels + near-known fully penalized + new-fault ground truth can lie within 300 m correction outcome; post2 masked excluded both rounds; 11536 new fault any pixel not captured can include newly mapped geometry; 11527 post7 not sharing details + Phase2 largest pool updated by expert review; 11524 rolling window; 11528 licence must permit use + sharing; 11529 single band bug.</li>
+          <li>GeoDAWN USGS data page <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS data page</a> re-read today: 149,030 line-km 51,857 sq km Area1 Clayton Valley rank1 200 m lines 90° 2,000 m ties 180° 100/150 m Area2 remainder rank1-2 400 m/4,000 m 150/200 m 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah flown 2021-11-01 to 2022-11-20 EDCON-PRJ Tonopah Precision GeoSurveys Bell Jet Ranger rest Cloudstreet Cessna 180 Turbo 206 drape 22-degree variable clearance warning verbatim magnetic processing diurnal/aircraft/tie-line/micro-levelling/IGRF radiometric aircraft/cosmic/radon/Compton/altitude deliverables grd/map/gdb Oasis Montaj/Geosoft Viewer + Esri shapefiles flight paths/outlines CC0 1.0 — verified today.</li>
+          <li>ScienceBase item <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a> + ?format=json&amp;fields=spatial re-read today: publication 2024-03-01 start 2021-11-01 end 2022-11-20 citation Glen Earney 2024 DOI <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a> boundingBox minX -120.0024 maxX -116.1415 minY 37.3641 maxY 40.7247 WGS84 file list GeoDAWN_area1_outline.zip 1,190 bytes area2 1,497 bytes extent 2,774 bytes.</li>
+          <li>INGENIOUS GDR 1391 <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> re-read today: DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a> CC BY 4.0 9 files 116.98 MB list 2m temp probe 1.03 MB earthquake density 22.98 MB independent+dependent conductance MT 5 depth 2-200 km DOI <a href="https://doi.org/10.5066/P9TWT2LU">10.5066/P9TWT2LU</a> elevation trend detrended DOI <a href="https://doi.org/10.5066/P9MQRCBY">10.5066/P9MQRCBY</a> geodetic shear/dilation 51.99 MB Nevada Geodetic Lab gravity/magnetics DOI <a href="https://doi.org/10.5066/P9Z6SA1Z">10.5066/P9Z6SA1Z</a> heat flow DOI <a href="https://doi.org/10.5066/P9BZPVUC">10.5066/P9BZPVUC</a> paleo geothermal 82.04 kB sinter/tufa slip/dilation DOI <a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a> Qfaults v1 5.76 MB v2 5.85 MB supersedes v1 with field definitions text volcanics 9.44 MB study area boundary 6.68 kB thermal conductivity well/spring 19.85 MB — verified today.</li>
+          <li>USGS QFFD <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">faults page</a> re-read today: coseismic surface deformation past 1.6 Ma verbatim, timescale 1983 1.6 Ma 1999 1.8 Ma 2009 2.6 Ma 2018 2.58 Ma, 2017-01-12 limited metadata archived via abbreviated record, Search retired 2026-02-26 legacy via interactive map DOI <a href="https://doi.org/10.5066/F7S75FJM">10.5066/F7S75FJM</a>, downloads KML 13 MB 5 layers + GIS zip 16 MB, citation USGS 2020 DOI <a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a>, cooperators 12 states Nevada = NBMG, Background M&gt;6 archive, History early 1970s nuclear reactor siting state maps Jennings 1975 Witkind 1975 first true compilations Johns 1982 Stickney Bartholemew 1987 Hecker 1993 1990 ILP Working Group II-2 World Map Active Faults Trifonov 1993 USGS developing earnest NEHRP + state surveys — verified today.</li>
+          <li>NBMG service <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson">layer JSON</a>: 22,956 polylines supportsStatistics false — verified today.</li>
+        </ul>
+
+        <p><strong>Did — code (Pass 1)</strong></p>
+        <ul>
+          <li>Ran <code>python3 scripts/metrics.py --selftest</code>: 11 PASS pure python backend.</li>
+          <li>Ran <code>python3 scripts/check_site.py</code>: 18 pages 64 sources PASS.</li>
+          <li>Ran <code>python3 scripts/build_search_index.py --check</code>: 100 items PASS.</li>
+          <li>Ran <code>bash scripts/download_competition_data.sh</code>: STATUS no competition GeoTIFF/CSV in data/ — training remains blocked, public-outline attempt ok=0 curl exit 35 TLS failure — environment limit, not evidence absence.</li>
+          <li>Ran <code>python scripts/prepare_data.py</code>: blocked_no_data — expected.</li>
+          <li>Rebuilt <a href="index.html">docs/index.html</a> with clean UI, verified-today banner session id, explicit data-placement blocker copy-paste, competition facts table source-linked verified today, research library cards, hypothesis backlog table, flagged irregularities 12 items, verification commands, official links.</li>
+        </ul>
+
+        <p><strong>Did — Pass 2 review (bugs, missing requirements, incorrect assumptions, edge cases)</strong></p>
+        <ul>
+          <li>Re-checked internal links and anchors: all resolve via check_site.py.</li>
+          <li>Re-checked stats: 6 domains, 11 hypotheses, 19 bands, 100 m grid 3730×3292, 300 m kernel R, $300k — verified against problem description and hub.</li>
+          <li>Re-checked hypothesis statuses: all untested because data not placed, H3 blocked needs 1 m DEM links, H10 blocked needs Silver et al 2011 mapping — consistent.</li>
+          <li>Re-checked source allowlist: every external link in docs/ appears on sources.html or PROJECT_BRIEF_GEMSDOE.md (63 URLs) — check_site enforces.</li>
+          <li>Re-checked no hallucinated numbers: deadline Dec 3 2026 11:59 p.m. UTC verified hub, prize splits verified rules §1.1 + hub, metric α=0.2 β=0.8 R=300 m worked example 0.60 verified problem description, raster geometry 3292×3730 EPSG:32611 float32 verified reference notebook, GeoDAWN 149,030 line-km 51,857 km² verified USGS data page, flight specs 200 m/400 m 2,000 m/4,000 m azimuths 90°/180° verified same page, 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah verified, CC0 1.0 verified, 1.6 Ma QFFD definition verified faults page, 22,956 polylines verified NBMG service, 1,179 envelope census verified CG-9 queries — all traceable.</li>
+          <li>Re-checked compliance: AI log, changelog, hypothesis backlog visible status, research library by domain, links back to executive-summary and pipeline, submission gate pipeline.html — all met.</li>
+          <li>Fixed: updated docs/index.html banner to session arena/01a0dfc9 and verified-today list, ensured forum watch 11 topics newest 11543 still accurate today (re-fetched category JSON), ensured rules PDF redirect docs.nlr.gov noted, ensured data-placement blocker instructions clear copy-paste.</li>
+        </ul>
+
+        <p><strong>Did — Pass 3 re-check entire implementation against original request</strong></p>
+        <ul>
+          <li>Verified site exists docs/ with GitHub Pages workflow .github/workflows/pages.yml deploys docs on push main, .nojekyll present, index.html clean UI user friendly simple organized, includes all relevant info with official verified links, research library 6 domains 57 entries each source-linked, hypothesis backlog 11 cards with layers/signature/gap reasoning/DTI impact/cost/status, changelog dated append-only, AI-usage log incremental compliance §3.2, links back to executive-summary and pipeline, no hallucinated sources numbers citations (check_site enforces), no submission generation or weekly-slot use (pipeline.html gate, no training/inference script emitting GeoTIFF, only metrics.py inspection-only), no second site/repo/account, flagged irregularities 12 items recorded not smoothed, eligibility re-confirmed §1.3 no team change, checkpoint commit + log entry, idempotent entries extended not duplicated.</li>
+          <li>Remaining blocker truthfully recorded: competition rasters not in data/ requires login, public outlines TLS failure environment limit, training/inference pipeline not present by design — only metrics verified working CPU. Handoff claim “full train→inference→validate pipeline ready” flagged as inaccurate — not smoothed.</li>
+          <li>Data placement instructions copy-paste bash scripts/download_competition_data.sh + python scripts/prepare_data.py present on index.html, pipeline.html, README.md, feature-stack.html.</li>
+        </ul>
+
+        <p><strong>Did not</strong></p>
+        <ul>
+          <li>Create or use DrivenData account or credentials.</li>
+          <li>Generate, validate, submit prediction raster, use weekly slot, touch submission API.</li>
+          <li>Create second site, repository, account, registration, including staging.</li>
+          <li>Invent source, DOI, number, quotation. Every quoted sentence copied from page fetched this session.</li>
+          <li>Transcribe number from source whose labels not legible.</li>
+          <li>Add training/inference script emitting submission GeoTIFF — gated by design.</li>
+        </ul>
+
+        <p><strong>Human review still required</strong></p>
+        <ul>
+          <li>Open every linked primary URL and confirm quotations; confirm eligibility against rules §1.3 if team composition or affiliations change; decide whether to raise GV-12 submission extent (entirety GeoDAWN vs same bounds training data) and GV-13 GeoDAWN contents (lidar vs magnetic/radiometric + 3DEP coordinated) on official forum; place competition rasters and run six CG-9 queries against outline polygons not just bounding box; read INGENIOUS v2 field-definition text inside zip before translating MAPSCALE codes; read Hermant chunks 7+ tail reference list + Mattéo 2021 body methods; obtain Silver et al 2011 mapping for H10 anchor.</li>
+        </ul>
+
+        <p><strong>Fabrication controls used</strong></p>
+        <ul>
+          <li>Quoted rules sentences copied from PDF chunks fetched this session via fetch_page.</li>
+          <li>Attribute counts copied from {"count": N} JSON responses then added checked against 22,956 — arithmetic labelled.</li>
+          <li>Numbers α=0.2 β=0.8 R=300 m prize splits 3292×3730 19 bands 149,030 line-km 51,857 km² 200 m/400 m line spacing 1,100 faults 264 km 50 m buffer 6.5% positives 1.6 Ma — each copied from document named beside them, not estimated.</li>
+          <li>Derived quantities show inputs marked arithmetic or inference: grid-area ≈122,800 km² bounding box vs 51,857 km² surveyed ≈2.4×, envelope census 1,179 of 22,956 =5.1% Inferred 7.5% inside box vs 23.0% regionally — arithmetic from verified counts labelled inference for interpretation.</li>
+          <li>Absence-of-evidence arguments “what is not in 19-band stack” labelled inference.</li>
+          <li>External link allowlist enforced by scripts/check_site.py offline — every outbound link must appear on sources page or PROJECT_BRIEF_GEMSDOE.md.</li>
+          <li>Search index freshness enforced by scripts/build_search_index.py --check.</li>
+        </ul>
+      </article>
+
+
+
       <article class="entry" id="ai-2026-09-26-df88">
         <h3>2026-09-26 · session <code>arena/01a0df88-learngemsdoe</code></h3>
         <p><strong>Tool.</strong> Arena.ai Agent Mode — a coding agent with web fetch, web search, file read/write and

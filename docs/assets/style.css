@@ -1,5 +1,7 @@
-/* GEMSDOE research library — stylesheet
-   Plain CSS, no build step. GitHub Pages serves this directory directly. */
+/* GEMSDOE research library — stylesheet v2
+   Plain CSS, no build step. GitHub Pages serves this directory directly.
+   Design goals: clean UI, user-friendly, simple, organized, easy to read.
+   Re-verified 2026-09-26, session arena/01a0dfc9 */
 
 :root {
   --bg: #f7f7f5;

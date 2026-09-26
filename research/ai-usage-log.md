@@ -2,7 +2,7 @@
 
 Canonical HTML: [`docs/ai-usage.html`](../docs/ai-usage.html)
 
-Required by Official Rules §3.2: <https://www.nlr.gov/docs/fy26osti/96647.pdf>
+Required by Official Rules §3.2: <https://www.nlr.gov/docs/fy26osti/96647.pdf> (redirect to docs.nlr.gov verified 2026-09-26)
 
 > "Using generative AI technology in the development of your prize submission is allowed. However, you must indicate
 > in the narrative (not included in the word count) the extent to which, if any, you used generative AI technology and
@@ -13,6 +13,70 @@ Required by Official Rules §3.2: <https://www.nlr.gov/docs/fy26osti/96647.pdf>
 
 This log is built incrementally, session by session, so the §3.2 narrative can be assembled from a contemporaneous
 record rather than reconstructed at the deadline.
+
+---
+
+## 2026-09-26 · session `arena/01a0dfc9-learngemsdoe`
+
+**Tool.** Arena.ai Agent Mode — coding agent with web fetch (fetch_page), file read/write, shell execution (bash) in this repository. No other generative-AI service called. No image/audio/video generation. No prediction GeoTIFF produced, scored, submitted, and no weekly submission slot used. No DrivenData account created or credentials stored.
+
+**Did — source verification (fetched and read, not recalled) — Pass 1-3**
+
+- Competition hub <https://www.drivendata.org/competitions/306/competition-doe-gems/>: deadline Dec 3 2026 11:59 p.m. UTC, prize $300k split, eligibility summary, 6 how-to steps — verified today.
+- Problem description page 967 both chunks <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/>: structure Initial $50k fixed private + Final $250k expanded via expert review, datasets GeoDAWN + INGENIOUS + 1m_DEM_links.csv, features list, labels USGS+INGENIOUS, external data licence, metric DTI α=0.2 β=0.8 R=300 m triangular kernel (1-d/R)+, worked example TPw 3.00 FPw 1.89 FNw 2.00 TIw 0.60, submission format EPSG:32611 100 m float32 [0,1] same bounds null/nan — verified today.
+- About/resources page 968 <https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/>: sponsor DOE OG, GeoDAWN 149,030 line-km 51,857 km² EarthMRI, lidar via 3DEP coordinated similar extent, fault definition trace/zone, detection methods field+seismic+gravity/magnetic+remote sensing+edge/Hough/DL, subtle/hidden quote, additional info Mattéo 2021 DOI 10.1029/2020JB021269 + Hermant 2025 PDF — verified today.
+- Rules page <https://www.drivendata.org/competitions/306/competition-doe-gems/rules/>: points to HeroX 2274 — verified today.
+- Official rules PDF NLR <https://www.nlr.gov/docs/fy26osti/96647.pdf> → docs.nlr.gov, all 7 chunks re-read today: Preface change-log empty, §1.1 prize, §1.2 key dates defers to website, §1.3 eligibility full, §1.4 goals, §2 background GeoDAWN lidar/magnetic/radiometric + USGS 1 m DEM + labels USGS QFFD + new faults NLR/USGS experts, §3.2 process single GeoTIFF entirety GeoDAWN 100 m 3 per week AI disclosure verbatim, §3.3 labels INGENIOUS, §3.6 public leaderboard may not equal final blind selection interviews judge DOE federal employee winner ~60 days, §A.1 5 p.m. ET flagged, §A.2 ACH/W-9, §A.3 single-entity, §A.4 public vs confidential double-bracket, §A.10 FOIA 29 CFR 70.26, §A.12 risk review not appealable may select no winners, §A.13 program policy factors.
+- Reference solution <https://github.com/drivendataorg/gems-prize-reference-solution>: README author Prof John Lipor, env CPU/GPU CUDA 12.6/13.0, notebook approach ensemble U-Net multi split Tversky loss weighted FN>FP data filenames numeric_features.tif labels.tif preprocessing < -1e38→NaN per-channel min-max [0,1] — verified today.
+- Forum category JSON <https://community.drivendata.org/c/gems-prize-challenge/111.json> both chunks re-read today: 11 topics newest 11543 (2026-09-25) 1 post, 11540 1 post, 11527 10 posts, 11528 2 posts, 11536 2 posts, 11529 2 posts, 11516 4 posts, 11531 1 post, 11526 1 post, 11524 2 posts, 11499 pinned 2 posts. No new topic since 11543.
+- Forum thread JSON re-read today: 11516 post4 pixel-exact mask identical to training labels + near-known fully penalized + new-fault ground truth can lie within 300 m correction outcome; post2 masked excluded both rounds; 11536 new fault any pixel not captured can include newly mapped geometry; 11527 post7 not sharing details about data sources/fault types/coverage + Phase2 largest pool updated by expert review; 11524 rolling window; 11528 licence must permit use + sharing; 11529 single band bug.
+- GeoDAWN USGS data page <https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and> re-read today: 149,030 line-km 51,857 sq km Area1 Clayton Valley rank1 200 m lines 90° 2,000 m ties 180° 100/150 m Area2 remainder rank1-2 400 m/4,000 m 150/200 m 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah flown 2021-11-01 to 2022-11-20 EDCON-PRJ Tonopah Precision GeoSurveys Bell Jet Ranger rest Cloudstreet Cessna 180 Turbo 206 drape 22-degree variable clearance warning verbatim magnetic processing diurnal/aircraft/tie-line/micro-levelling/IGRF radiometric aircraft/cosmic/radon/Compton/altitude deliverables grd/map/gdb Oasis Montaj/Geosoft Viewer + Esri shapefiles flight paths/outlines CC0 1.0.
+- ScienceBase item <https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7> + ?format=json&fields=spatial re-read today: publication 2024-03-01 start 2021-11-01 end 2022-11-20 citation Glen Earney 2024 DOI 10.5066/P93LGLVQ boundingBox minX -120.0024 maxX -116.1415 minY 37.3641 maxY 40.7247 WGS84 file list GeoDAWN_area1_outline.zip 1,190 bytes area2 1,497 bytes extent 2,774 bytes.
+- INGENIOUS GDR 1391 <https://gdr.openei.org/submissions/1391> re-read today: DOI 10.15121/1881483 CC BY 4.0 9 files 116.98 MB list 2m temp probe 1.03 MB earthquake density 22.98 MB independent+dependent conductance MT 5 depth 2-200 km DOI 10.5066/P9TWT2LU elevation trend detrended DOI 10.5066/P9MQRCBY geodetic shear/dilation 51.99 MB Nevada Geodetic Lab gravity/magnetics DOI 10.5066/P9Z6SA1Z heat flow DOI 10.5066/P9BZPVUC paleo geothermal 82.04 kB sinter/tufa slip/dilation DOI 10.5066/P9YL58W6 Qfaults v1 5.76 MB v2 5.85 MB supersedes v1 with field definitions text volcanics 9.44 MB study area boundary 6.68 kB thermal conductivity well/spring 19.85 MB.
+- USGS QFFD <https://www.usgs.gov/programs/earthquake-hazards/faults> re-read today: coseismic surface deformation past 1.6 Ma verbatim, timescale 1983 1.6 Ma 1999 1.8 Ma 2009 2.6 Ma 2018 2.58 Ma, 2017-01-12 limited metadata archived via abbreviated record, Search retired 2026-02-26 legacy via interactive map DOI 10.5066/F7S75FJM, downloads KML 13 MB 5 layers + GIS zip 16 MB, citation USGS 2020 DOI 10.5066/P9BCVRCK, cooperators 12 states Nevada = NBMG, Background M>6 archive, History early 1970s nuclear reactor siting state maps Jennings 1975 Witkind 1975 first true compilations Johns 1982 Stickney Bartholemew 1987 Hecker 1993 1990 ILP Working Group II-2 World Map Active Faults Trifonov 1993 USGS developing earnest NEHRP + state surveys.
+- NBMG service layer JSON: 22,956 polylines supportsStatistics false CRS NAD83 Contiguous USA Albers.
+- DOI resolutions: 10.5066/P93LGLVQ → GeoDAWN Glen Earney 2024, 10.15121/1881483 → INGENIOUS Ayling 2022, 10.5066/P9BCVRCK → QFFD, 10.5066/F7S75FJM → interactive map — verified.
+
+**Did — code (Pass 1-3)**
+
+- Ran python3 scripts/metrics.py --selftest: 11 PASS pure python backend (numpy fallback works).
+- Ran python3 scripts/check_site.py: 18 pages 63 sources PASS.
+- Ran python3 scripts/build_search_index.py --check: 99 items PASS.
+- Ran bash scripts/download_competition_data.sh: STATUS no competition GeoTIFF/CSV in data/ — training remains blocked, public-outline attempt ok=0 curl exit 35 TLS failure to sciencebase.gov gdr.openei.org usgs.gov (environment limit, not evidence absence) — same as previous sessions, not smoothed.
+- Ran python scripts/prepare_data.py: blocked_no_data — expected.
+- Rebuilt docs/index.html with clean UI, verified-today banner session id, explicit data-placement blocker copy-paste, competition facts table source-linked verified today, research library cards, hypothesis backlog table, flagged irregularities 12 items, verification commands, official links.
+
+**Did — writing (Pass 2-3 review)**
+
+- Re-checked stats: 6 domains, 11 hypotheses, 19 bands, 100 m grid 3730×3292, 300 m kernel R, $300k — all verified against problem description and hub.
+- Re-checked hypothesis statuses: all untested because data not placed, H3 blocked needs 1 m DEM links, H10 blocked needs Silver et al 2011 mapping — consistent.
+- Re-checked source allowlist: every external link in docs/ appears on docs/sources.html or PROJECT_BRIEF_GEMSDOE.md (63 URLs) — check_site enforces.
+- Re-checked no hallucinated numbers: deadline Dec 3 2026 11:59 p.m. UTC verified hub, prize splits verified rules §1.1 + hub, metric α=0.2 β=0.8 R=300 m worked example 0.60 verified problem description, raster geometry 3292×3730 EPSG:32611 float32 verified reference notebook, GeoDAWN 149,030 line-km 51,857 km² verified USGS data page, flight specs 200 m/400 m 2,000 m/4,000 m azimuths 90°/180° verified same page, 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah verified, CC0 1.0 verified, 1.6 Ma QFFD definition verified faults page, 22,956 polylines verified NBMG service, 1,179 envelope census verified CG-9 queries (739 Well 351 Moderately 89 Inferred 0 Poor/Other/blank) — all traceable.
+- Re-checked compliance: AI log, changelog, hypothesis backlog visible status, research library by domain, links back to executive-summary and pipeline, submission gate pipeline.html — all met.
+- Fixed: updated docs/index.html banner to session arena/01a0dfc9 and verified-today list, ensured forum watch 11 topics newest 11543 still accurate today (re-fetched category JSON), ensured rules PDF redirect docs.nlr.gov noted, ensured data-placement blocker instructions clear copy-paste.
+
+**Did not**
+
+- Create or use DrivenData account or credentials.
+- Generate, validate, submit prediction raster, use weekly slot, touch submission API.
+- Create second site, repo, account, registration, including staging.
+- Invent source, DOI, number, quotation. Every quoted sentence copied from page fetched this session.
+- Transcribe number from source whose labels not legible.
+- Add training/inference script emitting submission GeoTIFF — gated by design.
+
+**Human review still required**
+
+- Open every linked primary URL and confirm quotations; confirm eligibility against rules §1.3 if team composition or affiliations change; decide whether to raise GV-12 submission extent (entirety GeoDAWN vs same bounds training data) and GV-13 GeoDAWN contents (lidar vs magnetic/radiometric + 3DEP coordinated) on official forum; place competition rasters and run six CG-9 queries against outline polygons not just bounding box; read INGENIOUS v2 field-definition text inside zip before translating MAPSCALE codes; read Hermant chunks 7+ tail reference list + Mattéo 2021 body methods; obtain Silver et al 2011 mapping for H10 anchor.
+
+**Fabrication controls used**
+
+- Quoted rules sentences copied from PDF chunks fetched this session via fetch_page.
+- Attribute counts copied from {"count": N} JSON responses then added checked against 22,956 — arithmetic labelled.
+- Numbers α=0.2 β=0.8 R=300 m prize splits 3292×3730 19 bands 149,030 line-km 51,857 km² 200 m/400 m line spacing 1,100 faults 264 km 50 m buffer 6.5% positives 1.6 Ma — each copied from document named beside them, not estimated.
+- Derived quantities show inputs marked arithmetic or inference: grid-area ≈122,800 km² bounding box vs 51,857 km² surveyed ≈2.4×, envelope census 1,179 of 22,956 =5.1% Inferred 7.5% inside box vs 23.0% regionally — arithmetic from verified counts labelled inference for interpretation.
+- Absence-of-evidence arguments "what is not in 19-band stack" labelled inference.
+- External link allowlist enforced by scripts/check_site.py offline — every outbound link must appear on sources page or PROJECT_BRIEF_GEMSDOE.md.
+- Search index freshness enforced by scripts/build_search_index.py --check.
 
 ---
 
