@@ -4,108 +4,331 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Source index — GEMSDOE</title>
+  <meta name="description" content="Every source cited by the GEMSDOE research library, with what was read, what was quoted, and what remains unverified.">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="index.html">GEMSDOE research</a>
+      <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
+        <a href="feature-stack.html">Feature stack</a>
         <a href="hypotheses.html">Hypotheses</a>
-        <a href="research/governance.html">Governance</a>
         <a href="sources.html">Sources</a>
         <a href="pipeline.html">Pipeline</a>
+        <a href="research/governance.html">Governance</a>
         <a href="changelog.html">Changelog</a>
         <a href="ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main" class="wide" style="max-width:72rem">
-    <p class="meta">Fetched or confirmed 2026-09-26 · click through for manual review</p>
-    <h1>Source index</h1>
-    <p class="lede">Primary and clearly authoritative sources only. If a row is marked unverified, the link may exist but the content was not fully extracted or not independently confirmed.</p>
 
-    <h2>Competition (DrivenData / NLR / HeroX)</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Document</th><th>URL</th><th>Fetched</th></tr></thead>
-        <tbody>
-          <tr><td>Competition hub</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">drivendata.org/competitions/306/competition-doe-gems/</a></td><td>yes</td></tr>
-          <tr><td>Problem description (p. 967)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">…/page/967/</a></td><td>yes (2 chunks)</td></tr>
-          <tr><td>About / resources (p. 968)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">…/page/968/</a></td><td>yes</td></tr>
-          <tr><td>Data tab</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">…/data/</a></td><td>yes — redirects to login</td></tr>
-          <tr><td>DrivenData rules page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">…/rules/</a></td><td>yes — points to HeroX</td></tr>
-          <tr><td>HeroX rules resource</td><td><a href="https://www.herox.com/GEMSPrize/resource/2274">herox.com/GEMSPrize/resource/2274</a></td><td>yes — points to NLR PDF</td></tr>
-          <tr><td>Official rules PDF (NLR)</td><td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a></td><td>yes (chunks 0–4 of 7; remaining appendix not fully extracted)</td></tr>
-          <tr><td>Reference solution</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a></td><td>yes README + notebook start</td></tr>
-          <tr><td>Forum category</td><td><a href="https://community.drivendata.org/c/gems-prize-challenge/111">community.drivendata.org/c/gems-prize-challenge/111</a></td><td>yes</td></tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="shell">
+    <main id="main" style="max-width:60rem">
+      <p class="meta">Primary and clearly authoritative sources only · re-fetched and re-read 2026-09-26 · click through for manual review</p>
 
-    <h2>Forum threads (manual review)</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Thread</th><th>Staff answer?</th><th>URL</th></tr></thead>
-        <tbody>
-          <tr><td>About this category</td><td>category intro; eligibility question unanswered</td><td><a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a></td></tr>
-          <tr><td>Scoring mask / final-round labels</td><td>yes (chrisk-dd)</td><td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">11516</a></td></tr>
-          <tr><td>Weekly submissions reset</td><td>yes — rolling window</td><td><a href="https://community.drivendata.org/t/weekly-submissions/11524">11524</a></td></tr>
-          <tr><td>How new test faults were identified</td><td>yes — no details beyond the problem description (<a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">post 7</a>)</td><td><a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527">11527</a></td></tr>
-          <tr><td>Paid external data</td><td>yes — must be shareable with sponsor</td><td><a href="https://community.drivendata.org/t/paid-for-external-data-license/11528">11528</a></td></tr>
-          <tr><td>Label GeoTIFF “19 bands”</td><td>yes — notebook print bug</td><td><a href="https://community.drivendata.org/t/why-does-the-training-fault-labels-file-in-the-data-tab-have-a-single-band-while-the-labels-in-the-reference-solution-repo-have-19-bands/11529">11529</a></td></tr>
-          <tr><td>Where do you draw the line?</td><td>yes — new geometry of existing systems counts</td><td><a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">11536</a></td></tr>
-          <tr><td>Team eligibility homepage vs PDF</td><td>unanswered at fetch</td><td><a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a></td></tr>
-          <tr><td>Institutional limit / UEI</td><td>unanswered</td><td><a href="https://community.drivendata.org/t/institutional-limit/11526">11526</a></td></tr>
-          <tr><td>Teammate interpretation as labels</td><td>unanswered</td><td><a href="https://community.drivendata.org/t/using-a-teammates-geological-interpretation-as-training-labels/11543">11543</a></td></tr>
-          <tr><td>Looking for a geologist teammate</td><td>n/a (recruiting)</td><td><a href="https://community.drivendata.org/t/looking-for-a-geologist-teammate-lidar-fault-mapping-basin-and-range-to-join-a-working-ml-pipeline/11531">11531</a></td></tr>
-        </tbody>
-      </table>
-    </div>
+      <h1>Source index</h1>
+      <p class="lede">
+        Nothing enters the research library without a row here. “Read” means the document was opened this session and the
+        quoted content confirmed against it. “Record only” means the existence and bibliographic details are confirmed but
+        the content is not — no claim from a record-only source is reproduced as fact anywhere on this site.
+      </p>
 
-    <h2>Data releases and catalogues</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Dataset</th><th>Citation</th><th>URL</th></tr></thead>
-        <tbody>
-          <tr><td>GeoDAWN magnetics/radiometrics</td><td>Glen &amp; Earney, 2024</td><td><a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></td></tr>
-          <tr><td>INGENIOUS Great Basin compilation</td><td>Ayling et al., 2022</td><td><a href="https://doi.org/10.15121/1881483">10.15121/1881483</a></td></tr>
-          <tr><td>INGENIOUS project page</td><td>GBCGE</td><td><a href="https://gbcge.org/current-projects/ingenious/">gbcge.org/current-projects/ingenious</a></td></tr>
-          <tr><td>USGS QFFD landing page</td><td>USGS Earthquake Hazards</td><td><a href="https://www.usgs.gov/programs/earthquake-hazards/faults">usgs.gov/programs/earthquake-hazards/faults</a></td></tr>
-          <tr><td>USGS QFFD citation DOI</td><td>USGS, 2020</td><td><a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a></td></tr>
-          <tr><td>USGS QFFD interactive map</td><td>—</td><td><a href="https://doi.org/10.5066/F7S75FJM">10.5066/F7S75FJM</a></td></tr>
-          <tr><td>QFFD GIS zip</td><td>—</td><td><a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a></td></tr>
-          <tr><td>QFFD 1993 guidelines</td><td>Haller, Machette, Dart</td><td><a href="https://pubs.usgs.gov/of/1993/0338/report.pdf">OF 93-338</a></td></tr>
-          <tr><td>QFFD 2004 fact sheet</td><td>Machette, Haller, Wald</td><td><a href="https://pubs.usgs.gov/fs/2004/3033/fs-2004-3033.html">FS 2004-3033</a></td></tr>
-          <tr><td>Regional Great Basin gravity/magnetics</td><td>Glen et al., 2022</td><td><a href="https://doi.org/10.5066/P9Z6SA1Z">10.5066/P9Z6SA1Z</a></td></tr>
-          <tr><td>Electrical conductance maps</td><td>Peacock &amp; Bedrosian, 2022</td><td><a href="https://doi.org/10.5066/P9TWT2LU">10.5066/P9TWT2LU</a></td></tr>
-          <tr><td>Heat flow maps</td><td>DeAngelo et al., 2022</td><td><a href="https://doi.org/10.5066/P9BZPVUC">10.5066/P9BZPVUC</a></td></tr>
-          <tr><td>Slip/dilation tendency</td><td>Siler, 2022</td><td><a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a></td></tr>
-          <tr><td>INGENIOUS Qfaults v2 zip</td><td>—</td><td><a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">GDR file</a></td></tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="filter">
+        <label for="sq">Filter sources</label>
+        <input id="sq" type="search" placeholder="e.g. forum, USGS, tilt, unverified" data-filter="#all-sources" data-filter-count="#scount">
+        <span class="small" id="scount"></span>
+      </div>
 
-    <h2>Methods / prior art papers</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Paper</th><th>DOI or URL</th><th>Full text this session</th></tr></thead>
-        <tbody>
-          <tr><td>Mattéo et al., 2021, JGR</td><td><a href="https://doi.org/10.1029/2020JB021269">10.1029/2020JB021269</a></td><td>title/authors yes; methods incomplete</td></tr>
-          <tr><td>Hermant et al., 2025, Stanford Workshop</td><td><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">PDF</a></td><td>yes (chunks 0–1 of 8)</td></tr>
-          <tr><td>Miller &amp; Singh, 1994, J. Appl. Geophys.</td><td>v. 32, p. 213–217</td><td>citation corroborated; PDF not opened</td></tr>
-          <tr><td>Verduzco et al., 2004, The Leading Edge</td><td>v. 23, p. 116–119</td><td>citation corroborated; PDF not opened</td></tr>
-          <tr><td>Kreemer &amp; Young, 2022, SRL</td><td><a href="https://doi.org/10.1785/0220220153">10.1785/0220220153</a></td><td>existence yes; abstract not extracted</td></tr>
-          <tr><td>Hart-Wagoner et al., GRC feature engineering</td><td><a href="https://publications.mygeoenergynow.org/grc/1034813.pdf">1034813.pdf</a></td><td>snippets via search</td></tr>
-        </tbody>
-      </table>
+      <div id="all-sources">
+
+      <h2>Competition — DrivenData, NLR, HeroX</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Document</th><th>URL</th><th class="nowrap">State</th><th>What was taken from it</th></tr></thead>
+          <tbody>
+            <tr data-tags="competition drivendata hub">
+              <td>Competition hub</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">drivendata.org/competitions/306/competition-doe-gems/</a></td>
+              <td><span class="chip verified">read</span></td>
+              <td>End date, prize structure, how-to-compete steps, eligibility summary, use-of-test-data and external-data notes.</td>
+            </tr>
+            <tr data-tags="competition problem description metric">
+              <td>Problem description (page 967)</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">…/page/967/</a></td>
+              <td><span class="chip verified">read both chunks</span></td>
+              <td>Competition structure, provided features, labels, external datasets, the full metric definition and worked example, submission format.</td>
+            </tr>
+            <tr data-tags="competition about resources">
+              <td>About / resources (page 968)</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">…/page/968/</a></td>
+              <td><span class="chip verified">read</span></td>
+              <td>GeoDAWN background, 3DEP lidar statement, “more subtle … hidden below the surface” quotation, edge-detection/Hough/DL menu, the two cited papers.</td>
+            </tr>
+            <tr data-tags="competition data tab login">
+              <td>Data tab</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">…/data/</a></td>
+              <td><span class="chip verified">redirects to login</span></td>
+              <td>Confirms rasters are behind authentication. Not downloadable from this environment.</td>
+            </tr>
+            <tr data-tags="competition rules drivendata">
+              <td>DrivenData rules page</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">…/rules/</a></td>
+              <td><span class="chip verified">read</span></td>
+              <td>Points to the NLR PDF as the authoritative rules.</td>
+            </tr>
+            <tr data-tags="competition rules herox">
+              <td>HeroX rules resource</td>
+              <td><a href="https://www.herox.com/GEMSPrize/resource/2274">herox.com/GEMSPrize/resource/2274</a></td>
+              <td><span class="chip verified">read</span></td>
+              <td>Titled “GEMS Prize Official Rules”, described as “Official rules document for the Geologic Enhanced Mapping System (GEMS) Prize”, and links directly to <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a>. Confirms the NLR PDF is the authoritative rules document.</td>
+            </tr>
+            <tr data-tags="competition rules pdf nlr">
+              <td>Official rules PDF (NLR), September 2026</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a></td>
+              <td><span class="chip verified">read all 7 chunks</span></td>
+              <td>§1.1 prizes, §1.3 eligibility, §2 background and label provenance, §3.1–3.7 submission, §A.1–A.17 appendix. Every governance entry quotes a numbered section.</td>
+            </tr>
+            <tr data-tags="code reference solution">
+              <td>Reference solution (Lipor)</td>
+              <td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a></td>
+              <td><span class="chip verified">README + notebook part read</span></td>
+              <td>Approach summary, environment options, data filenames, the 19-band listing with descriptions and categories, raster geometry, label dtype/nodata, preprocessing code.</td>
+            </tr>
+            <tr data-tags="forum category">
+              <td>Forum category</td>
+              <td><a href="https://community.drivendata.org/c/gems-prize-challenge/111">community.drivendata.org/c/gems-prize-challenge/111</a></td>
+              <td><span class="chip verified">read</span></td>
+              <td>Full thread list with reply counts, used to build the watch list.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Forum threads — official clarifications and errata</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Thread</th><th class="nowrap">Staff answer</th><th>URL</th><th class="nowrap">State</th></tr></thead>
+          <tbody>
+            <tr data-tags="forum mask scoring pixel-exact">
+              <td>Scoring clarification: are known USGS/INGENIOUS faults masked, and are they in the Final Round label set?</td>
+              <td><strong>Yes — posts 2 and 4.</strong> Post 4 (2026-09-21) confirms the mask is pixel-exact and identical to the training labels, that near-known-trace predictions are fully penalised, and that new-fault ground truth may lie within 300 m of a known trace.</td>
+              <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">11516</a> · <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">post 4</a></td>
+              <td><span class="chip verified">read all 4 posts</span></td>
+            </tr>
+            <tr data-tags="forum new fault definition geometry">
+              <td>Where do you draw the line?</td>
+              <td><strong>Yes.</strong> “New fault” = any fault pixel not already captured by USGS/INGENIOUS; can include newly mapped geometry of an existing system.</td>
+              <td><a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">11536</a></td>
+              <td><span class="chip verified">read</span></td>
+            </tr>
+            <tr data-tags="forum test faults provenance">
+              <td>How were the new test faults identified? (data sources and fault types)</td>
+              <td><strong>Yes — declined (post 7).</strong> “We're not sharing details about the data sources, fault types, or coverage behind the test faults beyond what's in the problem description.” Also points competitors at Phase 2.</td>
+              <td><a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527">11527</a> · <a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">post 7</a></td>
+              <td><span class="chip verified">read all 10 posts</span></td>
+            </tr>
+            <tr data-tags="forum weekly submissions">
+              <td>Weekly Submissions</td>
+              <td><strong>Yes.</strong> “The submission allowance resets based on a rolling window, not at a specific date and time.”</td>
+              <td><a href="https://community.drivendata.org/t/weekly-submissions/11524">11524</a></td>
+              <td><span class="chip verified">read</span></td>
+            </tr>
+            <tr data-tags="forum external data licence">
+              <td>Paid for external data license</td>
+              <td><strong>Yes.</strong> Refers back to the problem description: the licence must permit use in the challenge <em>and</em> sharing with the sponsor.</td>
+              <td><a href="https://community.drivendata.org/t/paid-for-external-data-license/11528">11528</a></td>
+              <td><span class="chip verified">read</span></td>
+            </tr>
+            <tr data-tags="forum labels band bug">
+              <td>Why does the training-fault-labels file have a single band while the reference repo shows 19?</td>
+              <td><strong>Yes.</strong> “An artifact / bug in the summary string that gets printed in the notebook, which labels the single band in the label TIF as Band 19 when there is, in actuality, only one band.”</td>
+              <td><a href="https://community.drivendata.org/t/why-does-the-training-fault-labels-file-in-the-data-tab-have-a-single-band-while-the-labels-in-the-reference-solution-repo-have-19-bands/11529">11529</a></td>
+              <td><span class="chip verified">read</span></td>
+            </tr>
+            <tr data-tags="forum eligibility unanswered open">
+              <td>Team member eligibility (homepage vs official rules)</td>
+              <td><strong>None.</strong> Open at 2026-09-26.</td>
+              <td><a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a></td>
+              <td><span class="chip unverified">unanswered</span></td>
+            </tr>
+            <tr data-tags="forum institutional uei unanswered open">
+              <td>Institutional Limit</td>
+              <td><strong>None.</strong> Open at 2026-09-26.</td>
+              <td><a href="https://community.drivendata.org/t/institutional-limit/11526">11526</a></td>
+              <td><span class="chip unverified">unanswered</span></td>
+            </tr>
+            <tr data-tags="forum teammate labels unanswered open">
+              <td>Using a teammate's geological interpretation as training labels</td>
+              <td><strong>None.</strong> Open at 2026-09-26.</td>
+              <td><a href="https://community.drivendata.org/t/using-a-teammates-geological-interpretation-as-training-labels/11543">11543</a></td>
+              <td><span class="chip unverified">unanswered</span></td>
+            </tr>
+            <tr data-tags="forum category intro">
+              <td>About the GEMS Prize Challenge category</td>
+              <td>Category intro; an eligibility question in reply is unanswered.</td>
+              <td><a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a></td>
+              <td><span class="chip verified">read</span></td>
+            </tr>
+            <tr data-tags="forum recruiting">
+              <td>Looking for a geologist teammate</td>
+              <td>Not applicable — participant recruiting thread.</td>
+              <td><a href="https://community.drivendata.org/t/looking-for-a-geologist-teammate-lidar-fault-mapping-basin-and-range-to-join-a-working-ml-pipeline/11531">11531</a></td>
+              <td><span class="chip verified">read</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Data releases and catalogues</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Dataset</th><th>Citation / DOI</th><th class="nowrap">State</th></tr></thead>
+          <tbody>
+            <tr data-tags="geodawn magnetics radiometrics geophysics">
+              <td>GeoDAWN airborne magnetic and radiometric surveys</td>
+              <td>Glen, J.M.G., &amp; Earney, T.E. (2024). <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a> · <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS data page</a> · <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a> · CC0 1.0</td>
+              <td><span class="chip verified">read, both pages</span> — line-km, area, block names, flight specs, processing, deliverables, licence. ScienceBase adds publication date 2024-03-01 and survey dates 2021-11-01 to 2022-11-20.</td>
+            </tr>
+            <tr data-tags="ingenious labels compilation">
+              <td>INGENIOUS — Great Basin Regional Dataset Compilation</td>
+              <td>Ayling, B. et al. (2022). <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a> · <a href="https://gdr.openei.org/submissions/1391">GDR submission 1391</a> · CC BY 4.0</td>
+              <td><span class="chip verified">read</span> — resource list, Qfaults v1/v2 descriptions, licences, file sizes</td>
+            </tr>
+            <tr data-tags="ingenious qfaults shapefile">
+              <td>INGENIOUS Qfaults v2 archive (with field definitions)</td>
+              <td><a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">GDR file</a> (5.85 MB)</td>
+              <td><span class="chip unverified">not downloaded</span> — the field-definition document inside is unread</td>
+            </tr>
+            <tr data-tags="usgs qffd catalogue quaternary">
+              <td>USGS Quaternary Fault and Fold Database</td>
+              <td>USGS (2020). <a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a> · <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">landing page</a> · <a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">GIS zip</a> · <a href="https://doi.org/10.5066/F7S75FJM">interactive map</a></td>
+              <td><span class="chip verified">read</span> — 1.6 Ma definition, 2017 metadata reduction, search retirement, downloads, history</td>
+            </tr>
+            <tr data-tags="usgs qffd 1993 guidelines compilation">
+              <td>QFFD 1993 compilation guidelines</td>
+              <td>Haller, K.M., Machette, M.N., &amp; Dart, R.L. (1993). USGS Open-File Report 93-338. <a href="https://pubs.usgs.gov/of/1993/0338/report.pdf">report.pdf</a></td>
+              <td><span class="chip verified">read</span> — preference rules, inferred-structure rule, compiler-forced-entries rule</td>
+            </tr>
+            <tr data-tags="usgs gravity magnetics regional">
+              <td>Regional Great Basin gravity and magnetic maps</td>
+              <td>Glen, J.M.G. et al. (2022). <a href="https://doi.org/10.5066/P9Z6SA1Z">10.5066/P9Z6SA1Z</a></td>
+              <td><span class="chip verified">record read via INGENIOUS listing</span></td>
+            </tr>
+            <tr data-tags="usgs mt conductance">
+              <td>MT electrical conductance maps (5 depth ranges, 2–200 km)</td>
+              <td>Peacock, J.R., &amp; Bedrosian, P.A. (2022). <a href="https://doi.org/10.5066/P9TWT2LU">10.5066/P9TWT2LU</a></td>
+              <td><span class="chip verified">record read via INGENIOUS listing</span></td>
+            </tr>
+            <tr data-tags="usgs heat flow">
+              <td>Heat flow maps</td>
+              <td>DeAngelo, J. et al. (2022). <a href="https://doi.org/10.5066/P9BZPVUC">10.5066/P9BZPVUC</a></td>
+              <td><span class="chip verified">record read via INGENIOUS listing</span></td>
+            </tr>
+            <tr data-tags="usgs slip dilation tendency">
+              <td>Quaternary faulting slip and dilation tendency</td>
+              <td>Siler, D. (2022). <a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a></td>
+              <td><span class="chip verified">record read via INGENIOUS listing</span></td>
+            </tr>
+            <tr data-tags="usgs elevation detrended">
+              <td>Elevation trend and detrended elevation</td>
+              <td>USGS (2022). <a href="https://doi.org/10.5066/P9MQRCBY">10.5066/P9MQRCBY</a></td>
+              <td><span class="chip verified">record read via INGENIOUS listing</span></td>
+            </tr>
+            <tr data-tags="ingenious geodetics seismicity">
+              <td>INGENIOUS geodetic and earthquake-density archives</td>
+              <td><a href="https://gdr.openei.org/files/1391/geodetics_INGENIOUS_regional_data.zip">geodetics (51.99 MB)</a> · <a href="https://gdr.openei.org/files/1391/seismicity_INGENIOUS_regional_data.zip">seismicity (22.98 MB)</a></td>
+              <td><span class="chip unverified">not downloaded</span> — descriptions only</td>
+            </tr>
+            <tr data-tags="ingenious project page">
+              <td>INGENIOUS project page (GBCGE)</td>
+              <td><a href="https://gbcge.org/current-projects/ingenious/">gbcge.org/current-projects/ingenious/</a></td>
+              <td><span class="chip verified">read</span> — PI Bridget Ayling, Co-PI James Faulds; personnel include Koehler, Kreemer, Mlawsky, Coolbaugh, Micander, dePolo, Kraal, Wagoner; 1 Feb 2021 – 30 Jun 2025; $10,000,000; DOE GTO award DE-EE0009254. Carries the project's own publication list, which fixes several author lists on this site.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Methods and prior art</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Work</th><th>DOI / URL</th><th class="nowrap">State</th></tr></thead>
+          <tbody>
+            <tr data-tags="hermant 2025 deep learning lidar slope">
+              <td>Hermant, Kiersnowski &amp; Bellanger (2025) — deep learning for Quaternary fault mapping, western USA</td>
+              <td><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Stanford 50th Workshop PDF</a></td>
+              <td><span class="chip verified">read chunks 0–3 of 8</span> — abstract, study area, data and labels, architecture, training process, loss, results tables. Numbers quoted on the site come only from those chunks.</td>
+            </tr>
+            <tr data-tags="matteo 2021 optical topographic deep learning">
+              <td>Mattéo et al. (2021) — automatic fault mapping in remote optical images and topographic data</td>
+              <td><a href="https://doi.org/10.1029/2020JB021269">10.1029/2020JB021269</a> · open access, CC BY-NC-ND 4.0</td>
+              <td><span class="chip verified">full author list and record</span> · <span class="chip unverified">methods and results not extracted</span></td>
+            </tr>
+            <tr data-tags="miller singh 1994 tilt derivative">
+              <td>Miller &amp; Singh (1994) — potential field tilt</td>
+              <td><em>Journal of Applied Geophysics</em> 32, 213–217. <a href="https://doi.org/10.1016/0926-9851(94)90022-1">10.1016/0926-9851(94)90022-1</a></td>
+              <td><span class="chip verified">bibliographic record corroborated</span> · <span class="chip unverified">paywalled, article not opened</span></td>
+            </tr>
+            <tr data-tags="verduzco 2004 thdr magnetic derivatives">
+              <td>Verduzco, Fairhead, Green &amp; MacKenzie (2004) — new insights into magnetic derivatives for structural mapping</td>
+              <td><em>The Leading Edge</em> 23(2), 116–119. <a href="https://doi.org/10.1190/1.1651454">10.1190/1.1651454</a></td>
+              <td><span class="chip verified">bibliographic record corroborated</span> · <span class="chip unverified">paywalled, article not opened</span></td>
+            </tr>
+            <tr data-tags="kreemer 2022 strain rates earthquakes">
+              <td>Kreemer &amp; Young (2022) — crustal strain rates in the western US and their relationship with earthquake rates</td>
+              <td>Kreemer, C., &amp; Young, Z.M. (2022). <em>Seismological Research Letters</em> 93(6), November 2022. <a href="https://doi.org/10.1785/0220220153">10.1785/0220220153</a></td>
+              <td><span class="chip verified">publisher record</span> · <span class="chip verified">author list confirmed by the INGENIOUS project page</span> · <span class="chip unverified">abstract body not read</span></td>
+            </tr>
+            <tr data-tags="hart-wagoner fault attributes play fairway recency slip rate">
+              <td>Hart-Wagoner et al. — feature engineering of fault attributes for play fairway analysis, Great Basin</td>
+              <td>Hart-Wagoner, N.R., Coolbaugh, M., Faulds, J.E., &amp; Mlawsky, E. Great Basin Center for Geothermal Energy, NBMG, University of Nevada, Reno. <a href="https://publications.mygeoenergynow.org/grc/1034813.pdf">PDF</a></td>
+              <td><span class="chip verified">abstract and introduction read</span> — states the INGENIOUS Quaternary fault database "included updated fault locations and updated fault attributes of recency (i.e., age of most recent rupture) and slip rates". <strong>Previously listed as unverified; upgraded this session after the PDF was opened.</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Corrections made this session</h2>
+      <div class="banner warn">
+        <p>
+          Recorded so the change is visible rather than silent:
+        </p>
+        <ul>
+          <li>
+            <strong>“Hart-Wagoner et al., GRC feature engineering” was demoted and then reinstated.</strong> It had been
+            listed with no verified content, so it was moved out of the citation index; the PDF was then opened, found to
+            be a real GBCGE / NBMG paper with a directly relevant statement about how the INGENIOUS fault database was
+            collated, and restored to the methods table above as
+            <span class="chip verified">abstract and introduction read</span>.
+          </li>
+          <li>
+            <strong>Kreemer “et al.” corrected to Kreemer &amp; Young</strong>, and Siler's initials to D.L., using the
+            INGENIOUS project page's own publication list.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Repository artefacts</h2>
+      <ul>
+        <li><code>scripts/metrics.py</code> — distance-weighted Tversky index, Tversky loss, and a masked variant. Self-tests run on CPU with the standard library only.</li>
+        <li><code>scripts/prepare_data.py</code> — inspection-only raster inventory; writes <code>data/inventory.json</code>.</li>
+        <li><code>scripts/download_competition_data.sh</code> — prints the official URLs and checks <code>data/</code>; does not log in and stores no credentials.</li>
+        <li><code>research/*.md</code> — markdown mirrors of the library, so changes are reviewable as a git diff.</li>
+      </ul>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      A source is not added to the library until it has a row in this table. A row is not marked
+      <span class="chip verified">read</span> until someone has actually read it this session.
     </div>
-  </main>
-  <footer class="site"><div class="wrap">Do not add a source to the library without a URL in this table.</div></footer>
+  </footer>
   <script src="assets/nav.js"></script>
 </body>
 </html>

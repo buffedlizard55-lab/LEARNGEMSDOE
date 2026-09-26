@@ -4,61 +4,149 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Changelog — GEMSDOE</title>
+  <meta name="description" content="Dated, append-only changelog for the GEMSDOE research library and hypothesis backlog.">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="index.html">GEMSDOE research</a>
+      <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
+        <a href="feature-stack.html">Feature stack</a>
         <a href="hypotheses.html">Hypotheses</a>
-        <a href="research/governance.html">Governance</a>
         <a href="sources.html">Sources</a>
         <a href="pipeline.html">Pipeline</a>
+        <a href="research/governance.html">Governance</a>
         <a href="changelog.html">Changelog</a>
         <a href="ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Dated, idempotent · extend on re-run, do not duplicate</p>
-    <h1>Changelog</h1>
 
-    <article class="entry">
-      <h3>2026-09-26 — session arena/01a0df09-learngemsdoe: line-by-line verification + fixes</h3>
-      <p><strong>Verified against primary sources (live fetches):</strong> NLR rules PDF (§1.1, §1.3, §2, §3.2–§3.6, §A.1, §A.13), DrivenData hub + problem page 967 + about 968, USGS QFFD page, GeoDAWN ScienceBase item, INGENIOUS GDR record, Hermant 2025 Stanford PDF, Mattéo 2021 (JGR), Kreemer &amp; Young 2022 (SRL), and forum 11516 / 11527-7 / 11536.</p>
-      <p><strong>Fixed:</strong> tightened the “pixel-exact scoring mask” wording in four pages — staff 11516 confirms known faults are masked/excluded but did not state pixel-exact vs. buffered; the 300 m kernel is for new-fault ground-truth distance, not a known-fault buffer. Corrected the weekly-cap citation (“three per week” = rules §3.2/§3.4; “rolling window” = forum 11524).</p>
-      <p><strong>Upgraded confidence:</strong> CG-2 (OF 93-338 rules verified verbatim), CG-4 / PA-3 (Hermant 1,100 faults / 264 km, 50 m buffer, 10 m lidar 3DEP, B8A vegetation band, geographic half split all confirmed in the PDF).</p>
-      <p><strong>Unchanged (confirmed accurate):</strong> $300k prize structure, metric α=0.2/β=0.8/R=300 m and the 0.60 worked example, deadline Dec 3 2026 11:59 p.m. UTC, §3.3 INGENIOUS labels, §A.13 program-policy factors, GeoDAWN 149,030 line-km / 51,857 km² and Area 1/2 flight specs, QFFD 1.6 Ma coseismic-surface-deformation design.</p>
-      <p><strong>Next:</strong> place competition rasters + run <code>prepare_data.py</code>; unpack INGENIOUS Qfaults v2 field-definition readme; open Miller 1994 / Verduzco 2004 PDFs; watch unanswered eligibility threads 11540 / 11526 / 11543.</p>
-    </article>
+  <div class="shell">
+    <main id="main">
+      <p class="meta">Dated, append-only · passes are idempotent — extend entries, never duplicate · newest first</p>
 
-    <article class="entry">
-      <h3>2026-09-26 — Pass 1–3: stand up the research site</h3>
-      <p><strong>Added</strong></p>
+      <h1>Changelog</h1>
+
+      <article class="entry" id="2026-09-26-p3">
+        <h3>2026-09-26 · session <code>arena/01a0df14-learngemsdoe</code> — Pass 3: verification, corrections, full source re-read</h3>
+        <p><strong>Verified against primary sources this session (all re-fetched and read line by line):</strong></p>
+        <ul>
+          <li>NLR rules PDF — <strong>all seven chunks, §1.1 through §A.17</strong>. Closes the previous session's gap at §A.14–A.17.</li>
+          <li>Competition hub, problem description (both chunks), About page.</li>
+          <li>Forum: category index plus threads 11499, 11516 (<em>all four posts, via the Discourse JSON endpoint</em>), 11524, 11526, 11527 (<em>all ten posts</em>), 11528, 11529, 11531, 11536, 11540, 11543.</li>
+          <li>USGS GeoDAWN data page and Quaternary Fault and Fold Database landing page.</li>
+          <li>INGENIOUS GDR submission 1391 (full resource list and licences).</li>
+          <li>Hermant et al. 2025 PDF (chunks 0–3 of 8) and Mattéo et al. 2021 publisher record.</li>
+          <li>Reference-solution README and notebook (band listing, raster geometry, preprocessing code).</li>
+          <li>Miller &amp; Singh 1994 and Verduzco et al. 2004 — bibliographic records and DOIs corroborated; Kreemer &amp; Young 2022 publisher record confirmed.</li>
+          <li>HeroX rules resource 2274 — read; it names the NLR PDF as the official rules document and links to it.</li>
+          <li>USGS ScienceBase item for GeoDAWN — read; adds publication date 2024-03-01 and survey dates 2021-11-01 to 2022-11-20.</li>
+          <li>GBCGE INGENIOUS project page — read; PI, personnel, duration (1 Feb 2021 – 30 Jun 2025), $10,000,000 under DOE GTO award DE-EE0009254, and the project's own publication list.</li>
+          <li>Hart-Wagoner, Coolbaugh, Faulds &amp; Mlawsky (GRC) — abstract and introduction read; confirms the INGENIOUS fault database updated locations plus recency and slip-rate attributes.</li>
+        </ul>
+        <p><strong>Corrections</strong></p>
+        <ul>
+          <li>
+            <strong>Scoring mask upgraded from inference to verified.</strong> Staff post 4 of thread 11516 (2026-09-21)
+            states: “The mask is indeed pixel-exact — it is identical to the provided set of training fault labels.”
+            The previous session explicitly hedged this; the hedge is removed and the full post is now quoted on the
+            <a href="research/governance.html">governance</a> page. Two further points from the same post are new to the
+            library: near-known-trace predictions are <em>fully</em> penalised, and new-fault ground truth may lie within
+            300 m of a known trace.
+          </li>
+          <li>
+            <strong>Label provenance added.</strong> Rules §2 states the new faults were “labeled by geology experts at
+            the National Laboratory of the Rockies (NLR) and USGS”. Not previously recorded.
+          </li>
+          <li>
+            <strong>One source demoted, then reinstated on evidence.</strong> “Hart-Wagoner et al., GRC feature
+            engineering” had been listed with no verified content, so it was moved out of the citation index. The PDF was
+            then opened: it is a real GBCGE / Nevada Bureau of Mines and Geology paper whose abstract states that the
+            INGENIOUS fault database “included updated fault locations and updated fault attributes of recency … and slip
+            rates” — directly relevant to CG-4. Restored to the methods table as
+            <span class="chip verified">abstract and introduction read</span>. The sequence is recorded on the
+            <a href="sources.html">sources</a> page rather than silently reversed.
+          </li>
+          <li>
+            <strong>Two author lists corrected.</strong> Kreemer “et al.” → <strong>Kreemer &amp; Young (2022)</strong>,
+            and Siler → <strong>D.L. Siler (2022)</strong>, using the
+            <a href="https://gbcge.org/current-projects/ingenious/">INGENIOUS project page's</a> own publication list.
+          </li>
+          <li>
+            <strong>Pipeline claim flagged as inaccurate.</strong> The handoff stating a complete
+            train→inference→validate pipeline was “ready to run” does not match the repository. Recorded on
+            <a href="pipeline.html">pipeline status</a> and in the site-wide irregularity list.
+          </li>
+        </ul>
+        <p><strong>Added</strong></p>
+        <ul>
+          <li>New page: <a href="feature-stack.html">feature stack</a> — all 19 bands with official descriptions and categories, raster geometry, GeoDAWN acquisition table, a derived grid-area note, the public layers absent from the stack, and processing pitfalls.</li>
+          <li><code>scripts/metrics.py</code> — distance-weighted Tversky index, Tversky loss, masked variant, and 11 self-tests that pass on CPU with the standard library alone.</li>
+          <li>Research entries expanded to CG-1…CG-7, PF-1…PF-7, GM-1…GM-6, ST-1…ST-6, PA-1…PA-5, GV-1…GV-9 — each with source, citation, claim, relevance and a confidence mark.</li>
+          <li>Site-wide: redesigned stylesheet, sticky nav, per-page table of contents, client-side filters on the band table, hypothesis cards and source index, a confidence-mark legend, and a print stylesheet.</li>
+          <li>New derived artefacts: the 19-band family breakdown, the agreement/disagreement matrix in <a href="research/seismotectonics.html">seismotectonics</a>, and the four catalogue-gap classes in <a href="research/catalogue-gaps.html">CG-7</a> (all labelled as inference).</li>
+        </ul>
+        <p><strong>Changed</strong></p>
+        <ul>
+          <li>Every hypothesis card rewritten against the pixel-exact mask confirmation; H3 marked <span class="chip blocked">blocked</span> because it needs lidar placement as well as rasters.</li>
+          <li>Overview rewritten around “what is actually scored”, with a one-table competition summary and a six-item irregularity list.</li>
+          <li>Explainer rewritten as a geologist-facing narrative rather than a summary of pages.</li>
+        </ul>
+        <p><strong>Still open / next</strong></p>
+        <ul>
+          <li>Place rasters in <code>data/</code>; run <code>prepare_data.py</code>; reconcile against the feature-stack page.</li>
+          <li>Download and read the INGENIOUS Qfaults v2 field-definition document (CG-4's unverified note).</li>
+          <li>Open Miller &amp; Singh 1994 and Verduzco et al. 2004 — still paywalled and unread.</li>
+          <li>Read the remainder of the Hermant PDF (chunks 4–7) and the Mattéo methods.</li>
+          <li>Re-check the four unanswered forum threads (11540, 11526, 11543, and 11499's eligibility reply) at the start of the next session.</li>
+        </ul>
+      </article>
+
+      <article class="entry" id="2026-09-26-p1p3-prior">
+        <h3>2026-09-26 · session <code>arena/01a0df09-learngemsdoe</code> — Pass 1–3 verification and fixes</h3>
+        <p><strong>Verified against primary sources (live fetches):</strong> NLR rules PDF (§1.1, §1.3, §2, §3.2–§3.6, §A.1, §A.13), DrivenData hub + problem page 967 + about 968, USGS QFFD page, GeoDAWN ScienceBase item, INGENIOUS GDR record, Hermant 2025 Stanford PDF, Mattéo 2021 (JGR), Kreemer &amp; Young 2022 (SRL), and forum threads 11516 / 11527-7 / 11536.</p>
+        <p><strong>Fixed:</strong> tightened the “pixel-exact scoring mask” wording in four pages — staff 11516 confirms known faults are masked/excluded but, at that time, had not stated pixel-exact versus buffered; the 300 m kernel applies to new-fault ground-truth distance, not to a known-fault buffer. Corrected the weekly-cap citation (“three per week” = rules §3.2/§3.4; “rolling window” = forum 11524).</p>
+        <p><strong>Superseded this session:</strong> the pixel-exact hedge was resolved by staff post 11516/4 — see the entry above.</p>
+        <p><strong>Upgraded confidence:</strong> CG-2 (OF 93-338 rules verified verbatim), CG-4 / PA-3 (Hermant 1,100 faults / 264 km, 50 m buffer, 10 m lidar-derived 3DEP, B8A vegetation band, geographic half split — all confirmed in the PDF).</p>
+        <p><strong>Confirmed accurate, unchanged:</strong> $300k prize structure; metric α=0.2, β=0.8, R=300 m and the 0.60 worked example; deadline Dec 3 2026, 11:59 p.m. UTC; §3.3 INGENIOUS labels; §A.13 program-policy factors; GeoDAWN 149,030 line-km / 51,857 km² and the Area 1/2 flight specs; QFFD 1.6 Ma coseismic-surface-deformation design.</p>
+      </article>
+
+      <article class="entry" id="2026-09-26-foundation">
+        <h3>2026-09-26 · session <code>arena/01a0def8-learngemsdoe</code> — Pass 1–3: stand up the site</h3>
+        <p><strong>Added</strong></p>
+        <ul>
+          <li>GitHub Pages site under <code>docs/</code>: overview, explainer, six-domain library, hypothesis backlog, sources, pipeline, AI log, changelog.</li>
+          <li><code>PROJECT_BRIEF_GEMSDOE.md</code> — reconstructed; the file was <strong>not present in the repository at session start</strong> (flagged at the time).</li>
+          <li>Research markdown mirrors in <code>research/</code>.</li>
+          <li><code>scripts/download_competition_data.sh</code> and <code>scripts/prepare_data.py</code> — both inspect-only; neither can emit a prediction raster.</li>
+          <li>Hypothesis cards H1–H7, all <em>untested</em>.</li>
+        </ul>
+        <p><strong>Pass 2:</strong> staff post 11527/7 recorded (no test-fault protocol will be published). Root <code>index.html</code> redirect added so the legacy Pages source still reaches the library. §A.13 program-policy factors noted.</p>
+        <p><strong>Verified against:</strong> DrivenData hub/967/968, NLR rules PDF, forum staff posts 11516/11524/11528/11529/11536, GeoDAWN DOI, INGENIOUS DOI, USGS QFFD page, Hermant 2025 PDF, reference-solution README and notebook.</p>
+      </article>
+
+      <h2>Conventions for this file</h2>
       <ul>
-        <li>GitHub Pages site under <code>docs/</code> (overview, explainer, six-domain library, hypothesis backlog, sources, pipeline, AI log, this changelog).</li>
-        <li><code>PROJECT_BRIEF_GEMSDOE.md</code> (was missing from the repo at session start — flagged).</li>
-        <li>Research markdown mirrors in <code>research/</code>.</li>
-        <li><code>scripts/download_competition_data.sh</code> and <code>scripts/prepare_data.py</code> (inspect only; no prediction GeoTIFF).</li>
-        <li>Hypothesis cards H1–H7, all <em>untested</em>.</li>
+        <li>One entry per session, newest first, dated with the session branch name.</li>
+        <li>Append only. Earlier entries are corrected by adding a “superseded” note, never by rewriting history.</li>
+        <li>Every “verified” claim names the source it was read from. Every correction names what changed and why.</li>
+        <li>Each session entry ends with what is still open, so an interrupted run is resumable.</li>
       </ul>
-      <p><strong>Verified against</strong> DrivenData hub/967/968, NLR rules PDF, forum staff posts 11516/11524/11528/11529/11536, GeoDAWN DOI, INGENIOUS DOI, USGS QFFD page, Hermant 2025 PDF, reference-solution README/notebook.</p>
-      <p><strong>Pass 2:</strong> Staff post 11527/7 recorded (no test-fault protocol will be published). Root <code>index.html</code> redirect added so legacy Pages source <code>/</code> still reaches the library. §A.13 program-policy factors noted.</p>
-      <p><strong>What’s next</strong></p>
-      <ul>
-        <li>Place competition rasters; run <code>prepare_data.py</code>.</li>
-        <li>Unpack INGENIOUS Qfaults v2 field-definition text.</li>
-        <li>Mattéo 2021 methods; Miller/Verduzco PDFs; remaining NLR PDF §A.14–A.17.</li>
-        <li>Watch unanswered eligibility threads (11540, 11526, 11543).</li>
-      </ul>
-    </article>
-  </main>
-  <footer class="site"><div class="wrap">New sessions append a dated entry. Do not rewrite history.</div></footer>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      New sessions append a dated entry. Do not rewrite history.
+    </div>
+  </footer>
   <script src="assets/nav.js"></script>
 </body>
 </html>

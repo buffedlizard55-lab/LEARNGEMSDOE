@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature stack — GEMSDOE</title>
+  <meta name="description" content="The 19-band GEMS Prize training raster: band descriptions, raster geometry, GeoDAWN acquisition specs, and what is not in the stack.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="executive-summary.html">Explainer</a>
+        <a href="research/index.html">Library</a>
+        <a href="feature-stack.html">Feature stack</a>
+        <a href="hypotheses.html">Hypotheses</a>
+        <a href="sources.html">Sources</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="research/governance.html">Governance</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="shell has-toc">
+    <main id="main">
+      <p class="meta">All values copied from the official reference-solution notebook output and the official competition pages · re-read 2026-09-26</p>
+
+      <h1>The 19-band feature stack</h1>
+      <p class="lede">
+        One multiband GeoTIFF, 100&nbsp;m, UTM 11N. This page is the band-level inventory: what each band is officially
+        called, which geophysical family it belongs to, where the underlying survey came from, and — importantly — which
+        publicly available layers are <em>not</em> in the stack.
+      </p>
+
+      <div class="banner info">
+        <p>
+          <strong>Provenance caveat, stated up front.</strong> The band names and data categories below are the
+          <code>description</code> and <code>data_category</code> tags read out of <code>training_features.tif</code> by the
+          official <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb">reference-solution notebook</a>.
+          The competition pages do <em>not</em> state which public release each band was derived from, what processing was
+          applied, at what native resolution it was acquired, or how nodata was propagated. Anything beyond the band tag
+          on this page is labelled as an inference.
+        </p>
+      </div>
+
+      <h2 id="geometry">Raster geometry</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Property</th><th>Features</th><th>Labels</th><th class="nowrap">Source</th></tr></thead>
+          <tbody>
+            <tr><td>Width</td><td class="num">3292</td><td class="num">3292</td><td rowspan="7"><a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb">Reference notebook output</a></td></tr>
+            <tr><td>Height</td><td class="num">3730</td><td class="num">3730</td></tr>
+            <tr><td>CRS</td><td class="num">EPSG:32611</td><td class="num">EPSG:32611</td></tr>
+            <tr><td>Resolution</td><td class="num">100.0 × 100.0 m</td><td class="num">100.0 × 100.0 m</td></tr>
+            <tr><td>Data type</td><td class="num">float32</td><td class="num">int32</td></tr>
+            <tr><td>nodata</td><td class="num">−3.4028234663852886e+38</td><td class="num">−1.0</td></tr>
+            <tr><td>Bands</td><td class="num">19</td><td class="num">1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">
+        EPSG:32611, the 100&nbsp;m grid and the single-band float32 submission are also required by the
+        <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">official submission format</a>.
+        The “19 bands” printed for the <em>label</em> file is a known display bug, not a real band count —
+        <a href="https://community.drivendata.org/t/why-does-the-training-fault-labels-file-in-the-data-tab-have-a-single-band-while-the-labels-in-the-reference-solution-repo-have-19-bands/11529">staff confirmation, forum 11529</a>.
+      </p>
+
+      <h2 id="bands">Band index</h2>
+      <div class="filter">
+        <label for="bandq">Filter bands</label>
+        <input id="bandq" type="search" placeholder="e.g. gravity, tilt, strain, band 15" data-filter="#bandtable" data-filter-count="#bandcount">
+        <span class="small" id="bandcount"></span>
+      </div>
+      <div class="table-wrap">
+        <table id="bandtable">
+          <thead><tr><th class="num">#</th><th>Official description (band tag)</th><th class="nowrap">Data category</th><th>Why it can matter for a catalogue gap</th></tr></thead>
+          <tbody>
+            <tr data-tags="magnetic"><td class="num">1</td><td>Magnetic anomaly — deviation from expected Earth's magnetic field</td><td class="nowrap">magnetic_data</td><td>Regional susceptibility contrasts; basement blocks offset across unmapped structures.</td></tr>
+            <tr data-tags="magnetic rtp"><td class="num">2</td><td>Reduced to pole magnetic data — magnetic anomaly corrected for latitude effects</td><td class="nowrap">magnetic_data</td><td>Removes the inclination asymmetry that shifts anomaly peaks off their sources at this latitude; the honest base layer for edge picking.</td></tr>
+            <tr data-tags="magnetic gradient"><td class="num">3</td><td>Total magnetic intensity horizontal gradient — rate of change in horizontal direction</td><td class="nowrap">magnetic_data</td><td>Classic edge detector; maxima mark lateral susceptibility contrasts including buried ones.</td></tr>
+            <tr data-tags="geodetic strain invariant"><td class="num">4</td><td>Geodetic second invariant — measure of strain rate tensor magnitude</td><td class="nowrap">geodetic_strain</td><td>Deformation without a mapped trace. Independent of whether anyone has published a scarp.</td></tr>
+            <tr data-tags="gravity gradient"><td class="num">5</td><td>Isostatic gravity anomaly slope — gradient of gravity after isostatic correction</td><td class="nowrap">gravity_data</td><td>Density contrasts at depth; survives basin fill that hides scarps.</td></tr>
+            <tr data-tags="magnetic tilt curvature edge"><td class="num">6</td><td>Tilt angle or total curvature — magnetic field derivative for edge detection</td><td class="nowrap">magnetic_data</td><td>The tilt-derivative family (Miller &amp; Singh 1994; Verduzco et al. 2004) balances amplitudes from shallow and deep sources — the standard tool for this job. See <a href="research/potential-field.html">potential-field</a>.</td></tr>
+            <tr data-tags="geodetic strain shear"><td class="num">7</td><td>Geodetic shear rate — rate of angular deformation from GPS/InSAR</td><td class="nowrap">geodetic_strain</td><td>Strike-slip / oblique domains where surface scarps are subdued.</td></tr>
+            <tr data-tags="geodetic strain dilatation"><td class="num">8</td><td>Geodetic dilatation rate — rate of volumetric strain (expansion/contraction)</td><td class="nowrap">geodetic_strain</td><td>Extension and transtension; apertures that control permeability.</td></tr>
+            <tr data-tags="magnetic gradient vertical"><td class="num">9</td><td>Total magnetic intensity vertical gradient — rate of change in vertical direction</td><td class="nowrap">magnetic_data</td><td>Sharpens shallow sources; pairs with band 3 for gradient magnitude.</td></tr>
+            <tr data-tags="seismic distance"><td class="num">10</td><td>Distance to earthquake (n=100 km radius, a=15° azimuth parameters)</td><td class="nowrap">seismic</td><td>Proximity to recorded seismicity; a prior, not a detector.</td></tr>
+            <tr data-tags="gravity gradient vertical"><td class="num">11</td><td>Isostatic gravity anomaly vertical gradient — vertical rate of change</td><td class="nowrap">gravity_data</td><td>Vertical continuation behaviour; source-depth discrimination.</td></tr>
+            <tr data-tags="topographic elevation detrended"><td class="num">12</td><td>Detrended elevation — topography with regional trends removed</td><td class="nowrap">topographic</td><td>Removes the regional slope so local relief — including subtle scarps — is visible.</td></tr>
+            <tr data-tags="gravity anomaly"><td class="num">13</td><td>Isostatic gravity anomaly — gravity after compensating for topographic mass</td><td class="nowrap">gravity_data</td><td>Deep basin geometry and basement steps under cover.</td></tr>
+            <tr data-tags="magnetic tmi"><td class="num">14</td><td>Total magnetic intensity — total strength of magnetic field</td><td class="nowrap">magnetic_data</td><td>Raw field; the parent of bands 3, 6 and 9.</td></tr>
+            <tr data-tags="subsurface depth basement"><td class="num">15</td><td>Depth to basement surface — thickness of sedimentary cover</td><td class="nowrap">subsurface</td><td><strong>The cover thickness axis.</strong> Where cover is thick, a missing surface scarp means nothing; that is exactly where a buried fault is plausible and unmapped.</td></tr>
+            <tr data-tags="seismic density"><td class="num">16</td><td>Earthquake intensity or density (n=100 km radius, a=15° parameters)</td><td class="nowrap">seismic</td><td>Clustered seismicity with no catalogue fault = a kinematic orphan (H4).</td></tr>
+            <tr data-tags="subsurface conductivity mt"><td class="num">17</td><td>Conductivity surface — electrical conductivity of subsurface</td><td class="nowrap">subsurface</td><td>Fluid and clay pathways along structures. Also lights up basins and geothermal outflow, so corroboration only (H6).</td></tr>
+            <tr data-tags="gravity gradient horizontal"><td class="num">18</td><td>Isostatic gravity anomaly horizontal gradient — horizontal rate of change</td><td class="nowrap">gravity_data</td><td>Horizontal density edges; independent of magnetism, so a useful cross-check on H2.</td></tr>
+            <tr data-tags="topographic slope detrended"><td class="num">19</td><td>Detrended elevation slope — gradient of elevation after detrending</td><td class="nowrap">topographic</td><td>The scarp layer at 100&nbsp;m. Coarse: a 1–2&nbsp;m scarp is far below one pixel of vertical resolution.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Bands by family</h3>
+      <ul>
+        <li><strong>Magnetic (6):</strong> 1, 2, 3, 6, 9, 14</li>
+        <li><strong>Gravity (4):</strong> 5, 11, 13, 18</li>
+        <li><strong>Geodetic strain (3):</strong> 4, 7, 8</li>
+        <li><strong>Topographic (2):</strong> 12, 19</li>
+        <li><strong>Seismic (2):</strong> 10, 16</li>
+        <li><strong>Subsurface (2):</strong> 15, 17</li>
+      </ul>
+      <p class="small">
+        Only two of nineteen bands are topographic, and both are derived from a 100&nbsp;m detrended surface. That is the
+        single clearest structural reason to bring in outside elevation data (see H3 and the
+        <a href="research/geomorphology.html">geomorphology</a> domain).
+      </p>
+
+      <h2 id="acquisition">Where the magnetic and radiometric data come from</h2>
+      <p>
+        The magnetic bands derive from the GeoDAWN surveys. Acquisition facts below are quoted from the official USGS data
+        page for the release, <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">GeoDAWN: Airborne magnetic and radiometric surveys of the northwestern Great Basin</a>
+        (<a href="https://doi.org/10.5066/P93LGLVQ">Glen &amp; Earney, 2024</a>, released 4 March 2024, CC0 1.0).
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Area 1</th><th>Area 2</th></tr></thead>
+          <tbody>
+            <tr><td>Purpose</td><td>Clayton Valley — Li-clay and brine resources</td><td>Remainder of the extent — geothermal focus</td></tr>
+            <tr><td>Flight-line spacing</td><td class="num">200 m</td><td class="num">400 m</td></tr>
+            <tr><td>Tie-line spacing</td><td class="num">2 000 m</td><td class="num">4 000 m</td></tr>
+            <tr><td>Line azimuth</td><td class="num">90°</td><td class="num">90°</td></tr>
+            <tr><td>Tie azimuth</td><td class="num">180°</td><td class="num">180°</td></tr>
+            <tr><td>Nominal height above terrain</td><td>100 m (low relief) / 150 m (mountainous)</td><td>150 m (low relief) / 200 m (mountainous)</td></tr>
+            <tr><td>Specification rank</td><td>Rank 1 (EarthMRI)</td><td>Between rank 1 and 2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li>Total combined survey: <strong>149,030 line-km</strong> over <strong>51,857 km²</strong>.</li>
+        <li>Flown 1 November 2021 – 20 November 2022 by EDCON-PRJ, Inc. under USGS contract; the Tonopah block (Area 1 plus the southern part of Area 2) by Precision GeoSurveys with a Bell Jet Ranger; the remainder by Cloudstreet Flying Service with a Cessna 180 and Turbo 206.</li>
+        <li>Four acquisition blocks, north to south: <strong>Winnemucca, Fallon, Hawthorne, Tonopah</strong>.</li>
+        <li>Magnetic processing by the contractor: diurnal correction, aircraft-field correction, tie-line levelling, micro-levelling, IGRF removal.</li>
+        <li>Deliverables include <strong>Esri shapefiles of the flight paths and survey outlines</strong> — these are what hypothesis <a href="hypotheses.html">H7</a> needs as a control.</li>
+        <li>Licence: <strong>CC0 1.0 (public domain)</strong> — no external-data licence obstacle to using it and sharing it with the sponsor.</li>
+      </ul>
+
+      <details class="fold">
+        <summary>Derived observation: the prediction grid is larger than the GeoDAWN survey area</summary>
+        <p>
+          Arithmetic from two verified numbers: the raster is 3292 × 3730 pixels at 100&nbsp;m, i.e.
+          329.2&nbsp;km × 373.0&nbsp;km ≈ <strong>122,800 km²</strong> of bounding box. The GeoDAWN survey covers
+          <strong>51,857 km²</strong>. The bounding box is therefore roughly 2.4× the surveyed area.
+        </p>
+        <p>
+          <strong>Confidence: inference.</strong> Both inputs are verified; the conclusion is arithmetic, but neither the
+          competition pages nor the rules state how much of the prediction grid lies inside the GeoDAWN footprint, and no
+          one has measured it here because the rasters are not placed. If it holds, the implication is that a substantial
+          part of the scoring grid is served by regional, lower-resolution geophysics rather than by GeoDAWN — and any
+          method tuned on GeoDAWN-density lineaments would behave differently there. Worth checking first once data are
+          in <code>data/</code>: overlay the GeoDAWN survey-outline shapefile on the raster bounds.
+        </p>
+      </details>
+
+      <h2 id="missing">What is not in the stack</h2>
+      <div class="banner warn">
+        <p>
+          <strong>Confidence: inference, clearly labelled.</strong> The list below is derived from the 19 band
+          descriptions printed by the reference notebook. It is an absence-of-evidence argument, not a verified statement
+          about the raster's contents — it should be re-checked against the actual file once data are placed.
+        </p>
+      </div>
+      <p>Layers that are publicly available for this region, licensed for redistribution, and — on the band list above — not present:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Layer</th><th>Public source</th><th>Licence</th><th>Why it might catch a gap</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Radiometric (K / eU / eTh, total count)</td>
+              <td><a href="https://doi.org/10.5066/P93LGLVQ">GeoDAWN release</a></td>
+              <td>CC0 1.0</td>
+              <td>Surface geology and soil composition. The About page shows a GeoDAWN radiometric map but no radiometric band appears in the 19.</td>
+            </tr>
+            <tr>
+              <td>1 m lidar DEM (3DEP)</td>
+              <td><code>1m_DEM_links.csv</code> on the data tab</td>
+              <td>USGS public domain</td>
+              <td>Scarp morphology at the scale experts actually map. See H3.</td>
+            </tr>
+            <tr>
+              <td>Heat flow</td>
+              <td><a href="https://doi.org/10.5066/P9BZPVUC">10.5066/P9BZPVUC</a></td>
+              <td>USGS</td>
+              <td>Hydrothermal convective signal; independent of structure.</td>
+            </tr>
+            <tr>
+              <td>MT conductance (5 depth ranges, 2–200 km)</td>
+              <td><a href="https://doi.org/10.5066/P9TWT2LU">10.5066/P9TWT2LU</a></td>
+              <td>USGS</td>
+              <td>Deeper and better-documented than the single conductivity-surface band.</td>
+            </tr>
+            <tr>
+              <td>Slip &amp; dilation tendency of Quaternary faults</td>
+              <td><a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a></td>
+              <td>USGS</td>
+              <td>Kinematic plausibility of a candidate strand given the regional stress field.</td>
+            </tr>
+            <tr>
+              <td>Paleogeothermal features (sinter, tufa)</td>
+              <td><a href="https://gdr.openei.org/submissions/1391">GDR submission 1391</a></td>
+              <td>CC BY 4.0</td>
+              <td>Points at structures that leaked in the recent past — a different kind of evidence than a scarp.</td>
+            </tr>
+            <tr>
+              <td>2 m temperature probes</td>
+              <td><a href="https://gdr.openei.org/submissions/1391">GDR submission 1391</a></td>
+              <td>CC BY 4.0</td>
+              <td>Subtle thermal anomalies; cheap, independent, and absent from the stack.</td>
+            </tr>
+            <tr>
+              <td>Elevation trend / detrended elevation (native)</td>
+              <td><a href="https://doi.org/10.5066/P9MQRCBY">10.5066/P9MQRCBY</a></td>
+              <td>USGS</td>
+              <td>The parent product of bands 12 and 19, at native resolution, with its own detrending documented.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">
+        External data are allowed provided you hold a licence that permits use in the challenge <em>and</em> sharing with
+        the sponsor (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#external-datasets">problem description</a>;
+        staff reaffirmation in <a href="https://community.drivendata.org/t/paid-for-external-data-license/11528">forum 11528</a>).
+        Both licences above satisfy that.
+      </p>
+
+      <h2 id="pitfalls">Known processing pitfalls</h2>
+      <ul>
+        <li><strong>Nodata sentinel.</strong> Features use −3.4028234663852886e+38; the reference notebook masks anything below −1e38 to NaN before normalising. Any local preprocessing must do the same or the min-max normalisation will be destroyed.</li>
+        <li><strong>Per-band min-max normalisation</strong> is what the reference solution applies (across the whole raster, over non-NaN values). It is sensitive to outliers — worth re-checking per band before trusting it.</li>
+        <li><strong>The label raster is int32 with nodata −1.0</strong>, so “not a fault” and “no data” are different values. Treat −1 as nodata, not as background.</li>
+        <li><strong>Resampled provenance is undocumented.</strong> Several bands could be resampled from grids of very different native resolution. Any gradient you compute on top of an already-resampled grid inherits that smoothing; the GeoDAWN line spacing above is the lower bound on resolvable wavelength in the magnetic bands.</li>
+        <li><strong>Two seismic bands share parameters</strong> (n=100 km, a=15°), so bands 10 and 16 are not independent evidence.</li>
+      </ul>
+
+      <h2 id="reproduce">Reproduce the inventory locally</h2>
+      <pre><code>bash scripts/download_competition_data.sh   # on an enrolled machine, into data/
+python scripts/prepare_data.py              # writes data/inventory.json (inspection only)</code></pre>
+      <p>
+        <code>prepare_data.py</code> dumps CRS, resolution, size, band count, dtypes, nodata and per-band tags for every
+        GeoTIFF it finds. Run it first after data placement and compare its output with the table above; if they disagree,
+        the table on this page is wrong and should be corrected here.
+      </p>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      Band descriptions are the official band tags read by the DrivenData reference solution; acquisition facts are from
+      the USGS GeoDAWN data page. Derived observations are labelled as inferences.
+    </div>
+  </footer>
+  <script src="assets/nav.js"></script>
+</body>
+</html>

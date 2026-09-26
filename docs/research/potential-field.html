@@ -4,86 +4,246 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Potential-field geophysics — GEMSDOE</title>
+  <meta name="description" content="Magnetic and gravity layers in the GEMS Prize stack, tilt-derivative and gradient-magnitude methods, and what buried structural contrasts look like at 100 m.">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="../index.html">Overview</a>
         <a href="../executive-summary.html">Explainer</a>
         <a href="index.html">Library</a>
+        <a href="../feature-stack.html">Feature stack</a>
         <a href="../hypotheses.html">Hypotheses</a>
-        <a href="governance.html">Governance</a>
         <a href="../sources.html">Sources</a>
         <a href="../pipeline.html">Pipeline</a>
+        <a href="governance.html">Governance</a>
         <a href="../changelog.html">Changelog</a>
         <a href="../ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Magnetic (RTP, TMI, gradients) and isostatic gravity · edge detection</p>
-    <h1>Potential-field geophysics</h1>
-    <p class="lede">Buried structural contrasts in the GeoDAWN / Great Basin stack. Methods below are cited to primary papers or official data releases. No derivative grids were computed this session (no local rasters).</p>
 
-    <article class="entry">
-      <h3>PF-1 · GeoDAWN airborne magnetic and radiometric surveys</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p class="src"><strong>Source:</strong> Glen, J.M.G., and Earney, T.E., 2024, GeoDAWN: Airborne magnetic and radiometric surveys of the northwestern Great Basin, Nevada and California: USGS data release, <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a> · ScienceBase <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">item 657e1d85d34e23d3533209f7</a></p>
-      <p><strong>Claims:</strong> USGS and DOE acquired high-resolution aeromagnetic and aeroradiometric data over northern/western Nevada and eastern California to support geologic and geophysical mapping for geothermal and critical-mineral studies (Walker Lane and western Great Basin). EarthMRI + DOE GTO. Contractor EDCON-PRJ, 1 Nov 2021 – 20 Nov 2022. Two overlapping surveys: Area 1 (Clayton Valley; rank-1 EarthMRI specs; 200 m lines, 2000 m ties, ~100–150 m terrain clearance) and Area 2 (remainder; 400 m lines, 4000 m ties, ~150–200 m clearance). Combined 149,030 line-km, 51,857 km², four blocks (Winnemucca, Fallon, Hawthorne, Tonopah). Magnetic processing: diurnal, aircraft field, tie-line and micro-leveling, IGRF. In steep terrain, actual clearance can deviate from the planned drape; “variable terrain clearance should be considered when modeling and interpreting these data.” Coordinated 3DEP lidar over a similar extent.</p>
-      <p><strong>Relevance:</strong> This is the named feature-data citation in the prize rules (footnote 3). Line-spacing difference (200 m vs 400 m) implies spatially variable resolution of magnetic lineaments — a possible false-positive/false-negative pattern if models treat the mosaic as uniform. Terrain-clearance variation can mimic or mask shallow magnetic edges.</p>
-      <p><strong>Confidence:</strong> High. Flight-spec numbers are from the ScienceBase summary, not reconstructed.</p>
-    </article>
+  <div class="shell">
+    <main id="main">
+      <p class="meta">Library · domain 2 of 6 · 7 entries · re-verified 2026-09-26</p>
 
-    <article class="entry">
-      <h3>PF-2 · What the competition feature GeoTIFF actually contains (magnetics/gravity)</h3>
-      <p><span class="chip verified">verified</span> <span class="chip med">confidence: medium–high</span></p>
-      <p class="src"><strong>Sources:</strong> <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features">Problem description — provided features</a>; reference notebook band printout in <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb">unet-mc-cv-reference-solution.ipynb</a>.</p>
-      <p><strong>Problem description list:</strong> isostatic gravity anomaly and its slope; RTP magnetic anomaly; TMI; vertical and horizontal slope of TMI; top-of-crustal magnetic source depth estimate.</p>
-      <p><strong>Notebook tag printout (19 bands, 3730×3292, EPSG:32611, 100 m)</strong> includes, among others: magnetic anomaly; reduced-to-pole; TMI horizontal gradient; “tilt angle or total curvature” (tag text); TMI vertical gradient; TMI; isostatic gravity and its slope, vertical gradient, and horizontal gradient; depth to basement surface.</p>
-      <p><strong>Relevance:</strong> Gradient and tilt-style layers are already in the 100 m stack, so a model can use them without recomputing from line data — but at 100 m, not at flight-line resolution. Depth-to-basement / magnetic-source depth is a cover-thickness proxy for “younger cover masking scarps.”</p>
-      <p><strong>Confidence:</strong> High that those layers exist in the reference run. Medium that DrivenData’s download filename is <code>training_features.tif</code> (problem description) vs <code>numeric_features.tif</code> (notebook) — both names are documented; they may be the same file renamed. Re-check after local download.</p>
-    </article>
+      <h1>Potential-field geophysics</h1>
+      <p class="lede">
+        Ten of the nineteen bands are potential-field or derived from them: six magnetic, four gravity. This is the only
+        family in the stack that responds to structure <em>under</em> cover, which makes it the only family that can see
+        the gap class the USGS database excludes by definition (see
+        <a href="catalogue-gaps.html">catalogue-gap reasoning</a>, CG-1 and CG-7 class 3).
+      </p>
 
-    <article class="entry">
-      <h3>PF-3 · Tilt derivative (Miller &amp; Singh, 1994)</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high on the citation; medium on GeoDAWN-specific performance</span></p>
-      <p class="src"><strong>Citation:</strong> Miller, H.G., and Singh, V., 1994, Potential field tilt—a new concept for location of potential field sources: Journal of Applied Geophysics, v. 32, p. 213–217. (Cited as the first tilt-angle filter in later literature, e.g. reviews of balanced edge filters.)</p>
-      <p><strong>Claim (standard definition, as restated in later papers that quote the formula):</strong> TDR = atan( (∂F/∂z) / |∇h F| ), which equalizes amplitude of shallow and deep sources and highlights edges. This session did not fetch the paywalled 1994 PDF itself.</p>
-      <p><strong>Relevance:</strong> The reference notebook’s band 6 tag reads “Tilt angle or total curvature - magnetic field derivative for edge detection.” If that tag is accurate, Miller–Singh-type information is already a feature. Tilt zeros/edges are candidate buried contacts under basins where QFFD has no surface trace.</p>
-      <p><strong>Confidence:</strong> Citation year/title/journal/pages corroborated by multiple secondary citations. Full 1994 PDF not opened here — marked as such. Do not treat a specific TDR threshold as fact.</p>
-    </article>
+      <h2>Entries</h2>
 
-    <article class="entry">
-      <h3>PF-4 · Total horizontal derivative of tilt (Verduzco et al., 2004)</h3>
-      <p><span class="chip verified">verified as a published method</span> <span class="chip med">confidence: medium (PDF not opened)</span></p>
-      <p class="src"><strong>Citation:</strong> Verduzco, B., Fairhead, J.D., Green, C.M., and MacKenzie, C., 2004, New insights into magnetic derivatives for structural mapping: The Leading Edge, v. 23, p. 116–119.</p>
-      <p><strong>Claim (as restated in later papers):</strong> the total horizontal derivative of the tilt angle (THDR) is an improved edge detector relative to tilt alone.</p>
-      <p><strong>Relevance:</strong> Candidate extra feature if not already identical to the provided “tilt angle or total curvature” band. Computing THDR from 100 m grids is cheap; computing it from GeoDAWN line data is not yet done.</p>
-      <p><strong>Confidence:</strong> Bibliographic identity is consistent across independent citations. The 2004 TLE PDF was not fetched this session.</p>
-    </article>
+      <article class="entry" id="pf1">
+        <h3><span class="id">PF-1</span> What the GeoDAWN surveys can and cannot resolve</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data page</a> · <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></dd>
+          <dt>Citation</dt>
+          <dd>Glen, J.M.G., and Earney, T.E. (2024). <em>GeoDAWN: Airborne Magnetic and Radiometric Surveys of the Northwestern Great Basin, Nevada and California.</em> U.S. Geological Survey data release, <a href="https://doi.org/10.5066/P93LGLVQ">https://doi.org/10.5066/P93LGLVQ</a>. CC0 1.0.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            149,030 line-km over 51,857 km², flown 1 Nov 2021 – 20 Nov 2022. Area 1 (Clayton Valley, Li-brine focus) at
+            rank-1 EarthMRI specs: 200 m flight lines, 2,000 m tie lines, 100 m clearance over low relief. Area 2
+            (geothermal focus, between rank 1 and 2): 400 m flight lines, 4,000 m tie lines, 150 m clearance. Magnetic
+            processing included diurnal correction, aircraft-field correction, tie-line levelling, micro-levelling and IGRF
+            removal. Helicopter over the Tonopah block, fixed-wing elsewhere.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Flight-line spacing sets the shortest magnetic wavelength that is sampled rather than aliased. At 200 m
+            line spacing the reliable content is coarser than 200 m along the N–S tie direction but ~400 m or coarser
+            across it in Area 2, before you resample to a 100 m grid. A lineament you “find” at 100 m pixel scale may be
+            interpolation between lines 400 m apart. Treat any magnetic edge shorter than roughly the line spacing with
+            suspicion, and test it — that is hypothesis <a href="../hypotheses.html">H7</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Acquisition numbers quoted from the official USGS page. <span class="chip unverified">inference</span> The resolution/aliasing implication is standard potential-field practice, not a statement in the source.</dd>
+        </dl>
+      </article>
 
-    <article class="entry">
-      <h3>PF-5 · Regional Great Basin gravity/magnetic maps used by INGENIOUS</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p class="src"><strong>Citation:</strong> Glen, J.M.G., Earney, T.E., Zielinski, L.A., Schermerhorn, W.D., Dean, B.J., and Hardwick, C., 2022, Regional geophysical maps of the Great Basin, USA: USGS data release, <a href="https://doi.org/10.5066/P9Z6SA1Z">10.5066/P9Z6SA1Z</a></p>
-      <p><strong>Claims:</strong> Provisional regional gravity grid from USGS/UGS, industry, Ponce (1997) Nevada compilation, and Hildenbrand et al. (2002) public-domain gravity; regional magnetic grid from Bankey et al. (2002) North American compilation; depth-to-basement from Shah and Boyd (2018). Compiled to support geothermal characterization and INGENIOUS (DE-EE0009254).</p>
-      <p><strong>Relevance:</strong> Distinguishes <em>regional</em> potential-field compilations (INGENIOUS inputs) from <em>GeoDAWN</em> high-resolution magnetics. Catalogue-gap models should not confuse the two resolutions. Buried basin-bounding structures often show first in gravity; GeoDAWN magnetics may refine them inside the survey outline.</p>
-      <p><strong>Confidence:</strong> High.</p>
-    </article>
+      <article class="entry" id="pf2">
+        <h3><span class="id">PF-2</span> What is actually in the magnetic bands</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band <code>description</code> / <code>data_category</code> tags printed by the <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb">official reference notebook</a>; band list on the <a href="../feature-stack.html">feature stack</a> page</dd>
+          <dt>Citation</dt>
+          <dd>DrivenData (2025), <em>gems-prize-reference-solution</em>, notebook cell output. <a href="https://github.com/drivendataorg/gems-prize-reference-solution">https://github.com/drivendataorg/gems-prize-reference-solution</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            Six magnetic bands: <strong>1</strong> magnetic anomaly, <strong>2</strong> reduced-to-pole, <strong>3</strong>
+            TMI horizontal gradient, <strong>6</strong> “tilt angle or total curvature — magnetic field derivative for edge
+            detection”, <strong>9</strong> TMI vertical gradient, <strong>14</strong> TMI.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Three observations, each with a consequence:
+            <ul>
+              <li><strong>Band 6 is already an edge detector.</strong> The derivative work has been done for you. Whether it is a tilt derivative or a curvature is genuinely ambiguous from the tag — “tilt angle or total curvature” is the tag's own wording — and the difference matters, so this should be checked numerically against bands 3, 9 and 14 once data are placed (a tilt angle is bounded and zero-crossing based; total curvature is not).</li>
+              <li><strong>Bands 3 and 9 together give the full horizontal gradient magnitude and, with 14, the analytic-signal amplitude.</strong> These are the classic edge detectors; none of them requires a scarp.</li>
+              <li><strong>RTP is provided, so you should use band 2 rather than band 1 or 14</strong> for anything geometric. At mid-latitudes an unreduced anomaly peak is displaced from its source; RTP removes that displacement. The database's own About page describes aeromagnetics as providing “key information on … subsurface structure and geology”.</li>
+            </ul>
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Band tags. <span class="chip unverified">inference</span> Identification of band 6 as tilt vs curvature, and the recommendation to prefer RTP.</dd>
+        </dl>
+      </article>
 
-    <article class="entry">
-      <h3>PF-6 · Competition About page on gravity/magnetics for hidden faults</h3>
-      <p><span class="chip verified">verified</span></p>
-      <p class="src"><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/#about-the-task">About — the task</a></p>
-      <p><strong>Claim:</strong> “Gravity and magnetic surveys also help infer the presence of faults through density or magnetic anomalies.” The page contrasts clear San Andreas surface traces with GeoDAWN-region faults that are “more subtle, and many are hidden below the surface, requiring geophysical data to detect.”</p>
-      <p><strong>Relevance:</strong> Organizers explicitly expect geophysical detection of hidden faults. Whether the <em>private test set</em> includes those hidden structures is still CG-5 (unverified).</p>
-    </article>
-  </main>
-  <footer class="site"><div class="wrap"><a href="index.html">Library</a></div></footer>
+      <article class="entry" id="pf3">
+        <h3><span class="id">PF-3</span> The tilt derivative — Miller &amp; Singh (1994)</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Journal citation, corroborated across multiple citing references: <a href="https://doi.org/10.1016/0926-9851(94)90022-1">https://doi.org/10.1016/0926-9851(94)90022-1</a></dd>
+          <dt>Citation</dt>
+          <dd>Miller, H.G., &amp; Singh, V. (1994). Potential field tilt — a new concept for location of potential field sources. <em>Journal of Applied Geophysics</em>, 32, 213–217. <a href="https://doi.org/10.1016/0926-9851(94)90022-1">10.1016/0926-9851(94)90022-1</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            The tilt angle is the arctangent of the ratio of the vertical derivative to the horizontal gradient magnitude.
+            Its value is bounded, so it responds to shallow and deep sources with comparable amplitude, and its zero
+            contour sits over source edges — which is why it became the standard edge locator in potential-field work.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The amplitude-balancing property is exactly what you want in a basin-and-range setting, where a deep basement
+            step under several hundred metres of fill produces a weak, broad gradient that a plain gradient-magnitude
+            filter suppresses next to a shallow, sharp anomaly. If band 6 is a tilt angle, it is the single most
+            gap-relevant band in the stack.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Bibliographic record (title, journal, volume, pages, DOI) corroborated. <span class="chip unverified">unverified</span> The method description above is the standard textbook form; the paywalled article itself has <strong>not</strong> been opened in this project. Do not quote this entry as a verbatim statement of the authors.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="pf4">
+        <h3><span class="id">PF-4</span> Total horizontal derivative of the tilt — Verduzco et al. (2004)</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://doi.org/10.1190/1.1651454">https://doi.org/10.1190/1.1651454</a></dd>
+          <dt>Citation</dt>
+          <dd>Verduzco, B., Fairhead, J.D., Green, C.M., &amp; MacKenzie, C. (2004). New insights into magnetic derivatives for structural mapping. <em>The Leading Edge</em>, 23(2), 116–119. <a href="https://doi.org/10.1190/1.1651454">10.1190/1.1651454</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            The paper extends the tilt derivative by taking the total horizontal derivative of the tilt angle, producing
+            sharper, better-localised maxima over source edges than the tilt zero-contour alone, and it discusses the
+            analytic-signal amplitude alongside it.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            This is the method to apply <em>on top of</em> band 6 if band 6 is a tilt angle, or to compute from bands 3, 9
+            and 14 if it is not. It is cheap: a few gradient operations on grids that already exist, no external data, no
+            reprocessing of line data. That makes it the lowest-cost experiment available for hypothesis
+            <a href="../hypotheses.html">H2</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Bibliographic record corroborated across independent citing sources. <span class="chip unverified">unverified</span> The paywalled article has <strong>not</strong> been opened here; the summary is the conventional description of this method, not a quotation.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="pf5">
+        <h3><span class="id">PF-5</span> The gravity family, and the regional maps behind it</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Stack band tags · <a href="https://doi.org/10.5066/P9Z6SA1Z">Glen et al., 2022, regional Great Basin gravity and magnetic maps</a> · <a href="https://gdr.openei.org/submissions/1391">INGENIOUS compilation</a></dd>
+          <dt>Citation</dt>
+          <dd>Glen, J.M.G., et al. (2022). <em>Regional geophysical maps of the Great Basin.</em> U.S. Geological Survey data release, <a href="https://doi.org/10.5066/P9Z6SA1Z">https://doi.org/10.5066/P9Z6SA1Z</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            Four gravity bands: <strong>13</strong> isostatic gravity anomaly, <strong>5</strong> its slope,
+            <strong>11</strong> its vertical gradient, <strong>18</strong> its horizontal gradient. The INGENIOUS record
+            describes the source release as “Regional geophysical maps of the Great Basin, USA … generated from new and
+            existing sources to support ongoing efforts to characterize geothermal resource potential”.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Gravity is independent evidence from magnetics: different physical property, different failure modes. A
+            lineament that appears in both band 18 (gravity horizontal gradient) and band 3/6 (magnetic) is far harder to
+            explain away as lithology or acquisition artefact. That conjunction is the natural definition of a
+            high-confidence H2 candidate. The regional maps at
+            <a href="https://doi.org/10.5066/P9Z6SA1Z">10.5066/P9Z6SA1Z</a> give the native-resolution context for what
+            the 100 m bands were resampled from.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Band tags and the INGENIOUS description of the release. <span class="chip unverified">unverified</span> That the competition's gravity bands derive from this specific release is <strong>not</strong> stated anywhere official — the composition of the feature stack is undocumented beyond the band tags.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="pf6">
+        <h3><span class="id">PF-6</span> Band 15, depth to basement — the cover axis</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band tag: “Depth to basement surface — thickness of sedimentary cover”, category <code>subsurface</code></dd>
+          <dt>Citation</dt>
+          <dd>DrivenData reference-solution notebook band listing (see PF-2)</dd>
+          <dt>What it claims</dt>
+          <dd>Per-pixel thickness of sedimentary cover over the magnetic basement surface.</dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            This is the stratifying variable for the whole catalogue-gap argument. Where cover is thick, the absence of a
+            mapped surface scarp is uninformative — a buried fault can be real, geophysically visible, and structurally
+            excluded from QFFD. Where cover is thin or absent, a missing scarp is meaningful negative evidence and a
+            magnetic edge more likely reflects lithology than structure. Any H2 candidate should be reported
+            <em>conditioned on band 15</em>, not as a flat map. This is the cheapest single piece of conditioning
+            available and it costs nothing, because the band is already in the stack.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Band tag. <span class="chip unverified">inference</span> The conditioning strategy is our reasoning, not a sourced claim. The band's own provenance, method and error are undocumented.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="pf7">
+        <h3><span class="id">PF-7</span> Artefacts that will masquerade as structure</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Acquisition facts from PF-1; reasoning ours</dd>
+          <dt>Citation</dt>
+          <dd>—</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Three artefact families are predictable from the acquisition design and should be controlled for, not ignored:
+            <ol>
+              <li><strong>Mosaic discontinuity.</strong> Area 1 (200 m lines) abuts Area 2 (400 m lines). Apparent lineament density and gradient amplitude will change across that boundary for purely acquisitional reasons.</li>
+              <li><strong>Block boundaries.</strong> Four acquisition blocks — Winnemucca, Fallon, Hawthorne, Tonopah — flown by different contractors and aircraft. Levelling joins can leave residual line-to-line or block-to-block offsets that gradient filters amplify into straight “structures”.</li>
+              <li><strong>Terrain clearance.</strong> The USGS page notes that in steep terrain “the aircraft may have required deviating from the planned drape surface, and therefore variable terrain clearance should be considered when modeling and interpreting these data”. Variable clearance changes anomaly amplitude independently of geology.</li>
+            </ol>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            All three produce linear, fault-shaped features. A model that learns them will produce confident, plausible,
+            entirely false predictions — and because β=0.8 punishes misses more than α=0.2 punishes false positives, the
+            metric gives you latitude to over-predict, which makes this failure mode easy to fall into and hard to notice
+            on the public leaderboard. The control is cheap and public: the GeoDAWN release ships
+            <strong>Esri shapefiles of the flight paths and survey outlines</strong>. Overlay them and reject any
+            candidate lineament that parallels a survey or block boundary — that is
+            <a href="../hypotheses.html">H7</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Acquisition facts, block names and the terrain-clearance quotation. <span class="chip unverified">inference</span> The claim that these artefacts will appear in the derived bands is reasoning; it has not been measured here.</dd>
+        </dl>
+      </article>
+
+      <h2>Cheapest next experiments, in order</h2>
+      <ol>
+        <li>Confirm numerically what band 6 is: compare it against atan2-style tilt computed from bands 3, 9 and 14, and against curvature. Ten minutes once data are placed.</li>
+        <li>Overlay the GeoDAWN survey-outline shapefile and test whether band-6 / band-3 maxima cluster along the Area 1 / Area 2 boundary and block boundaries (H7).</li>
+        <li>Stratify every magnetic and gravity edge candidate by band 15 (cover thickness) and report detection statistics per cover class.</li>
+        <li>Compute the analytic-signal amplitude and the tilt's total horizontal derivative, and test whether either adds information over band 6 alone against held-out catalogue faults — a sanity check before trusting it on unknowns.</li>
+      </ol>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="catalogue-gaps.html">← Catalogue-gap reasoning</a> · <a href="index.html">Library</a> · next: <a href="geomorphology.html">DEM geomorphology</a>
+    </div>
+  </footer>
   <script src="../assets/nav.js"></script>
 </body>
 </html>

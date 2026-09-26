@@ -4,120 +4,262 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Competition governance — GEMSDOE</title>
+  <meta name="description" content="GEMS Prize official rules section by section, staff forum clarifications, open eligibility questions and time-sensitive items.">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="../index.html">Overview</a>
         <a href="../executive-summary.html">Explainer</a>
         <a href="index.html">Library</a>
+        <a href="../feature-stack.html">Feature stack</a>
         <a href="../hypotheses.html">Hypotheses</a>
-        <a href="governance.html">Governance</a>
         <a href="../sources.html">Sources</a>
         <a href="../pipeline.html">Pipeline</a>
+        <a href="governance.html">Governance</a>
         <a href="../changelog.html">Changelog</a>
         <a href="../ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Rules, forum errata, time-sensitive items · re-check §1.3 if the team changes</p>
-    <h1>Competition governance</h1>
 
-    <div class="banner warn">
-      <strong>Eligibility reminder (§1.3):</strong> re-confirm if team composition or affiliations change.
-      Official rules PDF: <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">https://www.nlr.gov/docs/fy26osti/96647.pdf</a>
-      (September 2026). DrivenData rules page only links HeroX, which links the same PDF:
-      <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">rules page</a> ·
-      <a href="https://www.herox.com/GEMSPrize/resource/2274">HeroX resource 2274</a>.
+  <div class="shell has-toc">
+    <main id="main">
+      <p class="meta">Library · domain 6 of 6 · 9 entries · whole rules PDF read end to end 2026-09-26</p>
+
+      <h1>Competition governance</h1>
+      <p class="lede">
+        The rules PDF has been read in full — all seven chunks, §1.1 through §A.17 — and every entry below quotes or
+        paraphrases a specific section. Where a staff forum answer changes the practical reading of a rule, both are
+        given. Where the official documents disagree with each other, the disagreement is recorded rather than resolved.
+      </p>
+
+      <div class="banner ok">
+        <p>
+          <strong>Correction carried in this session.</strong> A previous session recorded the scoring mask as
+          “masked/excluded, pixel-exactness not stated by staff”. That gap is now closed: staff stated on 2026-09-21 that
+          “The mask is indeed pixel-exact — it is identical to the provided set of training fault labels.”
+          (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">11516 post 4</a>).
+          Pages that previously hedged have been updated.
+        </p>
+      </div>
+
+      <h2 id="gv1">GV-1 · Eligibility: the homepage is shorter than the rules</h2>
+      <div class="entry">
+        <dl>
+          <dt>Homepage says</dt>
+          <dd>“Individual competitors must be U.S. citizens or permanent residents. Teams must have a captain who is a U.S. citizen or permanent resident. Private entities must be incorporated in and maintain a primary place of business in the United States. Federal entities and federal employees are not eligible to participate.”</dd>
+          <dt>Rules §1.3 adds</dt>
+          <dd>
+            <ul>
+              <li>“Individuals competing as part of a team are eligible to participate if they are <strong>legally authorized to work in the United States</strong>.”</li>
+              <li>“Academic institutions must be based in the United States and accredited by a nationally recognized accrediting agency or association.”</li>
+              <li>FFRDCs may not compete; individual FFRDC researchers may compete in their individual capacities if no FFRDC resources are used, but “may receive an honorable mention [and] are not eligible to receive any cash prizes”.</li>
+              <li>Non-DOE Federal entities and Federal employees are not eligible; nor are DrivenData officers, employees, judges and their households; DOE employees and support contractors; debarred parties; under-18s; individuals in a Malign Foreign Talent Recruitment Program of a foreign country of concern; and entities owned or controlled by such a government. DOE defines foreign countries of concern to include Iran, North Korea, Russia, Belarus and China, “subject to change”.</li>
+              <li>Registration requires certifying under penalty of perjury, with exposure under 18 U.S.C. §1001 and §287 and 31 U.S.C. §§3729–3733 and 3801–3812.</li>
+            </ul>
+          </dd>
+          <dt>Open questions</dt>
+          <dd>
+            Two forum threads ask which text governs and both are unanswered at 2026-09-26:
+            <a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a>
+            (must non-captain members be US-work-authorised?) and
+            <a href="https://community.drivendata.org/t/institutional-limit/11526">11526</a>
+            (is the one-final-submission limit applied per team or per organisation / per UEI?).
+            A third, older question in the category thread —
+            <a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a> —
+            asks whether a team of one US resident and one non-US resident may participate, and is also unanswered.
+          </dd>
+          <dt>Action</dt>
+          <dd>
+            <strong>Re-confirm eligibility against §1.3 before any change in team composition or affiliation.</strong>
+            Until 11540 is answered, the conservative reading is that §1.3 governs: every team member needs US work
+            authorisation and the captain needs citizenship or permanent residency.
+          </dd>
+        </dl>
+      </div>
+
+      <h2 id="gv2">GV-2 · Generative AI must be disclosed in the narrative (§3.2)</h2>
+      <div class="entry">
+        <p class="quote">
+          “Using generative AI technology in the development of your prize submission is allowed. However, you must
+          <strong>indicate in the narrative</strong> (not included in the word count) the extent to which, if any, you used
+          generative AI technology and how you used it to develop your submission (including all submission elements
+          described in this official rules document). You are responsible for the accuracy, authenticity, and authorship
+          representations of your submission under consideration, including content developed with generative AI tools.
+          Relying on generative AI may introduce significant risks, including but not limited to, research misconduct
+          resulting from <strong>fabrication, falsification, or plagiarism</strong> when proposing, performing, or
+          reviewing research or in reporting research results.”
+          <cite>Official rules §3.2, Process Overview</cite>
+        </p>
+        <p>
+          That is the compliance basis for the <a href="../ai-usage.html">AI-usage log</a>, which is maintained
+          incrementally, session by session, rather than reconstructed at the deadline. The log records the tool used,
+          what was done, what was deliberately not done, and which claims still need human verification.
+        </p>
+        <p class="small">
+          Related, from §3.2: prize finalists must submit “their solution's complete code assets and documentation”,
+          including a description of the resources required to build and run the solution, sufficient to reproduce the
+          winning results, consistent with DrivenData's Winning Model Documentation Template.
+        </p>
+      </div>
+
+      <h2 id="gv3">GV-3 · Submission mechanics</h2>
+      <div class="entry">
+        <ul>
+          <li><strong>Three scored submissions per week</strong> (§3.2, §3.4), resetting on a <strong>rolling window</strong>, not a calendar week (<a href="https://community.drivendata.org/t/weekly-submissions/11524">forum 11524</a>).</li>
+          <li><strong>One final submission for both rounds.</strong> “By the submission deadline, you must select only one set of predictions to use as your final submission” (§3.4). “Multiple finalized submissions are not allowed” and “individuals participating on a team will not be allowed to submit a separate final submission”.</li>
+          <li><strong>You choose blind.</strong> “You must make your decision without knowledge of your scores on the private test set. This restriction is in place to encourage models that generalize well to unseen data and to discourage overfitting to the public test set” (§3.6.2).</li>
+          <li><strong>Public leaderboard scores may not match final scores</strong> (§3.2) — the public test set is a subset of the new-fault labels, and the relative weighting of faults in the two test sets is set by the organisers (§3.6.2).</li>
+          <li>Winners are notified approximately <strong>60 days</strong> after the prize closes (§3.6.5); DOE may hold short, optional interviews with winners (§3.6.3); a DOE Federal employee is designated judge and makes the final determination (§3.6.4, A.15).</li>
+        </ul>
+      </div>
+
+      <h2 id="gv4">GV-4 · External data: licence plus shareability</h2>
+      <div class="entry">
+        <p class="quote">
+          “Participants are allowed to use any additional data sources, provided that the participants possess a license
+          that permits the data to be used in this challenge <strong>and shared with the sponsor for evaluation
+          purposes</strong>.”
+          <cite>Problem description — External datasets; reaffirmed by staff in <a href="https://community.drivendata.org/t/paid-for-external-data-license/11528">forum 11528</a></cite>
+        </p>
+        <p>
+          Staff's answer to a direct question about subscription-only data was to point back at that sentence, which reads
+          as: the licence must permit the sponsor to receive it, not merely permit you to hold it. Practically, this
+          favours public-domain and CC-licensed sources. Both major sources used in this research qualify —
+          <a href="https://doi.org/10.5066/P93LGLVQ">GeoDAWN</a> is CC0 1.0 and the
+          <a href="https://gdr.openei.org/submissions/1391">INGENIOUS compilation</a> is CC BY 4.0 (redistributable with
+          attribution).
+        </p>
+      </div>
+
+      <h2 id="gv5">GV-5 · The scoring mask is pixel-exact</h2>
+      <div class="entry">
+        <p>
+          Asked directly whether the mask is pixel-exact or buffered, and whether a new-fault ground-truth pixel may sit
+          near a known trace, staff answered on 2026-09-21:
+        </p>
+        <ol>
+          <li>“The mask is indeed <strong>pixel-exact</strong> — it is identical to the provided set of training fault labels.”</li>
+          <li>“Only new-fault ground truth is considered for scoring purposes. A predicted pixel that is near a known fault trace but far from a new-fault ground truth pixel will be <strong>fully penalized</strong>, i.e., the buffer does not apply to known faults.”</li>
+          <li>“A new-fault ground truth pixel <strong>can indeed lie within 300m of a known fault trace</strong>. Such pixels would constitute corrections or modifications to existing fault traces. Identifying these corrections is one outcome we are aiming for as part of this competition. Such corrections may already exist in the new-fault set, and may also exist in the final round evaluation set.”</li>
+        </ol>
+        <p>
+          Earlier in the same thread staff had already confirmed that known-fault pixels are masked from evaluation in
+          both rounds and that “for scoring purposes it should not matter whether these known faults are included with
+          predictions or not”
+          (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/2">post 2</a>).
+        </p>
+        <p>
+          <strong>Strategic reading.</strong> Point 2 is the one that costs people: hedging a few pixels either side of a
+          mapped trace is not free, it is full false-positive mass. Point 3 is the one that pays: corrections near known
+          traces are an explicitly intended outcome. Together they say — be precise where the catalogue is precise, and
+          be bold where it is wrong.
+        </p>
+      </div>
+
+      <h2 id="gv6">GV-6 · What counts as a new fault</h2>
+      <div class="entry">
+        <p class="quote">
+          “For the purposes of this competition, ‘new fault’ means ‘any fault pixel not already captured by
+          USGS/INGENIOUS’ and can include newly mapped geometry of an existing fault system.”
+          <cite>Staff reply, <a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">forum 11536</a></cite>
+        </p>
+        <p>
+          Asked whether a continuation beyond a mapped endpoint, or a newly mapped splay or parallel strand within the
+          same fault zone, counts — the answer covers all of it. This is the official grounding for hypothesis
+          <a href="../hypotheses.html">H1</a>, and it is the single most useful clarification in the forum for deciding
+          what to predict.
+        </p>
+      </div>
+
+      <h2 id="gv7">GV-7 · Test-fault provenance will not be published</h2>
+      <div class="entry">
+        <p class="quote">
+          “We're not sharing details about the data sources, fault types, or coverage behind the test faults beyond
+          what's in the problem description. Note that the largest prize pool (Phase 2) will use a test set that is
+          updated by expert review of all Phase 1 submissions, so your fault predictions have an impact on final
+          evaluation even if they are not the most performant in Phase 1.”
+          <cite>Staff reply, <a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">forum 11527, post 7</a></cite>
+        </p>
+        <p>
+          The question asked three things — which data the NLR and USGS experts used, whether the new faults are surface
+          features or buried/inferred structures, and whether the whole region was reviewed at uniform detail. All three
+          were declined. Constraints on strategy that follow: do not build a single-modality bet; make the Phase 2
+          narrative strong, because that is where staff have pointed; and do not expect to validate a
+          buried-fault detector against Phase 1 labels that may contain none.
+        </p>
+        <p class="small">
+          Separately, rules §2 does state <em>who</em> labelled them: “a set of newly identified faults labeled by geology
+          experts at the National Laboratory of the Rockies (NLR) and USGS.”
+        </p>
+      </div>
+
+      <h2 id="gv8">GV-8 · Deadline conflict between two official documents</h2>
+      <div class="entry">
+        <ul>
+          <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition hub</a>: “Dec. 3, 2026, 11:59 p.m. UTC”.</li>
+          <li><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §A.1</a>: “You must post the final content of your submission or upload the submission form online by <strong>5:00 p.m. ET</strong> on the prize submission deadline date before the prize's phase submission period closes.”</li>
+        </ul>
+        <p>
+          §A.1 also warns that “Late submissions or any other form of submission may be rejected” and that the
+          administrator “may give you an opportunity to fix nonsubstantive mistakes or errors”. Rules §1.2 punts to the
+          website: “Please see the competition website … for the most current timeline and important dates.”
+        </p>
+        <p>
+          <strong>Flagged, not resolved.</strong> No forum thread on this was found. The safe operating assumption is the
+          earlier of the two instants. Note also that §1.2 makes the website authoritative for dates, which means the hub
+          value could change; the rules PDF's own change-log table at the front was empty when read.
+        </p>
+      </div>
+
+      <h2 id="gv9">GV-9 · Other provisions worth knowing before you write anything down</h2>
+      <div class="entry">
+        <ul>
+          <li><strong>Public elements are public.</strong> §A.4: elements designated public “must not include trade secrets or business-sensitive, proprietary, or otherwise confidential information”, and teams grant DOE an unlimited licence to display and use them. Confidential material must be marked with the prescribed notice on every page and with double brackets around every line.</li>
+          <li><strong>Submission materials become DOE records</strong> subject to FOIA (§A.10); DOE will notify competitors of FOIA requests under 29 C.F.R. §70.26.</li>
+          <li><strong>Payment mechanics.</strong> §A.2: winners must return an NLR ACH form and an IRS W-9 within 30 days of notice; failure can mean disqualification and no funds. §A.3: a single amount is awarded to the designated primary submitter, who is solely responsible for allocating it among teammates — DOE will not arbitrate disputes.</li>
+          <li><strong>Program policy factors (§A.13)</strong> sit alongside reviewer scores in the judge's decision: advancing DOE and administration policy priorities; geographic diversity and economic impact; non-duplication with existing DOE funding; technological or programme diversity versus the existing portfolio; likely US employment and manufacturing benefit; acceleration of advances industry would not undertake alone; support for complementary DOE-funded efforts; expanding DOE funding to new recipients; enabling new market segments.</li>
+          <li><strong>Risk review (§A.12).</strong> “DOE may conduct a risk review, using government resources, of the competitor and project personnel for potential risks of foreign interference. … An elimination based on a risk review is not appealable.”</li>
+          <li><strong>DOE may award nothing.</strong> §A.12: “If, in DOE's determination, no competitors are likely to achieve the goals of the program, DOE will select no competitors to be winners and will award no prize money.”</li>
+          <li><strong>Prize amounts.</strong> §1.1: Phase 1 $50,000 split equally among the top five; Phase 2 $100,000 / $70,000 / $40,000 / $25,000 / $15,000. “Up to 10 awards” across both phases.</li>
+          <li><strong>Teams are encouraged to be multidisciplinary.</strong> §2: “competitors are strongly encouraged to form multidisciplinary teams that include expertise in data science and geosciences, such as geophysics or structural geology.”</li>
+        </ul>
+      </div>
+
+      <h2 id="watch">Watch list</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th class="nowrap">Thread / section</th><th class="nowrap">State at 2026-09-26</th></tr></thead>
+          <tbody>
+            <tr><td>Do non-captain team members need US work authorisation?</td><td><a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a></td><td><span class="chip unverified">unanswered</span></td></tr>
+            <tr><td>One final submission per team or per organisation / UEI?</td><td><a href="https://community.drivendata.org/t/institutional-limit/11526">11526</a></td><td><span class="chip unverified">unanswered</span></td></tr>
+            <tr><td>May a teammate's geological interpretation be used as training labels?</td><td><a href="https://community.drivendata.org/t/using-a-teammates-geological-interpretation-as-training-labels/11543">11543</a></td><td><span class="chip unverified">unanswered</span></td></tr>
+            <tr><td>Can a team mix one US resident and one non-US resident?</td><td><a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a></td><td><span class="chip unverified">unanswered</span></td></tr>
+            <tr><td>Deadline: 5:00 p.m. ET (rules) vs 11:59 p.m. UTC (hub)</td><td>§A.1 vs hub</td><td><span class="chip unverified">no thread found</span></td></tr>
+            <tr><td>Test-fault data sources, fault types, coverage</td><td><a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">11527 post 7</a></td><td><span class="chip rejected">declined by staff</span></td></tr>
+            <tr><td>Rules change-log table</td><td>Rules PDF, Preface</td><td><span class="chip verified">empty when read</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">
+        The forum category index is <a href="https://community.drivendata.org/c/gems-prize-challenge/111">community.drivendata.org/c/gems-prize-challenge/111</a>.
+        Re-check the four unanswered threads at the start of every session; any answer to 11540 or 11526 changes the
+        eligibility and submission picture directly.
+      </p>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="prior-art.html">← Prior art</a> · <a href="index.html">Research library</a> · compliance log: <a href="../ai-usage.html">AI-usage log</a>
     </div>
-
-    <article class="entry">
-      <h3>GV-1 · Eligibility (Official Rules §1.3) vs homepage short text</h3>
-      <p><span class="chip verified">verified discrepancy</span></p>
-      <p><strong>Homepage</strong> (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">hub</a>): individual competitors must be U.S. citizens or permanent residents; teams must have a captain who is a U.S. citizen or permanent resident; private entities incorporated in and with primary place of business in the U.S.; federal entities and federal employees not eligible.</p>
-      <p><strong>Official Rules §1.3 additional points</strong> (PDF, fetched 2026-09-26):</p>
-      <ul>
-        <li>Team members other than the captain: eligible if “legally authorized to work in the United States.”</li>
-        <li>Academic institutions must be U.S.-based and nationally accredited.</li>
-        <li>FFRDCs may not compete; individual FFRDC researchers may compete in individual capacity without FFRDC resources, honorable mention only, no cash.</li>
-        <li>Non-DOE federal entities and federal employees: not eligible for any portion.</li>
-        <li>DrivenData officers/employees/judges and household/family: ineligible.</li>
-        <li>DOE employees and DOE support-service contractors, sponsoring-organization employees, and their families/households: ineligible.</li>
-        <li>Debarred persons: ineligible. Under 18 / under age of majority: ineligible.</li>
-        <li>Malign Foreign Talent Recruitment Program participants (FCOC-sponsored) and their teams: ineligible. FCOC list in footnote 2: Iran, North Korea, Russia, Belarus, and China (subject to change).</li>
-        <li>Entities owned/controlled by an FCOC government: ineligible.</li>
-      </ul>
-      <p><strong>Irregularity:</strong> Forum thread <a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a> (dmitry_v, ~2 days before fetch) asks which text controls for non-captain team members. <strong>No organizer reply was present</strong> at fetch. Treat the PDF as controlling until staff say otherwise; do not add ineligible members.</p>
-      <p>Related unanswered: <a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">maksimovka, 10 Sep 2026</a> — one US resident + one non-US resident team?</p>
-    </article>
-
-    <article class="entry">
-      <h3>GV-2 · Generative AI disclosure (rules §3.2) — why this log exists</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p>PDF §3.2: generative AI is allowed in developing the prize submission, but competitors <strong>must indicate in the narrative</strong> (not in the word count) the extent of use and how it was used. Competitors own accuracy, authenticity, and authorship. Risks named: fabrication, falsification, or plagiarism. Running log: <a href="../ai-usage.html">AI-usage log</a>.</p>
-    </article>
-
-    <article class="entry">
-      <h3>GV-3 · Submission mechanics</h3>
-      <p><span class="chip verified">verified</span></p>
-      <ul>
-        <li>One GeoTIFF, 100 m, EPSG:32611, float32 [0,1], same bounds as training, outside bounds null/NaN — <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">format</a>.</li>
-        <li>Up to three submissions per week; choose <strong>one</strong> final for both prize rounds without seeing private scores — PDF §3.2, §3.4, §3.6.2.</li>
-        <li>Reset is a <strong>rolling window</strong>, not a calendar week — staff <a href="https://community.drivendata.org/t/weekly-submissions/11524">17 Sep 2026</a>.</li>
-        <li>This research agent does not consume those slots.</li>
-        <li>Finalists must later provide complete code and docs sufficient to reproduce and to generate predictions on new samples — §3.2 / §3.5.</li>
-        <li>PDF §A.1 also says submissions must be posted by <strong>5:00 p.m. ET</strong> on the deadline date. Hub lists <strong>3 Dec 2026, 11:59 p.m. UTC</strong>. Those are not the same clock time. <span class="chip unverified">unresolved which clock wins for the GeoTIFF upload</span> — flag, do not pick one.</li>
-      </ul>
-    </article>
-
-    <article class="entry">
-      <h3>GV-4 · External data</h3>
-      <p><span class="chip verified">verified</span></p>
-      <p>Problem description: additional data allowed if the team has a license that permits use in this challenge <strong>and sharing with the sponsor for evaluation</strong>
-        (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#external-datasets">external datasets</a>).
-        Staff repeated that sentence for paid subscriptions
-        (<a href="https://community.drivendata.org/t/paid-for-external-data-license/11528">11528</a>).
-        Hub: spatial overlap of train (USGS Q faults) and test (new faults) is allowed; train on the provided faults; evaluation is on the private new-fault set.</p>
-    </article>
-
-    <article class="entry">
-      <h3>GV-5 · Scoring mask (staff, binding for strategy)</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Thread 11516</a>:</p>
-    <ul>
-      <li>Known USGS/INGENIOUS pixels are masked/excluded from evaluation in both rounds and do not contribute to the penalty terms (staff 11516).</li>
-      <li>The 300 m triangular kernel measures distance to <em>new-fault</em> ground truth, not a buffer around known faults; a prediction beside a known trace but far from any new-fault pixel is still fully penalized.</li>
-      <li>Staff did not explicitly state the exact masking implementation (pixel-exact vs. a small buffer) in the fetched posts. The provided training-label raster encodes the known faults, so the practical effect is the same for strategy — but treat "pixel-exact" as an inference, not a staff quote.</li>
-      <li>New-fault pixels may lie within 300 m of known traces (corrections/modifications). Identifying those is an intended outcome and some may already be in the new-fault set.</li>
-    </ul>
-    </article>
-
-    <article class="entry">
-      <h3>GV-6 · Open forum questions (no staff answer at fetch)</h3>
-      <p><span class="chip unverified">unanswered</span></p>
-      <ul>
-        <li><a href="https://community.drivendata.org/t/institutional-limit/11526">Institutional limit / UEI</a></li>
-        <li><a href="https://community.drivendata.org/t/using-a-teammates-geological-interpretation-as-training-labels/11543">Teammate geologic interpretation as labels</a></li>
-        <li><a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527">How test faults were identified</a> — staff answered: no details beyond the problem description (see CG-5)</li>
-        <li>Team eligibility threads above</li>
-      </ul>
-    </article>
-
-    <article class="entry">
-      <h3>GV-7 · Prize structure (do not confuse rounds)</h3>
-      <p><span class="chip verified">verified</span></p>
-      <p>Initial: top 5 on private test each $10,000 ($50,000). Final: same submissions rescored on expanded labels after expert review of all teams — $100k / $70k / $40k / $25k / $15k.
-      Hub diagram and <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#competition-structure">structure section</a>.
-      PDF §1.1 matches those dollar amounts. PDF also: “All Phase 1 competitors will be eligible to compete in Phase 2 and will be automatically submitted for consideration.”
-      PDF §A.13: the prize judge may apply program policy factors (DOE priorities, geographic diversity, U.S. employment/manufacturing, and others) in addition to reviewer scores. DTI rank is not guaranteed to be the sole winner-selection input.</p>
-    </article>
-  </main>
-  <footer class="site"><div class="wrap">If the team changes, re-read §1.3 before any modeling work is attributed to a new person.</div></footer>
+  </footer>
   <script src="../assets/nav.js"></script>
 </body>
 </html>
