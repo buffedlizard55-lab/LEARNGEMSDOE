@@ -23,6 +23,7 @@ GitHub Pages is served from `docs/` (the workflow deploys on push to `main`).
 | Sources | [docs/sources.html](docs/sources.html) | Every source, with what was read and what remains unverified |
 | Pipeline | [docs/pipeline.html](docs/pipeline.html) | Data-placement blocker, what runs today, the submission gate |
 | Governance | [docs/research/governance.html](docs/research/governance.html) | Rules section by section, staff clarifications, open questions |
+| Forum watch | [docs/forum.html](docs/forum.html) | Unanswered threads with JSON links, re-read each session |
 | Changelog | [docs/changelog.html](docs/changelog.html) | Dated, append-only |
 | AI-usage log | [docs/ai-usage.html](docs/ai-usage.html) | Rules §3.2 compliance record |
 

@@ -52,7 +52,9 @@
     var mode = input.getAttribute("data-filter-mode") || "rows";
     var items = mode === "rows"
       ? target.querySelectorAll("tbody tr")
-      : target.querySelectorAll("[data-filter-item]");
+      : (mode === "cards"
+        ? target.querySelectorAll("a.card, [data-filter-item]")
+        : target.querySelectorAll("[data-filter-item]"));
     var shown = 0;
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
@@ -92,11 +94,23 @@
     out.textContent = parts.join(" · ");
   }
 
+  function wireNavToggle() {
+    var btn = document.querySelector(".nav-toggle");
+    var header = document.querySelector("header.site");
+    if (!btn || !header) return;
+    btn.addEventListener("click", function () {
+      var open = header.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.textContent = open ? "Close" : "Menu";
+    });
+  }
+
   function init() {
     markCurrent();
     buildToc();
     wireFilters();
     countChips();
+    wireNavToggle();
   }
 
   if (document.readyState === "loading") {

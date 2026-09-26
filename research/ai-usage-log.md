@@ -16,6 +16,24 @@ record rather than reconstructed at the deadline.
 
 ---
 
+## 2026-09-26 · session `arena/01a0df77-learngemsdoe`
+
+**Tool.** Arena.ai Agent Mode — coding agent with web fetch, file read/write and shell. No other generative-AI
+service. No image/audio generation. No prediction files.
+
+**Did — source verification.** Fetched hub, problem 967 (both chunks), About 968, forum category JSON and
+threads 11540, 11526, 11543, USGS QFFD page, INGENIOUS GDR 1391, NBMG count query (`22956`).
+
+**Did — writing.** Added `docs/forum.html`, GV-10, mobile navigation, library filter, changelog and this log
+entry. Extended existing pages; did not duplicate CG-1…CG-8 or H1–H8.
+
+**Did not.** Generate or submit a prediction GeoTIFF. Create a DrivenData account. Invent forum answers.
+Create a second site, repo, or registration.
+
+**Human review still required.** Open every linked primary URL. Four forum threads remain unanswered.
+
+---
+
 ## 2026-09-26 · session `arena/01a0df46-learngemsdoe`
 
 **Tool.** Arena.ai Agent Mode — coding agent with web fetch, web search, file read/write and shell execution. No other

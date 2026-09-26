@@ -86,6 +86,29 @@ header.site nav a:hover { background: rgba(255,255,255,.10); }
 header.site nav a[aria-current="page"] {
   background: var(--accent); color: #fff; font-weight: 600;
 }
+.nav-toggle {
+  display: none;
+  font-family: var(--sans);
+  font-size: .86rem;
+  background: transparent;
+  color: #f2f4f4;
+  border: 1px solid #5b6468;
+  border-radius: 6px;
+  padding: .28rem .7rem;
+  cursor: pointer;
+}
+@media (max-width: 860px) {
+  header.site .wrap { align-items: center; }
+  .nav-toggle { display: inline-block; margin-left: auto; }
+  header.site nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: .15rem;
+  }
+  header.site.is-open nav { display: flex; }
+  header.site nav a { padding: .4rem .55rem; }
+}
 
 /* ---------------------------------------------------------------- layout */
 .shell {
