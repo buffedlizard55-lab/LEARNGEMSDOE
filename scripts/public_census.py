@@ -135,26 +135,37 @@ def distance_stats(values):
     }
 
 
-def attribute_counts(records, idx, max_distinct=25, max_fields=6):
+PRIORITY_FIELDS = {"scale", "mapped_sca", "class", "certainty", "linetype", "age", "cooperator", "location"}
+
+
+def attribute_counts(records, idx, max_distinct=25, max_fields=6, top_values=20):
     """Value counts for the low-cardinality attributes of the selected records.
 
-    Generic on purpose: the USGS GIS distribution's field names are not assumed. Only fields
-    with a small number of distinct values are reported, so a long free-text field never
-    floods the output.
+    Generic on purpose: the USGS GIS distribution's field names are not assumed. Fields whose
+    name is in PRIORITY_FIELDS are always reported (top `top_values` values by count) because
+    they carry the catalogue's own statements about mapping scale, certainty and compiler;
+    other fields are reported only when they have few distinct values, so a long free-text
+    field never floods the output.
     """
     out = {}
-    candidates = []
     if not idx:
         return out
     keys = [k for k in records[idx[0]].keys() if k.upper() not in {"FID", "SHAPE", "SHAPE_LENG", "SHAPE_LENGTH"}]
     for key in keys:
         vals = [str(records[i].get(key, "")).strip() for i in idx]
-        distinct = sorted(set(vals))
-        if 1 < len(distinct) <= max_distinct:
-            candidates.append((len(distinct), key, {v: vals.count(v) for v in distinct}))
-    candidates.sort(key=lambda t: (t[0], t[1]))
-    for _, key, counts in candidates[:max_fields]:
-        out[key] = dict(sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
+        counts = {}
+        for v in vals:
+            counts[v] = counts.get(v, 0) + 1
+        if key.lower() in PRIORITY_FIELDS:
+            ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:top_values]
+            out[key] = dict(ranked)
+            out[key]["_distinct_values"] = len(counts)
+        elif 1 < len(counts) <= max_distinct:
+            out[key] = dict(sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
+    # Keep the report bounded: drop non-priority fields once we have enough of them.
+    extra = [k for k in out if k.lower() not in PRIORITY_FIELDS]
+    for k in extra[max(0, max_fields - len([k for k in out if k.lower() in PRIORITY_FIELDS])):]:
+        del out[k]
     return out
 
 
