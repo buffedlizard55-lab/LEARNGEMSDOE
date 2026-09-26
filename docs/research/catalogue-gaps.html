@@ -30,10 +30,11 @@
     <p class="lede">The prize scores faults the existing USGS / INGENIOUS map does not already capture. That requires reading how those maps were built — field campaigns, compilation rules, surface-expression requirements — and then asking where that process is structurally incomplete.</p>
 
     <div class="banner warn">
-      <strong>Scored definition of “new” (staff):</strong> any fault pixel not already captured by USGS/INGENIOUS, including newly mapped geometry of an existing fault system.
-      <a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">Forum thread</a>.
-      Known pixels are masked pixel-exactly; nearby unmapped splays/extensions can still score.
-      <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Scoring clarification</a>.
+      <strong>Scored definition of “new” (staff):</strong> any fault pixel not already captured by USGS/INGENIOUS, including newly mapped geometry of an existing fault system
+      (<a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">forum 11536</a>).
+      Known USGS/INGENIOUS pixels are masked/excluded from scoring (staff
+      <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">11516</a>);
+      the 300 m kernel is for new-fault ground-truth distance, not a known-fault buffer, so nearby unmapped splays/extensions can still score if they are new-fault pixels.
     </div>
 
     <article class="entry">
@@ -71,7 +72,7 @@
       <p class="src"><strong>Source:</strong> Hermant, B., Kiersnowski, L., and Bellanger, M., 2025, Using deep learning to map Quaternary faults in Western USA, 50th Workshop on Geothermal Reservoir Engineering, Stanford. <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">PDF</a> (also listed on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a>).</p>
       <p><strong>Claims:</strong> USGS Quaternary fault mapping is “occasionally imprecise at small scale or of variable and heterogeneous accuracy at large scale.” Figure 2 caption: local discrepancy in north-central Nevada between USGS Quaternary faults and the authors’ fault label “can be up to 400 m.” Heterogeneity is attributed to aggregation of different mapping sources/scales; some areas mapped more precisely have artificially higher fault density. Authors built a new manual mapping (1,100 faults, 264 km cumulative length) from elevation, slope, and Sentinel-2 because they judged QFFD insufficient as training labels.</p>
       <p><strong>Relevance:</strong> Directly supports (1) locational error that the 300 m DTI kernel is designed to soften (problem description notes possible misalignment of existing fault data), and (2) catalogue incompleteness that varies spatially with historical mapping effort — the exact gap-reasoning this domain needs. 400 m exceeds the 300 m kernel, so uncorrected catalogue traces can still be scored as misses if experts remapped them.</p>
-      <p><strong>Confidence:</strong> High for what Hermant et al. report. Their 400 m figure is from their comparison in north-central Nevada, not a GeoDAWN-wide statistic.</p>
+      <p><strong>Confidence:</strong> High — verified against the Stanford workshop PDF (2026-09-26): the 400 m local discrepancy (Figure 2, north-central Nevada), the "variable and heterogeneous accuracy" finding, and the 1,100 faults / 264 km manual label set are stated in the paper. Their 400 m figure is from their comparison in north-central Nevada, not a GeoDAWN-wide statistic.</p>
     </article>
 
     <article class="entry">
@@ -88,7 +89,7 @@
       Putting CG-1–CG-4 together, catalogue gaps that are <em>structurally likely</em> rather than merely “fault-like”:
     </p>
     <ol>
-      <li>Along-strike tips, splays, and parallel strands of already-named systems (staff: these count; mask is pixel-exact).</li>
+      <li>Along-strike tips, splays, and parallel strands of already-named systems (staff: these count; known pixels are masked).</li>
       <li>Intra-basin or range-front structures expressed in gravity/magnetics but lacking a published surface-rupture study (outside QFFD’s coseismic-surface-deformation criterion).</li>
       <li>Subtle scarps visible on 1 m 3DEP / GeoDAWN lidar that post-date or out-resolve the compiled map sources (Hermant; OF 93-338 scale preference).</li>
       <li>Regions of historically sparse topical paleoseismic work — the compiler guidelines privilege existing literature.</li>

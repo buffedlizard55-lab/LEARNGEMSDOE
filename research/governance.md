@@ -6,7 +6,7 @@ Canonical HTML: [`docs/research/governance.html`](../docs/research/governance.ht
 - GV-2 §3.2 generative AI narrative disclosure
 - GV-3 three submissions / rolling window; one final for both rounds; 5:00 p.m. ET vs 11:59 p.m. UTC flag
 - GV-4 external data must be shareable with sponsor
-- GV-5 pixel-exact known-fault mask (staff 11516)
+- GV-5 known-fault mask (staff 11516; pixel-exact width not explicitly stated by staff)
 - GV-6 unanswered: 11526, 11543, 11527 body
 - GV-7 prize amounts from hub + PDF §1.1
 

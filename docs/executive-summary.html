@@ -55,9 +55,13 @@
       (<a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">forum, 2026-09-23</a>).
     </p>
     <p>
-      Known-catalogue pixels are <strong>masked out of scoring</strong> in both prize rounds. The mask is
-      <strong>pixel-exact</strong> (identical to the provided training-label raster), not a 300 m buffer.
-      A predicted pixel next to a known trace but far from a <em>new</em> ground-truth pixel is fully penalized.
+      Known-catalogue pixels are <strong>masked out of scoring</strong> in both prize rounds — staff confirmed that
+      pixels corresponding to known USGS/INGENIOUS faults are excluded from evaluation and do not contribute to the
+      penalty terms (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">staff post, 16 Sep 2026</a>).
+      The 300 m triangular kernel applies to distance from <em>new-fault</em> ground truth, not as a buffer around known
+      faults, so a predicted pixel next to a known trace but far from a new ground-truth pixel is penalized normally.
+      Staff did not explicitly state whether the mask is pixel-exact to the provided training-label raster or slightly
+      buffered; because the training labels encode exactly the known faults, the strategic effect is the same.
       A new-fault ground-truth pixel <em>may</em> lie within 300 m of a known trace; identifying those corrections
       is an intended outcome
       (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">staff posts 16 and 21 Sep 2026</a>).
