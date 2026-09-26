@@ -159,21 +159,31 @@
         density variation that is “not only due to the geological context”.
       </p>
       <div class="banner ok">
-        <h3>What the catalogue actually holds in the scored area (measured 2026-09-26)</h3>
+        <h3>What the catalogue actually holds in the scored area (measured 2026-09-26, twice)</h3>
         <p>
-          The argument above is structural. It is now paired with a count. Clipping the INGENIOUS compilation — the
-          source of the training labels — to the published GeoDAWN bounding box returns
-          <strong>1,179 fault traces</strong>: 739 well constrained, 351 moderately constrained, 89 inferred
-          (<a href="research/catalogue-gaps.html#cg9">CG-9</a>, each figure a re-runnable query).
+          The argument above is structural. It is now paired with counts. Clipping both published compilations to the
+          GeoDAWN data-extent polygon returns <strong>413 INGENIOUS traces and 6,230.2 km of fault</strong>
+          (<a href="research/catalogue-gaps.html#cg12">CG-12</a>) and <strong>5,570 USGS sections and 6,241.3 km</strong>
+          (<a href="research/catalogue-gaps.html#cg15">CG-15</a>). The two numbers describe the same fault: a
+          <strong>13.5× difference in record count against a 0.18% difference in length</strong>, agreeing to within
+          31.6 m everywhere. Record counts are granularity, not content.
         </p>
         <p>
-          Two things follow, and they pull in different directions. The scored area holds only about
-          <strong>5%</strong> of the regional compilation, so the labels are sparse. But the <em>quality mix</em> here is
-          better than the regional mix — 7.5% inferred inside the box against 23% regionally — which says the GeoDAWN
-          area is comparatively well mapped. If that survives the polygon clip, the remaining gaps are more likely
-          subtle or hidden than obvious: cover-masked structures and scarps nobody has published, rather than unmapped
-          range fronts. That is a reason to weight geophysics and lidar over simple range-front tracing.
-          <span class="chip unverified">inference</span> — the clip is to the rectangle, not the irregular footprint.
+          Two things follow, and they pull in different directions. The scored area holds <strong>413 of the 22,956
+          regional records (1.8%)</strong>, so the labels are sparse — roughly <strong>62,300 one-pixel-wide fault pixels
+          against a 12,279,160-pixel grid, ≥ 0.51% positive</strong> (arithmetic from the two verified numbers, assuming
+          a one-pixel-wide rasterisation). But the <em>quality mix</em> here is better than the regional mix: 1.5% of the
+          USGS sections inside the footprint are <code>Inferred</code> against 23% regionally, <code>certainty</code> is
+          Good for 99.9%, and every section is <code>class</code> A — the top evidence grade
+          (<a href="research/catalogue-gaps.html#cg16">CG-16</a>). The GeoDAWN area is comparatively well mapped, and
+          what is missing from it is not low-grade material that was excluded but high-grade material that never entered
+          the literature (<a href="research/catalogue-gaps.html#cg13">CG-13</a>).
+          <span class="chip unverified">inference</span> for the interpretation; the counts are measured.
+        </p>
+        <p class="small">
+          Compare Hermant et al.'s 6.5% positive fraction at 10 m with a 50 m buffer (GM-3): the imbalance here is worse
+          by more than an order of magnitude, and their buffer is not available to us because the competition mask is
+          pixel-exact (GV-5). That is the single most important structural fact about the scored problem.
         </p>
       </div>
 

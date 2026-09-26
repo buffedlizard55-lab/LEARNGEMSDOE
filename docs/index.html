@@ -48,7 +48,7 @@
 
       <div class="stats">
         <div class="stat"><div class="n">6</div><div class="l">Research domains</div></div>
-        <div class="stat"><div class="n">12</div><div class="l">Hypotheses</div></div>
+        <div class="stat"><div class="n">14</div><div class="l">Hypotheses · 2 rejected</div></div>
         <div class="stat"><div class="n">19</div><div class="l">Feature bands</div></div>
         <div class="stat"><div class="n">100 m</div><div class="l">Grid / 3730×3292</div></div>
         <div class="stat"><div class="n">300 m</div><div class="l">Metric kernel R</div></div>
@@ -56,7 +56,20 @@
       </div>
 
       <div class="banner ok">
-        <h3>Verified today — 2026-09-26, session <code>arena/01a0dfc9-learngemsdoe</code></h3>
+        <h3>Verified and measured — 2026-09-26, session <code>arena/01a0dfe6-learngemsdoe</code></h3>
+        <ul>
+          <li><strong>Measured the two label catalogues against each other.</strong> The <code>public-data</code> workflow now also fetches the USGS QFFD GIS distribution (<code>Qfaults_GIS.zip</code>, 32,371,696 bytes, sha256 <code class="small">447eadc5…</code>) — <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277952393">run 36277952393</a>. Inside the GeoDAWN data extent: <strong>5,570 USGS sections / 6,241.3 km</strong> against <strong>413 INGENIOUS traces / 6,230.2 km</strong> — a 13.5× record-count difference for a 0.18% length difference, agreeing to ≤31.6 m everywhere. <a href="research/catalogue-gaps.html#cg15">CG-15</a>, <a href="research/catalogue-gaps.html#cg16">CG-16</a>.</li>
+          <li><strong>That measurement rejected H13</strong> (compilation-to-compilation offsets as a proxy for the correction class — they agree far inside the 300 m kernel), <strong>corrected the “413 traces is the catalogue” reading</strong>, and <strong>weakened H12's scale arithmetic</strong> while corroborating its coarse-scale observation (87.8% of footprint sections are 1:250,000). It also produced <a href="hypotheses.html#h14">H14</a>: the catalogue's own recency attributes (12.8% historic, 34.6% latest Quaternary, 41.9% undifferentiated) as a gap prior — testable with no competition data.</li>
+          <li><strong>USGS faults page read in full for the first time</strong> — the <em>Reference Materials</em> limitation (<a href="research/catalogue-gaps.html#cg13">CG-13</a>: unpublished field mapping is excluded, which is exactly what would fill the gaps), the <em>Fault Classes A–D</em> table (<a href="research/catalogue-gaps.html#cg14">CG-14</a>), and <em>Potential Uses</em> (“the short seismic record will not image all the active faults that exist” — <a href="research/seismotectonics.html#st8">ST-8</a>).</li>
+          <li><strong>GeoDAWN data page read in full</strong> — Area 1 / Area 2 specs and azimuths, EDCON-PRJ dates, and the deliverables list including “geoTIFF images of geophysical grids”, which gives a band-provenance route that needs no competition raster (<a href="research/potential-field.html#pf10">PF-10</a>).</li>
+          <li><strong>Hermant et al. read end to end</strong>, all eight chunks — §3.3 verbatim on why they built their own labels (<a href="research/geomorphology.html#gm10">GM-10</a>, <a href="research/prior-art.html#pa9">PA-9</a>) and the Figure 7 per-epoch tables (<a href="research/prior-art.html#pa10">PA-10</a>).</li>
+          <li><strong>Forum re-read</strong> — 11 topics, newest still 11543, no staff reply on 11540/11526/11543. One sentence of the 11516 answer was newly captured: corrections “may also exist in the final round evaluation set” (<a href="research/governance.html#gv15">GV-15</a>).</li>
+          <li><strong>Site checks</strong> — <code>metrics.py --selftest</code> 11 PASS, <code><code>check_site.py</code> 18 pages 66 sources PASS, <code>build_search_index.py --check</code> 103 items PASS. No prediction file. No second site/repo/account.</li>
+        </ul>
+      </div>
+
+      <div class="banner ok">
+        <h3>Verified earlier today — 2026-09-26, session <code>arena/01a0dfc9-learngemsdoe</code></h3>
         <ul>
           <li><strong>Competition hub, problem page 967 (both chunks), About page 968, rules page</strong> — re-fetched and read. Deadline <strong>Dec. 3, 2026, 11:59 p.m. UTC</strong> on hub; metric α=0.2 β=0.8 R=300 m; submission format float32 EPSG:32611 100 m; 19-band list; GeoDAWN + 3DEP wording confirmed.</li>
           <li><strong>Official rules PDF (NLR, September 2026)</strong> — <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">docs.nlr.gov/docs/fy26osti/96647.pdf</a> (redirect from nlr.gov). Preface change-log still empty; §1.1 prize $50k + $250k; §1.2 defers dates to website; §1.3 eligibility; §2 background labels from USGS + NLR/USGS experts + 1 m DEM; §3.2 single GeoTIFF, 3 per week, AI disclosure verbatim; §3.3 INGENIOUS labels; §A.1 5 p.m. ET wording flagged.</li>
@@ -64,7 +77,7 @@
           <li><strong>GeoDAWN</strong> — <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS data page</a> and <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a> re-read: 149,030 line-km, 51,857 km², Area 1 200 m / Area 2 400 m, E-W lines 90° / N-S ties 180°, 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah, CC0 1.0, flight-path shapefiles, “variable terrain clearance should be considered” warning. Publication date 2024-03-01, survey 2021-11-01 to 2022-11-20, citation Glen & Earney 2024 DOI <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a>.</li>
           <li><strong>INGENIOUS</strong> — <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> re-read: 9 files 116.98 MB, Qfaults v1/v2, geodetics 51.99 MB, seismicity 22.98 MB, CC BY 4.0, DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>. Qfaults v2 supersedes v1, field-definition text still inside zip not opened here (TLS). <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson">NBMG service</a> still 22,956 traces.</li>
           <li><strong>USGS QFFD</strong> — <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">faults page</a> re-read: “geological evidence of coseismic surface deformation” past 1.6 Ma, 2017 metadata reduction, Search retired 26 Feb 2026, GIS zip 16 MB, cooperators list Nevada = NBMG, history section. DOI <a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a>, interactive map <a href="https://doi.org/10.5066/F7S75FJM">10.5066/F7S75FJM</a>.</li>
-          <li><strong>Site checks</strong> — <code>python3 scripts/metrics.py --selftest</code> 11 PASS, <code>check_site.py</code> 18 pages 64 sources PASS, <code>build_search_index.py --check</code> 100 items PASS. No prediction file. No second site/repo/account.</li>
+          <li><strong>Site checks</strong> — <code>python3 scripts/metrics.py --selftest</code> 11 PASS, <code><code>check_site.py</code> 18 pages 66 sources PASS, <code>build_search_index.py --check</code> 103 items PASS. No prediction file. No second site/repo/account.</li>
         </ul>
       </div>
 
@@ -196,44 +209,44 @@
         Net effect: reproducing catalogue earns nothing, hedging wide corridor around known traces costs real false-positive mass. Money is in geometry an expert would add — tip extensions, splays, parallel strands, structures under cover — not thicker ink on mapped lines.
       </p>
 
-      <h2 id="library">Research library — 6 domains, 57 entries, every entry source-linked</h2>
+      <h2 id="library">Research library — 6 domains, 71 entries, every entry source-linked</h2>
       <div class="grid">
         <a class="card" href="research/catalogue-gaps.html">
           <h3>1 · Catalogue-gap reasoning</h3>
           <p>How USGS and INGENIOUS catalogues were actually built — and where that process is structurally incomplete. Highest-leverage domain.</p>
-          <p class="card-meta">12 entries · highest leverage</p>
+          <p class="card-meta">16 entries · highest leverage</p>
         </a>
         <a class="card" href="research/potential-field.html">
           <h3>2 · Potential-field geophysics</h3>
           <p>RTP/TMI, gradients, tilt derivative, isostatic gravity — edges that survive under basin fill where no scarp exists.</p>
-          <p class="card-meta">9 entries</p>
+          <p class="card-meta">10 entries</p>
         </a>
         <a class="card" href="research/geomorphology.html">
           <h3>3 · DEM structural geomorphology</h3>
           <p>Detrended elevation and slope at 100 m, 1 m lidar via 3DEP, and what a subtle Basin-and-Range scarp looks like in each.</p>
-          <p class="card-meta">9 entries</p>
+          <p class="card-meta">10 entries</p>
         </a>
         <a class="card" href="research/seismotectonics.html">
           <h3>4 · Seismotectonics and strain</h3>
           <p>Strain-rate invariants, earthquake density, conductivity — where independent signals agree and where they part.</p>
-          <p class="card-meta">7 entries</p>
+          <p class="card-meta">8 entries</p>
         </a>
         <a class="card" href="research/prior-art.html">
           <h3>5 · Prior art</h3>
           <p>Mattéo 2021, Hermant 2025 and official Lipor U-Net reference — including where reference likely falls short.</p>
-          <p class="card-meta">8 entries</p>
+          <p class="card-meta">10 entries</p>
         </a>
         <a class="card" href="research/governance.html">
           <h3>6 · Competition governance</h3>
           <p>Rules sections, forum clarifications and errata, open eligibility questions, time-sensitive items, plus re-verification passes showing no official change.</p>
-          <p class="card-meta">14 entries</p>
+          <p class="card-meta">17 entries</p>
         </a>
       </div>
       <p class="small">
         Also: <a href="feature-stack.html">feature stack</a> lists all 19 bands with official descriptions, raster geometry, GeoDAWN acquisition specs; <a href="sources.html">sources</a> is full index with verification status; <a href="search.html">search</a> covers every entry.
       </p>
 
-      <h2 id="hypotheses">Hypothesis backlog — 11 cards, all untested because data not placed</h2>
+      <h2 id="hypotheses">Hypothesis backlog — 14 cards, 2 rejected on measured public data, the rest untested because data are not placed</h2>
       <p class="small">
         Status counts: <span data-chip-count></span>. Full cards with layers, physical signature, why each targets a <em>gap</em> rather than known fault, expected DTI impact, cost and rejection criteria: <a href="hypotheses.html">hypothesis backlog</a>.
       </p>
@@ -248,7 +261,9 @@
             <tr><td class="nowrap"><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce label raster scorer masks out</td><td class="nowrap">Medium</td></tr>
             <tr><td class="nowrap"><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as primary detector</td><td class="nowrap">Low</td></tr>
             <tr><td class="nowrap"><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as false-structure test</td><td class="nowrap">Low</td></tr>
-            <tr><td class="nowrap"><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale traces mark edge of map — not positive class</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H8</strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Inferred and blank-scale traces mark edge of map — rejected: Inferred is 0.8% of clipped length (<a href="research/catalogue-gaps.html#cg12">CG-12</a>), 1.5% of USGS sections (<a href="research/catalogue-gaps.html#cg16">CG-16</a>)</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong><a href="hypotheses.html#h13">H13</a></strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Compilation-to-compilation offsets as a proxy for the correction class — rejected: compilations agree to ≤31.6 m (<a href="research/catalogue-gaps.html#cg15">CG-15</a>)</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong><a href="hypotheses.html#h14">H14</a></strong></td><td><span class="chip untested">untested</span></td><td>Catalogue recency attributes mark where expert attention has already been spent</td><td class="nowrap">Low</td></tr>
             <tr><td class="nowrap"><strong><a href="hypotheses.html#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Medium</td></tr>
             <tr><td class="nowrap"><strong><a href="hypotheses.html#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as independent lidar validation anchor</td><td class="nowrap">Low–med</td></tr>
             <tr><td class="nowrap"><strong><a href="hypotheses.html#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td></tr>
@@ -298,6 +313,12 @@
           </li>
           <li>
             <strong>Official documents disagree about whether GeoDAWN includes lidar.</strong> Rules §2 calls it “a high-resolution lidar, magnetic, and radiometric study”; data release titled “Airborne magnetic and radiometric surveys” and describes 3DEP lidar as coordinated but separate collection. No scoring consequence known — <a href="research/geomorphology.html#gm9">GM-9</a> / <a href="research/governance.html#gv13">GV-13</a>.
+          </li>
+          <li>
+            <strong>The two label catalogues disagree by 13.5× in record count and 0.18% in length.</strong> Inside the GeoDAWN data extent the USGS compilation holds 5,570 sections and INGENIOUS holds 413 traces for the same ~6,230 km of fault. Any sentence of the form “the catalogue holds only N traces here” describes a file, not the crust — <a href="research/catalogue-gaps.html#cg15">CG-15</a>. The USGS page also calls the GIS zip “16 MB”; the file served is 32,371,696 bytes.
+          </li>
+          <li>
+            <strong>The problem description's feature list and the notebook's band tags do not line up.</strong> “Depth to conductive base surface” and “top-of-crustal magnetic source depth estimate” have no band tag; band 6 (tilt/curvature) and band 10 (distance to earthquake) are absent from the description — <a href="research/governance.html#gv17">GV-17</a>. Resolvable from <code>data/inventory.json</code> once rasters are placed.
           </li>
         </ol>
       </div>

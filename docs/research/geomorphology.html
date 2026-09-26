@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 3 of 6 · 9 entries · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 3 of 6 · 10 entries · re-verified 2026-09-26</p>
 
       <h1>DEM structural geomorphology</h1>
       <p class="lede">
@@ -329,6 +329,39 @@
           </dd>
           <dt>Confidence</dt>
           <dd><span class="chip verified">verified</span> for both texts.</dd>
+        </dl>
+      </article>
+
+      <h2 id="gm10">GM-10 · Hermant et al.'s own labels, and the four visual criteria they used</h2>
+      <article class="entry" id="gm10-entry">
+        <h3><span class="id">GM-10</span> Why the closest comparable study stopped using the catalogue, and how its mappers decided</h3>
+        <p><span class="chip verified">verified</span> verbatim §3.3 · the comparison to the competition is <span class="chip unverified">inference</span></p>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Hermant et al. (2025)</a>, §3.3 (read 2026-09-26).</dd>
+          <dt>Verbatim</dt>
+          <dd><blockquote class="quote">As the USGS Quaternary fault mapping is sometimes inaccurate at small scales or of
+            variable precision, we created a new manual mapping of faults over the eastern half of the study area … The
+            remaining half was reserved for prediction<cite>Hermant et al. §3.3</cite></blockquote>
+            <blockquote class="quote">we created a fault label dataset containing 1100 faults with a cumulative length of
+              264 km<cite>Hermant et al. §3.3</cite></blockquote></dd>
+          <dt>What it means for this project</dt>
+          <dd><ul>
+            <li>The precedent is exactly the shape of our problem: an expert remapped half the area, held the other half out, and only then trained and scored.</li>
+            <li><strong>Count check.</strong> Their 1,100 labels over half the area are more labelled features than the <em>entire</em> USGS compilation holds inside the same half (CG-15: 5,570 sections over the whole footprint, mean 1.12 km each). So the expert label set is a different granularity from either compilation — which is what the competition's new-fault labels are too.</li>
+            <li>Their cumulative 264 km is ~4% of the 6,230 km of catalogue trace inside the footprint. Their labels are <em>not</em> the catalogue at higher resolution; they are a different, much smaller, locally-verified set.</li>
+          </ul></dd>
+          <dt>The four visual criteria, verbatim in substance</dt>
+          <dd><ul>
+            <li>a straight line with strong contrast;</li>
+            <li>an offset in elevation with a steeper slope on one side;</li>
+            <li>a variation in vegetation;</li>
+            <li>geological features such as weathered rock or fractures.</li>
+          </ul></dd>
+          <dt>Why the criteria matter more than the counts</dt>
+          <dd>They are a human decision rule, and every one of them is a <em>surface</em> signature. That is the strongest independent support in the library for GM-2's claim that elevation and imagery carry the signal, and it explains GM-8's confuser list from the other side: “a straight line with strong contrast” is satisfied by roads, canals, fence lines and drainages. Any confuser channel (H11) has to be built from exactly those non-fault causes of the same four criteria.</dd>
+          <dt>How to close the gap</dt>
+          <dd>Nothing to close — the section is read. What remains is GM-9: matching their 264 km against our own label raster once it is placed, which is the only local truth set available (see H10 and PA-8).</dd>
         </dl>
       </article>
 

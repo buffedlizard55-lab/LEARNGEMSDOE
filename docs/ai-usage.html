@@ -41,6 +41,32 @@
       <h1>AI-usage log</h1>
 
       
+      <article class="entry" id="ai-2026-09-26-df6e">
+        <h3>2026-09-26 · session <code>arena/01a0dfe6-learngemsdoe</code></h3>
+        <dl>
+          <dt>Tool</dt>
+          <dd>Arena.ai Agent Mode (an AI coding agent; underlying model not disclosed by the platform), with bash, git, <code>gh</code>, a web-page fetch tool, and GitHub Actions in this repository. No other generative-AI service was called. No image, audio or video generation. No prediction GeoTIFF was produced, scored or submitted, and no weekly submission slot was used. No DrivenData account was created and no credentials were requested or stored.</dd>
+          <dt>Did — source verification</dt>
+          <dd>Fetched and read (not recalled): the competition hub; problem description page 967 (both chunks); About page 968; the official rules PDF from <code>docs.nlr.gov</code> (Preface, §1.1–§1.4, §2, §3.1–§3.2); the forum category JSON (both chunks) and threads 11516 (all four posts) and 11536 (both posts); the NBMG layer-0 JSON and a <code>returnCountOnly</code> query; the ScienceBase item's spatial JSON; INGENIOUS GDR 1391's resource list; the USGS Quaternary Fault and Fold Database page (chunks 0–2); the USGS GeoDAWN data page (full); Hermant et al. (2025) (all eight chunks); and the reference-solution README.</dd>
+          <dt>Did — measurement</dt>
+          <dd>Extended <code>scripts/public_census.py</code> and <code>scripts/download_competition_data.sh</code> to also fetch the public USGS QFFD GIS distribution, and ran the public-data workflow three times on GitHub runners — <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277677626">36277677626</a>, <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277792332">36277792332</a>, <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277952393">36277952393</a> — reading results back from the check-run annotations API. The first run's USGS-layer annotations were silently dropped because GitHub keeps at most ~10 annotations per step; the workflow was changed to emit dense notices and the run repeated. Every number written into CG-15 and CG-16 was copied from those annotations, and the census JSON is the <code>public-census</code> run artifact.</dd>
+          <dt>Did — writing</dt>
+          <dd>Added catalogue-gap entries CG-13…CG-16, GM-10, PF-10, ST-8, PA-9, PA-10, GV-15…GV-17; added hypotheses H13 and H14; corrected the “413 traces” reading, H12's mechanism and PA-2's figure attribution; appended this log and the changelog. Existing entries were extended, not duplicated.</dd>
+          <dt>Did not</dt>
+          <dd>Create an account; request or store credentials; touch competition rasters; generate, validate or submit a prediction; use a submission slot; post to the forum; create a second site, repo or registration.</dd>
+          <dt>Fabrication controls used this session</dt>
+          <dd><ul>
+            <li>Every quotation was copied from a page fetched in this session. Where a source could not be read in full, the entry says so and is marked <span class="chip unverified">unverified</span> (e.g. the two paywalled potential-field methods papers, Miller &amp; Singh 1994 and Verduzco et al. 2004, remain bibliographic-record-only).</li>
+            <li>Every measured number names the run and the file it came from, with byte counts and sha256 for each downloaded file so a reviewer can confirm the same bytes were used.</li>
+            <li>Derived quantities are labelled arithmetic or inference: the 0.18% length difference, the mean trace lengths (1,120.5 m and 15,084.3 m), the shares in the CG-16 table, and the “≥ 0.51% of grid pixels” figure (6,230.2 km of trace ÷ 100 m ÷ 12,279,160 pixels, assuming a one-pixel-wide rasterisation).</li>
+            <li>Two discrepancies were recorded rather than resolved: the USGS page's “16 MB” against the 32,371,696-byte file actually served, and the problem description's feature list against the notebook's band tags.</li>
+            <li>A claim inherited from the task instructions — that the full train→inference→validate pipeline is “ready to run” — was checked against <code>scripts/</code>, found false, and left flagged rather than smoothed over.</li>
+          </ul></dd>
+          <dt>Human-owned checks</dt>
+          <dd>Open run 36277952393 and confirm the annotations; open <a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip</a> and confirm the 32,371,696-byte download and the 16 MB statement on the faults page; confirm eligibility against rules §1.3 if team composition or affiliations change; decide whether to raise GV-12, GV-13 and GV-17 with the organisers (forum or <a href="mailto:gemsprize@nlr.gov">gemsprize@nlr.gov</a>, GV-16).</dd>
+        </dl>
+      </article>
+
       <article class="entry" id="ai-2026-09-26-dfd3">
         <h3>2026-09-26 · session <code>arena/01a0dfd3-learngemsdoe</code></h3>
         <dl>

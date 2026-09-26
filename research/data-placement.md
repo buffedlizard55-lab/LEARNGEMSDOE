@@ -40,3 +40,14 @@ The NBMG map service was queried through a fetch path that can read JSON even wh
 - **GitHub Actions runner** ([run](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276586563)): all four public files downloaded — 1,190 / 1,497 / 2,774 / 6,131,182 bytes,
   matching the ScienceBase and GDR listings. Footprint census in CG-12. Files are not committed (gitignored, runner-only).
 - Competition rasters: still require the registered account's login. Not attempted beyond the probe.
+
+## Re-run — 2026-09-26, session `arena/01a0dfe6-learngemsdoe`
+
+- Sandbox: `download_competition_data.sh` → curl exit 35 on all four previously-listed public files **and** on the newly
+  added `Qfaults_GIS.zip`; `prepare_data.py` → exit 2, `blocked_no_data`. The data tab still redirects to login (fetched
+  via the page-fetch path, not curl). Environment limit, not evidence of absence.
+- GitHub Actions runner ([run 36277952393](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277952393)):
+  all five public files downloaded, including `Qfaults_GIS.zip` at 32,371,696 bytes. Footprint census plus the
+  USGS-vs-INGENIOUS comparison in CG-15/CG-16. Files are not committed (gitignored, runner-only); the census JSON is the
+  `public-census` run artifact.
+- Competition rasters: still require the registered account's login. Not attempted beyond the probe.

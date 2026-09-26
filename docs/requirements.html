@@ -36,7 +36,7 @@
 
   <div class="shell has-toc">
     <main id="main">
-      <p class="meta">The full list this project is required to keep · each row has a status and a link you can open · checked 2026-09-26</p>
+      <p class="meta">The full list this project is required to keep · each row has a status and a link you can open · checked 2026-09-26 · USGS-vs-INGENIOUS census added, two items closed</p>
 
       <h1>Requirements checklist</h1>
       <p class="lede">
@@ -281,16 +281,25 @@
       <ul>
         <li>Forum <a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a>, <a href="https://community.drivendata.org/t/institutional-limit/11526">11526</a>, <a href="https://community.drivendata.org/t/using-a-teammates-geological-interpretation-as-training-labels/11543">11543</a>, and the eligibility question in <a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a> — re-read 2026-09-26, still one post each (11499 has two; no staff reply to the question).</li>
         <li><s>INGENIOUS v2 field-definition text inside the zip — unread.</s> <strong>Update 2026-09-26 (session dfd3):</strong> read via GitHub Actions (<a href="research/catalogue-gaps.html#cg12">CG-12</a>).</li>
-        <li>GeoDAWN outline shapefiles — listed on ScienceBase (Area 1 outline 1,190 bytes, Area 2 outline 1,497 bytes, extent 2,774 bytes) but not downloaded. TLS to <code>sciencebase.gov</code> failed. The metadata CSV get-URL returned HTTP 500 via the page fetcher; the catalog still lists the file.</li>
+        <li><s>GeoDAWN outline shapefiles — listed on ScienceBase but not downloaded.</s> <strong>Closed 2026-09-26:</strong> downloaded on a GitHub Actions runner (Area 1 outline 1,190 bytes, Area 2 outline 1,497 bytes, extent 2,774 bytes, all matching the listing) and used for the polygon clip in <a href="research/catalogue-gaps.html#cg12">CG-12</a> and <a href="research/catalogue-gaps.html#cg15">CG-15</a>.</li>
         <li>Miller &amp; Singh 1994 and Verduzco et al. 2004 — still unread method papers.</li>
-        <li>Hermant et al. 2025 PDF chunks 7+, and the body of Mattéo et al. 2021. <strong>Partly closed 2026-09-26:</strong> chunks 4–6 were read (results in prose, Figures 7–9, discussion, conclusion, reference list).</li>
+        <li>Hermant et al. 2025 — <strong>closed 2026-09-26</strong>: all eight chunks read, including §3.3 (<a href="research/prior-art.html#pa9">PA-9</a>, <a href="research/geomorphology.html#gm10">GM-10</a>) and the Figure 7 epoch tables (<a href="research/prior-art.html#pa10">PA-10</a>). <strong>Still unread:</strong> the body of Mattéo et al. 2021, and Silver et al. (2011) (see below).</li>
         <li>Whether code <code>10</code> / <code>24</code> / <code>100</code> / <code>250</code> are thousands-denominator map scales.</li>
         <li>The full <code>REC2023</code> value list.</li>
         <li>
           Any spatial overlap between these 22,956 traces and the GeoDAWN <strong>outline</strong>.
-          <strong>Partly closed 2026-09-26:</strong> the <em>bounding-box</em> overlap is now measured —
-          <a href="research/catalogue-gaps.html#cg9">CG-9</a> — at 1,179 traces (739 well constrained, 351 moderately
-          constrained, 89 inferred). The envelope is a rectangle and the footprint is not, so this is an upper bound.
+          <strong>Closed 2026-09-26:</strong> the <em>bounding-box</em> overlap is
+          <a href="research/catalogue-gaps.html#cg9">CG-9</a> (1,179 traces — an upper bound, superseded), and the
+          <em>polygon</em> clip is <a href="research/catalogue-gaps.html#cg12">CG-12</a> — <strong>413 traces,
+          6,230.2 km</strong>, all <code>MAPSCALE</code> 250 or 100.
+        </li>
+        <li>
+          Whether the USGS and INGENIOUS compilations of the same faults agree, and at what offset.
+          <strong>Closed 2026-09-26 — <a href="research/catalogue-gaps.html#cg15">CG-15</a>:</strong> inside the footprint,
+          <strong>5,570 USGS sections / 6,241.3 km</strong> against <strong>413 INGENIOUS traces / 6,230.2 km</strong>;
+          13.5× the record count for a 0.18% length difference; ≤31.6 m mutual agreement. This rejected
+          <a href="hypotheses.html#h13">H13</a> as a proxy for the correction class and corrected the “413 traces is the
+          catalogue” reading. Needed a fifth public file (<code>Qfaults_GIS.zip</code>) and one GitHub Actions run.
         </li>
         <li>
           Submission extent: rules §3.2 says “the entirety of the GeoDAWN study area”, the problem description says “the
@@ -306,13 +315,16 @@
       <h2 id="next">Highest-value next question</h2>
       <div class="banner ok">
         <p>
-          <strong>Clip the census to the outline, not the box.</strong>
-          <a href="research/catalogue-gaps.html#cg9">CG-9</a> measured the GeoDAWN <em>bounding box</em>: 1,179 traces,
-          89 of them Inferred. The survey footprint is irregular and about 42% of that box, so the box over-counts.
-          Repeat the same six queries against the Area 1 and Area 2 outline polygons
-          (<a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a>) and the
-          gap map stops being an upper bound. It needs no DrivenData login; it was blocked this session by TLS, not by a
-          missing source.
+          <strong>Does catalogue density track the compiler rather than the geology?</strong>
+          The footprint census now gives both compilers and scales for all 5,570 USGS sections
+          (<a href="research/catalogue-gaps.html#cg16">CG-16</a>): Piedmont Geosciences compiled 72.7% of them, USGS
+          17.1%, the California Geological Survey 10.2%; and 87.8% are 1:250,000. If detail and density are a function of
+          who compiled an area and at what scale, then the apparent “gaps” in the scored area are partly a compilation
+          artefact — and the same test decides <a href="hypotheses.html#h14">H14</a>: are INGENIOUS's updated traces
+          concentrated where the USGS compilation can only say “undifferentiated Quaternary”? It needs no DrivenData
+          login, no competition raster and no submission slot. The previous highest-value question — clip the census to
+          the outline rather than the box — was closed by <a href="research/catalogue-gaps.html#cg12">CG-12</a> and
+          <a href="research/catalogue-gaps.html#cg15">CG-15</a>.
         </p>
       </div>
 

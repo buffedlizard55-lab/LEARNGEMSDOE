@@ -36,7 +36,7 @@
 
   <div class="shell has-toc">
     <main id="main">
-      <p class="meta">Research-agent boundary · no weekly-slot use · no prediction file · status verified 2026-09-26</p>
+      <p class="meta">Research-agent boundary · no weekly-slot use · no prediction file · status verified 2026-09-26, five public files fetched on a runner</p>
 
       <h1>Data placement and pipeline gates</h1>
       <p class="lede">
@@ -61,7 +61,16 @@
 
       <h2 id="blocker">The blocker</h2>
       <div class="banner">
-        <h3>Update 2026-09-26 (session <code>arena/01a0dfd3</code>) — re-run, partly unblocked</h3>
+        <h3>Update 2026-09-26 (session <code>arena/01a0dfe6</code>) — five public files, one census, still no rasters</h3>
+        <ul>
+          <li>Re-ran <code>bash scripts/download_competition_data.sh</code> and <code>python3 scripts/prepare_data.py</code> in the sandbox: same result — curl exit 35 to every public host; <code>prepare_data.py</code> exit 2, <code>blocked_no_data</code>. Environment limit, not absence.</li>
+          <li>The <code>public-data</code> workflow now fetches <strong>five</strong> public files, adding the USGS QFFD GIS distribution (<code>Qfaults_GIS.zip</code>, 32,371,696 bytes) — <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277952393">run 36277952393</a>. The USGS-vs-INGENIOUS census and attribute counts are in <a href="research/catalogue-gaps.html#cg15">CG-15</a> and <a href="research/catalogue-gaps.html#cg16">CG-16</a>.</li>
+          <li><strong>Competition rasters remain blocked, and this agent cannot unblock them.</strong> They require the team's own DrivenData login. No account was created; no credentials were requested.</li>
+          <li>The "full pipeline ready" claim is still false: re-checked this session against <code>scripts/</code>, there is no training script and no inference script that emits a submission GeoTIFF. <strong>This agent did not add one, and must not.</strong></li>
+        </ul>
+      </div>
+      <div class="banner">
+        <h3>Update 2026-09-26 (session <code>arena/01a0dfd3</code>) — re-run, partly unblocked (earlier this session)</h3>
         <ul>
           <li>Re-ran <code>bash scripts/download_competition_data.sh</code> and <code>python3 scripts/prepare_data.py</code> in the sandbox: same result — curl exit 35 to every public host; <code>prepare_data.py</code> exit 2, <code>blocked_no_data</code>. The data tab was re-fetched and again redirected to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">the login page</a>.</li>
           <li><strong>Public files are now unblocked</strong> via the <code>public-data</code> GitHub Actions workflow in this repo (runners have open egress). All four public zips downloaded with sizes matching their official listings, and the footprint census ran — see <a href="research/catalogue-gaps.html#cg12">CG-12</a>.</li>
@@ -209,7 +218,7 @@ python scripts/prepare_data.py              # writes data/inventory.json — ins
             <tr><td>INGENIOUS geodetic shear / dilation models</td><td><a href="https://gdr.openei.org/files/1391/geodetics_INGENIOUS_regional_data.zip">zip</a></td><td class="nowrap">CC BY 4.0</td><td class="nowrap">51.99 MB</td></tr>
             <tr><td>INGENIOUS earthquake density models</td><td><a href="https://gdr.openei.org/files/1391/seismicity_INGENIOUS_regional_data.zip">zip</a></td><td class="nowrap">CC BY 4.0</td><td class="nowrap">22.98 MB</td></tr>
             <tr><td>INGENIOUS study-area boundary</td><td><a href="https://gdr.openei.org/files/1391/study_area_boundary_INGENIOUS_regional_data.zip">zip</a></td><td class="nowrap">CC BY 4.0</td><td class="nowrap">6.68 kB</td></tr>
-            <tr><td>USGS QFFD GIS files</td><td><a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a></td><td class="nowrap">USGS public domain</td><td class="nowrap">16 MB</td></tr>
+            <tr><td>USGS QFFD GIS files <em>(3 shapefiles: database, fault areas, California offshore)</em></td><td><a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a></td><td class="nowrap">USGS public domain</td><td class="nowrap">32,371,696 bytes <span class="chip unverified">page says “16 MB”</span></td></tr>
             <tr><td>Elevation trend and detrended elevation</td><td><a href="https://doi.org/10.5066/P9MQRCBY">10.5066/P9MQRCBY</a></td><td class="nowrap">USGS</td><td class="nowrap">—</td></tr>
             <tr><td>MT conductance maps</td><td><a href="https://doi.org/10.5066/P9TWT2LU">10.5066/P9TWT2LU</a></td><td class="nowrap">USGS</td><td class="nowrap">—</td></tr>
             <tr><td>Slip and dilation tendency</td><td><a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a></td><td class="nowrap">USGS</td><td class="nowrap">—</td></tr>

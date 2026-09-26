@@ -227,12 +227,167 @@ Closes the open item from CG-9: the clip is now against the published outline po
 - **Confidence:** verified for the cooperator listing and the service host. The mapping-history argument is
   **inference**.
 
+## CG-13 · Only *published* evidence can enter the compilation at all
+
+- **Source:** <https://www.usgs.gov/programs/earthquake-hazards/faults> — "Reference Materials" section (read 2026-09-26)
+- **Citation:** U.S. Geological Survey, 2020, Quaternary Fault and Fold Database for the Nation, <https://doi.org/10.5066/P9BCVRCK>
+- **Claim (verbatim):**
+  > "For this compilation, we have limited our compilation to synthesis of published literature relevant to the United
+  > States. Our definition of published literature includes typical sources (journals and maps), as well as M.S. theses
+  > and Ph.D. dissertations, governmental contract reports (which includes many NEHRP-sponsored studies), abstracts, and
+  > open-file (preliminary) reports. **We generally do not cite unpublished field mapping, field notes, and other
+  > gray-literature reports that are not generally available to the public.**"
+  >
+  > "These data are compiled from thousands of journal articles, maps, theses, and other documents, as referenced herein."
+- **Relevance:** this is the strongest single sentence in the whole library for gap class 4 (CG-7). It is not our
+  inference that publication history gates inclusion — the database says so itself. A scarp that is visible in lidar,
+  recognisable in the field, and never written up has no route into the compilation. The named exclusions ("unpublished
+  field mapping, field notes") are exactly the evidence a field campaign produces before publication, and the named
+  inclusions ("abstracts, open-file (preliminary) reports") set a floor on how weak admissible evidence may be.
+- **Confidence:** verified — quoted verbatim from the official USGS page this session.
+
+## CG-14 · The catalogue's own fault classes A–D — and every section inside the footprint is Class A
+
+- **Source:** same USGS page, "Fault Classes" table. The page attributes the classes to Crone and Wheeler, 2000; **no URL for that reference is given on the page, and none is asserted here.**
+ 
+- **Claim (verbatim):**
+  - **Class A** — "Geologic evidence demonstrates the existence of a Quaternary fault of tectonic origin, whether the
+    fault is exposed for mapping or inferred from liquefaction or other deformational features."
+  - **Class B** — "Geologic evidence demonstrates the existence of a fault or suggests Quaternary deformation, but either
+    (1) the fault might not extend deeply enough to be a potential source of significant earthquakes, or (2) the
+    currently available geologic evidence is too strong to confidently assign the feature to Class C but not strong
+    enough to assign it to Class A."
+  - **Class C** — "Geologic evidence is insufficient to demonstrate (1) the existence of tectonic fault, or (2)
+    Quaternary slip or deformation associated with the feature."
+  - **Class D** — "Geologic evidence demonstrates that the feature is not a tectonic fault or feature; this category
+    includes features such as demonstrated joints or joint zones, landslides, erosional or fluvial scarps, or landforms
+    resembling fault scarps, but of demonstrable non-tectonic origin."
+- **Measured this session (CG-15/CG-16):** every one of the **5,570** USGS sections intersecting the GeoDAWN data
+  extent carries `class = A`. There is no Class B, C or D section inside the footprint.
+- **Relevance:** two consequences. (1) The USGS catalogue inside the GeoDAWN footprint contains **no** entries that the
+  database itself considered uncertain or non-tectonic — so "the catalogue here is poorly constrained" is *false* as
+  stated, and any argument that leans on it should be dropped. (2) Class D is the catalogue's own name for the confuser
+  set: erosional and fluvial scarps and "landforms resembling fault scarps, but of demonstrable non-tectonic origin".
+  That is the same list Hermant et al. measured their models firing on (GM-8, GM-10) — paleo-shorelines, canyon and
+  stream boundaries, the Rec Area scarp. The database resolved those questions with field evidence a model does not
+  have; a detector cannot, so it must price them rather than delete them (H11).
+- **Confidence:** verified for the class definitions and for the measured `class` counts.
+
+## CG-15 · Measured side by side: USGS QFFD vs INGENIOUS inside the footprint
+
+Closes the question CG-12 could not: how much fault is actually catalogued inside the GeoDAWN footprint, and do the two
+compilations the problem description names as label sources agree?
+
+- **Inputs (primary, both public):** `Qfaults_GIS.zip` — 32,371,696 bytes, sha256
+  `447eadc5926256710d988c30e5996ba540604caa0154f9746c48bad637926893` — from
+  <https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip>, the "GIS files" link on the USGS faults page
+  (<https://www.usgs.gov/programs/earthquake-hazards/faults>); and INGENIOUS Qfaults v2 from
+  [GDR 1391](https://gdr.openei.org/submissions/1391), <https://doi.org/10.15121/1881483>.
+- **How it was run:** GitHub Actions runner in *this* repository (sandbox TLS is blocked) — workflow
+  [`public-data.yml`](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/blob/main/.github/workflows/public-data.yml),
+  script [`public_census.py`](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/blob/main/scripts/public_census.py),
+  run [36277952393](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277952393). Results were read back
+  from the check-run annotations; the full JSON is the `public-census` run artifact. No competition raster was touched;
+  no prediction was produced.
+- **What the USGS zip contains:** three shapefiles, all EPSG:4326 —
+  `Qfaults_GIS/SHP/Qfaults_US_Database.shp` (112,809 records), `fault_areas.shp` (37 records, fault *zones* as polygons),
+  `ca_offshore.shp` (1,093 records, offshore California). Inside the GeoDAWN data extent polygon:
+  **5,570** sections from `Qfaults_US_Database`, **0** from `fault_areas`, **0** from `ca_offshore`.
+- **Measured inside the same polygon (the GeoDAWN data extent, EPSG:32611, computed area 51,678.8 km²):**
+
+| | USGS QFFD (`Qfaults_US_Database`) | INGENIOUS Qfaults v2 (2023-06-27) |
+| --- | --- | --- |
+| Records, whole dataset | 112,809 | 22,956 |
+| Traces intersecting the footprint | **5,570** (all distinct geometries) | **413** |
+| Clipped length inside the footprint | **6,241.3 km** (6,241,293.3 m) | **6,230.2 km** (6,230,216.8 m) |
+| Mean trace length (arithmetic) | 1,120.5 m | 15,084.3 m |
+
+- **Mutual agreement (distances computed in the INGENIOUS layer's NAD83 Contiguous USA Albers equal-area projection, in
+  metres — not geodesic):**
+  - Each of the 413 INGENIOUS footprint traces to its nearest USGS section: **0.0 m for all 413** (they intersect).
+  - Each of the 5,570 USGS sections inside the footprint to its nearest INGENIOUS trace: min 0.0 m, median 0.0 m,
+    **max 31.6 m**; 100% within 100 m.
+  - Length difference between the two compilations inside the footprint: 11.1 km of 6,230.2 km = **0.18%**
+    (arithmetic on the two measured values).
+- **Reading.** The two compilations carry the *same fault network* inside the footprint — the same total length to
+  within 0.18%, and mutually within 31.6 m. The 13.5× difference in record count is **granularity**: the USGS database
+  distributes ~1.1 km fault *sections*, INGENIOUS distributes ~15 km *traces*. **This corrects a statement this
+  knowledge base previously made.** CG-12 reported "413 traces inside the data extent" and several pages read that as
+  the catalogue's content in the GeoDAWN area. It is not: it is one compilation's record count. The content is
+  ~6,230 km of mapped fault, however it is segmented. Any future sentence of the form "the catalogue holds only N
+  traces here" is wrong unless it names the compilation and the granularity.
+- **Caveats.** (1) The USGS zip was downloaded 2026-09-26; the INGENIOUS compilation is dated 2023-06-27, so part of
+  any difference could be three years of USGS updates rather than compilation practice. (2) Neither is the rasterised
+  label file on the data tab; that reconciliation is still outstanding (CG-12 caveat 1). (3) "Intersecting" counts a
+  trace once even if only partly inside; the length column is the clipped length. (4) `fault_areas` and `ca_offshore`
+  do not intersect the footprint, so nothing is claimed about fault *zones* inside it.
+- **Confidence:** verified — computed from the two primary files on a public runner, reproducible by re-running the
+  workflow. The interpretation is labelled as such.
+
+## CG-16 · Who compiled the footprint, at what scale, and how certain — the mapping-history evidence
+
+The USGS `Qfaults_US_Database` layer carries the compilation's own provenance attributes. Counted inside the GeoDAWN
+data extent (5,570 sections; every count is one re-runnable measurement, CG-15):
+
+| Attribute | Values inside the footprint | Share |
+| --- | --- | --- |
+| `cooperator` | Piedmont Geosciences, Inc. **4,052** · U.S. Geological Survey **951** · California Geological Survey **567** | 72.7% / 17.1% / 10.2% |
+| `scale` | 1:250,000 **4,890** · 1:62,500 **389** · 1:100,000 **274** · unspecified **14** · 1:24,000 **3** | 87.8% / 7.0% / 4.9% / 0.3% / 0.05% |
+| `linetype` | Well Constrained **4,896** · Moderately Constrained **592** · Inferred **82** | 87.9% / 10.6% / 1.5% |
+| `certainty` | Good **5,567** · blank **3** | 99.95% / 0.05% |
+| `class` | A **5,570** | 100% |
+| `age` | undifferentiated Quaternary **2,335** · latest Quaternary **1,928** · historic **715** · late Quaternary **562** · middle and late Quaternary **30** | 41.9% / 34.6% / 12.8% / 10.1% / 0.5% |
+| `slip_sense` | Normal **3,786** · Right lateral **1,417** · Left lateral **364** · Unspecified **3** | 68.0% / 25.4% / 6.5% / 0.05% |
+| `Location` | Nevada **5,167** · California **403** | 92.8% / 7.2% |
+
+- **Relevance — four things this settles or changes.**
+  1. **Gap class 4 is now measurable, and it is a compiler statement.** 72.7% of the sections inside the footprint were
+     compiled by one contractor (Piedmont Geosciences, Inc.), 17.1% by USGS, 10.2% by the California Geological Survey.
+     CG-11's argument — that where the Nevada catalogue is thin is partly a statement about who was funded to map what,
+     and when — is no longer rhetorical inside this footprint: the compiler is an attribute on almost every section.
+  2. **H12 is corroborated on the USGS side.** 87.8% of the sections inside the footprint are `scale = 1:250,000`, and
+     only 3 of 5,570 are 1:24,000. The INGENIOUS-side measurement (every footprint trace `MAPSCALE` 250 or 100, CG-12)
+     and the USGS-side measurement now agree: the GeoDAWN catalogue is a coarse-scale compilation. Two independent
+     compilations, same conclusion.
+  3. **H12's *mechanism* is weakened.** H12 argued that at 1:250,000 "1 mm on the source map is 250 m on the ground, so
+     digitising and generalisation error alone is of the order of the 300 m kernel". The measured mutual agreement
+     between two independent compilations is **≤ 31.6 m** — an order of magnitude smaller than that arithmetic. The
+     naive scale argument over-predicts positional error. H12's class (b) (a scarp offset from a mapped trace by more
+     than the kernel) therefore cannot be sized from compilation-to-compilation offsets; it must come from expert
+     re-mapping at higher resolution (H10, GM-7's >150 m and CG-5's 400 m). H12 class (a) — short or low-relief scarps
+     below the resolution of a 1:250k source — is untouched by this measurement.
+  4. **The "poorly constrained catalogue" framing is dead inside this footprint.** `linetype` is 87.9% Well
+     Constrained, `certainty` is 99.95% Good, `class` is 100% A, and Inferred is 1.5% of sections. This independently
+     re-confirms the H8 rejection on the USGS side: the poorly-constrained stock that H8 wanted to exploit is not here.
+- **Why the age column matters for H14.** 12.8% of the sections have `age = historic` and 34.6% `latest Quaternary` —
+  nearly half the footprint's catalogue records rupture within the Holocene, i.e. the best-studied material.
+  41.9% are only "undifferentiated Quaternary". That asymmetry is the basis of hypothesis H14.
+- **Confidence:** verified for all counts (computed from the primary shapefile on a public runner). The four
+  interpretations are labelled **inference** where they go beyond the counts.
+- **Flagged irregularity.** The USGS faults page describes this file as "GIS files (16 MB ZIP file)". The file served
+  at that URL on 2026-09-26 is **32,371,696 bytes** (≈ 32.4 MB decimal, ≈ 30.9 MiB) — roughly twice the stated size.
+  Both the URL and the size were read from the same official page the same day; the discrepancy is recorded, not
+  resolved.
+
 ## Next actions
 
-1. ~~Clip CG-8 to the GeoDAWN outline polygon.~~ **Done 2026-09-26 — CG-12** (413 traces, via GitHub Actions).
+1. ~~Clip CG-8 to the GeoDAWN outline polygon.~~ **Done 2026-09-26 — CG-12** (413 INGENIOUS traces, via GitHub Actions).
 2. ~~Read the field-definition text in the v2 zip.~~ **Done 2026-09-26 (CG-12)** — 250 = 1:250,000, 100 = 1:100,000;
    code `10` is undocumented (flagged).
-3. Once rasters are placed: distance-to-nearest-label for high-strain / high-seismicity / high-gradient pixels.
-4. Reconcile the 413 footprint count (CG-12; the 1,179 envelope count is superseded) against the actual label raster. If the shipped labels contain materially more or
-   fewer traces than the 2023-06-27 service inside the same box, that is a provenance discrepancy worth recording, not
-   smoothing over.
+3. ~~Measure the USGS side of the catalogue inside the footprint.~~ **Done 2026-09-26 — CG-15/CG-16**: 5,570 sections,
+   6,241.3 km, ≤ 31.6 m from the INGENIOUS traces. Corrects the "413 traces is the catalogue" reading.
+4. Once rasters are placed: distance-to-nearest-label for high-strain / high-seismicity / high-gradient pixels.
+5. Reconcile the label raster against **both** public compilations — the INGENIOUS 413-trace clip (CG-12) and the USGS
+   5,570-section clip (CG-15). If the shipped labels carry materially more or less mapped length than ~6,230 km inside
+   the same polygon, that is a provenance discrepancy worth recording, not smoothing over.
+6. Split the USGS 5,570 footprint sections by `cooperator` and by `scale` on a map, and ask whether catalogue density
+   tracks the compiler rather than the geology (CG-16, H14). This needs no competition data and is the next
+   measurement that could move a hypothesis.
+
+### Arithmetic, stated so it can be checked
+
+6,230.2 km of catalogue trace at 100 m pixels is at least **62,302** one-pixel-wide fault pixels. The prediction grid is
+3292 × 3730 = **12,279,160** pixels. So the known-fault class occupies **≥ 0.51%** of the grid — arithmetic from two
+verified numbers, assuming a one-pixel-wide rasterisation. Compare Hermant et al.'s 6.5% positive fraction at 10 m with a
+50 m buffer (GM-3): the imbalance here is worse by more than an order of magnitude, and the buffer that produced their
+6.5% is not available to us because the mask is pixel-exact (GV-5).

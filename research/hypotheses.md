@@ -15,10 +15,13 @@ Negative results stay in this table.
 | H5 | untested | Do not train to reproduce the label raster the scorer masks out | Med | Rasters + GPU |
 | H6 | untested | Conductivity as corroboration only, never as a detector | Low | Rasters |
 | H7 | untested | Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test | Low | Public shapefiles |
-| H8 | untested | Inferred and blank-scale traces mark the edge of the map — not a positive class | Low | GeoDAWN clip (envelope version done: CG-9) |
+| H8 | rejected | Inferred and blank-scale traces mark the edge of the map — not a positive class | Low | Rejected on the footprint clip (CG-12, CG-16) |
 | H9 | untested | Train against label *incompleteness*, not just label position | Med | Rasters + GPU |
 | H10 | blocked | Rye Patch / western Humboldt Range as an independent lidar validation anchor | Low–med | Silver et al. 2011 mapping |
 | H11 | untested | Soft confuser channels instead of hard negative classes | Low–med | External public layers |
+| H12 | untested | Coarse-scale compilation: the gap is below 1:250k resolution and inside the positional error | Low–med | Rasters + 1 m DEM |
+| H13 | rejected | Compilation-to-compilation offsets as a proxy for the correction class | Low | **Measured and rejected 2026-09-26** (CG-15) |
+| H14 | untested | The catalogue's own recency attributes predict where expert attention has already been spent | Low | Rasters (public-data test available) |
 
 **All are untested because the competition rasters are not placed in `data/`.** "Untested" means not measured, not
 unexamined. Two cards are additionally **blocked** on their own inputs: H3 (needs the 1 m DEM links as well as the
@@ -93,7 +96,10 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
 
 - **Status: rejected 2026-09-26 (as detector and as prior), by its own pre-stated criterion.** CG-12 measured the
   footprint clip: Inferred traces are **8 of 413**, **51.0 km of 6,230.2 km clipped length (0.8%)**; there are **zero**
-  Poor / Other / blank-`FTYPE_` and zero blank-`MAPSCALE` traces inside the data extent. "Negligible Inferred length inside
+  Poor / Other / blank-`FTYPE_` and zero blank-`MAPSCALE` traces inside the data extent.
+  **Corroborated on the USGS side 2026-09-26 (CG-16):** inside the same polygon, the USGS compilation's `linetype` is
+  Well Constrained 4,896 / Moderately Constrained 592 / **Inferred 82 (1.5%)** of 5,570 sections, `certainty` is Good for
+  5,567, and `class` is A for all 5,570. Two independent compilations, same conclusion. "Negligible Inferred length inside
   the survey" is met. The regional stock of poorly-constrained traces this card relied on is simply not in the GeoDAWN
   area. Superseded by H12. Previous status text kept below for provenance.
 - **Previous status:** untested. Regional counts are measured (CG-8). **The envelope-clipped counts are now measured too (CG-9,
@@ -195,7 +201,13 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
   1:250,000 and 1:100,000 and says such faults "could be more discontinuous than continuous" (verified, CG-12).
   At 1:250k, 1 mm on the source map is 250 m on the ground, so digitising and generalisation error alone is of the order
   of the 300 m kernel (arithmetic, not a measured error). Hermant et al. measured catalogue misfit up to 400 m in
-  north-central Nevada (see H1). Both classes (a) and (b) are, by construction, pixels the mask does not contain — exactly
+  north-central Nevada (see H1).
+  **Correction recorded 2026-09-26 (CG-15, CG-16, H13).** That scale arithmetic over-predicts positional error: the two
+  public compilations agree to ≤ 31.6 m inside the footprint, an order of magnitude inside the kernel. Class (b) therefore
+  cannot be sized from compilation-to-compilation offsets — it must come from expert re-mapping at higher resolution
+  (H10, GM-7's >150 m, CG-5's 400 m). The *observation* that the footprint is a coarse-scale compilation is now
+  corroborated twice over: every INGENIOUS footprint trace is `MAPSCALE` 250 or 100 (CG-12), and 87.8% of the 5,570 USGS
+  footprint sections carry `scale = 1:250,000` (CG-16). Both classes (a) and (b) are, by construction, pixels the mask does not contain — exactly
   what staff defined as "new" (forum 11536, 11516 post 4).
 - **Expected DTI impact:** potentially large for (b) because it rides on H1's staff-confirmed class; moderate for (a).
   Risk: the mask is pixel-exact, so near-trace predictions that are *not* on a new label are fully penalised.
@@ -206,8 +218,78 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
 - **Rejection:** reject if (1) the v2 field definitions show `MAPSCALE` is not a scale denominator, or (2) the
   scarp-to-trace distance distribution shows no >300 m tail relative to a random-offset control.
 
+## H13 — Compilation-to-compilation offsets as a proxy for the correction class
+
+- **Status: rejected as a proxy, 2026-09-26 — by measurement, not by a model run.**
+- **Layers:** the public USGS QFFD GIS distribution (`Qfaults_GIS.zip`), the public INGENIOUS Qfaults v2 compilation, and
+  the public GeoDAWN data-extent outline. No competition raster, no submission slot.
+- **Physical signature:** none — this is a measurement about the catalogues, not about the crust.
+- **Why it was worth testing.** Staff define a "new fault" to include corrections to existing traces and say identifying
+  those "is one outcome we are aiming for" (GV-5), and that such corrections may also be in the Final-Round evaluation
+  set (GV-15). Hermant et al. measure up to **400 m** between USGS traces and their own lidar-derived labels in
+  north-central Nevada (CG-5) and **> 150 m** at Leach Hot Springs (GM-7). If two independent compilations of the same
+  faults disagreed by hundreds of metres, the width of the corridor H1 must search would be readable straight off public
+  data — the cheapest possible answer to the most expensive question in the backlog.
+- **What was measured (CG-15).** Inside the GeoDAWN data extent, the USGS compilation holds **5,570** sections and
+  **6,241.3 km** of trace; INGENIOUS holds **413** traces and **6,230.2 km**. Every one of the 413 INGENIOUS traces
+  intersects a USGS section (distance 0.0 m), and every one of the 5,570 USGS sections lies within **31.6 m** of an
+  INGENIOUS trace. Total mapped length agrees to **0.18%**.
+- **Why it is rejected.** The two compilations agree to well inside the 300 m kernel. Positional disagreement between
+  compilations is therefore *not* the mechanism that produces the correction class; expert re-mapping from
+  higher-resolution data is. The corridor width cannot be read off the public catalogues and must come from H10
+  (Silver et al. lidar mapping) or from Hermant's measured discrepancies.
+- **Cost of the test:** one GitHub Actions run on public files. No competition data, no prediction, no submission slot.
+- **What the test changed anyway — three things, all recorded:**
+  1. It corrected this knowledge base's own claim. CG-12's "413 traces inside the data extent" is one compilation's
+     record count, not the catalogue's content; the content is ~6,230 km of fault (CG-15). Several pages had read the
+     count as content.
+  2. It **weakened H12's mechanism**. H12 argued that at 1:250,000, "1 mm on the source map is 250 m on the ground, so
+     digitising and generalisation error alone is of the order of the 300 m kernel". The measured agreement is 31.6 m —
+     an order of magnitude smaller. H12 class (b) cannot be sized that way. H12 class (a) (short or low-relief scarps
+     below a 1:250k source's resolution) is unaffected.
+  3. It **corroborated H12's observation** on the USGS side: 87.8% of the 5,570 footprint sections carry
+     `scale = 1:250,000` (CG-16), matching the INGENIOUS-side finding that every footprint trace is `MAPSCALE` 250 or
+     100 (CG-12).
+- **Rejection criterion (pre-stated, met):** reject if the two compilations agree to well within the 300 m kernel. They
+  agree to 31.6 m.
+
+## H14 — The catalogue's own recency attributes mark where expert attention has already been spent
+
+- **Status:** untested. A public-data test is available and has not been run.
+- **Layers:** label raster as mask; the catalogue's own recency attribute — USGS `age`, INGENIOUS `REC2023` / `RCODE2023`
+  — as a spatial prior; bands 12, 19 and 3, 6 for the candidate set.
+- **Physical signature:** none. This is a prior about *where geologists have already looked*, derived from the
+  catalogue's own metadata rather than from any geophysical layer.
+- **Why it should catch a gap rather than a known fault.** Measured inside the GeoDAWN footprint (CG-16): of 5,570 USGS
+  sections, **715 (12.8%) are `historic`**, **1,928 (34.6%) `latest Quaternary`**, **2,335 (41.9%) only
+  "undifferentiated Quaternary"**, 562 late Quaternary and 30 middle-to-late Quaternary. Nearly half the catalogue in
+  the survey area records Holocene rupture — that is the material field campaigns, lidar passes and expert mapping have
+  already been spent on (GM-3, GM-7). Where the catalogue can only say "undifferentiated Quaternary", nobody has done
+  the work that would resolve it, and CG-13's publication gate means that unresolved work is exactly the work most
+  likely to be missing. So unmapped fault should be relatively *more* likely in the undifferentiated-Quaternary parts of
+  the footprint, not less.
+- **Expected DTI impact:** low as a standalone prior; potentially useful as a re-weighting of H1–H3 candidates. It is
+  cheap — the attribute is already in the public shapefile, and the label raster is masked anyway.
+- **Cost:** low.
+- **Validation — two routes, in order of preference:**
+  1. **No competition data needed.** Test the prior against the catalogues themselves: are INGENIOUS's *updated* traces
+     (the ones that differ from the USGS compilation) concentrated in the parts of the footprint where the USGS
+     compilation says "undifferentiated Quaternary"? That is a direct, public-data test of whether recency metadata
+     predicts where re-mapping happened.
+  2. Once rasters are placed: bin candidate pixels by the recency class of the nearest catalogue trace and measure
+     label density per bin.
+- **Rejection:** reject if new-label density per unit area shows no variation with recency class, or if route (1)
+  shows no association between INGENIOUS's updates and the USGS's undifferentiated-Quaternary sections.
+- **Confidence in the premise:** the recency counts are **verified** (CG-16). The reasoning that they predict expert
+  attention is **inference**, and route (1) exists precisely to test it.
+
 ## Negative results
 
+- **H13 — rejected as a proxy, 2026-09-26.** Measured on public files only (CG-15): the USGS and INGENIOUS
+  compilations agree to ≤ 31.6 m inside the GeoDAWN footprint, far inside the 300 m kernel. The tempting shortcut —
+  reading the correction-class corridor width off the public catalogues — does not work. The measurement still earned
+  its keep: it corrected the "413 traces is the catalogue" reading, weakened H12's scale-arithmetic mechanism, and
+  corroborated H12's coarse-scale observation on the USGS side (CG-16).
 - **H8 — rejected 2026-09-26.** Measured on the public footprint clip (CG-12): Inferred = 51.0 km of 6,230.2 km (0.8%),
   8 of 413 traces; zero Poor/Other/blank. Its rejection criterion ("negligible Inferred length inside the survey") is
   met. This is a *data* rejection, not a model run — no model has been trained.

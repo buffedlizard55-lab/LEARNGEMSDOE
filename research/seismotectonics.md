@@ -67,6 +67,23 @@ spatial priors that re-weight candidates produced elsewhere, never as a standalo
   claim from it is reproduced. The suggestion that it underlies the competition's geodetic bands is **unverified
   inference** — it is a place to look, not a finding.
 
+## ST-8 · USGS states outright that the seismic record under-images the active fault population
+
+- **Source:** <https://www.usgs.gov/programs/earthquake-hazards/faults> — "Potential Uses" (read 2026-09-26)
+- **Citation:** U.S. Geological Survey, 2020, Quaternary Fault and Fold Database for the Nation, <https://doi.org/10.5066/P9BCVRCK>
+- **Claim (verbatim):**
+  > "Although seismicity maps and earthquake catalogs show the past 100 to 150 years of felt and instrumental
+  > earthquakes, many faults in the United States have return times of thousands to tens of thousands of years for
+  > surface faulting events. **Clearly the short seismic record will not image all the active faults that exist.**"
+- **Relevance.** This bounds H4 in both directions, and it is worth being explicit about both. Bands 10 and 16 cannot be
+  used as a *positive* detector — a 100 km smoothing radius cannot localise anything to the 300 m kernel (ST-2). They
+  also cannot be used as a *negative* screen: an area with no recorded earthquakes is not an area without active faults,
+  and the database says so itself. So earthquake density is a prior with an asymmetric meaning, never a veto.
+  The measured recency distribution inside the footprint (CG-16) shows how uneven the rupture evidence is: 12.8% of USGS
+  sections are `historic`, 34.6% `latest Quaternary`, and 41.9% only "undifferentiated Quaternary" — i.e. for two fifths
+  of the catalogue inside the survey area, the time of most recent surface-deforming rupture is not resolved at all.
+- **Confidence:** verified for the quotation. The H4 implication is **inference**.
+
 ## Agreement / disagreement matrix (working tool, not a sourced claim)
 
 | Signal combination | Reading | Action |

@@ -6,6 +6,71 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 
 ---
 
+## 2026-09-26 · session `arena/01a0dfe6-learngemsdoe` — USGS-vs-INGENIOUS census, four new catalogue entries, H13 rejected
+
+**Verified this session, each item fetched and read line by line (not recalled)**
+
+- Competition hub <https://www.drivendata.org/competitions/306/competition-doe-gems/>: deadline Dec. 3, 2026, 11:59 p.m. UTC; $300,000 pool; Initial $50,000 (top five, $10,000 each); Final $250,000 ($100k/$70k/$40k/$25k/$15k); eligibility summary; six how-to-compete steps; sponsor DOE Office of Geothermal with NLR; official contact <gemsprize@nlr.gov>.
+- Problem description page 967, both chunks: competition structure and the two-round diagram text; datasets (GeoDAWN + INGENIOUS + `1m_DEM_links.csv`); the provided-features sentence; labels; external-data licence condition; the full metric section (DTI, α=0.2, β=0.8, triangular kernel, R=300 m, TP𝑤=3.00 FP𝑤=1.89 FN𝑤=2.00 TI𝑤=0.60); submission format (EPSG:32611, 100 m, same bounds, float32, [0,1]).
+- About page 968: sponsor, GeoDAWN description, coordinated 3DEP lidar "over a similar extent", fault/zone definitions, detection methods, the "more subtle … hidden below the surface" sentence, and the two additional-information citations (Mattéo 2021; Hermant 2025).
+- Official rules PDF <https://www.nlr.gov/docs/fy26osti/96647.pdf> (redirect to `docs.nlr.gov`), chunks covering the Preface, §1.1–§1.4, §2, §3.1–§3.2: change-log table still five empty rows; prize phases and "up to 10 awards"; §1.2 defers dates to the website; §1.3 eligibility in full; §2 background including the GeoDAWN footnote citation ("Accessed December 22, 2025"); §3 American-Made framing; §3.2 the single-GeoTIFF requirement, three submissions per week, and the generative-AI disclosure paragraph verbatim.
+- Forum category JSON (both chunks): 11 topics, newest still 11543 (2026-09-25), `posts_count` unchanged on every thread. Thread 11516 JSON read in full (all four posts) and thread 11536 JSON read in full — the pixel-exact mask, the full-penalty rule and the "new fault" definition re-confirmed verbatim, plus one sentence not previously captured ("Such corrections may already exist in the new-fault set, and may also exist in the final round evaluation set").
+- USGS Quaternary Fault and Fold Database page, chunks 0–2: the 1.6 Ma definition, the 2017 metadata reduction, the 2026-02-26 search retirement, the citation format, the cooperators list, the Background and History sections, **the "Reference Materials" paragraph (new to the library)**, **the Fault Classes A–D table (new)**, and **the "Potential Uses" paragraph on the short seismic record (new)**.
+- USGS GeoDAWN data page, read in full: 149,030 line-km, 51,857 km², Area 1 / Area 2 specifications and azimuths, four blocks, EDCON-PRJ and subcontractors, the 22-degree drape surface, the variable-clearance warning, magnetic and radiometric processing, the deliverables list including "geoTIFF images of geophysical grids", citation, CC0 1.0.
+- ScienceBase item `?format=json&fields=spatial`: bounding box −120.0024, 37.3641, −116.1415, 40.7247 (WGS 84) — unchanged.
+- INGENIOUS GDR 1391: full resource list, licences and file sizes unchanged (116.98 MB, 9 files).
+- NBMG `Qfaults_INGENIOUS` layer 0: metadata re-read (`supportsStatistics: false`, NAD83 Contiguous USA Albers) and `returnCountOnly` re-run → `{"count":22956}`.
+- Hermant et al. (2025), all eight chunks: abstract, introduction, data and labels (§3.1–§3.3), methodology, training, results (§6 with the per-epoch loss / PR-AUC / weighted-Focal-IoU tables now legible), discussion (§7), conclusion (§8) and the complete reference list.
+- Reference-solution README: author, environment options (uv extras cu126 / cu130 / cpu; conda GPU and CPU), notebook name, and the instruction to place data in `data/`.
+
+**Measured — the session's main result (CG-15, CG-16)**
+
+Ran the public census again on a GitHub Actions runner — [run 36277952393](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277952393) — this time also fetching the **USGS QFFD GIS distribution** (`Qfaults_GIS.zip`, 32,371,696 bytes, sha256 `447eadc5926256710d988c30e5996ba540604caa0154f9746c48bad637926893`) so the two compilations the problem description names as label sources could be compared inside the same polygon.
+
+- USGS `Qfaults_US_Database.shp`: 112,809 records nationally; **5,570** sections and **6,241.3 km** of clipped trace inside the GeoDAWN data extent. INGENIOUS v2: 22,956 records regionally; **413** traces and **6,230.2 km** inside the same polygon.
+- Mutual agreement: every INGENIOUS footprint trace intersects a USGS section (0.0 m, all 413); every USGS section inside the footprint lies within **31.6 m** of an INGENIOUS trace. Length difference 0.18%.
+- USGS attributes inside the footprint: `cooperator` Piedmont Geosciences 4,052 / USGS 951 / California Geological Survey 567; `scale` 1:250,000 4,890 / 1:62,500 389 / 1:100,000 274 / unspecified 14 / 1:24,000 3; `linetype` Well 4,896 / Moderately 592 / Inferred 82; `certainty` Good 5,567 / blank 3; `class` A 5,570; `age` undifferentiated Quaternary 2,335 / latest Quaternary 1,928 / historic 715 / late Quaternary 562 / middle-late Quaternary 30; `slip_sense` Normal 3,786 / Right lateral 1,417 / Left lateral 364 / Unspecified 3; `Location` Nevada 5,167 / California 403.
+- Two supplementary shapefiles in the same zip (`fault_areas`, 37 fault-zone polygons; `ca_offshore`, 1,093 traces) do not intersect the footprint.
+
+**Added**
+
+- Catalogue-gap entries **CG-13** (only published evidence can enter the compilation), **CG-14** (fault classes A–D, and every footprint section is Class A), **CG-15** (the side-by-side census), **CG-16** (who compiled the footprint, at what scale, how certain).
+- **GM-10** (Hermant §3.3: why they built their own labels, and the four visual criteria), **PF-10** (the GeoDAWN release ships geoTIFF grids and a contractor report — the band-provenance route), **ST-8** (USGS: "the short seismic record will not image all the active faults that exist"), **PA-9** and **PA-10** (Hermant §3.3 verbatim; the Figure 7 per-epoch tables re-read).
+- Governance entries **GV-15** (this re-verification pass), **GV-16** (the official escalation channel for the two open discrepancies), **GV-17** (the problem description's feature list and the notebook's band tags do not line up).
+- Hypotheses **H13** (rejected as a proxy, by measurement) and **H14** (the catalogue's recency attributes as a gap prior). Domain now 6 domains / 61 entries / 14 hypotheses.
+
+**Corrected — not smoothed over**
+
+- **"413 traces in the GeoDAWN area" is not the catalogue's content.** It is one compilation's record count; the content is ~6,230 km of mapped fault, however it is segmented (CG-15). Recorded on the catalogue-gap page and in the watch list.
+- **H12's scale-arithmetic mechanism is weakened** by the measured 31.6 m compilation-to-compilation agreement; H12's coarse-scale *observation* is corroborated on the USGS side (CG-16).
+- **H8's rejection is corroborated** on the USGS side (Inferred 82 of 5,570 sections, 1.5%).
+- **PA-2's Hermant figures are confirmed**, not approximate: the Figure 7 table read this session gives FaultSEG PR-AUC 0.88/0.59 and siUNET 0.56/0.47 at epoch 17.5, while the paper's prose reports 0.902/0.610/0.595 and 0.574/0.463/0.449 after 20 epochs. Both are now labelled by which they are (PA-10).
+- **11516 post 4 is now quoted in full**, including the sentence about corrections possibly existing in the final-round evaluation set (GV-15).
+
+**Flagged**
+
+- The USGS faults page calls `Qfaults_GIS.zip` a "16 MB ZIP file"; the file served is 32,371,696 bytes (≈32.4 MB). Recorded, unresolved.
+- The problem description's feature list names a "depth to conductive base surface" and a "top-of-crustal magnetic source depth estimate" that no band tag matches, and omits band 6 (tilt/curvature) and band 10 (distance to earthquake) (GV-17).
+- **The "full train→inference→validate pipeline is ready to run" claim is still false for this repository.** Re-checked against `scripts/` this session: `metrics.py` (metric, loss, masked variant, 11 self-tests), `prepare_data.py` (inspection only), `download_competition_data.sh` (placement helper), `public_census.py`, `check_site.py`, `build_search_index.py`. There is deliberately no training script and no inference script that emits a submission GeoTIFF. This agent did not add one.
+
+**Ran**
+
+- `python3 scripts/metrics.py --selftest` → 11 checks pass (CPU, standard library).
+- `python3 scripts/check_site.py` → pass (links, anchors, assets, source allowlist, entry counts).
+- `python3 scripts/build_search_index.py --check` → pass.
+- `bash scripts/download_competition_data.sh` → still no competition rasters; the four public files fail TLS from the sandbox (curl exit 35) and the new `Qfaults_GIS.zip` likewise. Environment limit, not absence.
+- `python3 scripts/prepare_data.py` → `blocked_no_data`.
+- No prediction GeoTIFF generated, validated or submitted; no weekly submission slot used; no second site, repo, account or registration.
+
+**Next**
+
+1. Split the 5,570 USGS footprint sections by `cooperator` and `scale` and ask whether catalogue density tracks the compiler rather than the geology (CG-16, H14 route 1) — needs no competition data.
+2. Rasterise both public compilations to the 100 m EPSG:32611 grid so the label raster can be reconciled against ~6,230 km of catalogue trace once it is placed (CG-15, CG-12).
+3. Place the competition rasters on an enrolled machine, run `prepare_data.py`, and resolve GV-17 (feature list vs band tags) from `data/inventory.json`.
+4. Obtain Silver et al. (2011) for H10 — still the only route to a local truth set for "does this detector find faults the catalogue lacks".
+
+---
+
 ## 2026-09-26 · session `arena/01a0dfd3-learngemsdoe` — public data via Actions, footprint census, H8 rejected
 
 **Added**
