@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -84,7 +88,13 @@
               <td><span class="chip verified">read</span></td>
               <td>Points to the NLR PDF as the authoritative rules.</td>
             </tr>
-            <tr data-tags="competition rules herox">
+            <tr data-tags="competition page 966 duplicate">
+              <td>Page 966 (linked from the staff about-post)</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/">…/page/966/</a></td>
+              <td><span class="chip verified">read</span></td>
+              <td>A duplicate of the hub welcome text, <strong>not</strong> the problem description. Recorded so the link is not mistaken for official problem content.</td>
+            </tr>
+
               <td>HeroX rules resource</td>
               <td><a href="https://www.herox.com/GEMSPrize/resource/2274">herox.com/GEMSPrize/resource/2274</a></td>
               <td><span class="chip verified">read</span></td>
@@ -120,7 +130,7 @@
             <tr data-tags="forum mask scoring pixel-exact">
               <td>Scoring clarification: are known USGS/INGENIOUS faults masked, and are they in the Final Round label set?</td>
               <td><strong>Yes — posts 2 and 4.</strong> Post 4 (2026-09-21) confirms the mask is pixel-exact and identical to the training labels, that near-known-trace predictions are fully penalised, and that new-fault ground truth may lie within 300 m of a known trace.</td>
-              <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">11516</a> · <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">post 4</a></td>
+              <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">11516</a> · <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/2">post 2</a> · <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">post 4</a></td>
               <td><span class="chip verified">read all 4 posts</span></td>
             </tr>
             <tr data-tags="forum new fault definition geometry">
@@ -182,6 +192,12 @@
               <td>Not applicable — participant recruiting thread.</td>
               <td><a href="https://community.drivendata.org/t/looking-for-a-geologist-teammate-lidar-fault-mapping-basin-and-range-to-join-a-working-ml-pipeline/11531">11531</a></td>
               <td><span class="chip verified">read</span></td>
+            </tr>
+            <tr data-tags="forum json api category index">
+              <td>Forum category and thread JSON endpoints (Discourse)</td>
+              <td>Machine-readable, used for the forum watch</td>
+              <td><a href="https://community.drivendata.org/c/gems-prize-challenge/111.json">…/c/gems-prize-challenge/111.json</a> · <a href="https://community.drivendata.org/t/11540.json">11540.json</a> · <a href="https://community.drivendata.org/t/11526.json">11526.json</a> · <a href="https://community.drivendata.org/t/11543.json">11543.json</a></td>
+              <td><span class="chip verified">read 2026-09-26</span> — 11 topics in the category; newest is 11543 (2026-09-25). <code>posts_count</code> is the field the forum watch reports.</td>
             </tr>
           </tbody>
         </table>
@@ -262,6 +278,21 @@
               <td><a href="https://gbcge.org/current-projects/ingenious/">gbcge.org/current-projects/ingenious/</a></td>
               <td><span class="chip verified">read</span> — PI Bridget Ayling, Co-PI James Faulds; personnel include Koehler, Kreemer, Mlawsky, Coolbaugh, Micander, dePolo, Kraal, Wagoner; 1 Feb 2021 – 30 Jun 2025; $10,000,000; DOE GTO award DE-EE0009254. Carries the project's own publication list, which fixes several author lists on this site.</td>
             </tr>
+            <tr data-tags="nbmg query endpoint counts arcgis rest">
+              <td>NBMG query endpoint (the <code>/query</code> used for every count)</td>
+              <td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query">…/MapServer/0/query</a> · <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer?f=pjson">…/MapServer?f=pjson</a> · <a href="https://web2.nbmg.unr.edu/">web2.nbmg.unr.edu</a></td>
+              <td><span class="chip verified">read 2026-09-26</span> — every count on this site is one <code>returnCountOnly</code> call against this endpoint with an explicit <code>where</code> clause. Query strings differ per count; the endpoint is the same. The service reports <code>supportsStatistics: false</code>, so group-by and sum queries return HTTP 400 — which is why no total trace length is asserted anywhere here.</td>
+            </tr>
+            <tr data-tags="geodawn extent sciencebase bbox">
+              <td>GeoDAWN bounding box (published spatial metadata)</td>
+              <td><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json&amp;fields=spatial">ScienceBase item, <code>fields=spatial</code></a> — minX −120.0024, maxX −116.1415, minY 37.3641, maxY 40.7247 (WGS 84)</td>
+              <td><span class="chip verified">read 2026-09-26</span> — the envelope used by the CG-9 census. It is a <strong>rectangle</strong>, not the flight footprint, so envelope counts are upper bounds.</td>
+            </tr>
+            <tr data-tags="ingenious study area boundary zip">
+              <td>INGENIOUS study-area boundary archive</td>
+              <td><a href="https://gdr.openei.org/files/1391/study_area_boundary_INGENIOUS_regional_data.zip">GDR file</a></td>
+              <td><span class="chip unverified">not downloaded</span> — TLS to gdr.openei.org failed 2026-09-26. Listed because the pipeline page cites it.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -274,7 +305,7 @@
             <tr data-tags="hermant 2025 deep learning lidar slope">
               <td>Hermant, Kiersnowski &amp; Bellanger (2025) — deep learning for Quaternary fault mapping, western USA</td>
               <td><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Stanford 50th Workshop PDF</a></td>
-              <td><span class="chip verified">read chunks 0–3 of 8</span> — abstract, study area, data and labels, architecture, training process, loss, results tables. Numbers quoted on the site come only from those chunks.</td>
+              <td><span class="chip verified">read chunks 0–6 of 8</span> — abstract, study area, data and labels, architecture, training process, loss, results tables (0–3); §6 results in prose, Figures 7–9, §7 discussion, §8 conclusion and the reference list (4–6), read 2026-09-26. Chunks 7+ are the tail of the reference list. Numbers quoted on the site come from the read chunks only; the Figure 7 per-epoch table is deliberately <strong>not</strong> transcribed because its column headers were truncated in extraction.</td>
             </tr>
             <tr data-tags="matteo 2021 optical topographic deep learning">
               <td>Mattéo et al. (2021) — automatic fault mapping in remote optical images and topographic data</td>
@@ -301,6 +332,21 @@
               <td>Hart-Wagoner, N.R., Coolbaugh, M., Faulds, J.E., &amp; Mlawsky, E. Great Basin Center for Geothermal Energy, NBMG, University of Nevada, Reno. <a href="https://publications.mygeoenergynow.org/grc/1034813.pdf">PDF</a></td>
               <td><span class="chip verified">abstract and introduction read</span> — states the INGENIOUS Quaternary fault database "included updated fault locations and updated fault attributes of recency (i.e., age of most recent rupture) and slip rates". <strong>Previously listed as unverified; upgraded this session after the PDF was opened.</strong></td>
             </tr>
+            <tr data-tags="drenth grauch 2019 rank criteria earthmri aeromagnetic">
+              <td>Drenth &amp; Grauch (2019) — the survey rank criteria GeoDAWN cites</td>
+              <td>Drenth, B.J., &amp; Grauch, V.J.S. (2019). <em>Finding the Gaps in America's Magnetic Maps.</em> <strong>Eos</strong> 100. <a href="https://doi.org/10.1029/2019EO120449">10.1029/2019EO120449</a> · criteria also re-stated in the <a href="https://data.usgs.gov/datacatalog/metadata/USGS.5d38aac0e4b01d82ce8b940a.xml">USGS Airborne Geophysical Survey Inventory metadata</a></td>
+              <td><span class="chip verified">Table 1 read</span> — rank 1 requires terrain clearance &lt; 152 m and flight-line-spacing-to-source-distance ratio ≤ 2; ranks run 1 (best) to 5 (worst), overall rank is the worst category. <span class="chip unverified">the full Eos byline was not captured</span> — USGS credits the ranking to Drenth and Grauch (2019).</td>
+            </tr>
+            <tr data-tags="silver 2011 lidar hyperspectral humboldt range fault mapping">
+              <td>Silver et al. (2011) — LiDAR and hyperspectral analysis of faulting, west side of the Humboldt Range, Nevada</td>
+              <td>Silver, E., MacKnight, R., Male, E., Pickles, W., Cocks, P., &amp; Waibel, A. (2011). <em>Geosphere</em> 7(6), 1357–1368. <a href="https://doi.org/10.1130/GES00673.1">10.1130/GES00673.1</a></td>
+              <td><span class="chip verified">citation and DOI resolution</span> — resolves to that title in Geosphere 7(6):1357. <span class="chip unverified">paper not read</span> and it is <strong>not</strong> established that its fault mapping is distributed as data. Found in Hermant et al.'s reference list.</td>
+            </tr>
+            <tr data-tags="kreemer 2009 walker lane strain rate tensor">
+              <td>Kreemer et al. (2009) — geodetic strain-rate tensor analysis, northern Walker Lane</td>
+              <td>Kreemer, C., Blewitt, G., Hammond, W.C., Oldow, J., &amp; Cashman, P. (2009). GSA <strong>Special Paper 447</strong>, 17–31. No DOI is printed in the source that cites it, and none is asserted here.</td>
+              <td><span class="chip verified">citation as printed in Hermant et al. (2025)'s reference list</span> · <span class="chip unverified">paper not read; no claim from it is reproduced</span></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -322,6 +368,15 @@
             <strong>Kreemer “et al.” corrected to Kreemer &amp; Young</strong>, and Siler's initials to D.L., using the
             INGENIOUS project page's own publication list.
           </li>
+          <li>
+            <strong>PA-2's epoch-resolved Hermant figures superseded (2026-09-26, session
+            <code>arena/01a0df88</code>).</strong> PA-2 recorded PR-AUC ≈ 0.88 train / ≈ 0.59 validation for FaultSEG
+            “at epoch 17.5”, taken from a figure whose axis labels were truncated in our extraction. §6 states the
+            values in prose: FaultSEG 0.902 / 0.610 / 0.595 (train / validation / test) and siUNET 0.574 / 0.463 / 0.449.
+            The prose values now appear as <a href="research/prior-art.html#pa6">PA-6</a> and should be cited instead.
+            The old numbers were not fabricated, but they were read off a chart and labelled with a precision the source
+            does not support.
+          </li>
         </ul>
       </div>
 
@@ -331,6 +386,8 @@
         <li><code>scripts/prepare_data.py</code> — inspection-only raster inventory; writes <code>data/inventory.json</code>.</li>
         <li><code>scripts/download_competition_data.sh</code> — prints the official URLs and checks <code>data/</code>; does not log in and stores no credentials.</li>
         <li><code>research/*.md</code> — markdown mirrors of the library, so changes are reviewable as a git diff.</li>
+        <li><code>scripts/build_search_index.py</code> — generates <code>docs/assets/search-index.js</code> from the markdown mirrors and page metadata. <code>--check</code> fails if the committed index is stale.</li>
+        <li><code>scripts/check_site.py</code> — offline site verification: internal links and anchors resolve, local assets exist, and every external link on the site is recorded as a source on this page. It fetches nothing.</li>
       </ul>
       </div>
     </main>

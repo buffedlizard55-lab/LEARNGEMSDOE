@@ -6,6 +6,65 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 
 ---
 
+## 2026-09-26 · session `arena/01a0df88-learngemsdoe` — catalogue census, Hermant read end to end, site search and verification
+
+**Verified this session, each item fetched and read**
+
+- Competition hub; problem page 967 (both chunks); About page 968 — metric, submission format and the GeoDAWN + 3DEP
+  wording re-confirmed against the text.
+- Rules PDF (served from `docs.nlr.gov`): Preface change-log table still empty; §1.1 prize table; §1.2 **defers** key
+  dates to the website; §1.3 eligibility; §2 background (labels, 1 m DEM, GeoDAWN described as a lidar/magnetic/
+  radiometric study); §3.1–§3.2 (single GeoTIFF, three per week, AI disclosure).
+- Forum category JSON (both chunks): 11 topics, newest 11543 (2026-09-25). No new topic or staff reply since the
+  previous session.
+- [ScienceBase GeoDAWN bounding box](https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json&fields=spatial):
+  −120.0024, 37.3641, −116.1415, 40.7247 (WGS 84).
+- NBMG INGENIOUS Qfaults service: six `returnCountOnly` queries inside that box (CG-9), plus layer metadata
+  (`supportsStatistics: false`; CRS NAD 1983 Contiguous USA Albers).
+- USGS faults page: 1.6 Ma definition, 2017 metadata reduction, 2026 search retirement, cooperators list — and the
+  "History" section, new to the library (CG-10).
+- Hermant et al. (2025) PDF chunks 4–6: results in prose, Figures 7–9, discussion, conclusion, reference list. Two DOIs
+  found there were resolved and checked.
+- USGS GeoDAWN data page: rank criteria, flight azimuths, CC0 1.0, shapefile deliverables.
+- Drenth & Grauch (2019) Table 1 (Eos) — the rank criteria GeoDAWN cites.
+- Reference-solution README (via the GitHub API): author, environment choices, notebook name.
+
+**Measured — the highest-value result of the session.** CG-9: **1,179** of 22,956 INGENIOUS traces intersect the GeoDAWN
+bounding box — 739 Well Constrained, 351 Moderately Constrained, 89 Inferred, 0 Poor/Other/blank, 0 blank `MAPSCALE`.
+739 + 351 + 89 = 1,179 exactly and the complementary query returns 0, so the partition closes. This is the clip the
+previous session asked for, done against the published box. The polygon version remains open. No total length is
+asserted: the service reports `supportsStatistics: false` and refuses the sum.
+
+**Added.** Research entries CG-9, CG-10, CG-11, PF-8, PF-9, GM-7, GM-8, GM-9, ST-7, PA-6, PA-7, PA-8, GV-11, GV-12,
+GV-13. Hypotheses H9, H10, H11. Site-wide search with a generated index, two-tier navigation, a "start here" reading
+order, a verification section on the overview, and two scripts (`scripts/check_site.py`,
+`scripts/build_search_index.py`).
+
+**Corrected.** PA-2's epoch-resolved Hermant figures (PR-AUC ≈ 0.88 / ≈ 0.59 "at epoch 17.5") were approximations read
+off a figure whose axis labels were truncated in our extraction, and the epoch attribution is not supported by the
+paper's prose. They are superseded by the values §6 states (PA-6), and the sequence is recorded on the sources page.
+Figure 7's per-epoch table was deliberately left untranscribed rather than guessed at.
+
+**Flagged, not smoothed.** Rules §3.2 says the submission must cover "the entirety of the GeoDAWN study area" while the
+problem description says "the same bounds as the training data" — not obviously the same instruction given a grid
+bounding box ≈ 2.4× the surveyed area (GV-12). Rules §2 describes GeoDAWN as including lidar while the data release
+treats the 3DEP lidar as a separate coordinated collection (GM-9 / GV-13).
+
+**Not done.** No competition raster was obtained; both data scripts were re-run and still report `blocked_no_data`, with
+all four public files failing TLS. No prediction file. No second site, repo, account or registration. No training or
+inference script was added — the handoff claim that a complete pipeline is "ready to run" is still not true of this
+repository, and that irregularity remains on the overview.
+
+**Still open / next**
+
+1. Repeat the six CG-9 queries against the Area 1 / Area 2 outline polygons instead of the bounding box. Everything
+   else in the backlog is gated on the rasters.
+2. Place the rasters on an enrolled machine, then reconcile the label raster against the 1,179 envelope count.
+3. Read the INGENIOUS v2 field-definition text (still blocked by TLS) before translating `MAPSCALE` codes.
+4. Hermant chunks 7+ (the tail of the reference list) and the body of Mattéo et al. 2021.
+
+---
+
 ## 2026-09-26 · session `arena/01a0df77-learngemsdoe` — Pass 1–3: re-verify, forum watch, Pages UX
 
 **Verified against primary sources this session (fetched and read):**

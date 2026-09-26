@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="../index.html">Overview</a>
-        <a href="../requirements.html">Requirements</a>
-        <a href="../executive-summary.html">Explainer</a>
-        <a href="index.html">Library</a>
-        <a href="../feature-stack.html">Feature stack</a>
-        <a href="../hypotheses.html">Hypotheses</a>
-        <a href="../sources.html">Sources</a>
-        <a href="../pipeline.html">Pipeline</a>
-        <a href="governance.html">Governance</a>
-        <a href="../forum.html">Forum</a>
-        <a href="../changelog.html">Changelog</a>
-        <a href="../ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="../index.html">Overview</a>
+          <a href="../research/index.html">Research library</a>
+          <a href="../hypotheses.html">Hypotheses</a>
+          <a href="../feature-stack.html">Feature stack</a>
+          <a href="../requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="../research/governance.html">Governance</a>
+          <a href="../sources.html">Sources</a>
+          <a href="../pipeline.html">Pipeline</a>
+          <a href="../forum.html">Forum watch</a>
+          <a href="../changelog.html">Changelog</a>
+          <a href="../ai-usage.html">AI-usage log</a>
+          <a href="../search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -248,6 +252,9 @@
             <tr><td>Rules change-log table</td><td>Rules PDF, Preface</td><td><span class="chip verified">empty when read</span></td></tr>
             <tr><td>Staff about-post links to page 966</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/">page 966</a></td><td><span class="chip verified">duplicate of the hub welcome, not the problem page</span></td></tr>
             <tr><td>Rules PDF host</td><td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov URL</a></td><td><span class="chip verified">redirects to docs.nlr.gov</span></td></tr>
+            <tr><td>§1.2 key dates</td><td>rules PDF vs hub</td><td><span class="chip verified">PDF defers to the website — cite the hub for the deadline</span> (<a href="#gv11">GV-11</a>)</td></tr>
+            <tr><td>Submission extent: "entirety of the GeoDAWN study area" vs "same bounds as the training data"</td><td>§3.2 vs problem description</td><td><span class="chip unverified">unresolved until the raster is placed</span> (<a href="#gv12">GV-12</a>)</td></tr>
+            <tr><td>Does GeoDAWN include lidar?</td><td>§2 vs Glen &amp; Earney 2024</td><td><span class="chip verified">documents differ; no scoring consequence known</span> (<a href="#gv13">GV-13</a>)</td></tr>
           </tbody>
         </table>
       </div>
@@ -273,6 +280,107 @@
           <li><strong>Confidence:</strong> <span class="chip verified">verified</span> for the named JSON fields only.</li>
         </ul>
       </div>
+
+      <h2 id="gv11">GV-11 · Rules and forum re-read (2026-09-26, session <code>arena/01a0df88</code>)</h2>
+      <article class="entry">
+        <h3><span class="id">GV-11</span> Nothing has changed — and the PDF does not carry the deadline</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>
+            Rules PDF <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a> (served
+            from <code>docs.nlr.gov</code> after redirect), chunks covering the Preface, §1.1–§1.4, §2 and §3.1–§3.2;
+            forum category JSON
+            <a href="https://community.drivendata.org/c/gems-prize-challenge/111.json">111.json</a> (both chunks).
+          </dd>
+          <dt>Claim — no change</dt>
+          <dd>
+            The Preface change-log table still has five empty rows: no recorded amendment since the September 2026
+            version. The forum holds <strong>11 topics</strong>; the newest is <strong>11543 (2026-09-25)</strong>, so no
+            new topic since the previous session's re-read hours earlier. <code>posts_count</code> is unchanged at 1 for
+            11543, 11540 and 11526, and at 2 for 11499 (the pinned "About" post plus one unanswered eligibility
+            question).
+          </dd>
+          <dt>Newly recorded — §1.2 does not restate the deadline (verbatim)</dt>
+          <dd>
+            <blockquote class="quote">Please see the competition website gems.drivendata.org for the most current
+              timeline and important dates.<cite>Official Rules, §1.2 Key Dates</cite></blockquote>
+            <p>Consequence: <strong>3 December 2026, 11:59 p.m. UTC</strong> must be cited to the
+            <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData hub</a>, not to the
+            rules PDF. The prize amounts in §1.1 and on the hub agree, so the PDF remains the authority for money, not
+            for dates. This does <em>not</em> resolve the separate §A.1 time-of-day discrepancy in GV-8.</p>
+          </dd>
+          <dt>Newly recorded — the submission cap sits in §3.2 (verbatim)</dt>
+          <dd>
+            <blockquote class="quote">You can make multiple submissions, subject to the limits specified on the
+              competition website (three submissions per week).<cite>Official Rules, §3.2</cite></blockquote>
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> for all of the above, read this session.</dd>
+        </dl>
+      </article>
+
+      <h2 id="gv12">GV-12 · Open wording difference: how much area must the GeoTIFF cover?</h2>
+      <article class="entry">
+        <h3><span class="id">GV-12</span> "The entirety of the GeoDAWN study area" vs "the same bounds as the training data"</h3>
+        <dl>
+          <dt>Sources</dt>
+          <dd>
+            Rules §3.2 <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">PDF</a>; problem description
+            <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">submission
+            format</a>.
+          </dd>
+          <dt>Claim (both verbatim)</dt>
+          <dd>
+            <blockquote class="quote">You must submit a single GeoTIFF with a single raster layer at 100-meter resolution
+              containing your model's predictions of fault locations <strong>for the entirety of the GeoDAWN study
+              area</strong>.<cite>Official Rules, §3.2</cite></blockquote>
+            <blockquote class="quote">Your submission has <strong>the same bounds as the training data</strong>, and data
+              outside the bounds is null or nan.<cite>Problem description, Submission format</cite></blockquote>
+          </dd>
+          <dt>Why it is a live question, not pedantry</dt>
+          <dd>
+            The prediction grid (3292 × 3730 px at 100 m ≈ 122,800 km² of bounding box) is roughly 2.4× the surveyed area
+            (51,857 km² — <a href="../feature-stack.html#grid">feature stack</a>). If the training raster's bounds are
+            that bounding box, then these are <strong>two different instructions</strong>, and the second is the larger
+            one. If the training raster is clipped to the footprint, they coincide. It cannot be settled without the
+            file.
+          </dd>
+          <dt>Action</dt>
+          <dd>
+            Once <code>training_features.tif</code> is placed, compare its bounds against the GeoDAWN bounding box from
+            ScienceBase (−120.0024, 37.3641, −116.1415, 40.7247) and record the answer here. If they differ, the safe
+            submission is the training-data bounds: the problem description governs format, and staff have confirmed the
+            scoring mask is derived from the provided labels. Until then this stays on the watch list.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for both quotations. The size mismatch is the derived observation
+            on the feature-stack page, itself <span class="chip unverified">inference</span> from two verified numbers.
+          </dd>
+        </dl>
+      </article>
+
+      <h2 id="gv13">GV-13 · Two official documents describe GeoDAWN's contents differently</h2>
+      <article class="entry">
+        <h3><span class="id">GV-13</span> Rules §2 vs the data release — flagged, no consequence known</h3>
+        <dl>
+          <dt>What differs</dt>
+          <dd>
+            Rules §2 calls GeoDAWN "a high-resolution lidar, magnetic, and radiometric study"; the data release
+            (Glen &amp; Earney, 2024, <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a>) is titled
+            "Airborne magnetic and radiometric surveys" and describes lidar as a separate, coordinated 3DEP collection
+            over "a similar extent". Tracked here as well as in
+            <a href="geomorphology.html#gm9">GM-9</a> because it is a discrepancy between two official sources.
+          </dd>
+          <dt>Status</dt>
+          <dd>
+            <strong>No scoring consequence is known.</strong> Not raised on the forum — this agent does not post. Flagged
+            for a human to raise if it ever matters.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> for both texts.</dd>
+        </dl>
+      </article>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
   </div>

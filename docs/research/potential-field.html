@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="../index.html">Overview</a>
-        <a href="../requirements.html">Requirements</a>
-        <a href="../executive-summary.html">Explainer</a>
-        <a href="index.html">Library</a>
-        <a href="../feature-stack.html">Feature stack</a>
-        <a href="../hypotheses.html">Hypotheses</a>
-        <a href="../sources.html">Sources</a>
-        <a href="../pipeline.html">Pipeline</a>
-        <a href="governance.html">Governance</a>
-        <a href="../forum.html">Forum</a>
-        <a href="../changelog.html">Changelog</a>
-        <a href="../ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="../index.html">Overview</a>
+          <a href="../research/index.html">Research library</a>
+          <a href="../hypotheses.html">Hypotheses</a>
+          <a href="../feature-stack.html">Feature stack</a>
+          <a href="../requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="../research/governance.html">Governance</a>
+          <a href="../sources.html">Sources</a>
+          <a href="../pipeline.html">Pipeline</a>
+          <a href="../forum.html">Forum watch</a>
+          <a href="../changelog.html">Changelog</a>
+          <a href="../ai-usage.html">AI-usage log</a>
+          <a href="../search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -228,6 +232,88 @@
           </dd>
           <dt>Confidence</dt>
           <dd><span class="chip verified">verified</span> Acquisition facts, block names and the terrain-clearance quotation. <span class="chip unverified">inference</span> The claim that these artefacts will appear in the derived bands is reasoning; it has not been measured here.</dd>
+        </dl>
+      </article>
+
+      <h2 id="pf8">PF-8 · What "rank 1" certifies — and what it does not</h2>
+      <article class="entry">
+        <h3><span class="id">PF-8</span> Rank is a sampling certificate, not a quality adjective</h3>
+        <dl>
+          <dt>Sources</dt>
+          <dd>
+            GeoDAWN text naming the criteria —
+            <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS
+            data page</a> and <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase
+            item</a>. The criteria themselves — Drenth, B.J., &amp; Grauch, V.J.S. (2019), <em>Finding the Gaps in
+            America's Magnetic Maps</em>, <strong>Eos</strong> 100,
+            <a href="https://doi.org/10.1029/2019EO120449">doi:10.1029/2019EO120449</a> (Table 1 read). The criteria as
+            re-stated by USGS for the national survey inventory —
+            <a href="https://data.usgs.gov/datacatalog/metadata/USGS.5d38aac0e4b01d82ce8b940a.xml">Airborne Geophysical
+            Survey Inventory metadata</a>.
+          </dd>
+          <dt>What it claims</dt>
+          <dd>
+            <p>Verbatim, GeoDAWN: Area 1 "was flown with rank 1 specifications (following criteria outlined by Drenth
+            and Grauch, 2019) that met EarthMRI survey requirements"; Area 2 used "lower resolution flight
+            specifications … (falling between rank 1 and 2)".</p>
+            <p>Verbatim, Table 1 (survey-specifications row), the definition of rank 1: "TC &lt; 152 meters and ratio ≤
+            2", where TC is terrain clearance and the ratio is "of flight line spacing to typical distance above
+            shallowest magnetic sources in the survey area". Ranks run 1 (best) to 5 (worst), and the overall rank is
+            the worst of three categories: data type, survey specifications, data issues.</p>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            GeoDAWN Area 1 is 200 m line spacing at ~100 m clearance, so rank 1 certifies a spacing-to-source-distance
+            ratio ≤ 2 — the survey is designed to image sources no shallower than about half the line spacing. Area 2, at
+            400 m spacing, is explicitly <em>below</em> that standard. Two consequences for H2: (a) a buried structure
+            expressed only in the shallowest magnetic layer may be undersampled in Area 2 <em>by design</em>; (b)
+            gridding to 100 m does not create information that 400 m sampling never captured — the 100 m product grid
+            oversamples Area 2 across strike. (a) is a documented specification; (b) is the standard sampling argument,
+            <span class="chip unverified">inference</span>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for the GeoDAWN wording, the Table 1 criteria and the Eos DOI.
+            <span class="chip unverified">unverified</span> for the Eos byline in full — the USGS survey-inventory
+            metadata credits the ranking to Drenth and Grauch (2019), the article credits "coauthor Tien Grauch" and an
+            image to Benjamin J. Drenth, and the complete author list was not captured. The resolution consequences are
+            <span class="chip unverified">inference</span>.
+          </dd>
+        </dl>
+      </article>
+
+      <h2 id="pf9">PF-9 · Acquisition geometry has an azimuth, and the structures do too</h2>
+      <article class="entry">
+        <h3><span class="id">PF-9</span> Flight lines run E–W; sampling is anisotropic by a factor of ten</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>
+            <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS
+            GeoDAWN data page</a> / <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase
+            item</a>, read 2026-09-26.
+          </dd>
+          <dt>What it claims</dt>
+          <dd>
+            <p>Verbatim, Area 1: "Flight lines were spaced 200 m apart at an azimuth of 90 degrees, and tie lines were
+            spaced 2000 m apart at an azimuth of 180 degrees." Area 2: "flight lines spaced 400 m apart at an azimuth of
+            90 degrees, and tie lines spaced 4000 m apart at an azimuth of 180 degrees."</p>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Flight lines run <strong>E–W (090°)</strong>, tie lines <strong>N–S (180°)</strong>, so sampling is
+            anisotropic by a factor of ten (200 m vs 2,000 m in Area 1; 400 m vs 4,000 m in Area 2). A N–S-trending
+            structure is crossed every 200–400 m; an E–W-trending one is crossed by tie lines only every 2–4 km.
+            Basin-and-Range normal faults trend broadly N–NE (well sampled); Walker Lane dextral structures and many
+            range-front splays trend NW to WNW (obliquely to poorly sampled). Any comparison of "how strong does this
+            lineament look" across orientations compares different sampling densities unless it is corrected for.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for the azimuths and spacings. The orientation-specific sampling
+            consequence and the regional trend generalisation are <span class="chip unverified">inference</span> — the
+            trend claim is a half-hour measurement against trace orientations in the label raster once data are placed,
+            and should not be quoted until it is made.
+          </dd>
         </dl>
       </article>
 

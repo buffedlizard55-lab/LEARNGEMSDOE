@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="../index.html">Overview</a>
-        <a href="../requirements.html">Requirements</a>
-        <a href="../executive-summary.html">Explainer</a>
-        <a href="index.html">Library</a>
-        <a href="../feature-stack.html">Feature stack</a>
-        <a href="../hypotheses.html">Hypotheses</a>
-        <a href="../sources.html">Sources</a>
-        <a href="../pipeline.html">Pipeline</a>
-        <a href="governance.html">Governance</a>
-        <a href="../forum.html">Forum</a>
-        <a href="../changelog.html">Changelog</a>
-        <a href="../ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="../index.html">Overview</a>
+          <a href="../research/index.html">Research library</a>
+          <a href="../hypotheses.html">Hypotheses</a>
+          <a href="../feature-stack.html">Feature stack</a>
+          <a href="../requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="../research/governance.html">Governance</a>
+          <a href="../sources.html">Sources</a>
+          <a href="../pipeline.html">Pipeline</a>
+          <a href="../forum.html">Forum watch</a>
+          <a href="../changelog.html">Changelog</a>
+          <a href="../ai-usage.html">AI-usage log</a>
+          <a href="../search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -211,6 +215,40 @@
           </dd>
           <dt>Confidence</dt>
           <dd><span class="chip verified">verified</span> Description quoted from the official GDR record. <span class="chip unverified">unverified</span> The release has not been downloaded; no field-level claim is made.</dd>
+        </dl>
+      </article>
+
+      <h2 id="st7">ST-7 · A native strain-rate source for the geodetic bands (citation located; paper not read)</h2>
+      <article class="entry">
+        <h3><span class="id">ST-7</span> Where bands 4, 7 and 8 may come from — a lead, not a finding</h3>
+        <dl>
+          <dt>Source of the citation</dt>
+          <dd>
+            Hermant et al. (2025) reference list, read this session —
+            <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Stanford PDF</a>.
+          </dd>
+          <dt>Citation as printed there</dt>
+          <dd>
+            Kreemer, C., Blewitt, G., Hammond, W.C., Oldow, J., &amp; Cashman, P. (2009). <em>Geodetic constraints on
+            contemporary deformation in the northern Walker Lane: 2. Velocity and strain rate tensor analysis.</em> In:
+            Late Cenozoic Structure and Evolution of the Great Basin–Sierra Nevada Transition, <strong>GSA Special Paper
+            447</strong>, 17–31. No DOI is printed in that reference list, and none is asserted here.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Bands 4, 7 and 8 are strain-rate quantities whose provenance the competition never documents. If they derive
+            from a Walker Lane velocity / strain-rate tensor analysis, then the station density, smoothing and reference
+            frame behind them are knowable — and the northern Walker Lane lies inside the GeoDAWN bounding box
+            (<a href="catalogue-gaps.html#cg9">CG-9</a>). Kreemer is also a co-author of the INGENIOUS compilation that
+            supplies the labels (ST-3), so one group's products sit on both sides of the model.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for the citation as printed in a source that was read. The paper
+            itself has <strong>not</strong> been read and no claim from it is reproduced. The suggestion that it
+            underlies the competition's geodetic bands is <span class="chip unverified">unverified inference</span> — a
+            place to look, not a finding.
+          </dd>
         </dl>
       </article>
 

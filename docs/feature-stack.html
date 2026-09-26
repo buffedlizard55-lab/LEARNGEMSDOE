@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -152,7 +156,7 @@
       </ul>
 
       <details class="fold">
-        <summary>Derived observation: the prediction grid is larger than the GeoDAWN survey area</summary>
+        <summary id="grid">Derived observation: the prediction grid is larger than the GeoDAWN survey area</summary>
         <p>
           Arithmetic from two verified numbers: the raster is 3292 × 3730 pixels at 100&nbsp;m, i.e.
           329.2&nbsp;km × 373.0&nbsp;km ≈ <strong>122,800 km²</strong> of bounding box. The GeoDAWN survey covers

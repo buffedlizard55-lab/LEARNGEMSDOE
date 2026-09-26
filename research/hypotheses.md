@@ -15,10 +15,14 @@ Negative results stay in this table.
 | H5 | untested | Do not train to reproduce the label raster the scorer masks out | Med | Rasters + GPU |
 | H6 | untested | Conductivity as corroboration only, never as a detector | Low | Rasters |
 | H7 | untested | Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test | Low | Public shapefiles |
-| H8 | untested | Inferred and blank-scale traces mark the edge of the map — not a positive class | Low | GeoDAWN clip |
+| H8 | untested | Inferred and blank-scale traces mark the edge of the map — not a positive class | Low | GeoDAWN clip (envelope version done: CG-9) |
+| H9 | untested | Train against label *incompleteness*, not just label position | Med | Rasters + GPU |
+| H10 | blocked | Rye Patch / western Humboldt Range as an independent lidar validation anchor | Low–med | Silver et al. 2011 mapping |
+| H11 | untested | Soft confuser channels instead of hard negative classes | Low–med | External public layers |
 
 **All are untested because the competition rasters are not placed in `data/`.** "Untested" means not measured, not
-unexamined.
+unexamined. Two cards are additionally **blocked** on their own inputs: H3 (needs the 1 m DEM links as well as the
+rasters) and H10 (needs an external lidar fault mapping, independent of the competition data).
 
 ## H1 — Newly mapped geometry of existing systems
 
@@ -87,11 +91,90 @@ unexamined.
 
 ## H8 — Inferred and blank-scale traces mark the edge of the map
 
-- **Status:** untested. Regional counts are measured (CG-8). The GeoDAWN clip is not.
+- **Status:** untested. Regional counts are measured (CG-8). **The envelope-clipped counts are now measured too (CG-9,
+  2026-09-26):** inside the GeoDAWN bounding box the compilation holds 1,179 traces — Well Constrained 739, Moderately
+  Constrained 351, Inferred 89, and **zero** Poor / Other / blank. The polygon clip is still missing.
 - **Layers:** `FTYPE_`, `MAPSCALE` on the NBMG 2023-06-27 service. Label raster as mask only, once placed.
-- **Why a gap, not a known fault:** Inferred (5,280), Poor (100), Other (27) and blank FTYPE (447) traces are already in the compilation the scorer masks. Predicting them scores nothing. The gap is where those traces end, and where the survey has no trace. Not yet known to lie inside GeoDAWN.
-- **Expected DTI impact:** harmful as a positive class. Useful only as a prior for H1 after the clip.
-- **Rejection:** reject as a detector now. Reject as a prior if the clip shows negligible Inferred length inside the survey.
+- **Why a gap, not a known fault:** Inferred (5,280 regionally, 89 in the box), Poor (100), Other (27) and blank FTYPE
+  (447) traces are already in the compilation the scorer masks. Predicting them scores nothing. The gap is where those
+  traces end, and where the survey has no trace.
+- **What the census changed (inference, from CG-9's verified counts):** inside the box, Inferred is 7.5% of traces
+  versus 23.0% regionally. If that survives the polygon clip, the GeoDAWN area is *better* mapped than the region as a
+  whole, and H8's value shifts: it is less "here is a stock of poorly-constrained traces to extend" and more "the
+  well-constrained traces here are the ones to trust positionally; the search should concentrate on geometry they do not
+  contain at all" — i.e. cover-masked and subtle-scarps classes (CG-7 classes 2–3) over class 4.
+- **Expected DTI impact:** harmful as a positive class. Useful only as a prior for H1 after the polygon clip.
+- **Rejection:** reject as a detector now. Reject as a prior if the polygon clip shows negligible Inferred length inside
+  the survey.
+
+## H9 — Train against label incompleteness, not only label position
+
+- **Status:** untested. Design hypothesis, so it can be specified now and measured as soon as rasters exist.
+- **Layers:** all 19 bands; label raster used as the scoring **mask** and as a *noisy* positive set; no new external data.
+- **Physical signature:** none — this is a training-target hypothesis, and it should be written as one.
+- **Why it catches a gap rather than a known fault.** The QFFD is defined by demonstrable coseismic surface deformation
+  in the past 1.6 Ma (CG-1); its compilers were told to prefer published, recent, detailed-scale studies (CG-2); and
+  Hermant et al. report model-found faults in this region that experts then confirmed on lidar (GM-7). The label raster
+  is therefore a *biased, incomplete sample* of the fault population, not the population. A model trained to reproduce
+  it learns the catalogue's accessibility and publication biases — the inverse of the scored target. Hermant et al.
+  propose exactly the countermeasures we propose here: "inform the model that any part of the study area may contain
+  some faults, even if they are not present in the fault label", via an adversarial loss term or label noise (PA-7).
+- **Expected DTI impact:** not measurable alone; it is the mechanism that lets H1–H3 candidates carry probability mass
+  outside catalogue corridors. The asymmetry helps: α=0.2 prices a false positive at a quarter of a false negative, so
+  the error this introduces is the cheap kind. Risk: label noise degrades the near-known-trace corrections that staff
+  said they are aiming for (11516 post 4), which are the most valuable pixels there are.
+- **Cost:** medium — one retrain, and a hyperparameter (noise rate or adversarial weight) that cannot be read off the
+  data statistics.
+- **Validation:** two models identical except for the incompleteness term, scored with `scripts/metrics.py` (α=0.2,
+  β=0.8, R=300 m, pixel-exact mask) on **contiguous geographic blocks** held out. Because no private labels exist
+  locally, measure three proxies: (1) share of predicted mass outside the 300 m corridor of known traces; (2) a
+  hand-audit of 50 random high-probability non-catalogue pixels against 1 m lidar and imagery; (3) recall on
+  deliberately withheld catalogue traces as a check that noise has not destroyed the ability to find faults at all.
+- **Rejection:** reject if the added out-of-corridor mass is dominated by survey/block-boundary geometry (H7) or by
+  GM-8's confuser list. Reject specifically as a *noise* method if withheld-trace recall falls faster than
+  out-of-corridor precision rises.
+
+## H10 — An independent lidar validation anchor at Rye Patch / western Humboldt Range
+
+- **Status:** **blocked** — on obtaining the Silver et al. (2011) mapping, not on competition data.
+- **Layers:** Silver et al. (2011) lidar-derived fault mapping (<https://doi.org/10.1130/GES00673.1>); bands 12, 19; the
+  officially provided 1 m DEM; label raster as mask only.
+- **Physical signature:** faults mapped from lidar in that study that are absent from, or displaced relative to, the
+  USGS catalogue.
+- **Why it catches a gap rather than a known fault.** It is an *independent* expert lidar mapping that predates this
+  competition, inside the GeoDAWN bounding box (≈40°30′–40°36′ N, 117°36′–118° W, against the box in CG-9). Running a
+  candidate detector there and asking "did it recover faults the catalogue lacks?" is a genuine out-of-sample test of
+  gap-finding behaviour that costs no submission slot and touches no private label.
+- **Expected DTI impact:** none directly. Its job is to de-risk H1 and H3 by giving them a local truth set before any
+  scoring budget is spent.
+- **Cost:** low to medium, entirely gated on whether the mapping is distributed.
+- **Validation:** treat Silver et al.'s lidar faults as truth; score detectors with `scripts/metrics.py` under two
+  masks — the catalogue (what we have) and the catalogue plus Silver (what a better catalogue looks like). A detector
+  whose score improves sharply under the second mask is finding real un-catalogued faults, not artefacts.
+- **Rejection:** reject as an anchor if the mapping is not obtainable, or if its footprint falls outside the actual
+  GeoDAWN flight lines rather than merely outside the bounding box.
+- **Open risk:** neither the paper nor any accompanying data has been obtained. It is a lead (PA-8), not an asset.
+
+## H11 — Soft confuser channels, not hard negative classes
+
+- **Status:** untested.
+- **Layers:** drainage/channel network and pluvial-shoreline elevations as continuous channels (external, public);
+  bands 12, 19 for the candidate set; label raster as mask only.
+- **Physical signature:** a candidate lineament that coincides with a channel margin or with a paleo-shoreline elevation
+  contour.
+- **Why it catches a gap rather than a known fault.** Hermant et al. measured paleo-shorelines, canyon boundaries and
+  stream boundaries being detected *as* faults in this terrain — and warned that a dedicated confuser class "may
+  therefore miss some of these co-located structures", because "faults can be co-located with a paleo-shoreline … or
+  with a canyon boundary" (GM-8). A soft channel suppresses the confuser without deleting the fault that happens to run
+  along it, which is the case a geologist would most want kept.
+- **Expected DTI impact:** small and positive — precision at matched recall, with the false-positive term priced at
+  α=0.2. Not a headline gain; a way to spend less of the audit budget on ditches.
+- **Cost:** low to medium; the layers are public, the engineering is a channel concatenation.
+- **Validation:** precision at matched recall on a contiguous-block holdout, with and without the channels; plus an
+  explicit check that candidates co-located with mapped faults are *not* suppressed (that is the failure mode Hermant
+  et al. warn about).
+- **Rejection:** reject if precision at matched recall does not improve, or if it removes H1 near-trace correction
+  candidates — the most valuable pixels in the whole submission.
 
 ## Negative results
 
@@ -107,3 +190,8 @@ this and it did not work, here is the measurement" is evidence a Phase 2 reviewe
 4. **H2 with band-15 conditioning** — highest-upside geophysical card; conditioning is free.
 5. **H1** — highest expected value, and staff-endorsed; after mask behaviour is confirmed locally.
 6. **H3** — highest cost, gated on lidar-coverage mapping.
+7. **H10 in parallel, from day one** — it needs no competition data. If Silver et al. (2011)'s mapping is obtainable, it
+   converts every later "is this a real gap?" argument into a measurement.
+8. **H9 with the first real train** — it is a flag on the training run, not a separate project. Do it while the GPU is
+   already warm for H5.
+9. **H11 last** — a precision tidy-up, only worth doing once there is something worth tidying.

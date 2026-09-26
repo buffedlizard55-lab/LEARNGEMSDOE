@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="../index.html">Overview</a>
-        <a href="../requirements.html">Requirements</a>
-        <a href="../executive-summary.html">Explainer</a>
-        <a href="index.html">Library</a>
-        <a href="../feature-stack.html">Feature stack</a>
-        <a href="../hypotheses.html">Hypotheses</a>
-        <a href="../sources.html">Sources</a>
-        <a href="../pipeline.html">Pipeline</a>
-        <a href="governance.html">Governance</a>
-        <a href="../forum.html">Forum</a>
-        <a href="../changelog.html">Changelog</a>
-        <a href="../ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="../index.html">Overview</a>
+          <a href="../research/index.html">Research library</a>
+          <a href="../hypotheses.html">Hypotheses</a>
+          <a href="../feature-stack.html">Feature stack</a>
+          <a href="../requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="../research/governance.html">Governance</a>
+          <a href="../sources.html">Sources</a>
+          <a href="../pipeline.html">Pipeline</a>
+          <a href="../forum.html">Forum watch</a>
+          <a href="../changelog.html">Changelog</a>
+          <a href="../ai-usage.html">AI-usage log</a>
+          <a href="../search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -190,6 +194,123 @@
           </dd>
           <dt>Confidence</dt>
           <dd><span class="chip verified">verified</span> All three quotations read from the official About page.</dd>
+        </dl>
+      </article>
+
+      <h2 id="pa6">PA-6 · Hermant et al. (2025): the numbers the paper states</h2>
+      <article class="entry">
+        <h3><span class="id">PA-6</span> PR-AUC 0.902 train / 0.595 test — and overfitting from epoch 7</h3>
+        <p class="small">Everything below is stated in the paper's prose (§6), not read off a chart. Source:
+          <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Stanford PDF</a>.</p>
+        <dl>
+          <dt>What it claims</dt>
+          <dd>
+            <ul>
+              <li><strong>Setup (verbatim):</strong> "The siUNET and FaultSEG models were both trained on the same
+                augmented dataset with the same hyperparameters (Adam optimizer, 20 epochs and a learning rate of
+                10⁻⁵)."</li>
+              <li><strong>PR-AUC:</strong> FaultSEG 0.902 train / 0.610 validation / 0.595 test. siUNET 0.574 / 0.463 /
+                0.449.</li>
+              <li><strong>Weighted Focal IoU (verbatim):</strong> "a threshold ≤ 0.3 should be considered as good
+                performance for FaultSEG (≥ 0.879, ≥ 0.594 and ≥ 0.580 for training, validation and test respectively)
+                and ≤ 0.2 for siUNET (0.600, 0.498 and 0.453 …)".</li>
+              <li><strong>Overfitting (verbatim):</strong> "the loss and metrics show a clear deviation between the
+                values for training and the validation datasets <strong>after 7 epochs</strong> … This overfitting is
+                also present but to a lesser extent for siUNET <strong>after 12 epochs</strong>." FaultSEG at 7 epochs
+                still outperforms siUNET at 12.</li>
+            </ul>
+          </dd>
+          <dt>Refines PA-2 — a correction worth stating plainly</dt>
+          <dd>
+            The epoch-resolved figures recorded in PA-2 (PR-AUC ≈ 0.88 / ≈ 0.59 for FaultSEG; ≈ 0.56 / ≈ 0.47 for siUNET)
+            were approximations taken from a figure whose axis labels were truncated in our extraction, and PA-2 cites
+            them at "epoch 17.5", which the prose does not support. They are consistent with the values above but they
+            are <strong>not</strong> the paper's stated numbers. <strong>Use the values in this entry.</strong> The
+            per-epoch table (Figure 7) has deliberately not been transcribed, because its column headers did not survive
+            extraction and transcribing half a header row is how wrong numbers enter a knowledge base.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The generalisation gap is the whole story: 0.902 in training against 0.595 in test, on the better of two
+            purpose-built models. Any score quoted on a random-patch split is not comparable to this. Note the absolute
+            level too — PR-AUC ≈ 0.6 out of sample for a bespoke fault detector on 10 m lidar-derived inputs is the
+            realistic ceiling to plan around, not a floor to beat on the first attempt.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> for every quotation and figure in this entry.</dd>
+        </dl>
+      </article>
+
+      <h2 id="pa7">PA-7 · Published design advice for exactly this problem</h2>
+      <article class="entry">
+        <h3><span class="id">PA-7</span> "Any part of the study area may contain some faults, even if they are not in the label"</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Hermant et al. (2025), §7, read this session.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            <blockquote class="quote">… the fault labels used for training are inherently uncertain as manual fault maps
+              are never exhaustive.<cite>§7, opening the three difficulties</cite></blockquote>
+            <blockquote class="quote">This highlights the need to inform the model that any part of the study area may
+              contain some faults, even if they are not present in the fault label. This could be done by including an
+              adversarial loss term (Goodfellow et al., 2015) or by introducing noise in the true label (Mnih and Hinton,
+              2012), which will be the subject of further work.<cite>§7</cite></blockquote>
+            <blockquote class="quote">It has been decided to take the risk of predicting too many faults, even if this
+              means deleting them manually afterwards with an expert analysis, rather than missing or incorrectly mapping
+              certain faults.<cite>§7</cite></blockquote>
+            <blockquote class="quote">[W]e believe that iterative learning …, using faults predicted by the model and
+              validated by an expert as fault label, can improve the qualitative and quantitative detection
+              performance …<cite>§7</cite></blockquote>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Region-specific, published endorsement of three assumptions this project already makes: (1) the catalogue is
+            an incomplete sample, so training to reproduce it encodes the wrong target; (2) under α = 0.2 / β = 0.8,
+            over-prediction is the correct posture; (3) expert re-labelling of model output is the improvement
+            mechanism — which is precisely the Phase 2 structure on the problem page. It is the strongest outside
+            support for <a href="../hypotheses.html#h9">H9</a>.
+          </dd>
+          <dt>Caveat to carry</dt>
+          <dd>
+            Their own models overfit after 7 epochs on 20,000 augmented tiles at 10 m. Porting the recipe to 100 m inputs
+            with a smaller positive fraction is not free.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span>.</dd>
+        </dl>
+      </article>
+
+      <h2 id="pa8">PA-8 · An independent lidar-mapped fault set inside the GeoDAWN box</h2>
+      <article class="entry">
+        <h3><span class="id">PA-8</span> Silver et al. (2011) — western Humboldt Range, lidar and hyperspectral</h3>
+        <dl>
+          <dt>Citation</dt>
+          <dd>
+            Silver, E., MacKnight, R., Male, E., Pickles, W., Cocks, P., &amp; Waibel, A. (2011). <em>LiDAR and
+            hyperspectral analysis of mineral alteration and faulting on the west side of the Humboldt Range,
+            Nevada.</em> <strong>Geosphere</strong>, 7(6), 1357–1368.
+            <a href="https://doi.org/10.1130/GES00673.1">doi:10.1130/GES00673.1</a>
+          </dd>
+          <dt>What is verified</dt>
+          <dd>
+            The DOI resolves to that title in <em>Geosphere</em> vol. 7 no. 6, p. 1357 (checked 2026-09-26). The full
+            citation is printed in Hermant et al. (2025)'s reference list, which is where it was found.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Hermant et al. use it as the reference fault mapping for the Rye Patch / western Humboldt Range area, and
+            their models' false positives include features "described by Silver et al. (2011), such as the paleo-shoreline
+            or the Rec Area scarp". If that mapping can be obtained, it is an <strong>independent</strong> lidar-derived
+            fault set inside the GeoDAWN bounding box — a local truth set for asking "does this detector find faults the
+            catalogue lacks?" without spending a submission slot or touching private labels. That is
+            <a href="../hypotheses.html#h10">H10</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for the citation and DOI resolution.
+            <span class="chip unverified">unverified</span>: the paper's contents have not been read, and it is
+            <strong>not</strong> established that its fault mapping is distributed as data. A lead, not an asset.
+          </dd>
         </dl>
       </article>
 

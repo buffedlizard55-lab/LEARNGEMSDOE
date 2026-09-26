@@ -80,8 +80,85 @@ Mapping to signals: classes 1–2 → topography (bands 12, 19, 1 m lidar); clas
 - **Relevance:** this is the measurement CG-7 class 4 was waiting for, at regional scale. It is not the GeoDAWN label raster. Do not predict Inferred traces; they are already in the compilation the scorer masks.
 - **Confidence:** verified for the counts. Unverified for what the short `MAPSCALE` codes mean. The zip's field-definition text is still unread (TLS).
 
+## CG-9 · The GeoDAWN-box catalogue census, measured (2026-09-26)
+
+This is the clip CG-8 was waiting for, done against the published bounding box rather than the outline polygon.
+
+- **Extent source (primary):** <https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json&fields=spatial>
+  → `"boundingBox":{"minX":-120.0024,"maxX":-116.1415,"minY":37.3641,"maxY":40.7247}` (WGS 84).
+- **Fault source:** NBMG `Qfaults [INGENIOUS 6-27-2023]` layer 0 — the INGENIOUS compilation cited by rules §3.3,
+  DOI <https://doi.org/10.15121/1881483>.
+- **Measured — every number below is one re-runnable query:**
+
+| What | Count in the GeoDAWN box | Query |
+| --- | --- | --- |
+| All traces | **1,179** | [count](https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=1%3D1&geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json) |
+| `FTYPE_` Well Constrained | **739** | [count](https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Well%20Constrained%27&geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json) |
+| `FTYPE_` Moderately Constrained | **351** | [count](https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Moderately%20Constrained%27&geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json) |
+| `FTYPE_` Inferred | **89** | [count](https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Inferred%27&geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json) |
+| Any other `FTYPE_` (Poor / Other / blank) | **0** | [count](https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%20NOT%20IN%20%28%27Well%20Constrained%27%2C%27Moderately%20Constrained%27%2C%27Inferred%27%29&geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json) |
+| `MAPSCALE` blank or null | **0** | [count](https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27%27&geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnCountOnly=true&f=json) |
+
+739 + 351 + 89 = 1,179 exactly, and the `NOT IN` query independently returns 0, so the partition closes.
+
+- **Why it matters.** Two readings, both relevant to the scored target:
+  1. The GeoDAWN box holds **1,179 of 22,956** traces — **5.1%** of the regional compilation. Whatever the label raster
+     contains, it is a small, spatially concentrated sample.
+  2. The *quality mix* inside the box is better than the regional mix: **Inferred is 89/1,179 = 7.5%** here versus
+     5,280/22,956 = **23.0%** regionally (CG-8). Read plainly: the GeoDAWN area is comparatively *well* mapped. If that
+     holds inside the actual footprint, the remaining gaps are less likely to be obvious unmapped range fronts and more
+     likely to be subtle, cover-masked, or outside the range-front template — which is the CG-7 class 2/3 argument, not
+     class 4. **Inference** from two verified counts; the footprint clip is still pending.
+- **Three caveats, stated before anyone quotes these numbers.**
+  1. The envelope is a **rectangle**, not the flight footprint. The footprint is irregular and covers 51,857 km² inside a
+     grid bounding box of roughly 122,800 km² (see the feature-stack page). Envelope counts are an **upper bound**:
+     counted traces may lie outside the flown area.
+  2. This is the **NBMG service snapshot dated 2023-06-27**, not the rasterised labels on the data tab. The two may
+     differ.
+  3. The service reports `supportsStatistics: false`, so `groupByFieldsForStatistics` / `outStatistics` return
+     HTTP 400 — every class had to be counted with its own `where` clause. Total trace *length* could not be summed for
+     the same reason; no length figure is asserted anywhere on this site.
+- **Confidence:** <span>verified</span> for the bounding box, the query results and the closure arithmetic. **Inference**
+  for the "comparatively well mapped" reading and for anything about the footprint interior.
+
+## CG-10 · The catalogue is a literature compilation, not a survey
+
+- **Source:** <https://www.usgs.gov/programs/earthquake-hazards/faults> — "Background" and "History".
+- **Claim (verbatim):** "This database was used to create the fault-source characterization in the National Seismic
+  Hazard Maps … For the hazard maps, both the fault surface trace and the metadata are simplified representations of the
+  geometry and behavior of the fault, based on geologic interpretation." History: "Starting in the early 1970s, mainly
+  in response to national concerns about the siting of nuclear reactors, scientists needed to locate active and
+  Quaternary faults and document their characteristics." "These map compilations, however, did not provide much
+  supporting data. Subsequent state-scale compilations, such as those by Johns and others, (1982), Stickney and
+  Bartholemew (1987), and Hecker (1993) provided some supporting database and were the first true fault compilations."
+  And: "In 1993, the U.S. Geological Survey began developing a database for Quaternary faults and folds for the United
+  States in earnest, largely supported by NEHRP but with significant support from many State surveys."
+- **Why it matters.** Completeness tracks **what was published and which state survey had capacity**, not the actual
+  fault population. Joined to CG-2 — compilers were told to prefer published, recent, detailed-scale topical studies —
+  this is the mechanism that produces CG-7 class 4. A fault in an unfashionable quadrangle is absent for reasons that
+  have nothing to do with whether it exists.
+- **Confidence:** verified — read from the USGS page this session.
+
+## CG-11 · Nevada's contribution runs through one state agency
+
+- **Source:** same USGS page, "List of cooperators": "Nevada - Nevada Bureau of Mines and Geology". Service host for the
+  INGENIOUS update: <https://web2.nbmg.unr.edu/> (University of Nevada, Reno).
+- **Claim:** the QFFD is a cooperative federal–state compilation with one named cooperator per participating state; for
+  Nevada that is NBMG, which also hosts the INGENIOUS Qfaults update used as training labels.
+- **Why it matters.** Where the Nevada catalogue is thin is partly a statement about NBMG's mapping history — which
+  programmes were funded, which quadrangles were prioritised, and when. That makes gap class 4 *measurable* rather than
+  rhetorical, provided someone measures it.
+- **Next measurement (not done):** intersect trace density with NBMG's published geologic-map coverage per quadrangle.
+  The map index has **not** been read this session, so no statement is made about what it contains.
+- **Confidence:** verified for the cooperator listing and the service host. The mapping-history argument is
+  **inference**.
+
 ## Next actions
 
-1. Clip CG-8 to the GeoDAWN outlines once TLS to ScienceBase works.
+1. Clip CG-8 to the GeoDAWN **outline polygon**, not the bounding box. CG-9 did the envelope version (2026-09-26); the
+   polygon version needs the Area 1 / Area 2 outline zips, which still fail TLS from this machine.
 2. Read the field-definition text in the v2 zip before translating `MAPSCALE` codes.
 3. Once rasters are placed: distance-to-nearest-label for high-strain / high-seismicity / high-gradient pixels.
+4. Reconcile the 1,179 envelope count against the actual label raster. If the shipped labels contain materially more or
+   fewer traces than the 2023-06-27 service inside the same box, that is a provenance discrepancy worth recording, not
+   smoothing over.
