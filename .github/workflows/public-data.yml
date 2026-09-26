@@ -42,7 +42,8 @@ jobs:
               print("::warning title=census::public_census.json not written"); raise SystemExit
           r = json.loads(p.read_text())
           for k, v in r["layers"].items():
-              print(f"::notice title=layer {k}::records={v['records']} crs={v['crs']} shp={v['shapefile']} fields={','.join(v['fields'])}")
+              if k != "qfaults":
+                  print(f"::notice title=layer {k}::records={v['records']} crs={v['crs']} attrs={json.dumps(v.get('attributes'))}")
           for k, v in r["clip"].items():
               print(f"::notice title=clip {k}::{json.dumps(v)}")
           print("::notice title=files::" + " ; ".join(f"{v['name']} bytes={v['bytes']} sha256={v['sha256']}" for v in r["files"].values()))
