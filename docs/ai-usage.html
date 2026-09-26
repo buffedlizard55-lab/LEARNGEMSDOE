@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-usage log — GEMSDOE</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE research</a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="executive-summary.html">Explainer</a>
+        <a href="research/index.html">Library</a>
+        <a href="hypotheses.html">Hypotheses</a>
+        <a href="research/governance.html">Governance</a>
+        <a href="sources.html">Sources</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Rules §3.2 first-class artifact · built incrementally · not reconstructed at deadline</p>
+    <h1>Generative AI usage log</h1>
+    <p>
+      Official rules §3.2 (NLR PDF, September 2026): using generative AI is allowed, but the submission
+      <strong>narrative must indicate the extent</strong> of use. The competitor owns accuracy, authenticity, and authorship.
+      Named risks: fabrication, falsification, plagiarism.
+      Source: <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">https://www.nlr.gov/docs/fy26osti/96647.pdf</a>.
+    </p>
+    <p>This page is the running log for work in <code>buffedlizard55-lab/LEARNGEMSDOE</code>. It is not a prize-submission narrative, but it is the raw material for that narrative.</p>
+
+    <article class="entry">
+      <h3>2026-09-26 · session arena/01a0def8-learngemsdoe</h3>
+      <p><strong>Tool:</strong> Arena.ai Agent Mode (coding agent with web fetch/search). No other generative-AI APIs were called from this repo.</p>
+      <p><strong>What the agent did</strong></p>
+      <ul>
+        <li>Fetched official competition pages, NLR rules PDF, forum threads, USGS/INGENIOUS/GeoDAWN landing pages, Hermant 2025 PDF, reference-solution README and notebook JSON.</li>
+        <li>Wrote the GitHub Pages research library, hypothesis backlog, changelog, this log, and inspect-only data scripts.</li>
+        <li>Did <em>not</em> generate a prediction GeoTIFF, did <em>not</em> call DrivenData submit, did <em>not</em> invent citations.</li>
+      </ul>
+      <p><strong>Human-owned checks still required</strong></p>
+      <ul>
+        <li>Every URL in <a href="sources.html">sources</a> should be opened by a person before a prize narrative quotes it.</li>
+        <li>Forum 11527 staff answer is now extracted (post 7). Remaining unanswered: 11540, 11526, 11543.</li>
+        <li>NLR PDF §A.14–A.17 not fully extracted this session.</li>
+      </ul>
+      <p><strong>Fabrication controls used:</strong> claims are tied to fetched URLs; numbers (α, β, R, prize amounts, flight-line spacing, raster 3730×3292, Hermant 400 m / 1100 faults / 264 km) are copied from those pages, not estimated. Missing content is labeled unverified.</p>
+    </article>
+  </main>
+  <footer class="site"><div class="wrap">Append a dated block every session that uses generative AI.</div></footer>
+  <script src="assets/nav.js"></script>
+</body>
+</html>

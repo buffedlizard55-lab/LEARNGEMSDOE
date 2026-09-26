@@ -1,0 +1,29 @@
+# Competition rasters are large and licensed via DrivenData login.
+# Do not commit raw GeoTIFFs, DEM tiles, or generated predictions.
+data/raw/
+data/processed/
+data/*.tif
+data/*.tiff
+data/*.zip
+data/*.csv
+!data/README.md
+data/inventory.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Notebooks / outputs
+*.ipynb_checkpoints/
+outputs/
+submissions/
+*.geojson
+*.gpkg

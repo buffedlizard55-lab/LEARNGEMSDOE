@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explainer — GEMSDOE</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE research</a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="executive-summary.html">Explainer</a>
+        <a href="research/index.html">Library</a>
+        <a href="hypotheses.html">Hypotheses</a>
+        <a href="research/governance.html">Governance</a>
+        <a href="sources.html">Sources</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Narrative for a geologist reader · not a prize submission · 2026-09-26</p>
+    <h1>What the prize actually scores</h1>
+    <p class="lede">Phase 2 is scored by geologists reading reasoning about <em>new</em> faults. This page is the executive summary of that problem, written from official sources only.</p>
+
+    <h2>The geologic question</h2>
+    <p>
+      Geothermal systems in the Great Basin are commonly fault-controlled
+      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a>;
+      Hermant et al., 2025, citing Faulds and others — <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Stanford Workshop paper</a>).
+      The GEMS Prize asks for an algorithm that produces an enhanced fault map of the GeoDAWN region
+      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">hub</a>).
+    </p>
+    <p>
+      Ground truth for <em>currently known</em> faults is public, and the organizers state that this set
+      “is not complete and may even contain some inaccurate data”
+      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem description</a>).
+      Experts at NLR and USGS labeled additional faults that are not in the public USGS database; those new faults
+      form the test set for the initial prize round. After that round, an expert panel uses submitted predictions
+      to update labels, and the <em>same</em> chosen submission is rescored on the expanded set
+      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#competition-structure">competition structure</a>;
+      <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">rules §1 / §3.6</a>).
+    </p>
+
+    <h2>What “new fault” means</h2>
+    <p>
+      DrivenData staff: for this competition, “new fault” means “any fault pixel not already captured by USGS/INGENIOUS”
+      and <strong>can include newly mapped geometry of an existing fault system</strong>
+      (<a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">forum, 2026-09-23</a>).
+    </p>
+    <p>
+      Known-catalogue pixels are <strong>masked out of scoring</strong> in both prize rounds. The mask is
+      <strong>pixel-exact</strong> (identical to the provided training-label raster), not a 300 m buffer.
+      A predicted pixel next to a known trace but far from a <em>new</em> ground-truth pixel is fully penalized.
+      A new-fault ground-truth pixel <em>may</em> lie within 300 m of a known trace; identifying those corrections
+      is an intended outcome
+      (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">staff posts 16 and 21 Sep 2026</a>).
+    </p>
+
+    <h2>Metric implications (for a mapper)</h2>
+    <ul>
+      <li>α = 0.2 (false positives cheaper) and β = 0.8 (false negatives expensive) — <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#mathematical-representation">problem description</a>.</li>
+      <li>A triangular kernel with 300 m support (3 pixels at 100 m) reduces the penalty for small locational error and for catalogue misalignment.</li>
+      <li>Worked example on that page: TP<sub>w</sub>=3.00, FP<sub>w</sub>=1.89, FN<sub>w</sub>=2.00 → TI<sub>w</sub>=0.60.</li>
+      <li>Because known traces are masked, copying the training labels does not earn true positives on the test set. Probability mass on the catalogue is wasted only insofar as it spills onto unmasked pixels that are not new faults.</li>
+    </ul>
+
+    <h2>Feature stack (as published)</h2>
+    <p>
+      Training features are a 100 m GeoTIFF in UTM zone 11N, EPSG:32611
+      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features">provided features</a>).
+      The page lists:
+    </p>
+    <ul>
+      <li>Surface conductivity and depth to conductive base</li>
+      <li>Detrended elevation and slope of detrended elevation</li>
+      <li>Dilatation rate, shear strain rate, and second invariant of the strain-rate tensor</li>
+      <li>Isostatic gravity anomaly and its slope</li>
+      <li>Magnetics: reduced-to-pole, total magnetic intensity, vertical and horizontal slope of TMI, top-of-crustal magnetic source depth</li>
+      <li>Earthquake density</li>
+      <li>Plus a CSV of 1 m DEM download links</li>
+    </ul>
+    <p>
+      The reference-solution notebook, run on the downloaded stack, prints <strong>19 bands</strong> and raster size
+      <strong>3730 × 3292</strong> at 100 m, EPSG:32611
+      (<a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb">notebook outputs</a>).
+      Band names in that printout are from GeoTIFF tags; they should be re-checked against the file you actually download.
+    </p>
+    <p>
+      Labels: USGS Quaternary fault maps and INGENIOUS, vector and raster
+      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#labels">labels</a>).
+      Rules §3.3: training labels “were obtained from the INGENIOUS project’s Great Basin Regional Dataset Compilation”
+      (Ayling et al., 2022, <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>).
+    </p>
+
+    <h2>What a good Phase 2 narrative must show</h2>
+    <p>
+      Rules §3.2 require a narrative disclosure of generative-AI use
+      (<a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">PDF</a>).
+      Phase 2 reviewers will look at whether predicted pixels are physically plausible <em>catalogue gaps</em>
+      (extensions, splays, buried intra-basin structures, lidar-only scarps), not just “fault-like” texture
+      on already-mapped range fronts. See <a href="hypotheses.html">hypothesis backlog</a>.
+    </p>
+
+    <h2>This site’s role</h2>
+    <p>
+      Document sources, catalogue-construction methods, and testable hypotheses so the next modeling decision
+      is better informed. No GeoTIFF of probabilities is produced here.
+    </p>
+  </main>
+  <footer class="site"><div class="wrap">Every numeric claim on this page is copied from the linked official page or staff post.</div></footer>
+  <script src="assets/nav.js"></script>
+</body>
+</html>

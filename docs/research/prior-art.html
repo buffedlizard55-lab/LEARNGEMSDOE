@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prior art — GEMSDOE</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <nav>
+        <a href="../index.html">Overview</a>
+        <a href="../executive-summary.html">Explainer</a>
+        <a href="index.html">Library</a>
+        <a href="../hypotheses.html">Hypotheses</a>
+        <a href="governance.html">Governance</a>
+        <a href="../sources.html">Sources</a>
+        <a href="../pipeline.html">Pipeline</a>
+        <a href="../changelog.html">Changelog</a>
+        <a href="../ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Published ML fault extraction and the official reference solution</p>
+    <h1>Prior art</h1>
+
+    <article class="entry">
+      <h3>PA-1 · DrivenData reference solution (Lipor) — design choices</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
+      <p class="src"><a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a> · notebook <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb">unet-mc-cv-reference-solution.ipynb</a> · author page linked in README: <a href="https://web.cecs.pdx.edu/~lipor/">John Lipor, PSU</a></p>
+      <p><strong>Documented design:</strong></p>
+      <ul>
+        <li>U-Net ensemble with Monte Carlo cross-validation (random train/test splits).</li>
+        <li>Inputs: multi-channel 100 m geospatial features (19 bands in the printed run).</li>
+        <li>Patches, data augmentation, Tversky loss weighted to penalize false negatives more than false positives (<code>segmentation_models_pytorch.losses.TverskyLoss</code>).</li>
+        <li>Average predictions from the best model across iterations.</li>
+        <li>Device: CUDA, else MPS, else CPU. Training described as much faster on GPU.</li>
+        <li>Expects local files <code>data/numeric_features.tif</code> and <code>data/labels.tif</code>.</li>
+        <li>Printed raster: 3292 × 3730, EPSG:32611, 100 m, features float32, labels int32, label nodata −1.</li>
+      </ul>
+      <p><strong>Staff erratum:</strong> the notebook summary string that prints the label band as “Band 19” is an artifact; the label GeoTIFF has a single band
+        (<a href="https://community.drivendata.org/t/why-does-the-training-fault-labels-file-in-the-data-tab-have-a-single-band-while-the-labels-in-the-reference-solution-repo-have-19-bands/11529">forum</a>).</p>
+    </article>
+
+    <article class="entry">
+      <h3>PA-2 · Where that reference is likely to fall short of the scored target</h3>
+      <p><span class="chip med">reasoning from verified facts — not an empirical score</span></p>
+      <ol>
+        <li><strong>Trains on the catalogue that scoring masks out.</strong> Labels are existing USGS/INGENIOUS faults (rules §3.3). Staff: those pixels are excluded from evaluation. A network that reproduces the training raster maximizes the wrong objective unless it also generalizes to unmapped geometry.</li>
+        <li><strong>No catalogue-gap sampling.</strong> Nothing in the README/notebook describes masking known traces, sampling negatives near traces, or targeting along-strike extensions.</li>
+        <li><strong>100 m only.</strong> The notebook path does not ingest the 1 m DEM listed in the problem description.</li>
+        <li><strong>Random patch splits vs spatial holdout.</strong> Monte Carlo random splits on overlapping patches leak spatial autocorrelation; they do not simulate “new faults in unmapped corridors.”</li>
+        <li><strong>Tversky on catalogue pixels ≠ DTI on new faults.</strong> Loss alignment with α=0.2, β=0.8 is directionally right, but the 300 m distance kernel and the known-fault mask are not in the training loop (not present in the overview cells fetched).</li>
+      </ol>
+      <p>These are design-gap arguments. This repo has not benchmarked the reference notebook (no data, no GPU run).</p>
+    </article>
+
+    <article class="entry">
+      <h3>PA-3 · Hermant et al., 2025 — CNN on DEM + Sentinel-2 in Nevada</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
+      <p class="src"><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">PDF</a> · listed on <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About</a></p>
+      <p><strong>Claims:</strong> CNN trained on 128×128×3 images (elevation, slope, Sentinel-2 B8A) with human-mapped labels on one half of a north-central Nevada area; prediction on the other half. Rejected USGS QFFD as insufficiently accurate/homogeneous for training. 1,100 faults / 264 km of labels; 50 m raster buffer. Lidar-derived 3DEP only. Authors argue regional QFFD density differences are partly mapping effort, not only geology.</p>
+      <p><strong>Relevance:</strong> Closest published analog in the same province. Lessons: (1) do not treat QFFD as perfect labels; (2) optical/vegetation can mark traces that DEM slope misses; (3) they still map <em>surface</em> faults — buried geophysical structures are out of scope for that CNN.</p>
+      <p><strong>Limitation they share with the reference U-Net:</strong> supervised on mapped traces, so they predict “what mappers already know how to draw,” unless the train region is spatially disjoint from the test region (they did use a geographic split).</p>
+    </article>
+
+    <article class="entry">
+      <h3>PA-4 · Mattéo et al., 2021 — organizer-listed DL fault mapping</h3>
+      <p><span class="chip verified">verified (existence)</span> <span class="chip low">full-text extract incomplete</span></p>
+      <p class="src"><a href="https://doi.org/10.1029/2020JB021269">10.1029/2020JB021269</a></p>
+      <p>Confirmed open-access JGR paper on automatic fault mapping from remote optical images and topographic data with deep learning. Methods/metrics not fully extracted this pass. Do not cite unquoted F1/IoU numbers.</p>
+    </article>
+
+    <article class="entry">
+      <h3>PA-5 · About page — classical methods named by organizers</h3>
+      <p><span class="chip verified">verified</span></p>
+      <p class="src"><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/#about-the-task">About — the task</a></p>
+      <p><strong>Quote:</strong> “modern computational methods including edge detection, Hough transforms, and deep learning on seismic or topographic datasets further enhance automated fault mapping.”</p>
+      <p>These are named as existing practice, not as a baseline implementation in the prize repo.</p>
+    </article>
+  </main>
+  <footer class="site"><div class="wrap"><a href="index.html">Library</a></div></footer>
+  <script src="../assets/nav.js"></script>
+</body>
+</html>

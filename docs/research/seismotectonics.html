@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seismotectonics and strain — GEMSDOE</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <nav>
+        <a href="../index.html">Overview</a>
+        <a href="../executive-summary.html">Explainer</a>
+        <a href="index.html">Library</a>
+        <a href="../hypotheses.html">Hypotheses</a>
+        <a href="governance.html">Governance</a>
+        <a href="../sources.html">Sources</a>
+        <a href="../pipeline.html">Pipeline</a>
+        <a href="../changelog.html">Changelog</a>
+        <a href="../ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Strain-rate invariants, earthquake density, conductivity</p>
+    <h1>Seismotectonics and strain</h1>
+
+    <article class="entry">
+      <h3>ST-1 · Layers in the official 100 m stack</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
+      <p class="src"><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features">Problem description</a> · notebook band list</p>
+      <p><strong>Problem description:</strong> dilatation rate, shear strain rate, and the second invariant of the strain rate tensor; density of earthquakes; surface conductivity and depth to conductive base surface.</p>
+      <p><strong>Notebook tags:</strong> geodetic second invariant; geodetic shear rate; geodetic dilatation rate; “Distance to earthquake (n=100km radius, a=15° azimuth parameters)”; “Earthquake intensity or density (n=100km radius, a=15° parameters)”; conductivity surface.</p>
+      <p><strong>Relevance:</strong> Independent kinematic and electrical evidence. Agreement among strain, seismicity, and a potential-field edge <em>off</em> the catalogue is a classic hidden-structure argument. Disagreement (high strain, no seismicity, no gravity edge) is a caution against over-predicting.</p>
+      <p><strong>Confidence:</strong> High that these bands exist. The “n=100km, a=15°” parameterization is from the notebook’s GeoTIFF tags, not from the problem-description prose — re-read tags after download.</p>
+    </article>
+
+    <article class="entry">
+      <h3>ST-2 · INGENIOUS geodetic and seismicity products</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high on existence</span></p>
+      <p class="src">Ayling et al., 2022, <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a> · GDR resource list</p>
+      <p><strong>Claims:</strong> Compilation includes geotiffs of geodetic shear and dilation models (Nevada Geodetic Laboratory) and independent/dependent earthquake density (Nevada). Project publications list Kreemer, C., and Young, Z.M., 2022, Crustal strain rates in the Western U.S. and their relationship with earthquake rates: Seismological Research Letters, <a href="https://doi.org/10.1785/0220220153">10.1785/0220220153</a>.</p>
+      <p><strong>Relevance:</strong> Likely provenance of the competition strain and seismicity bands (not independently confirmed by DrivenData metadata in this session). Kreemer &amp; Young relate strain rates to earthquake rates — useful for “where independent signals agree.”</p>
+      <p><strong>Confidence:</strong> High that the GDR zips exist (<a href="https://gdr.openei.org/files/1391/geodetics_INGENIOUS_regional_data.zip">geodetics zip</a>, <a href="https://gdr.openei.org/files/1391/seismicity_INGENIOUS_regional_data.zip">seismicity zip</a>). The SRL article abstract was not fully extracted (publisher page). No numerical strain values are quoted here.</p>
+    </article>
+
+    <article class="entry">
+      <h3>ST-3 · Electrical conductance (MT) of the Great Basin</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
+      <p class="src">Peacock, J.R., and Bedrosian, P., 2022, Electrical Conductance Maps of the Great Basin, USA: USGS data release, <a href="https://doi.org/10.5066/P9TWT2LU">10.5066/P9TWT2LU</a> (linked from INGENIOUS GDR and GBCGE project page).</p>
+      <p><strong>GDR blurb:</strong> electrical conductance maps from a 3D model of the Great Basin at five depth ranges spanning 2 to 200 km.</p>
+      <p><strong>Relevance:</strong> Conductive zones can mark fluids and clay along faults. A conductivity anomaly without a catalogue trace is a candidate gap; a conductivity anomaly on a mapped range-front fault is not. Depth-range mismatch vs 100 m surface labels is a real limitation.</p>
+      <p><strong>Confidence:</strong> High on the data release. The competition “surface conductivity and depth to conductive base” layers may be derived from this or from a different product — <span class="chip unverified">unverified which</span>.</p>
+    </article>
+
+    <article class="entry">
+      <h3>ST-4 · Slip and dilation tendency on Quaternary faults</h3>
+      <p><span class="chip verified">verified</span></p>
+      <p class="src">Siler, D.L., 2022, Shapefile for slip tendency and dilation tendency calculated for Quaternary faults in the Great Basin: <a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a></p>
+      <p><strong>Claim (GDR):</strong> slip- and dilation-tendency analysis of Quaternary faults in the Great Basin region.</p>
+      <p><strong>Relevance:</strong> Attributes of <em>already mapped</em> faults, useful for geothermal favorability, weaker as a detector of unmapped traces. Could still rank which catalogue gaps (if found) matter for Phase 2 geologic narrative.</p>
+    </article>
+
+    <article class="entry">
+      <h3>ST-5 · Agreement vs disagreement — research question, not a result</h3>
+      <p><span class="chip unverified">untested</span></p>
+      <p>No overlay of strain, seismicity, conductivity, and the training-label mask has been computed here (no rasters). Highest-value next measurement: pixels in the top strain-rate / earthquake-density quantiles whose distance to the nearest catalogue pixel exceeds 300 m. That set is the seismotectonic gap candidate list.</p>
+    </article>
+  </main>
+  <footer class="site"><div class="wrap"><a href="index.html">Library</a></div></footer>
+  <script src="../assets/nav.js"></script>
+</body>
+</html>

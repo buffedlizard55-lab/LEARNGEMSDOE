@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Changelog — GEMSDOE</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE research</a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="executive-summary.html">Explainer</a>
+        <a href="research/index.html">Library</a>
+        <a href="hypotheses.html">Hypotheses</a>
+        <a href="research/governance.html">Governance</a>
+        <a href="sources.html">Sources</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Dated, idempotent · extend on re-run, do not duplicate</p>
+    <h1>Changelog</h1>
+
+    <article class="entry">
+      <h3>2026-09-26 — Pass 1–3: stand up the research site</h3>
+      <p><strong>Added</strong></p>
+      <ul>
+        <li>GitHub Pages site under <code>docs/</code> (overview, explainer, six-domain library, hypothesis backlog, sources, pipeline, AI log, this changelog).</li>
+        <li><code>PROJECT_BRIEF_GEMSDOE.md</code> (was missing from the repo at session start — flagged).</li>
+        <li>Research markdown mirrors in <code>research/</code>.</li>
+        <li><code>scripts/download_competition_data.sh</code> and <code>scripts/prepare_data.py</code> (inspect only; no prediction GeoTIFF).</li>
+        <li>Hypothesis cards H1–H7, all <em>untested</em>.</li>
+      </ul>
+      <p><strong>Verified against</strong> DrivenData hub/967/968, NLR rules PDF, forum staff posts 11516/11524/11528/11529/11536, GeoDAWN DOI, INGENIOUS DOI, USGS QFFD page, Hermant 2025 PDF, reference-solution README/notebook.</p>
+      <p><strong>Pass 2:</strong> Staff post 11527/7 recorded (no test-fault protocol will be published). Root <code>index.html</code> redirect added so legacy Pages source <code>/</code> still reaches the library. §A.13 program-policy factors noted.</p>
+      <p><strong>What’s next</strong></p>
+      <ul>
+        <li>Place competition rasters; run <code>prepare_data.py</code>.</li>
+        <li>Unpack INGENIOUS Qfaults v2 field-definition text.</li>
+        <li>Mattéo 2021 methods; Miller/Verduzco PDFs; remaining NLR PDF §A.14–A.17.</li>
+        <li>Watch unanswered eligibility threads (11540, 11526, 11543).</li>
+      </ul>
+    </article>
+  </main>
+  <footer class="site"><div class="wrap">New sessions append a dated entry. Do not rewrite history.</div></footer>
+  <script src="assets/nav.js"></script>
+</body>
+</html>
