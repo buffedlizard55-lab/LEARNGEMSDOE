@@ -230,6 +230,47 @@ def main() -> int:
         }
     report["qfaults_total_records"] = len(fault_geoms)
 
+    # ------------------------------------------------- compiler-vs-geology split
+    # Previous session's open question (changelog 2026-09-26, next-step 1): does
+    # catalogue density track the compiler rather than the geology? Compute trace
+    # length per compiler / per mapping scale inside EACH GeoDAWN polygon
+    # (area1, area2, extent). Keyed by attribute value so no code is tied to any
+    # one cooperator's name.
+    polys = {}
+    for k in ("area1", "area2", "extent"):
+        geoms, crs, _ = loaded[k]
+        if crs is None:
+            continue
+        tf = Transformer.from_crs(crs, fault_crs, always_xy=True).transform
+        polys[k] = unary_union([transform(tf, g) for g in geoms])
+
+    def weighted_split(geoms_fc, recs, fields, polys_):
+        out = {}
+        for pname, poly in polys_.items():
+            idx = [i for i, g in enumerate(geoms_fc) if g.intersects(poly)]
+            area_km2 = poly.area / 1e6
+            entry = {"records": len(idx), "polygon_area_km2": round(area_km2, 1),
+                     "clipped_length_km": 0.0}
+            for f in fields:
+                by_len, by_cnt = {}, {}
+                for i in idx:
+                    v = str(recs[i].get(f, "")).strip() or "(blank)"
+                    L = geoms_fc[i].intersection(poly).length / 1000.0
+                    by_len[v] = by_len.get(v, 0.0) + L
+                    by_cnt[v] = by_cnt.get(v, 0) + 1
+                entry[f"{f}_length_km"] = {a: round(b, 2) for a, b in
+                                           sorted(by_len.items(), key=lambda kv: -kv[1])}
+                entry[f"{f}_records"] = {a: b for a, b in
+                                         sorted(by_cnt.items(), key=lambda kv: -kv[1])}
+            entry["clipped_length_km"] = round(
+                sum(geoms_fc[i].intersection(poly).length for i in idx) / 1000.0, 1)
+            entry["length_density_km_per_km2"] = round(entry["clipped_length_km"] / area_km2, 4) if area_km2 else None
+            out[pname] = entry
+        return out
+
+    report["compiler"] = {"ingenious": weighted_split(
+        fault_geoms, fault_recs, ["MAPSCALE"], polys)}
+
     # ------------------------------------------------------------------ offsets
     # Compare the USGS QFFD GIS distribution against the INGENIOUS compilation inside the
     # GeoDAWN data extent. This is a proxy for the "corrections to existing traces" class the
@@ -254,6 +295,7 @@ def main() -> int:
         footprint_geoms = [fault_geoms[i] for i in footprint_idx]
         footprint_len = sum(g.intersection(poly).length for g in footprint_geoms)
         layers = {}
+        report["compiler"]["usgs"] = {}
         for shp, members in unzip_all_shps(usgs_zip, work):
             ugeoms, ucrs, n, ufields, urecs = load_shp(shp)
             entry = {
@@ -282,6 +324,10 @@ def main() -> int:
             entry["ingenious_footprint_clipped_length_m"] = round(footprint_len, 1)
             entry["attribute_value_counts_in_extent"] = attribute_counts(urecs, in_idx)
             layers[shp.stem] = entry
+            split_fields = [f for f in ("cooperator", "scale") if f in ufields]
+            if split_fields:
+                report["compiler"]["usgs"][shp.stem] = weighted_split(
+                    ugeoms_fc, urecs, split_fields, polys)
         report["offsets"] = {
             "status": "measured",
             "distance_crs": fault_crs.to_string(),

@@ -11,6 +11,7 @@ on:
     branches: ["arena/**"]
     paths:
       - scripts/public_census.py
+      - scripts/rasterize_catalogue.py
       - scripts/download_competition_data.sh
       - .github/workflows/public-data.yml
 
@@ -31,6 +32,21 @@ jobs:
         run: pip install pyshp shapely pyproj
       - name: Footprint census
         run: python3 scripts/public_census.py
+      - name: Rasterise public catalogues to the competition grid
+        run: python3 scripts/rasterize_catalogue.py
+      - name: Publish rasterisation summary as annotations
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, pathlib
+          p = pathlib.Path("data/raw/catalogue_grid.json")
+          if not p.exists():
+              print("::warning title=rasterise::catalogue_grid.json not written"); raise SystemExit
+          r = json.loads(p.read_text())
+          print("::notice title=rasterise grid::" + json.dumps(r["grid"]["pixels"]))
+          for name, layer in r["layers"].items():
+              print(f"::notice title=rasterise {name}::" + json.dumps(layer))
+          PY
       - name: Publish census as annotations (readable via api.github.com check-runs)
         if: always()
         run: |
@@ -56,6 +72,8 @@ jobs:
           o = r.get("offsets") or {}
           print("::notice title=offsets::" + json.dumps(
               dict((k, v) for k, v in o.items() if k != "usgs_layers")))
+          comp = r.get("compiler") or {}
+          print("::notice title=compiler::" + json.dumps(comp))
           for name, layer in (o.get("usgs_layers") or {}).items():
               keep = {kk: vv for kk, vv in layer.items()
                       if kk in ("shapefile", "records", "crs", "traces_intersecting_extent",
@@ -93,4 +111,6 @@ jobs:
           path: |
             data/raw/public_census.json
             data/raw/data-tab-probe.txt
+            data/raw/catalogue_grid.json
+            data/raw/catalogue_grid.bin
           if-no-files-found: warn
