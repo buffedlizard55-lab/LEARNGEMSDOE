@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Requirements checklist — GEMSDOE</title>
+  <meta name="description" content="Line-by-line checklist of the GEMSDOE research-library requirements, with status and official links for manual review.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="requirements.html">Requirements</a>
+        <a href="executive-summary.html">Explainer</a>
+        <a href="research/index.html">Library</a>
+        <a href="feature-stack.html">Feature stack</a>
+        <a href="hypotheses.html">Hypotheses</a>
+        <a href="sources.html">Sources</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="research/governance.html">Governance</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="shell has-toc">
+    <main id="main">
+      <p class="meta">The full list this project is required to keep · each row has a status and a link you can open · checked 2026-09-26</p>
+
+      <h1>Requirements checklist</h1>
+      <p class="lede">
+        This is the working list for the one GEMSDOE research library. It is not a second site and not a submission.
+        A row is <span class="chip verified">met</span> only when the artefact exists in this repository and the claim
+        behind it was read from the linked source. <span class="chip blocked">blocked</span> means the next step needs
+        something this session could not obtain. <span class="chip unverified">open</span> means an organiser has not
+        answered, or a document has not been opened.
+      </p>
+
+      <div class="banner info">
+        <p>
+          Live site: <a href="https://buffedlizard55-lab.github.io/LEARNGEMSDOE/">buffedlizard55-lab.github.io/LEARNGEMSDOE</a>.
+          One repository, one DrivenData entity. No prediction GeoTIFF is produced here.
+        </p>
+      </div>
+
+      <h2 id="constraints">Project constraints</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Requirement</th><th class="nowrap">Status</th><th>Where to check</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Stay on the existing repository and the existing site. Do not create a second site, repo, account, or DrivenData registration.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE">this repo</a></td>
+            </tr>
+            <tr>
+              <td>Research and document. Do not generate, score-validate, or submit a prediction file. Do not use a weekly submission slot.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="pipeline.html">pipeline gate</a></td>
+            </tr>
+            <tr>
+              <td>Every research entry has a source link, a direct citation, what it claims, why it matters here, and a confidence note. Untraceable claims are marked unverified or inference.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="research/index.html">library</a> · <a href="sources.html">source index</a></td>
+            </tr>
+            <tr>
+              <td>Six domains: potential fields, DEM geomorphology, seismotectonics, catalogue gaps, prior art, governance.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="research/index.html">six sections</a></td>
+            </tr>
+            <tr>
+              <td>Hypothesis cards state layers, physical signature, why the target is a catalogue gap rather than a known fault, expected DTI impact, cost, and status. Negative results stay.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="hypotheses.html">H1–H8</a></td>
+            </tr>
+            <tr>
+              <td>Rules §3.2 AI-usage log, built incrementally, not reconstructed at the deadline.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="ai-usage.html">AI log</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">rules PDF §3.2</a></td>
+            </tr>
+            <tr>
+              <td>Dated changelog. Passes extend entries; they do not duplicate them.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="changelog.html">changelog</a></td>
+            </tr>
+            <tr>
+              <td>Clean, navigable GitHub Pages site with official links for manual review.</td>
+              <td><span class="chip verified">met</span></td>
+              <td><a href="https://buffedlizard55-lab.github.io/LEARNGEMSDOE/docs/index.html">live overview</a></td>
+            </tr>
+            <tr>
+              <td>Re-confirm eligibility against rules §1.3 if team composition or affiliation changes.</td>
+              <td><span class="chip unverified">open</span></td>
+              <td>No change recorded this session. §1.3 was re-read. Threads <a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a> and <a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a> are still unanswered.</td>
+            </tr>
+            <tr>
+              <td>Place competition rasters in <code>data/</code> and run <code>prepare_data.py</code>.</td>
+              <td><span class="chip blocked">blocked</span></td>
+              <td><a href="pipeline.html">two separate blockers</a>: login wall, and TLS failure to the public hosts from this machine.</td>
+            </tr>
+            <tr>
+              <td>Do not treat a previous handoff's “pipeline is ready to run” claim as true unless the scripts are in the repo.</td>
+              <td><span class="chip verified">flagged</span></td>
+              <td><a href="pipeline.html">pipeline page</a>. Metric self-tests exist. Training and inference scripts do not, on purpose.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="facts">Competition facts re-read this session</h2>
+      <p class="small">Copied from the pages opened on 2026-09-26. Open the link before quoting any row in a prize narrative.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Fact</th><th>Value read from the source</th><th>Open it</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Deadline on the hub</td>
+              <td>Dec. 3, 2026, 11:59 p.m. UTC</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">hub</a></td>
+            </tr>
+            <tr>
+              <td>Deadline in the rules</td>
+              <td>“by 5:00 p.m. ET on the prize submission deadline date”. Late submissions may be rejected.</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">rules §A.1</a></td>
+            </tr>
+            <tr>
+              <td>Prize</td>
+              <td>Phase 1 $50,000 split equally among the top five. Phase 2 $100,000 / $70,000 / $40,000 / $25,000 / $15,000.</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">rules §1.1</a></td>
+            </tr>
+            <tr>
+              <td>Metric</td>
+              <td>Distance-weighted Tversky index, α=0.2, β=0.8, triangular kernel, R=300 m. Worked example 0.60.</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">problem description</a></td>
+            </tr>
+            <tr>
+              <td>Training labels</td>
+              <td>Obtained from the INGENIOUS Great Basin Regional Dataset Compilation.</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">rules §3.3</a></td>
+            </tr>
+            <tr>
+              <td>Who labelled the new faults</td>
+              <td>“geology experts at the National Laboratory of the Rockies (NLR) and USGS”</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">rules §2</a></td>
+            </tr>
+            <tr>
+              <td>Weekly feedback</td>
+              <td>“three submissions per week” in §3.2. §3.4: one final submission per “participating entity (team, organization, or individual prize competitor not on a team)”.</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">§3.2, §3.4</a></td>
+            </tr>
+            <tr>
+              <td>Data tab</td>
+              <td>Unauthenticated request redirects to the login page. No files were downloaded.</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data tab</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="catalogue">Catalogue attribute list — measured, not estimated</h2>
+      <p>
+        The highest-leverage requirement is to read how the catalogue was built, not only what it looks like.
+        The zip that holds the field-definition text could not be downloaded from this machine
+        (<a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">GDR file</a>, TLS failure).
+        The same 2023-06-27 compilation is published as a public map service by the Nevada Bureau of Mines and Geology.
+        Counts below are <code>returnCountOnly</code> responses from that service on 2026-09-26. Click a count to re-run the query.
+      </p>
+      <div class="banner warn">
+        <p>
+          <strong>Scope flag.</strong> The service describes “Quaternary fault traces, slip and recency for the DoE INGENIOUS
+          (EE0009254) study area. Updated 06-27-2023.” That is the regional compilation rules §3.3 says the training
+          labels were obtained from. It is <em>not</em> the competition label raster, and these counts are not a pixel
+          count. This session did not clip the service to the GeoDAWN outline. Do not use 22,956 as the number of
+          competition labels.
+        </p>
+      </div>
+      <p>
+        Service:
+        <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson">layer 0 JSON</a>
+        · total
+        <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=1%3D1&amp;returnCountOnly=true&amp;f=json">22,956 polylines</a>.
+        The service reports <code>supportsAdvancedQueries: false</code> and <code>supportsStatistics: false</code>.
+        A <code>returnDistinctValues</code> request was ignored and returned duplicated rows, so it was not used for counts.
+      </p>
+
+      <h3>Constraint class (<code>FTYPE_</code>) — fully partitioned</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Value, as stored</th><th class="num">Count</th><th>Re-run</th></tr></thead>
+          <tbody>
+            <tr><td>Well Constrained</td><td class="num">12,048</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Well%20Constrained%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td>Moderately Constrained</td><td class="num">5,054</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Moderately%20Constrained%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td>Inferred</td><td class="num">5,280</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Inferred%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td>Poor</td><td class="num">100</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Poor%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td>Other</td><td class="num">27</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Other%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td>blank or a single space</td><td class="num">447</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27%20%27%20OR%20FTYPE_%3D%27%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Arithmetic, not a sourced claim: 12,048 + 5,054 + 5,280 + 100 + 27 + 447 = 22,956. Inferred + Poor + Other + blank = 5,854 traces whose own attribute says the trace is not well or moderately constrained.</p>
+
+      <h3>Mapping-scale code (<code>MAPSCALE</code>, length 8) — fully partitioned</h3>
+      <p>
+        Values are copied as stored. The field mixes short codes (<code>24</code>, <code>100</code>, <code>250</code>)
+        with one literal scale string (<code>1:10,000</code>, 12 traces, all named East Cache fault zone in the
+        sample returned). Whether code <code>24</code> means 1:24,000 is an <span class="chip unverified">inference</span>
+        until the field-definition text is read. Do not convert the codes.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Value, as stored</th><th class="num">Count</th><th>Re-run</th></tr></thead>
+          <tbody>
+            <tr><td><code>10</code></td><td class="num">11,334</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%2710%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>24</code></td><td class="num">3,025</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%2724%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>50</code></td><td class="num">120</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%2750%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>60</code></td><td class="num">1</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%2760%27&amp;returnCountOnly=true&amp;f=json">count</a> · <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%2760%27&amp;outFields=MAPSCALE,NAME&amp;returnGeometry=false&amp;f=json">name</a></td></tr>
+            <tr><td><code>62.5</code></td><td class="num">272</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%2762.5%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>100</code></td><td class="num">1,856</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27100%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>125</code></td><td class="num">45</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27125%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>155</code></td><td class="num">2</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27155%27&amp;outFields=MAPSCALE,NAME&amp;returnGeometry=false&amp;f=json">named Joes Valley fault zone</a></td></tr>
+            <tr><td><code>250</code></td><td class="num">2,229</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27250%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>700</code></td><td class="num">1</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27700%27&amp;returnCountOnly=true&amp;f=json">count</a> · <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27700%27&amp;outFields=MAPSCALE,NAME&amp;returnGeometry=false&amp;f=json">name</a></td></tr>
+            <tr><td><code>1:10,000</code></td><td class="num">12</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%20LIKE%20%271:%25%27&amp;outFields=MAPSCALE,NAME,FTYPE_&amp;returnGeometry=false&amp;f=json">12 features, East Cache fault zone</a></td></tr>
+            <tr><td>blank or a single space</td><td class="num">4,059</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27%20%27&amp;returnCountOnly=true&amp;f=json">space</a> and <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27%27&amp;returnCountOnly=true&amp;f=json">empty string</a> both returned 4,059. The query engine may be trimming. They were not added together.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Arithmetic: 11,334 + 3,025 + 120 + 1 + 272 + 1,856 + 45 + 2 + 2,229 + 1 + 12 + 4,059 = 22,956.</p>
+
+      <h3>Recency (<code>REC2023</code>) — not fully partitioned</h3>
+      <p>
+        Four category strings with a leading <code>&lt;</code> were counted. Other traces store a number without that
+        prefix. A sample at FID 22000–22020 returned <code>750,000</code> (RECNUM 750000) and <code>8400</code>
+        (RECNUM 8400). Those strings were not folded into the <code>&lt;</code> bins. A complete histogram was not
+        finished, because distinct-value queries are ignored by the service.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Value, as stored</th><th class="num">Count</th><th>Re-run</th></tr></thead>
+          <tbody>
+            <tr><td><code>&lt;15,000</code></td><td class="num">1,068</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=REC2023%3D%27%3C15%2C000%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>&lt;130,000</code></td><td class="num">1,378</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=REC2023%3D%27%3C130%2C000%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>&lt;750,000</code></td><td class="num">167</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=REC2023%3D%27%3C750%2C000%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td><code>&lt;1,600,000</code></td><td class="num">1,229</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=REC2023%3D%27%3C1%2C600%2C000%27&amp;returnCountOnly=true&amp;f=json">query</a></td></tr>
+            <tr><td>does not start with <code>&lt;</code></td><td class="num">18,905</td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=REC2023%20NOT%20LIKE%20%27%3C%25%27&amp;returnCountOnly=true&amp;f=json">direct count</a>. Agrees with 22,956 − 4,051.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Blank or single-space <code>REC2023</code> returned 0. The 18,905 are populated with some other string. Their full value list is <span class="chip unverified">unverified</span> beyond the FID 22000–22020 sample.</p>
+
+      <h3>Fields present on the service</h3>
+      <p>
+        Read from the layer JSON, not from the unread zip:
+        <code>NAME</code>, <code>NUM</code>, <code>DIPDIRECT</code>, <code>SLIPDIRECT</code>, <code>SLIPSENSE</code>,
+        <code>SECONDARY</code>, <code>SLIPRT2023</code>, <code>SLIPRTNUM</code>, <code>REC2023</code>, <code>RECNUM</code>,
+        <code>CODE2023</code>, <code>FCODE2023</code>, <code>RCODE2023</code>, <code>SCODE2023</code>, <code>FTYPE_</code>,
+        <code>MAPSCALE</code>, <code>SLIPINFO</code>, <code>RECINFO</code>, <code>COMMENTS</code>, <code>GEOCOMM</code>,
+        <code>Shape_Leng</code>.
+        FID 1, returned by
+        <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FID%3D1&amp;outFields=NAME,NUM,MAPSCALE,FTYPE_,REC2023,SLIPRT2023,SLIPSENSE,COMMENTS&amp;returnGeometry=false&amp;f=json">this query</a>,
+        is “Abert Rim fault, Lake Abert section”, NUM <code>829a</code>, MAPSCALE <code>100</code>, FTYPE_
+        Well Constrained, REC2023 <code>&lt;15,000</code>, SLIPRT2023 <code>0.52</code>, SLIPSENSE <code>N</code>,
+        comments blank.
+      </p>
+
+      <h2 id="open">Still open — do not fill these in</h2>
+      <ul>
+        <li>Forum <a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a>, <a href="https://community.drivendata.org/t/institutional-limit/11526">11526</a>, <a href="https://community.drivendata.org/t/using-a-teammates-geological-interpretation-as-training-labels/11543">11543</a>, and the eligibility question in <a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a> — re-read 2026-09-26, still one post each (11499 has two; no staff reply to the question).</li>
+        <li>INGENIOUS v2 field-definition text inside the zip — unread. TLS to <code>gdr.openei.org</code> failed from this machine.</li>
+        <li>GeoDAWN outline shapefiles — listed on ScienceBase (Area 1 outline 1,190 bytes, Area 2 outline 1,497 bytes, extent 2,774 bytes) but not downloaded. TLS to <code>sciencebase.gov</code> failed. The metadata CSV get-URL returned HTTP 500 via the page fetcher; the catalog still lists the file.</li>
+        <li>Miller &amp; Singh 1994 and Verduzco et al. 2004 — still unread method papers.</li>
+        <li>Hermant et al. 2025 PDF chunks 4–7, and the body of Mattéo et al. 2021.</li>
+        <li>Whether code <code>10</code> / <code>24</code> / <code>100</code> / <code>250</code> are thousands-denominator map scales.</li>
+        <li>The full <code>REC2023</code> value list.</li>
+        <li>Any spatial overlap between these 22,956 traces and the GeoDAWN outline.</li>
+      </ul>
+
+      <h2 id="next">Highest-value next question</h2>
+      <div class="banner ok">
+        <p>
+          Clip <code>FTYPE_</code> and <code>MAPSCALE</code> to the official GeoDAWN outlines
+          (<a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a>)
+          and measure two numbers: how much Inferred trace-length sits inside the survey, and where Well Constrained
+          traces simply stop. That is the first catalogue-gap map that does not need a DrivenData login. It was blocked
+          this session by TLS, not by a missing source.
+        </p>
+      </div>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      Checklist for one registered entity. Counts are query results, not estimates. If a query link and this page disagree, the query wins — correct the page.
+    </div>
+  </footer>
+  <script src="assets/nav.js"></script>
+</body>
+</html>

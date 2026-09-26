@@ -16,6 +16,56 @@ record rather than reconstructed at the deadline.
 
 ---
 
+## 2026-09-26 · session `arena/01a0df46-learngemsdoe`
+
+**Tool.** Arena.ai Agent Mode — coding agent with web fetch, web search, file read/write and shell execution. No other
+generative-AI service was called from this repository. No image, audio or video generation was used.
+
+**Did — source verification.** Fetched and read: competition hub, problem description (both chunks), About page, data
+tab (login redirect), page 966, rules PDF sections §1.3, §2, §3.2–§3.4 and §A.1, forum category JSON and threads
+11499, 11526, 11540 and 11543, ScienceBase item JSON file list, INGENIOUS GDR submission 1391, the NBMG INGENIOUS
+Qfaults MapServer (layer schema and `returnCountOnly` queries), the USGS faults page, and the USGS FAQ “What is a
+Quaternary fault?”. Reference-solution README was read via the GitHub API. The reference notebook was not re-read.
+
+**Did — measurement.** Counted INGENIOUS constraint class and mapping-scale codes from the public map service. Each
+count is tied to a query URL on `docs/requirements.html`. The service ignored `returnDistinctValues`. Counts that
+could not be completed (`REC2023` value list; GeoDAWN clip) are marked unverified, not estimated.
+
+**Did — writing.** Added the requirements checklist, CG-8, H8, watch-list rows, and this log entry. Extended the
+irregularity list. Did not rewrite earlier changelog entries.
+
+**Did — code and runs.** Updated `scripts/download_competition_data.sh` so it attempts small public files and still
+refuses to log in. Ran that script, `scripts/prepare_data.py`, and `scripts/metrics.py --selftest`. Competition
+rasters were not obtained. No prediction file was written.
+
+**Did not.**
+
+- Generate, score or write a prediction GeoTIFF, and add no code capable of doing so.
+- Use a DrivenData weekly submission slot, or touch the submission API.
+- Create a DrivenData account, or store credentials.
+- Create a second site, repository, or registration.
+- Invent a count. Where a partition was incomplete, the page says so.
+- Translate `MAPSCALE` short codes into map scales. That translation is labelled inference and is not used as a fact.
+
+**Human review still required.**
+
+- Open each query link on the requirements page and confirm the JSON count before a prize narrative quotes it.
+- The field-definition text inside the Qfaults v2 zip is unread.
+- Hermant 2025 chunks 4–7 and the body of Mattéo et al. 2021 remain unread.
+- Four forum threads remain unanswered: 11540, 11526, 11543, 11499.
+
+**Fabrication controls used.**
+
+- Quoted rules sentences were copied from the PDF chunks fetched this session.
+- Attribute counts were copied from `{"count": N}` responses, then added and checked against 22,956. The addition is
+  labelled arithmetic.
+- A `returnDistinctValues` response that repeated rows was discarded and not used as a histogram.
+- Empty-string and single-space `MAPSCALE` queries returned the same count. They were not summed.
+- East Cache and Joes Valley names were copied from feature attributes. Their position relative to GeoDAWN was not
+  asserted.
+
+---
+
 ## 2026-09-26 · session `arena/01a0df14-learngemsdoe`
 
 **Tool.** Arena.ai Agent Mode — coding agent with web fetch, web search, file read/write and shell execution. No other

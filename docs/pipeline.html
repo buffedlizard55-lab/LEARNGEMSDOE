@@ -14,6 +14,7 @@
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
+        <a href="requirements.html">Requirements</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
         <a href="feature-stack.html">Feature stack</a>
@@ -45,20 +46,33 @@
         </p>
         <p>
           <strong>Only the metric part of that is true of this repository.</strong> There is no training script and no
-          inference script here, and nothing has been run against real rasters. This session added a metric and validation
-          module (<code>scripts/metrics.py</code>) whose self-tests do pass on CPU, and left training and inference out
-          deliberately — see the gate below. The gap is recorded rather than papered over.
+          inference script here, and nothing has been run against real rasters. An earlier session on this date added
+          <code>scripts/metrics.py</code>. This session re-ran <code>python3 scripts/metrics.py --selftest</code>; the
+          11 checks passed on CPU. Training and inference remain absent on purpose — see the gate below. The gap is
+          recorded rather than papered over.
         </p>
       </div>
 
       <h2 id="blocker">The blocker</h2>
       <p>
-        <code>data/</code> contains no rasters. The DrivenData data tab requires login
-        (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">verified redirect</a>).
-        This agent does not hold, request or store credentials, and no attempt is made to work around the login.
+        <code>data/</code> contains no competition rasters. Two different blockers were confirmed on 2026-09-26, and they
+        are not the same thing:
       </p>
+      <ol>
+        <li>
+          The DrivenData data tab requires login
+          (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">verified redirect</a>).
+          This agent does not hold, request or store credentials, and no account was created.
+        </li>
+        <li>
+          Public hosts that do <em>not</em> need a DrivenData login — ScienceBase, GDR, USGS — failed the TLS handshake
+          from this machine (<code>curl</code> exit 35, <code>SSL_ERROR_SYSCALL</code>). That is an environment limit,
+          not evidence that the files are absent. The ScienceBase item JSON lists
+          <code>GeoDAWN_area1_outline.zip</code> at 1,190 bytes and <code>GeoDAWN_area2_outline.zip</code> at 1,497 bytes.
+        </li>
+      </ol>
       <p>On an unrestricted, enrolled machine:</p>
-      <pre><code>bash scripts/download_competition_data.sh   # prints official URLs, checks data/, never logs in
+      <pre><code>bash scripts/download_competition_data.sh   # never logs in; also tries the small public outlines
 python scripts/prepare_data.py              # writes data/inventory.json — inspection only</code></pre>
       <p>
         After that, <code>data/inventory.json</code> should be compared against the

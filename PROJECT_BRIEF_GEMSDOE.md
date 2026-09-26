@@ -111,13 +111,18 @@ re-running extends existing entries rather than duplicating them.
 End of each session, report: what was added and where, hypothesis backlog and status, what is still unverified, what is
 blocking progress, and the single highest-value next research question.
 
-## Current blockers (as of 2026-09-26)
+## Current blockers (as of 2026-09-26, session arena/01a0df46)
 
-1. **Competition rasters are not in `data/`** — the data tab requires a DrivenData login. No hypothesis can move from
-   `untested` until they are placed and `prepare_data.py` is run.
-2. **No training or inference code** — deliberately. A prior handoff claimed a complete train→inference→validate
-   pipeline was ready to run; it is not present, and the discrepancy is flagged on `docs/pipeline.html`.
-3. **Unanswered forum questions** — 11540 (non-captain work authorisation), 11526 (per-team vs per-organisation
-   submission limit), 11543 (teammate interpretation as labels), and the eligibility reply in 11499.
-4. **Unread sources** — the INGENIOUS Qfaults v2 field-definition document; Hermant 2025 PDF chunks 4–7; the body of
-   Mattéo et al. 2021; two paywalled potential-field methods papers.
+1. **Competition rasters are not in `data/`** — the data tab requires a DrivenData login (re-confirmed redirect).
+   No hypothesis can move from `untested` until they are placed and `prepare_data.py` is run. No account was created.
+2. **Public binary downloads also failed from this machine** — TLS handshake to sciencebase.gov, gdr.openei.org and
+   usgs.gov returned `SSL_ERROR_SYSCALL`. The files are listed; they were not fetched. Do not treat that as absence.
+3. **No training or inference code** — deliberately. A prior handoff claimed a complete train→inference→validate
+   pipeline was ready to run; it is not present, and the discrepancy is flagged on `docs/pipeline.html`. Re-checked.
+4. **Unanswered forum questions** — re-read 2026-09-26, still unanswered: 11540, 11526, 11543, and 11499's eligibility
+   question.
+5. **Unread sources** — the INGENIOUS Qfaults v2 field-definition *text* (field names and counts were read from the
+   NBMG MapServer instead; see CG-8); Hermant 2025 PDF chunks 4–7; the body of Mattéo et al. 2021; two paywalled
+   potential-field methods papers.
+6. **GeoDAWN clip not run** — the highest-value next measurement. Outline zips are on ScienceBase (1,190 and 1,497
+   bytes) but were not downloaded.

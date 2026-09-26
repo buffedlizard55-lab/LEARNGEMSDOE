@@ -14,6 +14,7 @@
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
+        <a href="requirements.html">Requirements</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
         <a href="feature-stack.html">Feature stack</a>
@@ -41,11 +42,18 @@
 
       <div class="stats">
         <div class="stat"><div class="n">6</div><div class="l">Research domains</div></div>
-        <div class="stat"><div class="n">7</div><div class="l">Hypotheses</div></div>
+        <div class="stat"><div class="n">8</div><div class="l">Hypotheses</div></div>
         <div class="stat"><div class="n">19</div><div class="l">Feature bands</div></div>
         <div class="stat"><div class="n">100 m</div><div class="l">Grid / 3730×3292</div></div>
         <div class="stat"><div class="n">300 m</div><div class="l">Metric kernel R</div></div>
         <div class="stat"><div class="n">$300k</div><div class="l">Prize pool</div></div>
+      </div>
+
+      <div class="banner info">
+        <p>
+          The line-by-line requirements list, including the counted INGENIOUS attribute inventory and every open item, is
+          on the <a href="requirements.html">requirements checklist</a>.
+        </p>
       </div>
 
       <div class="banner warn">
@@ -154,7 +162,7 @@
         <a class="card" href="research/catalogue-gaps.html">
           <h3>1 · Catalogue-gap reasoning</h3>
           <p>How the USGS and INGENIOUS catalogues were actually built — and where that process is structurally incomplete. Highest-leverage domain.</p>
-          <p class="card-meta">7 entries · highest leverage</p>
+          <p class="card-meta">8 entries · highest leverage</p>
         </a>
         <a class="card" href="research/potential-field.html">
           <h3>2 · Potential-field geophysics</h3>
@@ -204,6 +212,7 @@
             <tr><td class="nowrap"><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster the scorer masks out</td><td class="nowrap">Medium</td></tr>
             <tr><td class="nowrap"><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td></tr>
             <tr><td class="nowrap"><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale traces mark the edge of the map — not a positive class</td><td class="nowrap">Low</td></tr>
           </tbody>
         </table>
       </div>
@@ -244,7 +253,31 @@
           <li>
             <strong>No training pipeline exists in this repository.</strong> A prior handoff stated the
             train→inference→validate pipeline was “ready to run”; it is not present in <code>scripts/</code>. See
-            <a href="pipeline.html">pipeline status</a>.
+            <a href="pipeline.html">pipeline status</a>. Re-checked this session: still true. This agent did not add one.
+          </li>
+          <li>
+            <strong>Rules PDF host redirect.</strong> The official URL
+            <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a> redirected to
+            <code>docs.nlr.gov</code> when fetched on 2026-09-26. Keep the NLR URL as the citation. The change-log table
+            in the PDF preface was still empty.
+          </li>
+          <li>
+            <strong>Staff about-post links to page 966.</strong> The pinned forum welcome links to
+            <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/">page 966</a>, which is a
+            duplicate of the hub welcome, not the problem description
+            (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a>).
+          </li>
+          <li>
+            <strong>Public downloads failed TLS from this machine; the files were not treated as missing.</strong>
+            <code>curl</code> to usgs.gov, sciencebase.gov, gdr.openei.org and web2.nbmg.unr.edu returned
+            <code>SSL_ERROR_SYSCALL</code>. HTML and JSON were still readable through a separate fetch path. The
+            ScienceBase catalog lists the outline zips. Do not conclude they do not exist.
+          </li>
+          <li>
+            <strong>Catalogue attribute conventions are mixed.</strong> On the NBMG service, <code>MAPSCALE</code> stores
+            both short codes and the literal string <code>1:10,000</code>, and <code>REC2023</code> stores both
+            <code>&lt;15,000</code>-style bins and bare numbers such as <code>8400</code>. Do not normalize them until
+            the field-definition text is read. Counts: <a href="requirements.html#catalogue">requirements page</a>.
           </li>
         </ol>
       </div>

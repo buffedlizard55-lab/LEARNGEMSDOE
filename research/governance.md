@@ -112,3 +112,5 @@ was empty when read.
 | Deadline conflict | §A.1 vs hub | no thread found |
 | Test-fault provenance | 11527 post 7 | declined by staff |
 | Rules change-log table | PDF Preface | empty when read |
+| Staff about-post links to page 966 | https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/ | duplicate of the hub welcome, not page 967 |
+| Rules PDF host | https://www.nlr.gov/docs/fy26osti/96647.pdf | redirects to docs.nlr.gov (re-fetched 2026-09-26) |

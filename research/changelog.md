@@ -6,6 +6,41 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 
 ---
 
+## 2026-09-26 · session `arena/01a0df46-learngemsdoe` — Pass 1–3: catalogue counts, requirements list, data-placement attempt
+
+**Verified against primary sources this session (fetched and read; not copied from the previous session's notes):**
+
+- Competition hub, problem description (both chunks), About page, data tab (login redirect), page 966 (duplicate welcome).
+- Rules PDF chunks covering §1.3, §2, §3.2, §3.3, §3.4, §A.1. Official URL redirected to `docs.nlr.gov`. Preface change-log table still empty.
+- Forum category JSON and threads 11499, 11526, 11540, 11543. Still unanswered. No new topic since 11543 (2026-09-25).
+- ScienceBase item JSON file list, including outline zip sizes and MD5s.
+- INGENIOUS GDR submission 1391 resource list.
+- NBMG MapServer `Qfaults/Qfaults_INGENIOUS` layer 0: field list, 22,956 feature count, `FTYPE_` and `MAPSCALE` partitions, partial `REC2023`.
+- USGS faults page and USGS FAQ “What is a Quaternary fault?”
+- Reference-solution README via GitHub. Notebook was not re-read this session (1.6 MB); no new claim taken from it.
+
+**Added**
+
+- `docs/requirements.html` — the full requirements checklist, with the counted attribute inventory and a query link for each count.
+- Research entry CG-8 and hypothesis H8. H8 is untested; the regional counts are measured.
+- Watch-list rows for the page-966 link and the rules-PDF host redirect.
+- Download script now attempts the small public outline zips and records failure. It still never logs in.
+
+**Changed**
+
+- CG-4's “field definitions unread” note: field names and counts are now verified from the live service. The zip's text document is still unread.
+- Pipeline page distinguishes the login wall from the TLS failure. They are not the same blocker.
+- Irregularity list extended. The “pipeline is ready” handoff was re-checked and remains false. No training or inference script was added.
+
+**Still open / next**
+
+- Clip `FTYPE_` and `MAPSCALE` to the GeoDAWN outlines. That is the single highest-value next question.
+- Read the v2 field-definition text before translating `MAPSCALE` codes.
+- Re-check 11540, 11526, 11543, 11499.
+- Place competition rasters only on an enrolled machine. Do not create an account from this agent.
+
+---
+
 ## 2026-09-26 · session `arena/01a0df14-learngemsdoe` — Pass 3: verification, corrections, full source re-read
 
 **Verified against primary sources this session (all re-fetched and read line by line):**

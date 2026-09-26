@@ -12,6 +12,7 @@ the database, you know which faults were structurally incapable of getting in.
 - **Citation:** U.S. Geological Survey, 2020, Quaternary Fault and Fold Database for the Nation, <https://doi.org/10.5066/P9BCVRCK>
 - **Claim (verbatim):** "This database contains information on faults and associated folds in the United States that demonstrate geological evidence of **coseismic surface deformation** in large earthquakes during the past 1.6 million years (Ma)." The 1.6 Ma cutoff is inherited from the 1983 Geologic Time Scale in use when the database was established in 1993.
 - **Relevance:** A buried structure with no demonstrable surface deformation is out of scope by construction, not merely unmapped. Combined with the About page — "many are hidden below the surface, requiring geophysical data to detect" (<https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/>) — this is the strongest argument for H2.
+- **Corroboration (2026-09-26):** USGS FAQ, https://www.usgs.gov/faqs/what-a-quaternary-fault — "A Quaternary fault is one that has been recognized at the surface and that has moved in the past 1,600,000 years (1.6 million years)."
 - **Confidence:** verified.
 
 ## CG-2 · 1993 compilation rules
@@ -71,8 +72,16 @@ Mapping to signals: classes 1–2 → topography (bands 12, 19, 1 m lidar); clas
 - If distance-to-known-fault is a *positive* predictor of new labels, the gap is diffuse and H1 should be demoted.
 - If the INGENIOUS v2 field definitions carry provenance or mapping-scale attributes, class 4 becomes measurable.
 
+## CG-8 · Constraint codes counted on the live service (2026-09-26)
+
+- **Source:** <https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson>
+- **Citation:** same DOI as CG-4, service updated 2023-06-27. Counts and query links: [`docs/requirements.html`](../docs/requirements.html#catalogue).
+- **Claim:** 22,956 polylines. `FTYPE_` partitions into Well Constrained 12,048 / Moderately Constrained 5,054 / Inferred 5,280 / Poor 100 / Other 27 / blank 447. `MAPSCALE` partitions into the codes on the requirements page, including 4,059 blank and 12 literal `1:10,000`.
+- **Relevance:** this is the measurement CG-7 class 4 was waiting for, at regional scale. It is not the GeoDAWN label raster. Do not predict Inferred traces; they are already in the compilation the scorer masks.
+- **Confidence:** verified for the counts. Unverified for what the short `MAPSCALE` codes mean. The zip's field-definition text is still unread (TLS).
+
 ## Next actions
 
-1. Download <https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip> and read the field-definition text.
-2. Pull Qfaults GIS zip and the GeoDAWN survey outlines (<https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7>); build catalogue-density and lidar-coverage surfaces.
-3. Once rasters are placed: distribution of distance-to-nearest-label for high-strain / high-seismicity / high-gradient pixels.
+1. Clip CG-8 to the GeoDAWN outlines once TLS to ScienceBase works.
+2. Read the field-definition text in the v2 zip before translating `MAPSCALE` codes.
+3. Once rasters are placed: distance-to-nearest-label for high-strain / high-seismicity / high-gradient pixels.
