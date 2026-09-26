@@ -86,21 +86,43 @@ CARD_RE = re.compile(
 
 
 def check_domain_counts() -> list[str]:
-    """The library index advertises an entry count per domain. Make it true."""
+    """The overview and library index cards advertise an entry count per domain. Make it true."""
     problems: list[str] = []
-    index_page = DOCS / "research" / "index.html"
-    if not index_page.exists():
-        return ["research/index.html is missing"]
-    text = index_page.read_text(encoding="utf-8")
-    for target, claimed in CARD_RE.findall(text):
-        path = DOCS / "research" / target
-        if not path.exists():
-            problems.append(f"research/index.html: card points at missing page {target}")
+    for index_rel, base in (("research/index.html", DOCS / "research"), ("index.html", DOCS)):
+        index_page = DOCS / index_rel
+        if not index_page.exists():
+            problems.append(f"{index_rel} is missing")
             continue
-        actual = path.read_text(encoding="utf-8").count('class="entry"')
-        if actual != int(claimed):
+        text = index_page.read_text(encoding="utf-8")
+        for target, claimed in CARD_RE.findall(text):
+            path = base / target
+            if not path.exists():
+                problems.append(f"{index_rel}: card points at missing page {target}")
+                continue
+            actual = path.read_text(encoding="utf-8").count('class="entry"')
+            if actual != int(claimed):
+                problems.append(
+                    f"{index_rel}: {target} claims {claimed} entries, page has {actual}"
+                )
+    return problems
+
+
+META_COUNT_RE = re.compile(r"domain \d of 6 · (\d+) entries")
+
+
+def check_page_meta_counts() -> list[str]:
+    """Each domain page announces its own entry count in the page meta line. Make it true."""
+    problems: list[str] = []
+    for page in sorted((DOCS / "research").glob("*.html")):
+        text = page.read_text(encoding="utf-8")
+        match = META_COUNT_RE.search(text)
+        if not match:
+            continue
+        claimed = int(match.group(1))
+        actual = text.count('class="entry"')
+        if claimed != actual:
             problems.append(
-                f"research/index.html: {target} claims {claimed} entries, page has {actual}"
+                f"{page.relative_to(DOCS).as_posix()}: meta says {claimed} entries, page has {actual}"
             )
     return problems
 
@@ -114,6 +136,7 @@ def main() -> int:
     id_cache: dict[Path, set[str]] = {}
     sources = collect_source_urls()
     failures.extend(check_domain_counts())
+    failures.extend(check_page_meta_counts())
 
     for page in doc_pages:
         text = page.read_text(encoding="utf-8")

@@ -38,12 +38,20 @@ asserted: the service reports `supportsStatistics: false` and refuses the sum.
 **Added.** Research entries CG-9, CG-10, CG-11, PF-8, PF-9, GM-7, GM-8, GM-9, ST-7, PA-6, PA-7, PA-8, GV-11, GV-12,
 GV-13. Hypotheses H9, H10, H11. Site-wide search with a generated index, two-tier navigation, a "start here" reading
 order, a verification section on the overview, and two scripts (`scripts/check_site.py`,
-`scripts/build_search_index.py`).
+`scripts/build_search_index.py`). Also added `.github/workflows/verify.yml` CI for metrics, site checks, and search-index
+freshness; footer links from research and hypothesis pages back to the explainer and submission gate; and a README note
+documenting the two configured Pages deploy paths plus the remaining owner-only source-switch step.
 
 **Corrected.** PA-2's epoch-resolved Hermant figures (PR-AUC ≈ 0.88 / ≈ 0.59 "at epoch 17.5") were approximations read
 off a figure whose axis labels were truncated in our extraction, and the epoch attribution is not supported by the
 paper's prose. They are superseded by the values §6 states (PA-6), and the sequence is recorded on the sources page.
 Figure 7's per-epoch table was deliberately left untranscribed rather than guessed at.
+
+Pass 2 corrected H10/GM-7 to state only the coordinates printed in Hermant et al.'s figures; restored a missing `<tr>`
+in `sources.html`; changed Drenth & Grauch to **Eos (2019)** rather than an unverified volume number; and recorded the
+§1.3 eligibility text re-confirmation with its no-team-change limit. Pass 3 corrected stale overview/library/meta-line
+domain counts, the requirements H1–H11 label, and the pipeline search-index count; `check_site.py` now enforces
+overview-card and domain-meta counts as well as library-card counts.
 
 **Flagged, not smoothed.** Rules §3.2 says the submission must cover "the entirety of the GeoDAWN study area" while the
 problem description says "the same bounds as the training data" — not obviously the same instruction given a grid

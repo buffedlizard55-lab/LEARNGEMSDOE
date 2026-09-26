@@ -36,13 +36,15 @@ count is reproducible from a linked query URL. No total fault length is asserted
 `supportsStatistics: false` and refuses the sum.
 
 **Did — writing.** Added 15 numbered research entries and three hypothesis cards; added the search page, its generated
-index, a two-tier navigation, a reading order and a verification section; corrected PA-2 in favour of PA-6's
-prose-sourced figures; appended this log and the changelog entry in the same session. Existing entries were extended,
-not duplicated.
+index, a two-tier navigation, a reading order and a verification section; added CI and footer/explainer-gate links;
+corrected PA-2 in favour of PA-6's prose-sourced figures; made Pass 2–3 review corrections to coordinates, citation
+form, counts, and markup; and appended this log and the changelog entry in the same session. Existing entries were
+extended, not duplicated.
 
-**Did — code.** Wrote `scripts/check_site.py` (offline link, anchor, asset and source-allowlist verification) and
-`scripts/build_search_index.py` (search-index generator with a `--check` drift mode); re-ran
-`scripts/metrics.py --selftest` (11 checks pass) and both data-placement scripts (still blocked).
+**Did — code.** Wrote `scripts/check_site.py` (offline link, anchor, asset, source-allowlist, and count verification)
+and `scripts/build_search_index.py` (search-index generator with a `--check` drift mode); added
+`.github/workflows/verify.yml`; extended `check_site.py` during review to cover overview cards and domain-meta counts;
+re-ran `scripts/metrics.py --selftest` (11 checks pass) and both data-placement scripts (still blocked).
 
 **Did not.** Create or use a DrivenData account or credentials. Generate, validate or submit a prediction raster. Ask
 the forum anything — this agent does not post. Create a second site, repository, account or registration, including for

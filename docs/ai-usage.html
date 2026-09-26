@@ -61,13 +61,15 @@
 
         <p><strong>Did — writing.</strong> Added 15 numbered research entries and three hypothesis cards; added the
           <a href="search.html">search page</a>, its generated index, a two-tier navigation, a reading order and a
-          verification section; corrected PA-2 in favour of PA-6's prose-sourced figures; appended this log and the
-          changelog entry in the same session. Existing entries were extended, not duplicated.</p>
+          verification section; added CI and footer/explainer-gate links; corrected PA-2 in favour of PA-6's
+          prose-sourced figures; made Pass 2–3 review corrections to coordinates, citation form, counts, and markup; and
+          appended this log and the changelog entry in the same session. Existing entries were extended, not duplicated.</p>
 
-        <p><strong>Did — code.</strong> Wrote <code>scripts/check_site.py</code> (offline link, anchor, asset and
-          source-allowlist verification) and <code>scripts/build_search_index.py</code> (search-index generator with a
-          <code>--check</code> drift mode); re-ran <code>scripts/metrics.py --selftest</code> (11 checks pass) and both
-          data-placement scripts (still blocked).</p>
+        <p><strong>Did — code.</strong> Wrote <code>scripts/check_site.py</code> (offline link, anchor, asset,
+          source-allowlist, and count verification) and <code>scripts/build_search_index.py</code> (search-index
+          generator with a <code>--check</code> drift mode); added <code>.github/workflows/verify.yml</code>; extended
+          <code>check_site.py</code> during review to cover overview cards and domain-meta counts; re-ran
+          <code>scripts/metrics.py --selftest</code> (11 checks pass) and both data-placement scripts (still blocked).</p>
 
         <p><strong>Did not.</strong> Create or use a DrivenData account or credentials. Generate, validate or submit a
           prediction raster. Ask the forum anything (this agent does not post). Create a second site, repository, account

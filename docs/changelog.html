@@ -77,7 +77,10 @@
           PA-8, GV-11, GV-12, GV-13. Hypotheses H9, H10, H11. Site-wide
           <a href="search.html">search</a> with a generated index, a two-tier navigation, a "start here" reading order, a
           verification section on the overview, and two new scripts
-          (<code>scripts/check_site.py</code>, <code>scripts/build_search_index.py</code>).</p>
+          (<code>scripts/check_site.py</code>, <code>scripts/build_search_index.py</code>). Also added
+          <code>.github/workflows/verify.yml</code> CI for metrics, site checks, and search-index freshness; footer links
+          from research and hypothesis pages back to the explainer and submission gate; and a README note documenting the
+          two configured Pages deploy paths plus the remaining owner-only source-switch step.</p>
 
         <p><strong>Corrected.</strong>
           <a href="research/prior-art.html#pa2">PA-2</a>'s epoch-resolved Hermant figures (PR-AUC ≈ 0.88 / ≈ 0.59 "at
@@ -86,6 +89,13 @@
           states in §6 — recorded in <a href="research/prior-art.html#pa6">PA-6</a> and on the
           <a href="sources.html">sources page</a>. Figure 7's per-epoch table was deliberately not transcribed rather than
           guessed at.</p>
+
+        <p><strong>Pass 2–3 review corrections.</strong> H10/GM-7 now state only the coordinates printed in Hermant et
+          al.'s figures. A missing <code>&lt;tr&gt;</code> was restored in <code>sources.html</code>. Drenth &amp; Grauch
+          is cited as <strong>Eos (2019)</strong>, not an unverified volume number. GV-11 records the §1.3 text
+          re-confirmation and its no-team-change limit. Stale overview/library/meta-line domain counts, the requirements
+          H1–H11 label, and the pipeline search-index count were corrected; <code>check_site.py</code> now enforces
+          overview-card and domain-meta counts as well as library-card counts.</p>
 
         <p><strong>Flagged, not smoothed.</strong> Rules §3.2 says the submission must cover "the entirety of the GeoDAWN
           study area" while the problem description says "the same bounds as the training data" — not obviously the same
