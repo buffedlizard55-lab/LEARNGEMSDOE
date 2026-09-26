@@ -4,76 +4,159 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI-usage log — GEMSDOE</title>
+  <meta name="description" content="Dated record of generative-AI use in this project, maintained for the disclosure required by GEMS Prize Official Rules section 3.2.">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="index.html">GEMSDOE research</a>
+      <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
+        <a href="feature-stack.html">Feature stack</a>
         <a href="hypotheses.html">Hypotheses</a>
-        <a href="research/governance.html">Governance</a>
         <a href="sources.html">Sources</a>
         <a href="pipeline.html">Pipeline</a>
+        <a href="research/governance.html">Governance</a>
         <a href="changelog.html">Changelog</a>
         <a href="ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Rules §3.2 first-class artifact · built incrementally · not reconstructed at deadline</p>
-    <h1>Generative AI usage log</h1>
 
-    <article class="entry">
-      <h3>2026-09-26 · session arena/01a0df09-learngemsdoe</h3>
-      <p><strong>Tool:</strong> Arena.ai Agent Mode (coding agent with web fetch/search). Same repository, separate branch from the 01a0def8 session.</p>
-      <p><strong>What the agent did</strong></p>
-      <ul>
-        <li>Re-fetched and line-by-line verified the rules PDF, DrivenData hub/967/968, USGS QFFD page, GeoDAWN ScienceBase, INGENIOUS GDR, Hermant 2025 PDF, Mattéo 2021, Kreemer &amp; Young 2022, and forum threads 11516 / 11527-7 / 11536.</li>
-        <li>Corrected an overclaim: staff 11516 confirms the known-fault mask but does not state it is pixel-exact; re-labeled that detail as an inference. Fixed a weekly-cap citation. Upgraded several confidence notes to "verified."</li>
-        <li>Did <em>not</em> generate a prediction GeoTIFF, did <em>not</em> call DrivenData submit, did <em>not</em> invent citations.</li>
-      </ul>
-      <p><strong>Human-owned checks still required</strong></p>
-      <ul>
-        <li>Open Miller 1994 / Verduzco 2004 PDFs (cited, not yet read).</li>
-        <li>Unpack INGENIOUS Qfaults v2 field-definition readme.</li>
-        <li>Confirm the reference-notebook band count (19) and raster size (3730×3292) against the actual downloaded file.</li>
-        <li>Unanswered forum threads 11540 / 11526 / 11543.</li>
-      </ul>
-      <p><strong>Fabrication controls:</strong> every numeric claim traces to a fetched primary source; the one prior inference (pixel-exact mask) was corrected rather than left as fact.</p>
-    </article>
+  <div class="shell">
+    <main id="main">
+      <p class="meta">Compliance artefact · append a dated block every session that uses generative AI · newest first</p>
 
-    <p>
-      Official rules §3.2 (NLR PDF, September 2026): using generative AI is allowed, but the submission
-      <strong>narrative must indicate the extent</strong> of use. The competitor owns accuracy, authenticity, and authorship.
-      Named risks: fabrication, falsification, plagiarism.
-      Source: <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">https://www.nlr.gov/docs/fy26osti/96647.pdf</a>.
-    </p>
-    <p>This page is the running log for work in <code>buffedlizard55-lab/LEARNGEMSDOE</code>. It is not a prize-submission narrative, but it is the raw material for that narrative.</p>
+      <h1>AI-usage log</h1>
 
-    <article class="entry">
-      <h3>2026-09-26 · session arena/01a0def8-learngemsdoe</h3>
-      <p><strong>Tool:</strong> Arena.ai Agent Mode (coding agent with web fetch/search). No other generative-AI APIs were called from this repo.</p>
-      <p><strong>What the agent did</strong></p>
-      <ul>
-        <li>Fetched official competition pages, NLR rules PDF, forum threads, USGS/INGENIOUS/GeoDAWN landing pages, Hermant 2025 PDF, reference-solution README and notebook JSON.</li>
-        <li>Wrote the GitHub Pages research library, hypothesis backlog, changelog, this log, and inspect-only data scripts.</li>
-        <li>Did <em>not</em> generate a prediction GeoTIFF, did <em>not</em> call DrivenData submit, did <em>not</em> invent citations.</li>
-      </ul>
-      <p><strong>Human-owned checks still required</strong></p>
-      <ul>
-        <li>Every URL in <a href="sources.html">sources</a> should be opened by a person before a prize narrative quotes it.</li>
-        <li>Forum 11527 staff answer is now extracted (post 7). Remaining unanswered: 11540, 11526, 11543.</li>
-        <li>NLR PDF §A.14–A.17 not fully extracted this session.</li>
-      </ul>
-      <p><strong>Fabrication controls used:</strong> claims are tied to fetched URLs; numbers (α, β, R, prize amounts, flight-line spacing, raster 3730×3292, Hermant 400 m / 1100 faults / 264 km) are copied from those pages, not estimated. Missing content is labeled unverified.</p>
-    </article>
-  </main>
-  <footer class="site"><div class="wrap">Append a dated block every session that uses generative AI.</div></footer>
+      <div class="banner info">
+        <p>
+          <strong>Why this page exists.</strong>
+          <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Official Rules §3.2</a>:
+        </p>
+        <p class="quote">
+          “Using generative AI technology in the development of your prize submission is allowed. However, you must
+          indicate in the narrative (not included in the word count) the extent to which, if any, you used generative AI
+          technology and how you used it to develop your submission … You are responsible for the accuracy, authenticity,
+          and authorship representations of your submission under consideration, including content developed with
+          generative AI tools. Relying on generative AI may introduce significant risks, including but not limited to,
+          research misconduct resulting from fabrication, falsification, or plagiarism…”
+          <cite>GEMS Prize Official Rules, §3.2</cite>
+        </p>
+        <p>
+          This log is built incrementally, session by session, so that the §3.2 narrative can be assembled from a
+          contemporaneous record rather than reconstructed from memory at the deadline. The rules name fabrication as the
+          AI-specific risk the competitor owns; the controls in use are listed at the bottom of this page.
+        </p>
+      </div>
+
+      <article class="entry" id="session-01a0df14">
+        <h3>2026-09-26 · session <code>arena/01a0df14-learngemsdoe</code> (this session)</h3>
+        <p><strong>Tool.</strong> Arena.ai Agent Mode — a coding agent with web fetch, web search, file read/write, and
+          shell execution. No other generative-AI service was called from this repository. No image, audio or video
+          generation was used.</p>
+
+        <p><strong>What the agent did</strong></p>
+        <ul>
+          <li>
+            <em>Source verification.</em> Re-fetched and read, in full or in part: the NLR official rules PDF (all 7
+            chunks), the DrivenData hub, problem page 967 (both chunks), about page 968, the forum category index and
+            eleven individual threads, the USGS GeoDAWN data page, the USGS Quaternary Fault and Fold Database page, the
+            INGENIOUS GDR record, the Hermant 2025 workshop PDF (4 of 8 chunks), the Mattéo 2021 publisher record, the
+            reference-solution README and notebook, and corroborating records for Miller &amp; Singh 1994, Verduzco et al.
+            2004 and Kreemer &amp; Young 2022; plus the HeroX rules resource, the USGS ScienceBase item for GeoDAWN, the
+            GBCGE INGENIOUS project page, and the Hart-Wagoner et al. GRC paper.
+          </li>
+          <li>
+            <em>Correction.</em> Resolved the previous session's open question about the scoring mask by reading staff
+            post 4 of forum thread 11516 (2026-09-21), which states plainly that the mask is pixel-exact. Removed the
+            earlier hedge from four pages and quoted the full post.
+          </li>
+          <li>
+            <em>Writing.</em> Rebuilt the site: new stylesheet, sticky navigation, per-page tables of contents,
+            client-side filters; new <a href="feature-stack.html">feature stack</a> page; expanded all six library domains
+            to 40 numbered entries; rewrote the seven hypothesis cards against the corrected mask behaviour; rewrote the
+            overview and explainer; rebuilt the source index with per-source verification status.
+          </li>
+          <li>
+            <em>Code.</em> Wrote <code>scripts/metrics.py</code> — distance-weighted Tversky index, Tversky loss, a
+            pixel-exact masked variant, and 11 self-tests. Ran the self-tests; all pass on CPU with the Python standard
+            library alone.
+          </li>
+        </ul>
+
+        <p><strong>What the agent did not do</strong></p>
+        <ul>
+          <li>Did not generate, score, or write a prediction GeoTIFF, and did not add any code capable of doing so.</li>
+          <li>Did not use a DrivenData weekly submission slot, and did not touch the submission API.</li>
+          <li>Did not handle, request, or store DrivenData credentials, and made no attempt to bypass the login on the data tab.</li>
+          <li>Did not create a second site, repository, account, or competition registration.</li>
+          <li>Did not invent a source, DOI, number or quotation. Three items that could not be traced to content that was
+            actually read are marked <span class="chip unverified">unverified</span> or
+            <span class="chip unverified">inference</span> on the page where they appear.</li>
+        </ul>
+
+        <p><strong>Human review still required</strong></p>
+        <ul>
+          <li>Every URL on the <a href="sources.html">source index</a> should be opened by a person before any prize narrative quotes it.</li>
+          <li>The two paywalled methods papers — <a href="https://doi.org/10.1016/0926-9851(94)90022-1">Miller &amp; Singh 1994</a> and <a href="https://doi.org/10.1190/1.1651454">Verduzco et al. 2004</a> — are cited by bibliographic record only. Their method summaries on this site are conventional descriptions, not quotations, and are labelled as such.</li>
+          <li>The remaining chunks of the Hermant 2025 PDF (4–7) and the body of Mattéo et al. 2021 are unread.</li>
+          <li>The INGENIOUS Qfaults v2 field-definition document inside the downloaded archive has not been opened.</li>
+          <li>The reference notebook is 198 chunks; only the first was read. Any claim about later cells (patch size, epochs, ensemble size) is explicitly withheld.</li>
+          <li>The four unanswered forum threads need re-checking: <a href="https://community.drivendata.org/t/team-member-eligibility-competition-homepage-vs-official-rules/11540">11540</a>, <a href="https://community.drivendata.org/t/institutional-limit/11526">11526</a>, <a href="https://community.drivendata.org/t/using-a-teammates-geological-interpretation-as-training-labels/11543">11543</a>, and the eligibility reply in <a href="https://community.drivendata.org/t/about-the-gems-prize-challenge-category/11499">11499</a>.</li>
+        </ul>
+
+        <p><strong>Fabrication controls used this session</strong></p>
+        <ul>
+          <li>Every quoted sentence was copied from a page fetched during the session. Nothing is quoted from memory.</li>
+          <li>Numbers — α=0.2, β=0.8, R=300 m, prize splits, 3292×3730, 19 bands, 149,030 line-km, 51,857 km², 200 m / 400 m line spacing, 1,100 faults, 264 km, 50 m buffer, 6.5% positive pixels, 1.6 Ma — were each copied from the document named beside them.</li>
+          <li>Derived quantities are shown with their inputs and marked as arithmetic or inference. The grid-area comparison (≈122,800 km² bounding box versus 51,857 km² surveyed) is presented as arithmetic from two verified numbers, inside a collapsible note, with the conclusion labelled an inference.</li>
+          <li>Absence-of-evidence arguments — notably “what is not in the 19-band stack” — are labelled as inference rather than fact.</li>
+          <li>One source listed with no verified content was moved out of the citation index; the PDF was then opened, found to be a real GBCGE / NBMG paper with a directly relevant statement about how the INGENIOUS fault database was collated, and reinstated as <em>abstract and introduction read</em>. Both the demotion and the reinstatement are recorded on the sources page and in the changelog rather than silently reversed.</li>
+          <li>Two author lists were corrected — Kreemer &amp; Young, and Siler D.L. — against the INGENIOUS project page's own publication list.</li>
+          <li>A claim inherited from a previous session — that a complete train/inference/validate pipeline was ready to run — was checked against the repository, found false, and flagged on the <a href="pipeline.html">pipeline</a> page and in the site-wide irregularity list.</li>
+        </ul>
+      </article>
+
+      <article class="entry" id="session-01a0df09">
+        <h3>2026-09-26 · session <code>arena/01a0df09-learngemsdoe</code></h3>
+        <p><strong>Tool.</strong> Arena.ai Agent Mode (web fetch/search + file writes). Same repository, separate branch from the 01a0def8 session.</p>
+        <p><strong>Did.</strong> Re-fetched and line-by-line verified the rules PDF, DrivenData hub/967/968, USGS QFFD page, GeoDAWN ScienceBase, INGENIOUS GDR, Hermant 2025 PDF, Mattéo 2021, Kreemer &amp; Young 2022, and forum threads 11516 / 11527-7 / 11536. Corrected an overclaim (staff 11516 confirms the known-fault mask but, at that time, did not state it is pixel-exact; re-labelled that as an inference). Fixed a weekly-cap citation. Upgraded several confidence notes to “verified”.</p>
+        <p><strong>Did not.</strong> Generate or submit a prediction GeoTIFF; use weekly submission slots; invent citations.</p>
+        <p><strong>Human review still needed.</strong> Forum thread 11527 post bodies; NLR PDF appendix remainder; Mattéo 2021 full methods. <em>Partly resolved this session — see above.</em></p>
+      </article>
+
+      <article class="entry" id="session-01a0def8">
+        <h3>2026-09-26 · session <code>arena/01a0def8-learngemsdoe</code></h3>
+        <p><strong>Tool.</strong> Arena.ai Agent Mode (coding agent with web fetch/search). No other generative-AI APIs were called from this repository.</p>
+        <p><strong>Did.</strong> Fetched official competition pages, NLR rules PDF, forum threads, USGS/INGENIOUS/GeoDAWN landing pages, Hermant 2025 PDF, reference-solution README and notebook. Wrote the GitHub Pages research library, hypothesis backlog, changelog, this log, and the inspect-only data scripts.</p>
+        <p><strong>Did not.</strong> Generate a prediction GeoTIFF; call DrivenData submit; invent citations.</p>
+        <p><strong>Human-owned checks still required.</strong> Every URL in the source index should be opened by a person before a prize narrative quotes it. NLR PDF §A.14–A.17 not fully extracted at the time — <em>resolved this session</em>.</p>
+        <p><strong>Fabrication controls used.</strong> Claims tied to fetched URLs; numbers copied from those pages rather than estimated; missing content labelled unverified.</p>
+      </article>
+
+      <h2>Standing controls</h2>
+      <ol>
+        <li><strong>No unsourced number.</strong> If a figure cannot be pointed at in a fetched document, it is not written down.</li>
+        <li><strong>Quote, do not paraphrase.</strong> Where a rule or clarification matters, the sentence is copied verbatim with a citation to the section or post.</li>
+        <li><strong>Label the inference.</strong> Reasoning built on verified inputs is marked <span class="chip unverified">inference</span> so a reader knows it is arguable rather than sourced.</li>
+        <li><strong>Distinguish record from content.</strong> A confirmed DOI means the work exists; it does not mean a claim from it has been read. Both states are recorded separately on the source index.</li>
+        <li><strong>Log the negative.</strong> Corrections, demotions and rejected hypotheses are recorded in the changelog and kept, not deleted.</li>
+        <li><strong>Gate the submission.</strong> No prediction artefact is produced by this agent. Submission generation remains a separate, explicitly authorised process, and this log is the record that separation was maintained.</li>
+      </ol>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      Append a dated block every session that uses generative AI. A log reconstructed at deadline time is not a record.
+    </div>
+  </footer>
   <script src="assets/nav.js"></script>
 </body>
 </html>

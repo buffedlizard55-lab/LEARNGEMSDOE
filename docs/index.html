@@ -3,138 +3,276 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GEMSDOE research library</title>
+  <title>GEMSDOE — GEMS Prize research library</title>
+  <meta name="description" content="Research library and hypothesis backlog for the DOE GEMS Prize. Sources are linked to primary documents for line-by-line review. No prediction files.">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="index.html">GEMSDOE research</a>
+      <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
+        <a href="feature-stack.html">Feature stack</a>
         <a href="hypotheses.html">Hypotheses</a>
-        <a href="research/governance.html">Governance</a>
         <a href="sources.html">Sources</a>
         <a href="pipeline.html">Pipeline</a>
+        <a href="research/governance.html">Governance</a>
         <a href="changelog.html">Changelog</a>
         <a href="ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Knowledge base for one DrivenData entity · last verified 2026-09-26 · no prediction files</p>
-    <h1>Find catalogue gaps, not known traces</h1>
-    <p class="lede">Research library for the Geologic Enhanced Mapping System (GEMS) Prize. The scored target is faults that are <em>not</em> already in the USGS / INGENIOUS catalogue in the GeoDAWN area. This site documents sources, methods, and hypotheses. It does not generate or submit predictions.</p>
 
-    <div class="banner warn">
-      <strong>Training blocker (verified):</strong> competition GeoTIFFs sit behind DrivenData login
-      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data tab → login</a>).
-      Place them with <code>bash scripts/download_competition_data.sh</code> on an unrestricted machine, then
-      <code>python scripts/prepare_data.py</code>. This agent does not use weekly submission slots.
+  <div class="shell">
+    <main id="main">
+      <p class="meta">Knowledge base for one registered DrivenData entity · sources re-verified line by line 2026-09-26 · this repository does not produce prediction files</p>
+
+      <h1>Find the faults the catalogue missed</h1>
+      <p class="lede">
+        The GEMS Prize is not scored on how well you reproduce the published fault map — the published map is
+        <em>masked out of the scoring</em>. It is scored on faults that experts have identified and that are absent from the
+        USGS / INGENIOUS catalogue in the GeoDAWN area. This site is the research library and hypothesis backlog behind
+        that problem: every entry is tied to a primary source you can open and check.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><div class="n">6</div><div class="l">Research domains</div></div>
+        <div class="stat"><div class="n">7</div><div class="l">Hypotheses</div></div>
+        <div class="stat"><div class="n">19</div><div class="l">Feature bands</div></div>
+        <div class="stat"><div class="n">100 m</div><div class="l">Grid / 3730×3292</div></div>
+        <div class="stat"><div class="n">300 m</div><div class="l">Metric kernel R</div></div>
+        <div class="stat"><div class="n">$300k</div><div class="l">Prize pool</div></div>
+      </div>
+
+      <div class="banner warn">
+        <h3>Blocker: competition rasters are not in this repository</h3>
+        <p>
+          <code>data/</code> is empty. The DrivenData data tab sits behind login
+          (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">verified redirect</a>),
+          and this agent does not hold or store credentials. Nothing on this site has been measured against the real
+          rasters — every hypothesis is <span class="chip untested">untested</span> for that reason.
+        </p>
+        <p class="small">
+          Unblock on an enrolled machine: <code>bash scripts/download_competition_data.sh</code> then
+          <code>python scripts/prepare_data.py</code>. See <a href="pipeline.html">pipeline status</a>.
+        </p>
+      </div>
+
+      <h2 id="facts">The competition in one table</h2>
+      <p class="small">Every row below was read out of the linked primary source on 2026-09-26. Nothing here is paraphrased from memory.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Fact</th><th>Value</th><th class="nowrap">Source (open it)</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Submission deadline</td>
+              <td>3 December 2026, 11:59 p.m. UTC</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition hub</a></td>
+            </tr>
+            <tr>
+              <td>Prize pool</td>
+              <td>$300,000. Phase&nbsp;1 $50,000 split equally among the top five ($10k each). Phase&nbsp;2 $250,000: $100k / $70k / $40k / $25k / $15k.</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Hub</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules PDF §1.1</a></td>
+            </tr>
+            <tr>
+              <td>Metric</td>
+              <td>Distance-weighted Tversky index, α=0.2 (false positives), β=0.8 (false negatives), triangular kernel, R=300&nbsp;m</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">Problem description</a></td>
+            </tr>
+            <tr>
+              <td>Submission format</td>
+              <td>One GeoTIFF, single band, <code>float32</code>, values in [0,&nbsp;1], EPSG:32611, 100&nbsp;m, same bounds as the training data, null/nan outside</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">Submission format</a></td>
+            </tr>
+            <tr>
+              <td>One submission, two rounds</td>
+              <td>You must pick a single submission for both rounds <em>before</em> seeing your private-test score</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.5, §3.6.2</a></td>
+            </tr>
+            <tr>
+              <td>Feedback budget</td>
+              <td>Three scored submissions per week; the allowance resets on a rolling window, not a calendar week</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2, §3.4</a> · <a href="https://community.drivendata.org/t/weekly-submissions/11524">forum 11524</a></td>
+            </tr>
+            <tr>
+              <td>Training labels</td>
+              <td>USGS Quaternary fault maps + INGENIOUS, provided as vector and raster; obtained from the INGENIOUS Great Basin Regional Dataset Compilation</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.3</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#labels">Problem description</a></td>
+            </tr>
+            <tr>
+              <td>Who labelled the <em>new</em> faults</td>
+              <td>“Geology experts at the National Laboratory of the Rockies (NLR) and USGS”</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §2 — Background</a></td>
+            </tr>
+            <tr>
+              <td>Scoring mask</td>
+              <td><strong>Pixel-exact</strong> — “identical to the provided set of training fault labels”. A predicted pixel near a known trace but far from a new-fault label is <em>fully penalised</em>.</td>
+              <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">Staff reply, forum 11516 post 4 (2026-09-21)</a></td>
+            </tr>
+            <tr>
+              <td>What “new fault” means</td>
+              <td>“Any fault pixel not already captured by USGS/INGENIOUS”, and it “can include newly mapped geometry of an existing fault system”</td>
+              <td><a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">Staff reply, forum 11536</a></td>
+            </tr>
+            <tr>
+              <td>Generative-AI disclosure</td>
+              <td>Allowed, but you must state in the narrative “the extent to which … you used generative AI technology and how you used it”; you own accuracy, authenticity and authorship</td>
+              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2</a> · <a href="ai-usage.html">this site's AI log</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="scored">What is actually being scored</h2>
+      <p>
+        The private test set for Phase 1 was labelled by experts <em>before</em> the competition and is fixed. In Phase 2 an
+        expert panel reviews every team's submission, verifies anything genuinely new, and all submissions are re-scored
+        against the expanded set — so a prediction that helps experts find a real unmapped fault can score higher in Phase 2
+        than in Phase 1 (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#competition-structure">competition structure</a>).
+      </p>
+      <p>
+        Two clarifications from DrivenData staff change the optimal strategy materially, and both are quoted verbatim on the
+        <a href="research/governance.html">governance</a> page:
+      </p>
+      <ol>
+        <li>Existing catalogue pixels are masked from evaluation in <em>both</em> rounds — the mask is pixel-exact, not buffered.</li>
+        <li>A new-fault ground-truth pixel <em>may</em> lie within 300&nbsp;m of a known trace; staff describe finding those
+          corrections as “one outcome we are aiming for”.</li>
+      </ol>
+      <p>
+        Net effect: reproducing the catalogue earns nothing, and hedging a wide corridor around known traces costs
+        real false-positive mass. The money is in geometry an expert would add — tip extensions, splays, parallel strands,
+        and structures under cover — not in thicker ink on mapped lines.
+      </p>
+
+      <h2 id="library">Research library</h2>
+      <div class="grid">
+        <a class="card" href="research/catalogue-gaps.html">
+          <h3>1 · Catalogue-gap reasoning</h3>
+          <p>How the USGS and INGENIOUS catalogues were actually built — and where that process is structurally incomplete. Highest-leverage domain.</p>
+          <p class="card-meta">7 entries · highest leverage</p>
+        </a>
+        <a class="card" href="research/potential-field.html">
+          <h3>2 · Potential-field geophysics</h3>
+          <p>RTP/TMI, gradients, tilt derivative, isostatic gravity — edges that survive under basin fill where no scarp exists.</p>
+          <p class="card-meta">7 entries</p>
+        </a>
+        <a class="card" href="research/geomorphology.html">
+          <h3>3 · DEM structural geomorphology</h3>
+          <p>Detrended elevation and slope at 100&nbsp;m, 1&nbsp;m lidar via 3DEP, and what a subtle Basin-and-Range scarp looks like in each.</p>
+          <p class="card-meta">6 entries</p>
+        </a>
+        <a class="card" href="research/seismotectonics.html">
+          <h3>4 · Seismotectonics and strain</h3>
+          <p>Strain-rate invariants, earthquake density, conductivity — where independent signals agree and where they part company.</p>
+          <p class="card-meta">6 entries</p>
+        </a>
+        <a class="card" href="research/prior-art.html">
+          <h3>5 · Prior art</h3>
+          <p>Mattéo 2021, Hermant 2025 and the official Lipor U-Net reference — including where the reference likely falls short.</p>
+          <p class="card-meta">5 entries</p>
+        </a>
+        <a class="card" href="research/governance.html">
+          <h3>6 · Competition governance</h3>
+          <p>Rules sections, forum clarifications and errata, open eligibility questions, and time-sensitive items.</p>
+          <p class="card-meta">9 entries</p>
+        </a>
+      </div>
+      <p class="small">
+        Also: the <a href="feature-stack.html">feature stack</a> page lists all 19 bands with their official descriptions,
+        the raster geometry, and the GeoDAWN acquisition specs that produced them.
+      </p>
+
+      <h2 id="hypotheses">Hypothesis backlog</h2>
+      <p class="small">
+        Status counts: <span data-chip-count></span>. Full cards with layers, physical signature, why each targets a
+        <em>gap</em> rather than a known fault, expected DTI impact, cost and rejection criteria:
+        <a href="hypotheses.html">hypothesis backlog</a>.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">ID</th><th class="nowrap">Status</th><th>Hypothesis</th><th class="nowrap">Cost</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap"><strong>H1</strong></td><td><span class="chip untested">untested</span></td><td>New geometry of existing systems — tip extensions, splays, parallel strands</td><td class="nowrap">Low–med</td></tr>
+            <tr><td class="nowrap"><strong>H2</strong></td><td><span class="chip untested">untested</span></td><td>Buried intra-basin structures from gravity / magnetic edges under cover</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H3</strong></td><td><span class="chip blocked">blocked</span></td><td>1&nbsp;m lidar scarps too subtle for the compiled catalogue (needs DEM placement)</td><td class="nowrap">High</td></tr>
+            <tr><td class="nowrap"><strong>H4</strong></td><td><span class="chip untested">untested</span></td><td>Kinematic orphans — strain / seismicity highs with no catalogue trace</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster the scorer masks out</td><td class="nowrap">Medium</td></tr>
+            <tr><td class="nowrap"><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="irregular">Flagged irregularities</h2>
+      <div class="banner bad">
+        <p>These are recorded, not smoothed over. Each one is a place where the official documents disagree with each other, or where a question put to the organisers has no answer.</p>
+        <ol>
+          <li>
+            <strong>Deadline wording differs between documents.</strong> The hub states “Dec. 3, 2026, 11:59 p.m. UTC”;
+            rules §A.1 states “5:00 p.m. ET on the prize submission deadline date”. Both are official. Treat the earlier
+            instant as binding and submit well before it.
+            (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">hub</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">§A.1</a>)
+          </li>
+          <li>
+            <strong>Eligibility text is shorter on the homepage than in the rules.</strong> The hub says only that a team
+            captain must be a US citizen or permanent resident; §1.3 adds that other team members must be “legally
+            authorized to work in the United States”, excludes FFRDC-affiliated researchers from cash prizes, and excludes
+            participants in Malign Foreign Talent Recruitment Programs. Two forum threads asking which text governs are
+            unanswered (see <a href="research/governance.html">governance</a>).
+          </li>
+          <li>
+            <strong>Test-fault provenance will not be published.</strong> Staff: “We're not sharing details about the data
+            sources, fault types, or coverage behind the test faults beyond what's in the problem description.”
+            (<a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">11527 post 7</a>)
+          </li>
+          <li>
+            <strong>The reference notebook prints the label raster as “Band 19”.</strong> Staff confirm this is a bug in the
+            summary string; the label file has one band.
+            (<a href="https://community.drivendata.org/t/why-does-the-training-fault-labels-file-in-the-data-tab-have-a-single-band-while-the-labels-in-the-reference-solution-repo-have-19-bands/11529">11529</a>)
+          </li>
+          <li>
+            <strong>Feature-stack provenance is not documented per band.</strong> The 19-band raster carries band
+            descriptions and data categories, but the competition pages do not state which public release each band was
+            derived from, at what resolution it was resampled, or how nodata was handled. Any provenance claim beyond the
+            band description is an inference and is labelled as such.
+          </li>
+          <li>
+            <strong>No training pipeline exists in this repository.</strong> A prior handoff stated the
+            train→inference→validate pipeline was “ready to run”; it is not present in <code>scripts/</code>. See
+            <a href="pipeline.html">pipeline status</a>.
+          </li>
+        </ol>
+      </div>
+
+      <h2 id="official">Official links for manual review</h2>
+      <ul>
+        <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition hub</a></li>
+        <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description (page 967)</a> — datasets, metric, submission format</li>
+        <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About / resources (page 968)</a></li>
+        <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">DrivenData rules page</a> → <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF (NLR, September 2026)</a></li>
+        <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference solution</a></li>
+        <li><a href="https://community.drivendata.org/c/gems-prize-challenge/111">Official forum</a></li>
+        <li><a href="https://doi.org/10.5066/P93LGLVQ">GeoDAWN data release (Glen &amp; Earney, 2024)</a> ·
+            <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data page</a></li>
+        <li><a href="https://doi.org/10.15121/1881483">INGENIOUS Great Basin Regional Dataset Compilation (Ayling et al., 2022)</a></li>
+        <li><a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS Quaternary Fault and Fold Database</a></li>
+        <li>Full index with verification status: <a href="sources.html">sources</a></li>
+      </ul>
+    </main>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      Research library and hypothesis backlog only. No prediction GeoTIFF is generated, validated for score, or submitted
+      from this repository, and no weekly submission slot is used. Every claim is linked to a primary source so a reviewer
+      can check it line by line.
     </div>
-
-    <h2>Competition in one screen</h2>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Fact</th><th>Value</th><th>Source</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>End date</td>
-            <td>3 December 2026, 11:59 p.m. UTC</td>
-            <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition hub</a></td>
-          </tr>
-          <tr>
-            <td>Prize pool</td>
-            <td>$300,000 ($50k initial / $250k final)</td>
-            <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Hub</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules PDF §1.1</a></td>
-          </tr>
-          <tr>
-            <td>Metric</td>
-            <td>Distance-weighted Tversky index, α=0.2, β=0.8, R=300 m</td>
-            <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">Problem description</a></td>
-          </tr>
-          <tr>
-            <td>Submission</td>
-            <td>One float32 GeoTIFF, EPSG:32611, 100 m, values in [0, 1]</td>
-            <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">Submission format</a></td>
-          </tr>
-          <tr>
-            <td>Weekly cap</td>
-            <td>Three submissions per week; reset is a rolling window, not a calendar week</td>
-            <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2 / §3.4</a> · <a href="https://community.drivendata.org/t/weekly-submissions/11524">forum 11524</a></td>
-          </tr>
-          <tr>
-            <td>Scoring mask</td>
-            <td>Known USGS/INGENIOUS pixels masked/excluded from scoring (staff 11516); the 300 m kernel is for new-fault ground-truth distance, not a known-fault buffer</td>
-            <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Staff clarification 11516</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h2>Research library</h2>
-    <div class="grid">
-      <a class="card" href="research/catalogue-gaps.html">
-        <h3>Catalogue-gap reasoning</h3>
-        <p>Highest-leverage domain. How USGS and INGENIOUS actually mapped faults, and where that process is incomplete.</p>
-      </a>
-      <a class="card" href="research/potential-field.html">
-        <h3>Potential-field geophysics</h3>
-        <p>RTP, TMI, gravity; gradient magnitude and tilt-derivative lineaments for buried contrasts.</p>
-      </a>
-      <a class="card" href="research/geomorphology.html">
-        <h3>DEM structural geomorphology</h3>
-        <p>Curvature and breaks-in-slope; what a subtle Basin-and-Range scarp looks like.</p>
-      </a>
-      <a class="card" href="research/seismotectonics.html">
-        <h3>Seismotectonics and strain</h3>
-        <p>Strain-rate invariants, earthquake density, conductivity — agreement vs disagreement.</p>
-      </a>
-      <a class="card" href="research/prior-art.html">
-        <h3>Prior art</h3>
-        <p>Published ML fault mapping and the DrivenData U-Net reference — where it likely falls short.</p>
-      </a>
-      <a class="card" href="research/governance.html">
-        <h3>Competition governance</h3>
-        <p>Rules §1.3 eligibility, §3.2 generative-AI disclosure, forum errata, open questions.</p>
-      </a>
-    </div>
-
-    <h2>Hypothesis backlog (status)</h2>
-    <p>All hypotheses below are <span class="chip untested">untested</span> — no spatial holdout has been run in this repository because competition rasters are not placed. Full cards: <a href="hypotheses.html">hypothesis backlog</a>.</p>
-    <ul>
-      <li><strong>H1</strong> — Along-strike extensions and splays of mapped traces (known pixels masked; 300 m kernel can still score nearby new geometry).</li>
-      <li><strong>H2</strong> — Intra-basin buried structures from gravity/magnetic edges under cover that QFFD never intended to map.</li>
-      <li><strong>H3</strong> — 1 m lidar scarps too subtle or too recently imaged for the compiled catalogue.</li>
-      <li><strong>H4</strong> — Strain-rate / seismicity highs with no catalogue trace.</li>
-      <li><strong>H5</strong> — Do not reproduce the training label raster; the reference U-Net is trained on the catalogue that scoring masks out.</li>
-    </ul>
-
-    <h2>Official links (manual review)</h2>
-    <ul>
-      <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition hub</a></li>
-      <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description</a></li>
-      <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About / resources</a></li>
-      <li><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF (NLR)</a></li>
-      <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Reference solution</a></li>
-      <li><a href="https://community.drivendata.org/c/gems-prize-challenge/111">Forum</a></li>
-      <li>Full index: <a href="sources.html">sources</a></li>
-    </ul>
-
-    <div class="banner bad">
-      <strong>Flagged irregularities</strong> (not smoothed over):
-      DrivenData homepage eligibility text is shorter than Official Rules §1.3;
-      forum threads on team-member work authorization, institutional limits, and teammate-mapped labels are unanswered as of 2026-09-26;
-      staff will not share test-fault data sources, types, or coverage beyond the problem description (<a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">11527/7</a>);
-      rules PDF §A.1 says 5:00 p.m. ET on the deadline date while the hub lists 11:59 p.m. UTC on 3 Dec 2026.
-    </div>
-  </main>
-  <footer class="site"><div class="wrap">Research library only. Not a submission generator. Sources are linked for line-by-line review.</div></footer>
+  </footer>
   <script src="assets/nav.js"></script>
 </body>
 </html>

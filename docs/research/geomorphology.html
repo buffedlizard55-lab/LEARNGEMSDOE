@@ -4,72 +4,236 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DEM structural geomorphology — GEMSDOE</title>
+  <meta name="description" content="Detrended elevation and slope at 100 m, 1 m lidar via 3DEP, and what a subtle Basin-and-Range fault scarp looks like in each.">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="../index.html">Overview</a>
         <a href="../executive-summary.html">Explainer</a>
         <a href="index.html">Library</a>
+        <a href="../feature-stack.html">Feature stack</a>
         <a href="../hypotheses.html">Hypotheses</a>
-        <a href="governance.html">Governance</a>
         <a href="../sources.html">Sources</a>
         <a href="../pipeline.html">Pipeline</a>
+        <a href="governance.html">Governance</a>
         <a href="../changelog.html">Changelog</a>
         <a href="../ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Scarps, curvature, breaks-in-slope in Basin and Range terrain</p>
-    <h1>DEM-based structural geomorphology</h1>
 
-    <article class="entry">
-      <h3>GM-1 · 1 m DEM is an official extra, not inside the 100 m stack</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p class="src"><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features">Problem description</a> · rules §2 and §3.3 in <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">NLR PDF</a></p>
-      <p><strong>Claims:</strong> Feature GeoTIFF includes detrended elevation and slope of detrended elevation at 100 m. Separately, <code>1m_DEM_links.csv</code> lists where 1 m DEM can be downloaded. Rules: feature data “also contain USGS Digital Elevation Model (DEM) elevation data at 1-m resolution.” About page: coordinated airborne lidar through USGS 3DEP over a similar extent as GeoDAWN.</p>
-      <p><strong>Relevance:</strong> A 100 m pixel is coarser than many Basin-and-Range scarps. Catalogue compilers historically used mixed, often coarser, topographic bases (OF 93-338). 1 m lidar is the highest-leverage extra dataset for surface-scarp gaps — and the largest I/O cost.</p>
-      <p><strong>Confidence:</strong> High. The CSV itself was not downloaded (login wall).</p>
-    </article>
+  <div class="shell">
+    <main id="main">
+      <p class="meta">Library · domain 3 of 6 · 6 entries · re-verified 2026-09-26</p>
 
-    <article class="entry">
-      <h3>GM-2 · How mappers actually see Quaternary faults on DEMs (Hermant et al., 2025)</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high for their protocol</span></p>
-      <p class="src"><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Hermant et al., 2025, Stanford Geothermal Workshop</a></p>
-      <p><strong>Claims:</strong> Many faults induce local topographic variations (fault scarps) mappable from elevation, slope, or satellite imagery. Authors used USGS 3DEP 1/3-arc-second (~10 m) DEM only where derived from lidar, because slope from non-lidar 3DEP was artefact-ridden. Visual criteria: generally straight line with strong contrast; different elevation on either side and steeper slope in the fault zone; vegetation contrasts; weathered rock/fractures. They applied a 50 m buffer around mapped traces because “the expression of a fault on the data can be thicker than the resolution of the data.” They note 1 m DEM would be heavier computationally; 10 m was a deliberate tradeoff.</p>
-      <p><strong>Relevance:</strong> In this terrain, a “subtle scarp” is often a linear slope break, not a San Andreas-style ribbon. Buffering traces by tens of meters is standard when rasterizing. Competition rasterization is 100 m; DTI kernel is 300 m. A 1 m scarp that is real but only 1–2 pixels wide at 100 m is easy for a U-Net trained on thick catalogue traces to miss — or, conversely, to over-thicken.</p>
-      <p><strong>Confidence:</strong> High for Hermant’s Nevada protocol. Not automatically the NLR/USGS private-label protocol (see CG-5).</p>
-    </article>
+      <h1>DEM structural geomorphology</h1>
+      <p class="lede">
+        Two of nineteen bands are topographic, and both come from a 100&nbsp;m detrended surface. That is the central
+        tension in this domain: the scarps an expert would map are 1–10&nbsp;m features, and the only topographic layers
+        provided are an order of magnitude coarser than that. Everything useful here comes from knowing precisely where
+        the coarse layer fails.
+      </p>
 
-    <article class="entry">
-      <h3>GM-3 · Mattéo et al., 2021 — deep learning on optical + topographic fault mapping</h3>
-      <p><span class="chip verified">verified</span> <span class="chip med">confidence: medium (full text not fully extracted)</span></p>
-      <p class="src">Mattéo, L., Manighetti, I., Tarabalka, Y., Gaucel, J.-M., van den Ende, M., Mercier, A., et al., 2021, Automatic fault mapping in remote optical images and topographic data with deep learning: JGR Solid Earth, 126, e2020JB021269. <a href="https://doi.org/10.1029/2020JB021269">10.1029/2020JB021269</a> (listed on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/#additional-information">About page</a>).</p>
-      <p><strong>Claims:</strong> Title and venue confirmed. The paper addresses automatic fault mapping from remote optical images and topographic data using deep learning. Full methods/results were not line-extracted this session (Wiley page is long; paywall-adjacent).</p>
-      <p><strong>Relevance:</strong> Organizer-endorsed prior art for DEM/optical fault mapping. Next pass should extract architecture, input bands, and reported error vs manual mapping.</p>
-      <p><strong>Confidence:</strong> High that the paper exists at that DOI. Low on unquoted numerical results — none invented here.</p>
-    </article>
+      <h2>Entries</h2>
 
-    <article class="entry">
-      <h3>GM-4 · QFFD geomorphic-expression field</h3>
-      <p><span class="chip verified">verified</span></p>
-      <p class="src"><a href="https://pubs.usgs.gov/of/1993/0338/report.pdf">USGS OF 93-338</a></p>
-      <p><strong>Claim:</strong> Compilers must describe geomorphic expression (fault scarps, offset streams, monoclines, shutter ridges, associated landslides, etc.). Example given: small (1–2 m) to moderate (&lt;10 m) scarps on a lacustrine surface. Line type depends on continuity/surface expression; inferred traces are dotted.</p>
-      <p><strong>Relevance:</strong> A 1–2 m scarp is invisible in a 100 m DEM slope but obvious in 1 m lidar. Catalogue completeness for small scarps is therefore a function of whether a topical study existed, not of whether the landform exists.</p>
-    </article>
+      <article class="entry" id="gm1">
+        <h3><span class="id">GM-1</span> What the two 100 m topographic bands can and cannot see</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band tags: <strong>12</strong> “Detrended elevation — topography with regional trends removed”, <strong>19</strong> “Detrended elevation slope — gradient of elevation after detrending”, both category <code>topographic</code></dd>
+          <dt>Citation</dt>
+          <dd>DrivenData reference-solution notebook band listing; see <a href="../feature-stack.html">feature stack</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            The elevation layer is detrended — a regional surface has been removed — and the slope band is the gradient of
+            that detrended surface, not of raw elevation.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Detrending is the right thing for scarp work: it removes the long-wavelength range-and-basin signal so local
+            relief stands out. But a 100&nbsp;m pixel averages 10,000 m² of ground. A 2&nbsp;m-high scarp that is 20&nbsp;m
+            wide contributes a slope signal diluted roughly fifty-fold across the pixel that contains it, before any
+            detrending error is considered. The practical consequence: bands 12 and 19 will resolve range-front scarps and
+            large piedmont lineaments, and will miss the small, recent, low-offset scarps that are the most likely
+            post-compilation discoveries. This is the direct justification for
+            <a href="../hypotheses.html">H3</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Band tags. <span class="chip unverified">inference</span> The resolution-dilution reasoning and the claim about which scarps survive are our analysis, not sourced statements.</dd>
+        </dl>
+      </article>
 
-    <article class="entry">
-      <h3>GM-5 · What a subtle or partly buried scarp looks like here — bounded statement</h3>
-      <p><span class="chip unverified">reasoning, not a new observation</span></p>
-      <p>No original DEM analysis was run (no 1 m tiles on disk). From GM-2 and the About page’s contrast with Carrizo Plain: expect degraded, dissected, or sediment-mantled slope breaks along range fronts and across piedmonts; intra-basin scarps may be only a metre or two high or expressed as vegetation lineaments (Hermant B8A rationale). Do not treat this paragraph as a field observation.</p>
-    </article>
-  </main>
-  <footer class="site"><div class="wrap"><a href="index.html">Library</a></div></footer>
+      <article class="entry" id="gm2">
+        <h3><span class="id">GM-2</span> The 1 m DEM is official and provided as links, not as data</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features">Problem description — Provided features</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.3</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a></dd>
+          <dt>Citation</dt>
+          <dd>DrivenData / DOE GEMS Prize problem description and official rules (September 2026)</dd>
+          <dt>What it claims</dt>
+          <dd>
+            The problem description: “you will find a CSV file called <code>1m_DEM_links.csv</code> that contains links
+            where DEM data at 1m resolution can be downloaded.” Rules §3.3: “In addition, instructions will be provided
+            for downloading USGS DEM elevation data at 1-m resolution for the GeoDAWN region”, and §2 states the feature
+            data “also contain U.S. Geological Survey (USGS) Digital Elevation Model (DEM) elevation data at 1-m
+            resolution”. The About page adds that airborne lidar was collected through the USGS 3D Elevation Program
+            (3DEP) “over a similar extent spanned by the geophysical surveys”.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The 1&nbsp;m DEM is an officially sanctioned part of the feature set, not external data — so using it carries
+            no licence question under the external-data rule. It is also the only provided layer at a resolution
+            commensurate with the features experts map. Note the wording carefully: it is a <em>CSV of links</em>, so
+            acquisition is a batch download job, and the About page says lidar covers an extent “similar to” — not
+            identical to — the geophysical surveys. Lidar coverage is therefore itself a spatial variable, and
+            coverage boundaries are exactly where catalogue completeness will change discontinuously.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> All three quotations read from the official pages this session.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="gm3">
+        <h3><span class="id">GM-3</span> Hermant et al. (2025): a worked scarp-detection protocol for this exact region</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Stanford 50th Workshop PDF</a>, cited by the competition's <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a></dd>
+          <dt>Citation</dt>
+          <dd>Hermant, B., Kiersnowski, L., &amp; Bellanger, M. (2025). <em>Using deep learning to map Quaternary faults in Western USA.</em> Proc. 50th Workshop on Geothermal Reservoir Engineering, Stanford University.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Numbers read from the PDF:
+            <ul>
+              <li>Elevation from <strong>3DEP 1/3 arc-second</strong> (~10&nbsp;m ground spacing N–S; E–W varies with meridian convergence) — chosen because it is the highest-resolution seamless DEM with full conterminous-US coverage, and because it is lighter than a 1&nbsp;m DEM.</li>
+              <li><strong>“Clean slope raster data can only be calculated where elevation data is derived from LIDAR data.”</strong> They therefore used the 1/3 arc-second DEM <em>only where it is lidar-derived</em>, in northern central Nevada. Non-lidar 3DEP slope was artefact-ridden.</li>
+              <li>Their own manual label set: <strong>1,100 faults, cumulative length 264 km</strong>, mapped over the eastern half of the study area, with the western half reserved for prediction.</li>
+              <li>Fault pixels buffered by <strong>50 m</strong> → a 100&nbsp;m-thick fault signature. 7,692 tiles retained after filtering to tiles containing at least one fault pixel; split 64 / 16 / 20 → 4,920 / 1,232 / 1,540, then augmented to 20,000 / 4,000 / 4,000.</li>
+              <li>Tiles <strong>128 × 128 px at 10 m = 1,280 m</strong> across.</li>
+              <li>Fault pixels are <strong>6.5%</strong> of the data after buffering. Loss: Focal Binary Cross Entropy with <strong>α = 0.065</strong> (matched to the imbalance) and <strong>γ = 2.0</strong>.</li>
+              <li>Sentinel-2 <strong>B8A</strong> (20 m → 10 m, 865 nm, 20 nm bandwidth) chosen for vegetation/biomass sensitivity: “in areas of very flat topography where faults are not necessarily highlighted by elevation data but sometimes by vegetation orientation.”</li>
+              <li>Explicit caveat: in flat areas (basin centre, playa) their processing <strong>vertically exaggerates relief</strong>, which helps find structures but also exaggerates non-fault features — “Prediction results in flat areas should therefore be treated with caution.”</li>
+            </ul>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            This is the closest published analogue to the competition task, done in north-central Nevada, and it is cited
+            by the organisers themselves. Five transferable lessons:
+            <ul>
+              <li><strong>Lidar provenance gates slope quality.</strong> If you compute slope from non-lidar 3DEP, you get artefacts. That is a hard constraint on H3, and it means a lidar-coverage mask should be built before any slope processing.</li>
+              <li><strong>1,100 faults / 264 km</strong> gives a realistic prior for how much new fault length a manual expert pass adds in this terrain — i.e. how much signal a model could hope to find.</li>
+              <li><strong>6.5% positive pixels</strong> at 10&nbsp;m with a 50&nbsp;m buffer. At 100&nbsp;m with a 1-pixel trace the positive fraction will be far smaller; the imbalance — and the focal-loss style fix — will matter more, not less.</li>
+              <li><strong>Vegetation carries structural signal in flat terrain.</strong> No optical/vegetation band is present in the 19-band stack, so this is a genuine external-data opportunity (Sentinel-2 is open data).</li>
+              <li><strong>Flat-area predictions are unreliable</strong> by the authors' own admission, and basins are exactly where cover-masked faults live. Their caveat is a warning against trusting the same failure mode in our output.</li>
+            </ul>
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Every number and quotation above was read from the PDF this session.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="gm4">
+        <h3><span class="id">GM-4</span> Geomorphic expression is an admissible evidence class in the catalogue itself</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://pubs.usgs.gov/of/1993/0338/report.pdf">OF 93-338</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a></dd>
+          <dt>Citation</dt>
+          <dd>Haller, Machette &amp; Dart (1993), USGS Open-File Report 93-338</dd>
+          <dt>What it claims</dt>
+          <dd>
+            OF 93-338 admits structures with pre-Quaternary movement only “unless there is compelling evidence of
+            Quaternary movement (<strong>geomorphology, offset surficial deposits, etc.</strong>)”, and treats scarp
+            morphology as supporting data for segmentation. The competition About page, describing how geologists detect
+            faults, lists field searches for “surface expressions such as fault scarps, offset rock layers, and polished
+            slickensides”, and from remote sensing “linear features and subtle ground movements indicative of fault
+            activity”.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Geomorphology is a valid route into the catalogue — but only when a human has already interpreted and
+            published it. A scarp visible in lidar that nobody has written up is geomorphically identical to one that
+            would qualify, and is absent from the catalogue purely for lack of publication. That is gap class 2 in
+            <a href="catalogue-gaps.html">CG-7</a>, and it is the class most directly attacked by
+            <a href="../hypotheses.html">H3</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Quotations read from both official sources.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="gm5">
+        <h3><span class="id">GM-5</span> The native detrended-elevation release</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://doi.org/10.5066/P9MQRCBY">10.5066/P9MQRCBY</a>, listed as a resource of <a href="https://gdr.openei.org/submissions/1391">INGENIOUS GDR submission 1391</a></dd>
+          <dt>Citation</dt>
+          <dd>U.S. Geological Survey (2022). <em>Elevation Trend and Detrended Elevation</em> [Great Basin]. <a href="https://doi.org/10.5066/P9MQRCBY">https://doi.org/10.5066/P9MQRCBY</a></dd>
+          <dt>What it claims</dt>
+          <dd>“Provided are maps of elevation trend and detrended elevation for the Great Basin, USA. The detrended elevation map … emphasizes local relative topogra[phy].”</dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            If bands 12 and 19 were resampled from this product, then the native grid, its documented detrending method
+            and its resolution are all available as external data. That matters because detrending is not neutral: the
+            wavelength of the removed trend determines which scarp heights survive. Knowing the trend model tells you
+            which scarp scales the provided bands are blind to.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> The release exists and its description is quoted from the INGENIOUS record. <span class="chip unverified">unverified</span> That the competition bands derive from it is <strong>not</strong> stated officially — band provenance is undocumented. Verify by comparing grids once data are placed.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="gm6">
+        <h3><span class="id">GM-6</span> What a subtle scarp looks like in this terrain — the operational picture</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Reasoning, assembled from GM-1 … GM-5 and the acquisition facts on <a href="../feature-stack.html">feature stack</a>. No single source states this.</dd>
+          <dt>Citation</dt>
+          <dd>—</dd>
+          <dt>What it claims</dt>
+          <dd>
+            In the northwestern Great Basin, the fault expression most likely to be missing from the catalogue is a
+            low-offset, basin-facing scarp on a piedmont or playa margin: a few metres of relief over tens of metres of
+            width, continuous for hundreds of metres to a few kilometres along strike, often beheaded or dissected by
+            alluvial channels, sometimes expressed only as a vegetation or tonal line. Operationally:
+            <ul>
+              <li>At <strong>1 m lidar</strong>: a break-in-slope or a curvature maximum traceable along strike, possibly with a tonal/vegetation line (Hermant's B8A observation).</li>
+              <li>At <strong>10 m 3DEP</strong>: visible only if lidar-derived; otherwise buried in artefacts (GM-3).</li>
+              <li>At <strong>100 m bands 12/19</strong>: invisible individually, but a persistent along-strike run of slightly elevated slope may still register. Detection must be directional and multi-pixel, not per-pixel.</li>
+            </ul>
+            The confusers are specific and should be listed before modelling, not after: irrigation and drainage ditches,
+            shorelines and wave-cut benches of pluvial lakes, alluvial-fan channel margins, lithologic benches, road and
+            fence lines, and playa edges.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            This is the mental model a geologist reviewer will apply to a candidate map. Writing it down converts H3 from
+            “use the 1&nbsp;m DEM” into a testable detection problem with named false positives.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip unverified">inference</span> Deliberately unsourced beyond the components cited. This entry exists to be corrected by someone who has mapped these scarps in the field.</dd>
+        </dl>
+      </article>
+
+      <h2>Blocked-on, and what to do the moment data land</h2>
+      <ol>
+        <li><strong>Read <code>1m_DEM_links.csv</code></strong> and count tiles, coverage and total volume before committing to H3.</li>
+        <li><strong>Build a lidar-coverage mask</strong> from the 3DEP tile index for the region and intersect it with the GeoDAWN survey outline. Coverage boundaries are where catalogue completeness should jump — test that directly.</li>
+        <li><strong>Check whether bands 12/19 match</strong> the detrended-elevation release at <a href="https://doi.org/10.5066/P9MQRCBY">10.5066/P9MQRCBY</a> once resampled. If they do, the detrending method is documented and the blind spots become computable.</li>
+        <li><strong>Do not compute slope from non-lidar 3DEP.</strong> Hermant et al. tried it and found it artefact-ridden; that is a published negative result and it is free to respect.</li>
+      </ol>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="potential-field.html">← Potential-field geophysics</a> · <a href="index.html">Library</a> · next: <a href="seismotectonics.html">Seismotectonics and strain</a>
+    </div>
+  </footer>
   <script src="../assets/nav.js"></script>
 </body>
 </html>

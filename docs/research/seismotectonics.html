@@ -4,73 +4,249 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Seismotectonics and strain — GEMSDOE</title>
+  <meta name="description" content="Strain-rate invariants, earthquake density and conductivity bands: what each measures, where they are independent, and how to use them as priors rather than detectors.">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="../index.html">Overview</a>
         <a href="../executive-summary.html">Explainer</a>
         <a href="index.html">Library</a>
+        <a href="../feature-stack.html">Feature stack</a>
         <a href="../hypotheses.html">Hypotheses</a>
-        <a href="governance.html">Governance</a>
         <a href="../sources.html">Sources</a>
         <a href="../pipeline.html">Pipeline</a>
+        <a href="governance.html">Governance</a>
         <a href="../changelog.html">Changelog</a>
         <a href="../ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Strain-rate invariants, earthquake density, conductivity</p>
-    <h1>Seismotectonics and strain</h1>
 
-    <article class="entry">
-      <h3>ST-1 · Layers in the official 100 m stack</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p class="src"><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features">Problem description</a> · notebook band list</p>
-      <p><strong>Problem description:</strong> dilatation rate, shear strain rate, and the second invariant of the strain rate tensor; density of earthquakes; surface conductivity and depth to conductive base surface.</p>
-      <p><strong>Notebook tags:</strong> geodetic second invariant; geodetic shear rate; geodetic dilatation rate; “Distance to earthquake (n=100km radius, a=15° azimuth parameters)”; “Earthquake intensity or density (n=100km radius, a=15° parameters)”; conductivity surface.</p>
-      <p><strong>Relevance:</strong> Independent kinematic and electrical evidence. Agreement among strain, seismicity, and a potential-field edge <em>off</em> the catalogue is a classic hidden-structure argument. Disagreement (high strain, no seismicity, no gravity edge) is a caution against over-predicting.</p>
-      <p><strong>Confidence:</strong> High that these bands exist. The “n=100km, a=15°” parameterization is from the notebook’s GeoTIFF tags, not from the problem-description prose — re-read tags after download.</p>
-    </article>
+  <div class="shell">
+    <main id="main">
+      <p class="meta">Library · domain 4 of 6 · 6 entries · re-verified 2026-09-26</p>
 
-    <article class="entry">
-      <h3>ST-2 · INGENIOUS geodetic and seismicity products</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high on existence</span></p>
-      <p class="src">Ayling et al., 2022, <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a> · GDR resource list</p>
-      <p><strong>Claims:</strong> Compilation includes geotiffs of geodetic shear and dilation models (Nevada Geodetic Laboratory) and independent/dependent earthquake density (Nevada). Project publications list Kreemer, C., and Young, Z.M., 2022, Crustal strain rates in the Western U.S. and their relationship with earthquake rates: Seismological Research Letters, <a href="https://doi.org/10.1785/0220220153">10.1785/0220220153</a>.</p>
-      <p><strong>Relevance:</strong> Likely provenance of the competition strain and seismicity bands (not independently confirmed by DrivenData metadata in this session). Kreemer &amp; Young relate strain rates to earthquake rates — useful for “where independent signals agree.”</p>
-      <p><strong>Confidence:</strong> High that the GDR zips exist (<a href="https://gdr.openei.org/files/1391/geodetics_INGENIOUS_regional_data.zip">geodetics zip</a>, <a href="https://gdr.openei.org/files/1391/seismicity_INGENIOUS_regional_data.zip">seismicity zip</a>). The SRL article abstract was not fully extracted (publisher page). No numerical strain values are quoted here.</p>
-    </article>
+      <h1>Seismotectonics and strain</h1>
+      <p class="lede">
+        Seven bands in this family — three geodetic, two seismic, one conductivity, plus depth-to-basement borrowed from
+        <a href="potential-field.html">potential-field</a>. None of them is a fault detector. All of them are independent
+        of the published fault map, which is exactly why they are useful: they can point at a place where the crust is
+        demonstrably doing something and the catalogue says nothing.
+      </p>
 
-    <article class="entry">
-      <h3>ST-3 · Electrical conductance (MT) of the Great Basin</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p class="src">Peacock, J.R., and Bedrosian, P., 2022, Electrical Conductance Maps of the Great Basin, USA: USGS data release, <a href="https://doi.org/10.5066/P9TWT2LU">10.5066/P9TWT2LU</a> (linked from INGENIOUS GDR and GBCGE project page).</p>
-      <p><strong>GDR blurb:</strong> electrical conductance maps from a 3D model of the Great Basin at five depth ranges spanning 2 to 200 km.</p>
-      <p><strong>Relevance:</strong> Conductive zones can mark fluids and clay along faults. A conductivity anomaly without a catalogue trace is a candidate gap; a conductivity anomaly on a mapped range-front fault is not. Depth-range mismatch vs 100 m surface labels is a real limitation.</p>
-      <p><strong>Confidence:</strong> High on the data release. The competition “surface conductivity and depth to conductive base” layers may be derived from this or from a different product — <span class="chip unverified">unverified which</span>.</p>
-    </article>
+      <div class="banner info">
+        <p>
+          <strong>The disciplining rule for this whole domain.</strong> Strain and seismicity fields are smooth and
+          regional. Faults are thin and local. A high strain-rate invariant does not tell you where a fault is, only that
+          deformation is happening nearby. Use these bands as <em>spatial priors that re-weight candidates produced
+          elsewhere</em>, never as a standalone probability map — unless you want a confident, diffuse, high-false-positive
+          output. That is written into hypothesis <a href="../hypotheses.html">H4</a> as a rejection criterion.
+        </p>
+      </div>
 
-    <article class="entry">
-      <h3>ST-4 · Slip and dilation tendency on Quaternary faults</h3>
-      <p><span class="chip verified">verified</span></p>
-      <p class="src">Siler, D.L., 2022, Shapefile for slip tendency and dilation tendency calculated for Quaternary faults in the Great Basin: <a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a></p>
-      <p><strong>Claim (GDR):</strong> slip- and dilation-tendency analysis of Quaternary faults in the Great Basin region.</p>
-      <p><strong>Relevance:</strong> Attributes of <em>already mapped</em> faults, useful for geothermal favorability, weaker as a detector of unmapped traces. Could still rank which catalogue gaps (if found) matter for Phase 2 geologic narrative.</p>
-    </article>
+      <h2>Entries</h2>
 
-    <article class="entry">
-      <h3>ST-5 · Agreement vs disagreement — research question, not a result</h3>
-      <p><span class="chip unverified">untested</span></p>
-      <p>No overlay of strain, seismicity, conductivity, and the training-label mask has been computed here (no rasters). Highest-value next measurement: pixels in the top strain-rate / earthquake-density quantiles whose distance to the nearest catalogue pixel exceeds 300 m. That set is the seismotectonic gap candidate list.</p>
-    </article>
-  </main>
-  <footer class="site"><div class="wrap"><a href="index.html">Library</a></div></footer>
+      <article class="entry" id="st1">
+        <h3><span class="id">ST-1</span> The three geodetic strain bands</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band tags: <strong>4</strong> “Geodetic second invariant — measure of strain rate tensor magnitude”, <strong>7</strong> “Geodetic shear rate — rate of angular deformation from GPS/InSAR”, <strong>8</strong> “Geodetic dilatation rate — rate of volumetric strain (expansion/contraction)”. All category <code>geodetic_strain</code>.</dd>
+          <dt>Citation</dt>
+          <dd>DrivenData reference-solution notebook band listing; see <a href="../feature-stack.html">feature stack</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            The three standard invariants of a 2-D horizontal strain-rate tensor derived from geodetic observations:
+            the second invariant (overall magnitude), the shear component (angular distortion), and the dilatation
+            (area change).
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            These are the only provided bands that measure present-day deformation directly. Deformation does not require
+            a published scarp. A pixel with elevated second invariant and no catalogue fault within 300&nbsp;m is a
+            defensible statement that the catalogue is silent where the crust is not — the “kinematic orphan” of H4.
+            Note also the decomposition: dilatation (band 8) is the extensional signal, which in this province is
+            associated with opening and therefore with permeability, so it carries geothermal relevance as well as
+            structural relevance.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Band tags and category. <span class="chip unverified">unverified</span> The underlying velocity field, its station density, the smoothing applied, and the reference frame are all undocumented in the competition materials.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="st2">
+        <h3><span class="id">ST-2</span> The two seismic bands are parameterised, and not independent of each other</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band tags: <strong>10</strong> “Distance to earthquake (n=100km radius, a=15° azimuth parameters)”, <strong>16</strong> “Earthquake intensity or density (n=100km radius, a=15° parameters)”. Both category <code>seismic</code>.</dd>
+          <dt>Citation</dt>
+          <dd>DrivenData reference-solution notebook band listing</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Two seismic fields computed with the same neighbourhood and azimuth parameters — a 100 km radius and a 15°
+            azimuth term.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Two consequences, one practical and one methodological:
+            <ul>
+              <li><strong>They are not independent evidence.</strong> Both derive from the same catalogue with the same smoothing parameters. Counting them as two confirmations of the same hypothesis is double counting.</li>
+              <li><strong>A 100 km smoothing radius is very large relative to a 300 m scoring kernel.</strong> A density band built with a 100 km neighbourhood is a regional field; it cannot localise a fault to within 300 m. It can tell you a fault is <em>plausible</em> in a broad area.</li>
+            </ul>
+            Treat bands 10 and 16 as one weak regional prior, not two.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Band tags including the parameter strings. <span class="chip unverified">inference</span> The non-independence and over-smoothing conclusions follow from those parameters; they are stated nowhere official.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="st3">
+        <h3><span class="id">ST-3</span> The strain–earthquake-rate relationship, in the peer-reviewed literature</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://doi.org/10.1785/0220220153">10.1785/0220220153</a></dd>
+          <dt>Citation</dt>
+          <dd>Kreemer, C., &amp; Young, Z.M. (2022). <em>Crustal Strain Rates in the Western United States and Their Relationship with Earthquake Rates.</em> Seismological Research Letters, 93(6), November 2022. <a href="https://doi.org/10.1785/0220220153">https://doi.org/10.1785/0220220153</a>. First author affiliated with the Nevada Bureau of Mines and Geology and the Seismological Laboratory, University of Nevada, Reno. Author list confirmed from the <a href="https://gbcge.org/current-projects/ingenious/">INGENIOUS project page</a>.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Presents crustal strain rates for the western United States and examines their relationship to earthquake
+            rates.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The relevant point is the <em>imperfect</em> correlation between geodetic strain and seismicity. Where the two
+            agree, you have two independent lines of evidence for active deformation and stronger grounds to suspect an
+            unmapped structure. Where they disagree — high geodetic strain with low seismicity, or vice versa — the
+            disagreement itself is informative: it may indicate aseismic creep, a short observational window, or strain
+            distributed across structures too small or too slow to appear in either the seismic record or the fault
+            catalogue. The last case is precisely the catalogue-gap target. Kreemer is also a co-author on the INGENIOUS
+            compilation that supplies the training labels, so the strain products in the stack plausibly sit in this
+            lineage.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Title, journal, volume, date, DOI and first-author affiliation confirmed from the publisher record. <span class="chip unverified">unverified</span> The abstract body has not been read — only the title/record is confirmed — so no quantitative claim from the paper is reproduced here. <span class="chip unverified">inference</span> The lineage link to the stacked strain bands is our suggestion, not a sourced fact.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="st4">
+        <h3><span class="id">ST-4</span> Native geodetic and seismic products, free of the 100 m resampling</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://gdr.openei.org/submissions/1391">INGENIOUS GDR submission 1391</a></dd>
+          <dt>Citation</dt>
+          <dd>Ayling et al. (2022), <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>, CC BY 4.0</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Two downloadable archives: <strong>Geodetic Shear and Dilation Models</strong> (51.99 MB) — “GeoTIFFs and
+            accompanying ASCII, .csv, and metadata that describe geodetic shear and dilation models for the INGENIOUS
+            study area, developed at the Nevada Geodetic Labo[ratory]”; and <strong>Earthquake Density Models</strong>
+            (22.98 MB) — “GeoTIFFs and accompanying ASCII, .csv, and metadata that describe independent and dependent
+            earthquake density for the INGENIOUS study area, developed at the Nevada Geo[dettic Laboratory]”.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Two concrete gains. First, the archives ship <strong>metadata</strong>, so the smoothing, station network and
+            construction of the strain and density fields become knowable — which is exactly the information missing from
+            the 100&nbsp;m bands (ST-1). Second, the earthquake density release distinguishes
+            <strong>independent and dependent</strong> density, i.e. declustered vs. raw. For locating structures rather
+            than aftershock clouds, the declustered field is the right one, and knowing which is which matters. Both are
+            CC BY 4.0, so both satisfy the external-data licence condition.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Descriptions quoted from the official GDR record. <span class="chip unverified">unverified</span> The archive contents have not been downloaded or read; nothing here is asserted about the internal files.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="st5">
+        <h3><span class="id">ST-5</span> Conductivity: one surface band here, five depth slices in the source release</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band <strong>17</strong> “Conductivity surface — electrical conductivity of subsurface”, category <code>subsurface</code> · <a href="https://doi.org/10.5066/P9TWT2LU">Peacock &amp; Bedrosian (2022) conductance maps</a></dd>
+          <dt>Citation</dt>
+          <dd>Peacock, J.R., &amp; Bedrosian, P.A. (2022). <em>Electrical conductance maps estimated from a 3D model of the Great Basin, USA.</em> U.S. Geological Survey data release, <a href="https://doi.org/10.5066/P9TWT2LU">https://doi.org/10.5066/P9TWT2LU</a>, via <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            The stack carries a single conductivity-surface band. The release listed in the INGENIOUS compilation
+            “presents electrical conductance maps estimated from a 3D model of the Great Basin, USA, at
+            <strong>five different depth ranges, spanning 2 to 200 km depth</strong>”.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Conductance is sensitive to fluids, clays and alteration along structures, so a conductive lineament can
+            corroborate a candidate fault that has no surface expression. But it is equally sensitive to basin fill,
+            salinity and geothermal outflow, none of which is a fault. Used as a primary detector it will light up
+            exactly the flat, sedimentary, low-lying areas where Hermant et al. warn that predictions should be treated
+            with caution. Used as a multiplier on a candidate produced by structure-aware evidence, it is cheap and
+            occasionally decisive. The depth slicing in the source release is the improvement worth having: a conductor at
+            2 km means something different from one at 50 km, and the single stacked band cannot say which.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Band tag and the release description. <span class="chip unverified">unverified</span> That band 17 derives from this release is not stated officially.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="st6">
+        <h3><span class="id">ST-6</span> Slip and dilation tendency — kinematic plausibility of a candidate</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://doi.org/10.5066/P9YL58W6">10.5066/P9YL58W6</a>, listed in <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a></dd>
+          <dt>Citation</dt>
+          <dd>Siler, D.L. (2022). <em>Shapefile for slip tendency and dilation tendency calculated for Quaternary faults in the Great Basin.</em> U.S. Geological Survey data release, <a href="https://doi.org/10.5066/P9YL58W6">https://doi.org/10.5066/P9YL58W6</a>. Author and title as listed on the <a href="https://gbcge.org/current-projects/ingenious/">INGENIOUS project page</a>.</dd>
+          <dt>What it claims</dt>
+          <dd>“This database contains the results of slip tendency and dilation tendency analysis of Quaternary faults in the Great Basin region” — i.e. how favourably each known fault is oriented for slip or dilation in the regional stress field.</dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Note the limitation: it is computed <em>for known Quaternary faults</em>, so it cannot discover anything on its
+            own. Its value is as a <strong>plausibility filter on candidates</strong> — given a proposed strand with an
+            orientation and dip, is that orientation one that the regional stress field would actually activate? That is a
+            genuinely geological test rather than a statistical one, and it is the kind of argument a Phase 2 reviewer can
+            engage with. It also serves geothermal relevance directly, since dilation tendency relates to permeability.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Description quoted from the official GDR record. <span class="chip unverified">unverified</span> The release has not been downloaded; no field-level claim is made.</dd>
+        </dl>
+      </article>
+
+      <h2>Agreement / disagreement matrix</h2>
+      <p class="small">
+        A working tool, not a sourced claim. It says what to do when independent signals conflict — conflicts are where
+        the interesting candidates live.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Signal combination</th><th>Reading</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>Strain high <strong>+</strong> seismicity high <strong>+</strong> no catalogue fault</td><td>Active deformation, silent catalogue: strongest kinematic-orphan case</td><td>Prioritise for H1/H3 inspection; highest value per unit effort</td></tr>
+            <tr><td>Strain high <strong>+</strong> seismicity low</td><td>Possibly aseismic, or the catalogue window is short</td><td>Lower priority; worth noting in the Phase 2 narrative</td></tr>
+            <tr><td>Strain low <strong>+</strong> seismicity high</td><td>Localised release on a structure below geodetic resolution — or an aftershock cluster</td><td>Check for clustering before believing it; use declustered density</td></tr>
+            <tr><td>Magnetic/gradient edge <strong>+</strong> gravity edge <strong>+</strong> thick cover (band 15)</td><td>Buried structure with two independent physical contrasts</td><td>H2 candidate; report conditioned on cover thickness</td></tr>
+            <tr><td>Edge <strong>+</strong> no gravity counterpart <strong>+</strong> thin cover</td><td>Probably lithology, not structure</td><td>Demote</td></tr>
+            <tr><td>Edge parallel to a GeoDAWN survey or block boundary</td><td>Acquisition artefact until proven otherwise</td><td>Reject (H7)</td></tr>
+            <tr><td>Conductivity high <strong>+</strong> no structural evidence</td><td>Basin fill, salinity or outflow</td><td>Do not promote (H6)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>First measurements to run</h2>
+      <ol>
+        <li>Quantile-bin bands 4, 7, 8, 10, 16 and compute distance-to-nearest-label per bin. If distance does not decrease with strain quantile, H4 is dead as stated and should be rewritten.</li>
+        <li>Check correlation between bands 10 and 16 — expected to be high; if it is, use one.</li>
+        <li>Overlay the declustered earthquake-density grid from <a href="https://gdr.openei.org/files/1391/seismicity_INGENIOUS_regional_data.zip">the INGENIOUS archive</a> on band 16 and confirm which one the stacked band corresponds to.</li>
+        <li>Build the agreement matrix above as an actual raster stack, then measure label density per cell of the matrix on a spatial holdout.</li>
+      </ol>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="geomorphology.html">← DEM geomorphology</a> · <a href="index.html">Library</a> · next: <a href="prior-art.html">Prior art</a>
+    </div>
+  </footer>
   <script src="../assets/nav.js"></script>
 </body>
 </html>

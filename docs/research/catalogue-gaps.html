@@ -4,99 +4,303 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Catalogue-gap reasoning — GEMSDOE</title>
+  <meta name="description" content="How the USGS Quaternary Fault and Fold Database and the INGENIOUS compilation were actually built, and where that process is structurally incomplete.">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="../index.html">Overview</a>
         <a href="../executive-summary.html">Explainer</a>
         <a href="index.html">Library</a>
+        <a href="../feature-stack.html">Feature stack</a>
         <a href="../hypotheses.html">Hypotheses</a>
-        <a href="governance.html">Governance</a>
         <a href="../sources.html">Sources</a>
         <a href="../pipeline.html">Pipeline</a>
+        <a href="governance.html">Governance</a>
         <a href="../changelog.html">Changelog</a>
         <a href="../ai-usage.html">AI log</a>
       </nav>
     </div>
   </header>
-  <main id="main">
-    <p class="meta">Highest-leverage domain · methodology of the catalogues, not just their rasters</p>
-    <h1>Catalogue-gap reasoning</h1>
-    <p class="lede">The prize scores faults the existing USGS / INGENIOUS map does not already capture. That requires reading how those maps were built — field campaigns, compilation rules, surface-expression requirements — and then asking where that process is structurally incomplete.</p>
 
-    <div class="banner warn">
-      <strong>Scored definition of “new” (staff):</strong> any fault pixel not already captured by USGS/INGENIOUS, including newly mapped geometry of an existing fault system
-      (<a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">forum 11536</a>).
-      Known USGS/INGENIOUS pixels are masked/excluded from scoring (staff
-      <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">11516</a>);
-      the 300 m kernel is for new-fault ground-truth distance, not a known-fault buffer, so nearby unmapped splays/extensions can still score if they are new-fault pixels.
+  <div class="shell">
+    <main id="main">
+      <p class="meta">Library · domain 1 of 6 · 7 entries · highest leverage · re-verified 2026-09-26</p>
+
+      <h1>Catalogue-gap reasoning</h1>
+      <p class="lede">
+        The scored target is not “what looks fault-like”. It is “what the catalogue does not contain”. That makes the
+        catalogues' <em>own methodology</em> the most valuable document in this project: if you know how a fault had to be
+        evidenced to get into the database, you know exactly which faults were structurally incapable of getting in.
+      </p>
+
+      <div class="banner ok">
+        <p>
+          <strong>The one-sentence version.</strong> The USGS database exists to archive faults with geological evidence of
+          <em>coseismic surface deformation</em>, compiled from published literature, with a stated preference for topical
+          studies and detailed mapping scales, and — since 2017 — with a reduced metadata set. Every one of those four
+          properties excludes a specific, predictable class of real fault. Those classes are the target.
+        </p>
+      </div>
+
+      <h2>Entries</h2>
+
+      <article class="entry" id="cg1">
+        <h3><span class="id">CG-1</span> The database is defined by surface rupture, not by structure</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS — Quaternary Fault and Fold Database of the United States</a></dd>
+          <dt>Citation</dt>
+          <dd>U.S. Geological Survey, 2020, Quaternary Fault and Fold Database for the Nation, <a href="https://doi.org/10.5066/P9BCVRCK">https://doi.org/10.5066/P9BCVRCK</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            “This database contains information on faults and associated folds in the United States that demonstrate
+            geological evidence of <strong>coseismic surface deformation</strong> in large earthquakes during the past
+            1.6 million years (Ma).” The page explains the 1.6&nbsp;Ma cutoff is inherited from the 1983 Geologic Time
+            Scale in use when the database was established in 1993; the Quaternary has since been redefined several times,
+            most recently to 2.58&nbsp;Ma, but the database retains the original definition.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            This is the design limit that creates the target class. A buried or blind structure with no demonstrable
+            surface deformation is not merely unmapped — it is <em>out of scope by construction</em>. The same is true of a
+            structure whose most recent deformation is older than the window, and of one where surface rupture has not been
+            demonstrated even though the structure is real. Combined with the About page's statement that in the GeoDAWN
+            region “many are hidden below the surface, requiring geophysical data to detect”
+            (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">page 968</a>), this is the
+            strongest available argument for hypothesis <a href="../hypotheses.html">H2</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Text quoted verbatim from the official USGS page.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="cg2">
+        <h3><span class="id">CG-2</span> 1993 compilation rules: what a compiler was told to include and exclude</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://pubs.usgs.gov/of/1993/0338/report.pdf">Haller, Machette &amp; Dart, 1993, Open-File Report 93-338 — Guidelines for U.S. Database and Map</a></dd>
+          <dt>Citation</dt>
+          <dd>Haller, K.M., Machette, M.N., and Dart, R.L. (1993). <em>Maps of Major Active Faults, Western Hemisphere International Lithosphere Program (ILP) Project II-2: Guidelines for U.S. Database and Map.</em> U.S. Geological Survey Open-File Report 93-338.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            The guidelines told compilers to “give preference to (1) fault-related topical studies over general studies
+            (i.e., those addressing paleoseismology versus general geology), (2) more recent studies, and (3) more detailed
+            scale of work (i.e., 1:24,000-scale over 1:250,000-scale mapping)”. On inferred structures:
+            <span class="quote">
+              “suspected or inferred Quaternary faults (and folds) will be shown as dotted Quaternary structures (age
+              category 5), whereas structures with known late Tertiary (or older) movement will not be shown unless there
+              is compelling evidence of Quaternary movement (geomorphology, offset surficial deposits, etc.)”
+              <cite>OF 93-338, Introduction</cite>
+            </span>
+            The document also notes the compiler “is forced to select a slip rate and age even when no data may exist”,
+            and that a fault should only be treated as segmented when it “should have been well studied … in a
+            paleoseismologic sense (trenching and dating)”.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Three separate exclusion mechanisms, all documented:
+            <ul>
+              <li><strong>Evidence must be published.</strong> A scarp nobody has written up cannot be compiled, no matter how visible it is in lidar. That is precisely the class of thing 3DEP lidar made visible after the compilation.</li>
+              <li><strong>Inferred structures are deliberately down-weighted or dropped.</strong> A geophysically inferred buried fault with no surface expression has no route into the database.</li>
+              <li><strong>Scale heterogeneity is baked in.</strong> Areas mapped at 1:24,000 were preferred over areas mapped at 1:250,000, which produces mapping-density differences that reflect publication history rather than geology.</li>
+            </ul>
+            This is the methodology foundation under hypotheses H1, H2 and H3.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Quotations read directly from the official USGS PDF this session.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="cg3">
+        <h3><span class="id">CG-3</span> Since 2017 the database is maintained with a reduced attribute set</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS faults page</a>, and the database-search retirement notice on the same page</dd>
+          <dt>Citation</dt>
+          <dd>U.S. Geological Survey, 2020, <a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            “In order to maintain a current and relevant dataset, effective January 12, 2017, the USGS will maintain a
+            limited number of metadata fields that characterize the Quaternary faults and folds of the United States.
+            Archived reports are accessible from the abbreviated record.” Separately, the page states that as of
+            <strong>26 February 2026</strong> the Database Search function is retired and legacy reports are reachable
+            through the <a href="https://doi.org/10.5066/F7S75FJM">interactive fault map</a>.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Two consequences. First, maintenance capacity has been deliberately reduced, which is consistent with a
+            compilation whose completeness reflects when an area was last actively worked on rather than how many faults
+            it contains. Second, the retired search function is a practical, time-sensitive note for anyone planning to
+            pull per-fault metadata: the route in is now the interactive map at
+            <a href="https://doi.org/10.5066/F7S75FJM">10.5066/F7S75FJM</a>, and the GIS zip
+            (<a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a>, 16 MB).
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Quoted from the official USGS page.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="cg4">
+        <h3><span class="id">CG-4</span> INGENIOUS Qfaults: an update of the USGS attributes, not a new mapping</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://gdr.openei.org/submissions/1391">Geothermal Data Repository — submission 1391</a></dd>
+          <dt>Citation</dt>
+          <dd>Ayling, B., Faulds, J., Morales Rivera, A., Koehler, R., Kreemer, C., Mlawsky, E., Coolbaugh, M., Micander, R., dePolo, C., Kraal, K., Wagoner, N., Siler, D., DeAngelo, J., Glen, J., Peacock, J., Batir, J., Gentry, E., Berti, C., Lifton, Z., Clark, A., Kirby, S., Hardwick, C., and Kleber, E. (2022). <em>INGENIOUS — Great Basin Regional Dataset Compilation</em> [Data set]. Geothermal Data Repository, GBCGE, NBMG, UNR. <a href="https://doi.org/10.15121/1881483">https://doi.org/10.15121/1881483</a></dd>
+          <dt>What it claims</dt>
+          <dd>
+            The compilation's own descriptions: <strong>Quaternary Faults v1</strong> is a “Shapefile (NAD83 Geographic)
+            containing updated quaternary fault traces, ages, and slip rates for the INGENIOUS study area. Attributes
+            conform to USGS Qfault Database s[tandards]”. <strong>Quaternary Faults v2</strong> “contains an updated
+            version of the INGENIOUS quaternary fault compilation shapefile and text document with field definitions. It
+            supersedes 'Quaternary Fau[lts v1]'”. Licence: CC BY 4.0. The whole compilation is 9 files, 116.98 MB.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The training labels come from this compilation (rules §3.3), so this is the label set the scorer masks out.
+            Two things follow. It is an <em>attribute update</em> of USGS traces — traces, ages, slip rates — which means
+            it inherits the USGS inclusion criteria documented in CG-1 and CG-2 rather than fixing them. And v2 supersedes
+            v1, so any outside copy of the fault shapefile must be checked for version; the field-definition text
+            document in the v2 archive is the authoritative field dictionary.
+          </dd>
+          <dt>Corroboration from the project's own team</dt>
+          <dd>
+            Hart-Wagoner, Coolbaugh, Faulds &amp; Mlawsky (GBCGE / Nevada Bureau of Mines and Geology, University of
+            Nevada, Reno), <a href="https://publications.mygeoenergynow.org/grc/1034813.pdf">Feature Engineering of Fault
+            Attributes for Play Fairway Analysis, Great Basin Region, USA</a>, state that “A Quaternary fault database for
+            the INGENIOUS GBR was collated in Phase I of the INGENIOUS project and included <strong>updated fault
+            locations</strong> and updated fault attributes of <strong>recency</strong> (i.e., age of most recent rupture)
+            and <strong>slip rates</strong>.” That is an independent, project-internal confirmation of what v1's own
+            description implies: the compilation updated locations and attributes, and did not re-map from new evidence.
+            Project context from the <a href="https://gbcge.org/current-projects/ingenious/">INGENIOUS project page</a>:
+            PI Bridget Ayling, Co-PI James Faulds; 1 February 2021 – 30 June 2025; $10,000,000 under DOE Geothermal
+            Technologies Office award DE-EE0009254.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Descriptions quoted from the official GDR record; the Hart-Wagoner abstract and the project page were both read this session. <span class="chip unverified">unverified</span> The field-definition text inside the v2 archive has not been unpacked and read; no field-level claim is made here.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="cg5">
+        <h3><span class="id">CG-5</span> Measured heterogeneity and up to 400 m of positional misfit</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Hermant, Kiersnowski &amp; Bellanger (2025), Stanford 50th Workshop on Geothermal Reservoir Engineering</a> — cited by the competition's own <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a></dd>
+          <dt>Citation</dt>
+          <dd>Hermant, B., Kiersnowski, L., &amp; Bellanger, M. (2025, February). <em>Using deep learning to map Quaternary faults in Western USA.</em> Proceedings, 50th Workshop on Geothermal Reservoir Engineering, Stanford University.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Figure 2 caption: “USGS Quaternary fault density map highlighting the regional variation in Quaternary fault
+            mapping that is not only due to the geological context … (Right) Local discrepancy observed in North Central
+            Nevada: <strong>distance between USGS Quaternary faults and TLS fault label can be up to 400 m</strong>.”
+            The text attributes heterogeneity to “the aggregation of different mapping sources or scales in this database”
+            and notes that “some areas where the geology has been mapped more precisely have an artificially higher fault
+            density and accuracy than areas where geological and structural mapping has been done at a larger scale.”
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The 400&nbsp;m figure is larger than the metric's 300&nbsp;m kernel radius. That is the quantitative core of
+            hypothesis <a href="../hypotheses.html">H1</a>: if published traces can sit up to 400&nbsp;m off the true
+            scarp, then ground-truth pixels for “new” faults can be up to 400&nbsp;m from the nearest catalogue pixel —
+            which is exactly what staff confirmed is possible and even desired
+            (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">forum 11516 post 4</a>).
+            It also means a naive “stay near the known line” prior is not safe.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Figure caption and surrounding text read from the PDF. Note the measurement is in north-central Nevada, inside but not coextensive with GeoDAWN; treat it as regional, not area-specific.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="cg6">
+        <h3><span class="id">CG-6</span> Who labelled the new faults, and what they will and will not say about it</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF, §2 Background</a> · <a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">forum 11527, post 7</a></dd>
+          <dt>Citation</dt>
+          <dd>NLR (2026), <em>Geologic Enhanced Mapping System (GEMS) Prize Official Rules</em>, September 2026, §2. DrivenData staff (Chris Kucharczyk), forum post 2026-09-23.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Rules §2: “The labels for this prize come from the USGS Quaternary Fault and Fold Database and from a set of
+            newly identified faults labeled by geology experts at the National Laboratory of the Rockies (NLR) and USGS.”
+            Staff, in reply to a direct question about data sources, fault types and coverage:
+            <span class="quote">
+              “We're not sharing details about the data sources, fault types, or coverage behind the test faults beyond
+              what's in the problem description. Note that the largest prize pool (Phase 2) will use a test set that is
+              updated by expert review of all Phase 1 submissions…”
+              <cite>forum 11527, post 7</cite>
+            </span>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            We know the labellers' institutional identity but not their protocol. Two usable, source-backed inferences:
+            <ul>
+              <li>They are <em>geologists at NLR and USGS</em> — the same community that maintains QFFD. Their notion of “a fault” is likely continuous with QFFD's evidence culture, which argues <em>against</em> exotic buried-structure labels and <em>for</em> surface-expression corrections. <span class="chip unverified">inference</span></li>
+              <li>Staff explicitly redirect effort to Phase 2, where verified new discoveries are added. That is an official hint that a defensible, geologically argued candidate set has value even if Phase 1 DTI is mediocre.</li>
+            </ul>
+            Do not build a strategy that depends on knowing whether the labels are lidar-derived or geophysics-derived.
+            Nobody outside the organising team knows, and they have said they will not say.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> Both quotations are verbatim. <span class="chip unverified">unverified</span> Any inference from the labellers' identity about label character.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" id="cg7">
+        <h3><span class="id">CG-7</span> The gap classes, derived</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Derived from CG-1 … CG-6. Not a sourced claim in its own right.</dd>
+          <dt>Citation</dt>
+          <dd>—</dd>
+          <dt>What it claims</dt>
+          <dd>
+            Combining the documented inclusion rules with the known data history gives four predictable gap classes:
+            <ol>
+              <li><strong>Corrections to known traces</strong> — tip extensions, splays, parallel strands, and positional errors up to ~400&nbsp;m (CG-5). Staff have explicitly said these count.</li>
+              <li><strong>Post-compilation visibility</strong> — scarps that only became mappable with 3DEP lidar / GeoDAWN-era elevation, i.e. after the topical literature that the compiler was told to prefer (CG-2).</li>
+              <li><strong>Cover-masked structures</strong> — real faults with no demonstrable coseismic surface deformation, which CG-1 places outside the database's definition entirely.</li>
+              <li><strong>Low-publication terrain</strong> — areas where no topical study at detailed scale was ever published, so the compiler had nothing to prefer (CG-2 rule 3).</li>
+            </ol>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Each class maps onto a different feature signal: class 1 and 2 onto topography (bands 12, 19, plus 1 m lidar),
+            class 3 onto gravity and magnetics under thick cover (bands 5, 11, 13, 15, 18), class 4 onto nothing structural
+            and everything independent — strain, seismicity, conductivity (bands 4, 7, 8, 10, 16, 17). That mapping is the
+            bridge from this domain to the hypothesis cards.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip unverified">inference</span> This entry is reasoning, not sourced fact. It is written to be argued with by a geologist, which is the point.</dd>
+        </dl>
+      </article>
+
+      <h2>What would falsify this domain's working assumption</h2>
+      <ul>
+        <li>If the private label set turns out to be dominated by long, obvious, entirely unmapped range-front faults, then the “corrections and subtle scarps” framing in CG-7 is wrong and detection should be biased toward large, continuous, high-amplitude lineaments.</li>
+        <li>If a spatial holdout shows that distance-to-known-fault is a <em>positive</em> predictor of new-fault labels, the gap is diffuse rather than adjacent, and H1 should be demoted relative to H2/H4.</li>
+        <li>If the INGENIOUS v2 field definitions reveal per-fault provenance or mapping-scale attributes, CG-7 class 4 could be measured directly instead of inferred.</li>
+      </ul>
+
+      <h2>Next actions for this domain</h2>
+      <ol>
+        <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text document; replace CG-4's unverified note with the actual field list.</li>
+        <li>Pull <a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a> and the <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">GeoDAWN survey outlines</a>; build a catalogue-density surface and a lidar-coverage surface, then look for their mismatch.</li>
+        <li>Once rasters are placed, compute the single most informative statistic in the project: the distribution of distance-to-nearest-label for high-strain, high-seismicity, high-gradient pixels. That converts CG-7 from reasoning into measurement.</li>
+      </ol>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="index.html">← Research library</a> · domain 1 of 6 · next: <a href="potential-field.html">potential-field geophysics</a>
     </div>
-
-    <article class="entry">
-      <h3>CG-1 · USGS Quaternary Fault and Fold Database — what it is designed to contain</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p class="src"><strong>Source:</strong> <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS Earthquake Hazards — Faults</a> · citation DOI <a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a> · interactive map <a href="https://doi.org/10.5066/F7S75FJM">10.5066/F7S75FJM</a></p>
-      <p><strong>Citation:</strong> U.S. Geological Survey, 2020, Quaternary Fault and Fold Database for the Nation, accessed 26 September 2026, at https://doi.org/10.5066/P9BCVRCK. Official landing page: https://www.usgs.gov/programs/earthquake-hazards/faults.</p>
-      <p><strong>Claims (quoted/paraphrased from that page):</strong> The database contains faults and associated folds in the United States that demonstrate geological evidence of coseismic surface deformation in large earthquakes during the past 1.6 million years. It is intended as the USGS archive for historic and ancient earthquake sources used in probabilistic seismic-hazard analyses. Effective 12 January 2017, USGS maintains a limited number of metadata fields; archived reports remain accessible. Database Search was retired 26 February 2026; legacy reports are reached through the interactive map. GIS download: <a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a>. Nevada cooperator: Nevada Bureau of Mines and Geology.</p>
-      <p><strong>Relevance:</strong> Inclusion requires <em>geologic evidence of coseismic surface deformation</em>. Buried intra-basin faults without a documented surface rupture, and many geophysically inferred structures, are outside the design of this catalogue. That is a structural gap, not a random omission.</p>
-      <p><strong>Confidence:</strong> High — primary USGS page and DOI, fetched 2026-09-26.</p>
-    </article>
-
-    <article class="entry">
-      <h3>CG-2 · 1993 compilation guidelines — how traces were chosen and classified</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
-      <p class="src"><strong>Source:</strong> Haller, K.M., Machette, M.N., and Dart, R.L., 1993, Guidelines for U.S. Database and Map: <a href="https://pubs.usgs.gov/of/1993/0338/report.pdf">USGS Open-File Report 93-338</a> (linked from the QFFD ScienceBase record).</p>
-      <p><strong>Claims:</strong> Compilers should prefer (1) fault-related topical studies over general geology, (2) more recent studies, and (3) more detailed map scales (e.g. 1:24,000 over 1:250,000). Line type is solid, dashed, or dotted depending on continuity or surface expression. Suspected or inferred Quaternary faults are shown as dotted age-category-5 structures; late Tertiary structures are omitted unless there is compelling evidence of Quaternary movement (geomorphology, offset surficial deposits, etc.). Compilers are instructed to present “fact and not interpretation.” Slip rate and most-recent-movement categories must still be chosen even when data are sparse (educated, qualified guesses). Sections (weaker criterion) may be defined from relative age, geometry, scarp preservation, a single trench, or other geologic data including gravity.</p>
-      <p><strong>Relevance:</strong> The catalogue is a compilation of published surface-fault studies at mixed scales, not a wall-to-wall lidar remapping. Expect: (a) sparse fieldwork areas under-represented; (b) inferred/dotted traces conservative; (c) gravity-supported sections exist in the guidelines but are not a substitute for a modern potential-field interpretation of GeoDAWN.</p>
-      <p><strong>Confidence:</strong> High for the 1993 rules. <span class="chip unverified">unverified</span> how fully later QFFD updates still follow OF 93-338 line-by-line — the 2017 metadata reduction is documented on the USGS faults page, but a full modern mapping manual was not re-fetched this session.</p>
-    </article>
-
-    <article class="entry">
-      <h3>CG-3 · INGENIOUS Great Basin fault compilation — what was updated</h3>
-      <p><span class="chip verified">verified</span> <span class="chip med">confidence: medium–high</span></p>
-      <p class="src"><strong>Source:</strong> Ayling et al., 2022, INGENIOUS – Great Basin Regional Dataset Compilation, GDR, <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a> · project page <a href="https://gbcge.org/current-projects/ingenious/">gbcge.org/current-projects/ingenious</a></p>
-      <p><strong>Citation:</strong> Ayling, B., Faulds, J., Morales Rivera, A., Koehler, R., Kreemer, C., Mlawsky, E., Coolbaugh, M., Micander, R., dePolo, C., Kraal, K., Wagoner, N., Siler, D., DeAngelo, J., Glen, J., Peacock, J., Batir, J., Gentry, E., Berti, C., Lifton, Z., Clark, A., Kirby, S., Hardwick, C., and Kleber, E., 2022, INGENIOUS - Great Basin Regional Dataset Compilation [data set], Geothermal Data Repository, https://doi.org/10.15121/1881483.</p>
-      <p><strong>Claims:</strong> The compilation includes shapefiles of Quaternary faults (v1 and superseding v2). GDR text for v1: “updated quaternary fault traces, ages, and slip rates for the INGENIOUS study area. Attributes conform to USGS Qfault Database s[chema].” v2 “supersedes Quaternary Faults v1.” Koehler’s public résumé (NBMG) states he led “compilation, mapping, and attribution of Quaternary faults and earthquake data” on INGENIOUS — <a href="https://nbmg.unr.edu/Staff/Koehler/Koehler_cummulative_resume2023.pdf">PDF</a>. Hart-Wagoner et al. (GRC) state that a Quaternary fault database for the INGENIOUS GBR was collated in Phase I with updated locations and recency; recency was re-evaluated into 64 discrete bins versus USGS age bins — <a href="https://publications.mygeoenergynow.org/grc/1034813.pdf">GRC paper</a>.</p>
-      <p><strong>Relevance:</strong> Training labels (rules §3.3) come from this compilation, not from a raw QFFD dump alone. Updates focused on recency/slip-rate attribution and trace revisions for geothermal play-fairway work — still a Quaternary-fault compilation in the USGS schema, not a hidden-structure inventory.</p>
-      <p><strong>Confidence:</strong> High that v2 exists and supersedes v1 (GDR). Medium on the internal mapping protocol: the zip’s text document of field definitions was not unpacked this session (downloadable at GDR: <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">qfaults_ingenious_nad83conus117_2023-06-27.zip</a>). Next pass should open that readme.</p>
-    </article>
-
-    <article class="entry">
-      <h3>CG-4 · Documented spatial heterogeneity and locational error in USGS QFFD</h3>
-      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high for the paper’s claims</span></p>
-      <p class="src"><strong>Source:</strong> Hermant, B., Kiersnowski, L., and Bellanger, M., 2025, Using deep learning to map Quaternary faults in Western USA, 50th Workshop on Geothermal Reservoir Engineering, Stanford. <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">PDF</a> (also listed on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a>).</p>
-      <p><strong>Claims:</strong> USGS Quaternary fault mapping is “occasionally imprecise at small scale or of variable and heterogeneous accuracy at large scale.” Figure 2 caption: local discrepancy in north-central Nevada between USGS Quaternary faults and the authors’ fault label “can be up to 400 m.” Heterogeneity is attributed to aggregation of different mapping sources/scales; some areas mapped more precisely have artificially higher fault density. Authors built a new manual mapping (1,100 faults, 264 km cumulative length) from elevation, slope, and Sentinel-2 because they judged QFFD insufficient as training labels.</p>
-      <p><strong>Relevance:</strong> Directly supports (1) locational error that the 300 m DTI kernel is designed to soften (problem description notes possible misalignment of existing fault data), and (2) catalogue incompleteness that varies spatially with historical mapping effort — the exact gap-reasoning this domain needs. 400 m exceeds the 300 m kernel, so uncorrected catalogue traces can still be scored as misses if experts remapped them.</p>
-      <p><strong>Confidence:</strong> High — verified against the Stanford workshop PDF (2026-09-26): the 400 m local discrepancy (Figure 2, north-central Nevada), the "variable and heterogeneous accuracy" finding, and the 1,100 faults / 264 km manual label set are stated in the paper. Their 400 m figure is from their comparison in north-central Nevada, not a GeoDAWN-wide statistic.</p>
-    </article>
-
-    <article class="entry">
-      <h3>CG-5 · Organizers will not publish how the private test faults were mapped</h3>
-      <p><span class="chip verified">verified staff statement</span> <span class="chip high">confidence: high</span></p>
-      <p class="src"><strong>Source:</strong> <a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">Forum thread 11527, post 7</a> (chrisk-dd, DrivenData Staff). Fetched 2026-09-26.</p>
-      <p><strong>Competitor questions (posts 1–2):</strong> which data experts used (lidar, 1 m DEM, magnetics/radiometrics, imagery, field mapping, geologic maps); whether new faults are mainly surface scarps or also buried/inferred structures; whether GeoDAWN was reviewed uniformly.</p>
-      <p><strong>Staff answer (verbatim paraphrase of the posted text):</strong> “We’re not sharing details about the data sources, fault types, or coverage behind the test faults beyond what’s in the problem description.” Staff also note that the largest prize pool (Phase 2) uses a test set updated by expert review of all Phase 1 submissions, so predictions can affect final evaluation even if they are not the most performant in Phase 1.</p>
-      <p><strong>Relevance:</strong> H2 (buried geophysical structures) and H3 (lidar-only scarps) cannot be prioritized from an official test-label protocol. Both remain live hypotheses. Phase 2 expert review is the path by which non-Phase-1-optimal maps can still score. Do not claim the private labels are “lidar scarps” or “geophysical traces.”</p>
-    </article>
-
-    <h2>Working synthesis (labeled as reasoning, not fact)</h2>
-    <p>
-      Putting CG-1–CG-4 together, catalogue gaps that are <em>structurally likely</em> rather than merely “fault-like”:
-    </p>
-    <ol>
-      <li>Along-strike tips, splays, and parallel strands of already-named systems (staff: these count; known pixels are masked).</li>
-      <li>Intra-basin or range-front structures expressed in gravity/magnetics but lacking a published surface-rupture study (outside QFFD’s coseismic-surface-deformation criterion).</li>
-      <li>Subtle scarps visible on 1 m 3DEP / GeoDAWN lidar that post-date or out-resolve the compiled map sources (Hermant; OF 93-338 scale preference).</li>
-      <li>Regions of historically sparse topical paleoseismic work — the compiler guidelines privilege existing literature.</li>
-    </ol>
-    <p>Items 2–4 remain hypotheses: staff will not publish the private-label protocol (CG-5). Phase 2 expert review is the documented mechanism that can still reward them.</p>
-  </main>
-  <footer class="site"><div class="wrap"><a href="index.html">Library</a></div></footer>
+  </footer>
   <script src="../assets/nav.js"></script>
 </body>
 </html>
