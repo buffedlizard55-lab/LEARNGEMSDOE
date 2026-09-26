@@ -59,6 +59,12 @@ jobs:
             hits=$(grep -i -n -A3 'MAPSCALE\|map scale' "$f" 2>/dev/null | tr -s ' \t\r\n' ' ' | head -c 1500)
             [ -n "$hits" ] && echo "::notice title=MAPSCALE in $(basename $f)::$hits"
           done
+          r=$(find $d -iname 'README_fielddefinitions*.txt' | head -1)
+          if [ -n "$r" ]; then
+            echo "::notice title=README lines 45-70::$(sed -n '45,70p' "$r" | tr -d '\r' | sed 's/$/ ||/' | tr '\n' ' ')"
+            echo "::notice title=README lines 86-120::$(sed -n '86,120p' "$r" | tr -d '\r' | sed 's/$/ ||/' | tr '\n' ' ')"
+            echo "::notice title=README wc::$(wc -l < "$r") lines, sha256 $(sha256sum "$r" | cut -c1-64)"
+          fi
           true
       - uses: actions/upload-artifact@v4
         if: always()
