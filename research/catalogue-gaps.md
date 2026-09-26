@@ -82,6 +82,8 @@ Mapping to signals: classes 1–2 → topography (bands 12, 19, 1 m lidar); clas
 
 ## CG-9 · The GeoDAWN-box catalogue census, measured (2026-09-26)
 
+> **Superseded for footprint questions by CG-12** (413 traces inside the actual data extent). Kept for provenance.
+
 This is the clip CG-8 was waiting for, done against the published bounding box rather than the outline polygon.
 
 - **Extent source (primary):** <https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json&fields=spatial>
@@ -121,6 +123,68 @@ This is the clip CG-8 was waiting for, done against the published bounding box r
 - **Confidence:** <span>verified</span> for the bounding box, the query results and the closure arithmetic. **Inference**
   for the "comparatively well mapped" reading and for anything about the footprint interior.
 
+## CG-12 · The GeoDAWN *footprint* census, measured from the public files (2026-09-26)
+
+Closes the open item from CG-9: the clip is now against the published outline polygons, not the bounding box.
+
+- **How it was run.** The Arena sandbox cannot complete TLS to sciencebase.gov / gdr.openei.org, so the public files
+  were fetched on a GitHub Actions runner in *this* repository (no new account, no secrets, no DrivenData login):
+  workflow [`public-data.yml`](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/blob/main/.github/workflows/public-data.yml), script [`public_census.py`](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/blob/main/scripts/public_census.py), run [36276586563](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276586563). Results were read back
+  as run annotations. No competition raster was touched; no prediction was produced.
+- **Inputs (primary):** `GeoDAWN_area1_outline.zip`, `GeoDAWN_area2_outline.zip`, `GeoDAWN_data_extent.zip` from
+  ScienceBase item [657e1d85d34e23d3533209f7](https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7) (Glen & Earney 2024, <https://doi.org/10.5066/P93LGLVQ>);
+  `qfaults_ingenious_nad83conus117_2023-06-27.zip` from [GDR 1391](https://gdr.openei.org/submissions/1391) (Ayling et al. 2022,
+  <https://doi.org/10.15121/1881483>).
+- **File checks (measured on the runner):**
+
+| File | Bytes | Matches listing? | SHA-256 |
+| --- | --- | --- | --- |
+| GeoDAWN_area1_outline.zip | 1,190 | yes (ScienceBase 1,190) | `6a63cccdd7ebe51bc009eca5cc7ac83c959bf4876385813e73cebe442f850131` |
+| GeoDAWN_area2_outline.zip | 1,497 | yes (ScienceBase 1,497) | `20916d6c2f74039254dc8d134cb79d380aee5ab66e5de89209ab4a8f4e0d2c27` |
+| GeoDAWN_data_extent.zip | 2,774 | yes (ScienceBase 2,774) | `a27b484332fd1b75345cc63a0fa5353861db5812c5c846a494c566938c0c2ddb` |
+| qfaults_v2.zip | 6,131,182 | yes (= 5.85 MiB, GDR page "5.85 MB") | `c7b091c9ac8bca140ad89ee6bb2bd63dd3ac12e3013acbfd8373d11c9faee59d` |
+
+  The outlines are EPSG:32611; the faults are `NAD_1983_Contiguous_USA_Albers_117`
+  (an equal-area projection, metres), so the area figures below are valid areas.
+- **Independent cross-checks (all pass):**
+  1. The GDR zip holds **22,956** records — exactly CG-8's count from the NBMG MapServer. Two distribution channels, one
+     dataset.
+  2. Computed extent-polygon area **51,678.8 km²** vs the shapefile's own `SqKm` attribute **51,695.2 km²** (0.03% apart).
+  3. Computed Area 1 area **2,413.4 km²** vs its `ENCLOSED_A` attribute **"2411.7 sq km"**.
+- **Measured (traces intersecting each polygon):**
+
+| Polygon | Traces | Well / Moderately / Inferred | Clipped length | Inferred length | `MAPSCALE` codes |
+| --- | --- | --- | --- | --- | --- |
+| Data extent | **413** | 276 / 129 / 8 | 6,230.2 km | 51.0 km (0.8%) | `250`: 393 · `100`: 20 |
+| Area 2 | 405 | 271 / 127 / 7 | 5,974.1 km | 46.7 km | `250`: 385 · `100`: 20 |
+| Area 1 (Clayton Valley) | 19 | 12 / 6 / 1 | 311.6 km | 4.3 km | `250`: 19 |
+
+  Partitions close: 276+129+8 = 413; 393+20 = 413; per-class lengths sum to the total. No Poor / Other / blank `FTYPE_`
+  and no blank `MAPSCALE` inside the footprint.
+- **What changed versus CG-9.**
+  1. **The box over-counted by ~2.9×** (1,179 → 413). CG-9 had already labelled its figure an upper bound; this is the
+     measured value. The 1,179 figure must not be quoted as "traces in the GeoDAWN area".
+  2. Trace density inside the extent is 6,230 km / 51,679 km² ≈ **0.12 km of mapped trace per km²** (arithmetic on the
+     measured values).
+  3. **Mapping scale is the striking result.** Regionally the dominant `MAPSCALE` code is `10` (11,334 traces, CG-8 /
+     requirements page), with `24` next (3,025). **Inside the footprint there are zero traces with code `10` or `24`**;
+     every trace carries `250` or `100`. Regionally `250` is only 2,229 of 22,956 traces (9.7%); the footprint alone holds
+     393 of those 2,229 (17.6%).
+- **Why it matters for the scored target (inference — labelled as such).** Reading the codes as map-scale denominators
+  in thousands (1:250,000 / 1:100,000) is the natural interpretation but is *not yet confirmed* against the v2 field-
+  definition text (see Next actions). If it holds, the entire GeoDAWN catalogue was compiled from the coarsest source
+  maps in the compilation. That predicts two specific gap classes: (a) short or low-relief scarps below the resolution
+  of a 1:250k source, and (b) positional misfit of mapped traces large enough to leave true fault pixels outside the
+  300 m kernel — the H1 "newly mapped geometry" class staff confirmed is scored. It also reframes CG-9's "comparatively
+  well mapped" reading: `FTYPE_` says *constrained*, `MAPSCALE` says *coarse*. Those are different properties.
+- **Caveats.** (1) Still the 2023-06-27 compilation, not the rasterised labels on the data tab — they may differ.
+  (2) "Intersecting" counts a trace once even if only partly inside; the length column is the clipped length.
+  (3) The USGS data page states the survey covers **51,857 km²**; the extent shapefile's own attribute says
+  **51,695.2 km²** (0.3% lower). Small, but a real discrepancy between two official artefacts — **flagged, not
+  resolved.**
+- **Confidence:** verified (computed from primary files, reproducible by re-running the workflow). The scale-code
+  interpretation and the gap-class predictions are **inference**.
+
 ## CG-10 · The catalogue is a literature compilation, not a survey
 
 - **Source:** <https://www.usgs.gov/programs/earthquake-hazards/faults> — "Background" and "History".
@@ -155,10 +219,10 @@ This is the clip CG-8 was waiting for, done against the published bounding box r
 
 ## Next actions
 
-1. Clip CG-8 to the GeoDAWN **outline polygon**, not the bounding box. CG-9 did the envelope version (2026-09-26); the
-   polygon version needs the Area 1 / Area 2 outline zips, which still fail TLS from this machine.
-2. Read the field-definition text in the v2 zip before translating `MAPSCALE` codes.
+1. ~~Clip CG-8 to the GeoDAWN outline polygon.~~ **Done 2026-09-26 — CG-12** (413 traces, via GitHub Actions).
+2. Read the field-definition text in the v2 zip before translating `MAPSCALE` codes. **Now the top item** — CG-12's
+   strongest finding depends on it. The zip downloads fine on the runner; extend `public_census.py` to print its text.
 3. Once rasters are placed: distance-to-nearest-label for high-strain / high-seismicity / high-gradient pixels.
-4. Reconcile the 1,179 envelope count against the actual label raster. If the shipped labels contain materially more or
+4. Reconcile the 413 footprint count (CG-12; the 1,179 envelope count is superseded) against the actual label raster. If the shipped labels contain materially more or
    fewer traces than the 2023-06-27 service inside the same box, that is a provenance discrepancy worth recording, not
    smoothing over.

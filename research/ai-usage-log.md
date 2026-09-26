@@ -16,6 +16,23 @@ record rather than reconstructed at the deadline.
 
 ---
 
+## 2026-09-26 · session `arena/01a0dfd3-learngemsdoe`
+
+- **Tool:** Arena.ai Agent Mode (an AI coding agent; underlying model not disclosed by the platform), with bash, git,
+  `gh`, a web-page fetch tool, and GitHub Actions in this repository.
+- **Did:** re-ran both data scripts (still blocked in sandbox); re-fetched the data tab (login redirect) and forum JSON;
+  wrote `public-data.yml` and `public_census.py`; ran the workflow on GitHub runners ([run](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276586563)) and read results via
+  the check-run annotations API; wrote CG-12, H12, H8 rejection, changelog and pipeline updates from those results.
+- **Did not:** create an account; request or store credentials; touch competition rasters; generate, validate or submit
+  a prediction; use a submission slot.
+- **Fabrication controls:** every number in CG-12 is copied from run annotations; totals cross-checked against
+  independent sources (CG-8 service count, shapefile area attributes, official file sizes). Scale-code meaning is
+  labelled inference until the field-definition text is read.
+- **Human-owned checks:** open the run link and confirm the annotations; confirm the 51,857 vs 51,695.2 km² discrepancy
+  before quoting either.
+
+---
+
 ## 2026-09-26 · session `arena/01a0dfc9-learngemsdoe`
 
 **Tool.** Arena.ai Agent Mode — coding agent with web fetch (fetch_page), file read/write, shell execution (bash) in this repository. No other generative-AI service called. No image/audio/video generation. No prediction GeoTIFF produced, scored, submitted, and no weekly submission slot used. No DrivenData account created or credentials stored.

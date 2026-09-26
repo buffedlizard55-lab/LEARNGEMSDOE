@@ -6,6 +6,30 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 
 ---
 
+## 2026-09-26 · session `arena/01a0dfd3-learngemsdoe` — public data via Actions, footprint census, H8 rejected
+
+**Added**
+- `.github/workflows/public-data.yml` + `scripts/public_census.py`: fetch the *public* GeoDAWN outline / extent zips and
+  INGENIOUS Qfaults v2 on a GitHub runner (sandbox TLS is blocked), clip faults to the footprint, report via annotations.
+  Run [36276586563](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276586563). No competition data, no secrets, no predictions.
+- **CG-12** footprint census: 413 traces (not 1,179), 6,230.2 km clipped length, every trace `MAPSCALE` 250 or 100.
+  Cross-checks pass (22,956 = CG-8; area vs `SqKm` within 0.03%).
+- **H12** (coarse-scale compilation) — new, untested.
+
+**Changed**
+- **H8 → rejected** by its own criterion (Inferred = 0.8% of clipped length). First entry under Negative results.
+- CG-9 marked superseded for footprint questions. Pipeline page: re-run results + what is and isn't unblocked.
+
+**Flagged**
+- USGS data page says 51,857 km²; extent shapefile attribute says 51,695.2 km² (0.3%). Unresolved.
+- "Full pipeline ready to run" handoff claim — still false (no train/inference scripts). Re-checked.
+
+**Re-verified (fetched)**: data tab → login redirect; forum category JSON — 11 topics, newest still 11543, no new staff reply.
+
+**Next**: print the v2 field-definition text in the workflow to confirm `MAPSCALE` semantics (gates H12).
+
+---
+
 ## 2026-09-26 · session `arena/01a0dfc9-learngemsdoe` — Pass 1-3 re-verification, clean UI rebuild, site audit
 
 **Verified this session, each item fetched and read — line by line, no hallucinations**

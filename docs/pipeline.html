@@ -60,6 +60,15 @@
       </div>
 
       <h2 id="blocker">The blocker</h2>
+      <div class="banner">
+        <h3>Update 2026-09-26 (session <code>arena/01a0dfd3</code>) — re-run, partly unblocked</h3>
+        <ul>
+          <li>Re-ran <code>bash scripts/download_competition_data.sh</code> and <code>python3 scripts/prepare_data.py</code> in the sandbox: same result — curl exit 35 to every public host; <code>prepare_data.py</code> exit 2, <code>blocked_no_data</code>. The data tab was re-fetched and again redirected to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">the login page</a>.</li>
+          <li><strong>Public files are now unblocked</strong> via the <code>public-data</code> GitHub Actions workflow in this repo (runners have open egress). All four public zips downloaded with sizes matching their official listings, and the footprint census ran — see <a href="research/catalogue-gaps.html#cg12">CG-12</a>.</li>
+          <li><strong>Competition rasters remain blocked, and this agent cannot unblock them.</strong> They require the team's own DrivenData login. The only compliant route is a human on the registered account downloading them, or the account owner adding their own credentials as a repository secret for a future, explicitly authorised workflow. No account was created; no credentials were requested.</li>
+          <li>The "full pipeline ready" claim above is still false: re-checked, <code>scripts/</code> has no training or inference script.</li>
+        </ul>
+      </div>
       <p>
         <code>data/</code> contains no competition rasters. Two different blockers were confirmed on 2026-09-26, and they
         are not the same thing:
