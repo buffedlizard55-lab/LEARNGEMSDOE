@@ -99,6 +99,34 @@ that responds to structure *under* cover.
   trend generalisation are **inference** — the trend claim should be checked against the actual trace orientations in
   the label raster once data are placed, which is a half-hour measurement.
 
+## PF-10 · The GeoDAWN release ships geoTIFF grids, a contractor report and flight-path shapefiles
+
+- **Source:** <https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and>
+  (read in full 2026-09-26) · <https://doi.org/10.5066/P93LGLVQ> · CC0 1.0
+- **Claim (verbatim, deliverables):** "Included with this publication are: PDF files of the contractor's report and readme
+  file (describing the surveys, field operations, equipment, data, and processing procedures), a .csv file of the
+  contractor's metadata, and compressed .zip files containing deliverable products \[consisting of binary grid (.grd),
+  map (.map), and database (.gdb) files of magnetic and radiometric grids and line data …\]; and Esri shapefiles (.shp)
+  and associated projection (.prj), index (.shx) and dBASE (.dbf) files of the flight paths and survey outlines. Also
+  included in this report are compressed .zip files containing .csv files of flight line data for magnetic and
+  radiometric surveys, a PDF of the radiometric ternary map, and **geoTIFF images of geophysical grids**."
+- **Also verified verbatim from the same page:** "The GeoDAWN surveys were performed by EDCON-PRJ, Inc., under contract
+  with the USGS from November 1, 2021 to November 20, 2022"; the four acquisition blocks "from north to south: Winnemucca,
+  Fallon, Hawthorne, and Tonopah"; and on the drape surface, "Nominal flight heights for both surveys were based on a best
+  fit, pre-planned, three-dimensional draped surface designed with a maximum 22-degree climb/descent angle".
+- **Relevance.** The last clause is the important one for provenance. PF-5 and the feature-stack page both record that
+  the competition never says which public release each of the 19 bands came from. The GeoDAWN release itself ships
+  **geoTIFF images of the geophysical grids**, plus a contractor report and readme that describe the processing
+  procedures. That gives a concrete, licence-clean (CC0 1.0) route to resolving band provenance *without* the
+  competition rasters: download the public grids, resample to the 100 m EPSG:32611 grid, and compare against the 19
+  bands once the training raster is placed. The radiometric channels — the one GeoDAWN product with a direct
+  surface-geology signal — are in that release and are **not** in the 19-band stack (feature-stack page), which is an
+  external-data opportunity under rules §3.2/GV-4 rather than a gap in the survey.
+- **Confidence:** verified for the deliverables list, the acquisition dates and the drape-surface wording, all read from
+  the official page this session. **Unverified:** nothing was downloaded from ScienceBase this session (TLS to that host
+  fails from this sandbox), so no claim is made about the contents, resolution or nodata handling of any file inside the
+  release.
+
 ## Cheapest next experiments
 
 1. Confirm numerically what band 6 is, from bands 3, 9, 14.

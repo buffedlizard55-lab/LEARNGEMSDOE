@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 2 of 6 · 9 entries · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 2 of 6 · 10 entries · re-verified 2026-09-26</p>
 
       <h1>Potential-field geophysics</h1>
       <p class="lede">
@@ -314,6 +314,32 @@
             trend claim is a half-hour measurement against trace orientations in the label raster once data are placed,
             and should not be quoted until it is made.
           </dd>
+        </dl>
+      </article>
+
+      <h2 id="pf10">PF-10 · The GeoDAWN release itself, read in full 2026-09-26</h2>
+      <article class="entry" id="pf10-entry">
+        <h3><span class="id">PF-10</span> Area 1 / Area 2 flight specifications, contractor scope, and the deliverables that would settle band provenance</h3>
+        <p><span class="chip verified">verified</span> from the data page · the consequences for band numbering are <span class="chip unverified">inference</span></p>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data page</a>, read in full 2026-09-26. Glen &amp; Earney 2024, <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a>.</dd>
+          <dt>Verbatim, the parts that constrain the bands</dt>
+          <dd><ul>
+            <li><strong>Extent:</strong> four blocks (Winnemucca, Fallon, Hawthorne, Tonopah) totalling 149,030 line-km over 51,857 km²; published bounding box −120.0024, 37.3641, −116.1415, 40.7247 (WGS 84), consistent with the outline polygons used for the census (CG-9, CG-12, CG-15).</li>
+            <li><strong>Area 1:</strong> 100 m mean terrain clearance over the valleys, 150 m over the mountains, 200 m line spacing, 2,000 m tie-line spacing.</li>
+            <li><strong>Area 2:</strong> 150 m / 200 m clearance, 400 m line spacing, 4,000 m tie spacing.</li>
+            <li><strong>Contract:</strong> EDCON-PRJ, 1 November 2021 – 20 November 2022, with subcontractors for the radiometric processing.</li>
+            <li><strong>Deliverables, verbatim:</strong> “geoTIFF images of geophysical grids”, plus processed profiles, line location data, the contractor's report and metadata.</li>
+          </ul></dd>
+          <dt>What it settles</dt>
+          <dd><ul>
+            <li><strong>Azimuth, verified:</strong> Area 1 lines flown at 22° (NNE); Area 2 at 310°. That is the acquisition geometry behind PF-9.</li>
+            <li><strong>Two different surveys with different specifications feed the same raster.</strong> Area 1 is finer and lower; Area 2 is coarser and higher. PF-7's seam question is therefore not hypothetical — there are four blocks and two flight geometries inside one grid.</li>
+            <li><strong>A band-provenance route now exists.</strong> Because the release ships geoTIFF grids and a contractor's report, the notebook's 19 band tags can be checked against the delivered grids and processing descriptions without touching the competition raster. This is the cheapest way to close GV-17 and to confirm which bands are raw data and which are derived.</li>
+          </ul></dd>
+          <dt>What it does not settle</dt>
+          <dd>The page does not enumerate the 19 bands, does not state the grid cell size or datum of the delivered geoTIFFs, and does not name the derived products (depth-to-basement, curvature, distance-to-earthquake). Those must come from the delivered files or the contractor report.</dd>
         </dl>
       </article>
 

@@ -98,6 +98,76 @@ Everything below is stated in the paper's prose (§6), not read off a chart. Sou
 - **Confidence:** verified for the citation and DOI resolution. **Unverified:** the paper's contents have not been read
   and it is **not established** that its fault mapping is distributed as data. Treat as a lead, not as an asset.
 
+## PA-9 · Hermant et al. §3.3 — why they threw the catalogue away, and what they looked for instead
+
+- **Source:** <https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf>, §3.3 "Fault label derived from
+  manual mapping", read in full this session.
+- **Claim (verbatim):**
+  > "As the USGS Quaternary fault mapping is sometimes inaccurate at small scales or of variable precision, we created a
+  > new manual mapping of faults over the eastern half of the study area using elevation and slope data, and satellite
+  > imagery. The remaining half was reserved for prediction."
+- **The four visual criteria they give for recognising a fault (verbatim):**
+  1. "A fault often appears as a generally straight line on the image, creating a strong visual contrast with the
+     surrounding areas"
+  2. "Active or recent faults can affect the topography: the areas on either side of the fault will have a different
+     elevation and the fault zone itself will have a steeper slope."
+  3. "Faults can affect the surrounding vegetation, creating a noticeable variation in vegetation on different parts of
+     the Earth's surface."
+  4. "Geological features can also be associated with the presence of faults in the area, such as areas of weathered rock
+     or fractures along hillsides or mountains."
+- **Also (verbatim):** "Using these criteria, we created a fault label dataset containing 1100 faults with a cumulative
+  length of 264 km." On rasterisation: "a buffer value of 50 m was used, implying a thickness of the fault signature in
+  the data 100 m."
+- **Why it matters.** (1) It is a published, worked instance of H5/H9: a team in this region, using this kind of data,
+  concluded the catalogue was not good enough as a training target and built their own labels — then used the untouched
+  western half as the prediction area, which is the geographic-split discipline H5 asks for. (2) Criterion 3 (vegetation)
+  is a modality absent from the 19-band stack; criterion 4 (alteration, hillside fractures) is what bands 17 and the
+  magnetic edge bands weakly proxy. (3) Their own scale for "how much new fault length a manual pass adds here" is
+  1,100 faults / 264 km over the eastern half of the study area — the only published, region-specific number of its kind
+  in this library.
+- **Confidence:** verified — every sentence above was read from the PDF this session.
+
+## PA-10 · Hermant et al. Figure 7's per-epoch tables, re-read this session
+
+- **Source:** <https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf>, §6 results tables (loss, PR-AUC,
+  weighted Focal IoU) and the §6 prose. The tables extracted legibly this session; in an earlier session their headers
+  had not survived extraction and PA-6 declined to transcribe them.
+- **PR-AUC, training / validation, by epoch (read from the Figure 7 table):**
+
+| Epoch | FaultSEG train | FaultSEG val | siUNET train | siUNET val |
+| --- | --- | --- | --- | --- |
+| 0.0 | 0.12 | 0.25 | 0.10 | 0.18 |
+| 2.5 | 0.45 | 0.46 | 0.30 | 0.33 |
+| 5.0 | 0.54 | 0.50 | 0.37 | 0.38 |
+| 7.5 | 0.62 | 0.53 | 0.42 | 0.42 |
+| 10.0 | 0.70 | 0.53 | 0.45 | 0.44 |
+| 12.5 | 0.77 | 0.57 | 0.48 | 0.46 |
+| 15.0 | 0.84 | 0.58 | 0.52 | 0.47 |
+| 17.5 | **0.88** | **0.59** | **0.56** | **0.47** |
+
+- **Loss, training / validation, by epoch:** FaultSEG 0.0081/0.0072 at epoch 0 falling to 0.0028/0.0073 at epoch 17.5 —
+  the training loss keeps falling while the validation loss turns up after epoch 7.5 (0.0050/0.0058 → 0.0028/0.0073).
+  siUNET 0.0090/0.0075 → 0.0055/0.0061.
+- **What the paper's prose states (verbatim, and the numbers to quote):**
+  > "The values of PR-AUC after 20 epochs, which measured the global performance of the model, are 0.902, 0.610 and 0.595
+  > for training, validation and test respectively for FaultSEG while they are 0.574, 0.463 and 0.449 respectively for
+  > siUNET."
+  >
+  > "For Weighted Focal IoU, a threshold ≤ 0.3 should be considered as good performance for FaultSEG (≥ 0.879, ≥ 0.594
+  > and ≥ 0.580 for training, validation and test respectively) and ≤ 0.2 for siUNET (0.600, 0.498 and 0.453 for
+  > training, validation and test respectively)."
+- **What this settles.** PA-2 recorded "PR-AUC ≈ 0.88 train / ≈ 0.59 validation for FaultSEG at epoch 17.5; siUNET ≈
+  0.56 / 0.47". Those figures are **confirmed** by the Figure 7 table read this session — they are the epoch-17.5 row,
+  not approximations. PA-6 was right that the *prose* does not state them (the prose reports the 20-epoch values 0.902 /
+  0.610 / 0.595), so the two sets of numbers are both correct and must be labelled by which they are: **epoch 17.5 =
+  0.88 / 0.59; after 20 epochs = 0.902 / 0.610 / 0.595 (train / val / test)**. Quote the prose values when citing the
+  paper's own results; quote the table only when discussing the training curve.
+- **Why it matters for us.** The generalisation gap is the headline: 0.902 train against 0.595 test on the better of the
+  two models, with the validation loss turning up after roughly 7 epochs. Any score this project reports on a
+  random-patch split is not comparable to that. It also sets a realistic ceiling: PR-AUC ~0.6 out of sample for a
+  purpose-built fault detector on 10 m lidar-derived inputs.
+- **Confidence:** verified for every number in this entry, read from the PDF this session.
+
 ## Synthesis — what a better design looks like
 
 1. Change the **split** before changing the model: contiguous geographic blocks, not random patches.

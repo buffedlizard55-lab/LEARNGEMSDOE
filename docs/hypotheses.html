@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Written for a Phase 2 geologic reviewer · negative results are kept, never deleted · re-verified 2026-09-26</p>
+      <p class="meta">Written for a Phase 2 geologic reviewer · negative results are kept, never deleted · 14 hypotheses, 2 rejected · re-verified 2026-09-26</p>
 
       <h1>Hypothesis backlog</h1>
       <p class="lede">
@@ -74,7 +74,9 @@
             <tr><td><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster the scorer masks out</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td><td class="nowrap">Rasters</td></tr>
             <tr><td><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td><td class="nowrap">Public shapefiles</td></tr>
-            <tr><td><strong>H8</strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — rejected: Inferred is 0.8% of clipped length in the footprint (<a href="research/catalogue-gaps.html#cg12">CG-12</a>)</td><td class="nowrap">Low</td><td class="nowrap">— (superseded by H12)</td></tr>
+            <tr><td><strong>H8</strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — rejected: Inferred is 0.8% of clipped length in the footprint (<a href="research/catalogue-gaps.html#cg12">CG-12</a>), and 1.5% of USGS sections (<a href="research/catalogue-gaps.html#cg16">CG-16</a>)</td><td class="nowrap">Low</td><td class="nowrap">— (superseded by H12)</td></tr>
+            <tr><td><strong><a href="#h13">H13</a></strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Compilation-to-compilation offsets as a proxy for the correction class — rejected: the two compilations agree to ≤31.6 m (<a href="research/catalogue-gaps.html#cg15">CG-15</a>)</td><td class="nowrap">Low</td><td class="nowrap">— (measured on public data)</td></tr>
+            <tr><td><strong><a href="#h14">H14</a></strong></td><td><span class="chip untested">untested</span></td><td>The catalogue's own recency attributes mark where expert attention has already been spent</td><td class="nowrap">Low</td><td class="nowrap">Public data</td></tr>
             <tr><td><strong><a href="#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong><a href="#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as an independent lidar validation anchor</td><td class="nowrap">Low–med</td><td class="nowrap">Silver et al. 2011 mapping</td></tr>
             <tr><td><strong><a href="#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td><td class="nowrap">External public layers</td></tr>
@@ -486,7 +488,15 @@
           <dt>Expected DTI impact</dt>
           <dd>Potentially large for (b), riding on H1's staff-confirmed class; moderate for (a). Risk: the pixel-exact mask fully penalises near-trace predictions that are not on a new label.</dd>
           <dt>Cost</dt>
-          <dd>Medium — 1 m DEM tiles (URLs in the login-gated competition CSV) plus a scarp detector.</dd>
+          <dd>Medium — 1 m DEM tiles (URLs in the login-gated competition CSV) plus a scarp detector.
+            <strong>Correction recorded 2026-09-26 (<a href="research/catalogue-gaps.html#cg15">CG-15</a>,
+            <a href="research/catalogue-gaps.html#cg16">CG-16</a>, H13).</strong> The scale arithmetic over-predicts
+            positional error: the two public compilations agree to ≤31.6 m inside the footprint, an order of
+            magnitude inside the kernel. Class (b) therefore cannot be sized from compilation-to-compilation
+            offsets — it must come from expert re-mapping at higher resolution (H10, GM-7's &gt;150 m,
+            CG-5's 400 m). The <em>observation</em> that the footprint is a coarse-scale compilation is now
+            corroborated twice: every INGENIOUS footprint trace is <code>MAPSCALE</code> 250 or 100 (CG-12), and
+            87.8% of the 5,570 USGS footprint sections carry <code>scale = 1:250,000</code> (CG-16).</dd>
           <dt>Validation protocol</dt>
           <dd>Contiguous-block spatial holdout; distance from high-curvature 1 m scarps to nearest catalogue trace, stratified by <code>MAPSCALE</code>. Prediction: a heavier &gt;300 m tail for code-250 traces than for code-100 traces.</dd>
           <dt>Rejection criterion</dt>
@@ -494,7 +504,68 @@
         </dl>
       </article>
 
+      <article class="entry" data-filter-item data-tags="H13 catalogue compilation offset correction proxy rejected">
+        <h3 id="h13">H13 — Compilation-to-compilation offsets as a proxy for the correction class</h3>
+        <p><span class="chip rejected">rejected as a proxy 2026-09-26</span> <span class="chip verified">measured</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>Public USGS QFFD GIS distribution (<code>Qfaults_GIS.zip</code>), the public INGENIOUS Qfaults v2 compilation, and the public GeoDAWN data-extent outline. No competition raster, no submission slot.</dd>
+          <dt>Physical signature</dt>
+          <dd>None — this is a measurement about the catalogues, not about the crust.</dd>
+          <dt>Why it was worth testing</dt>
+          <dd>Staff define a “new fault” to include corrections to existing traces and say identifying those “is one outcome we are aiming for” (<a href="research/governance.html#gv15">GV-15</a>), and that such corrections may also be in the Final-Round evaluation set. Hermant et al. measure up to <strong>400 m</strong> between USGS traces and their own lidar-derived labels (<a href="research/catalogue-gaps.html#cg5">CG-5</a>) and <strong>&gt;150 m</strong> at Leach Hot Springs (<a href="research/geomorphology.html#gm7">GM-7</a>). If two independent compilations of the same faults disagreed by hundreds of metres, the width of the corridor H1 must search would be readable straight off public data — the cheapest possible answer to the most expensive question in the backlog.</dd>
+          <dt>What was measured</dt>
+          <dd>Inside the GeoDAWN data extent, the USGS compilation holds <strong>5,570</strong> sections and <strong>6,241.3 km</strong> of trace; INGENIOUS holds <strong>413</strong> traces and <strong>6,230.2 km</strong>. Every one of the 413 INGENIOUS traces intersects a USGS section (0.0 m), and every one of the 5,570 USGS sections lies within <strong>31.6 m</strong> of an INGENIOUS trace. Length difference 0.18%. (<a href="research/catalogue-gaps.html#cg15">CG-15</a>, run 36277952393.)</dd>
+          <dt>Why it is rejected</dt>
+          <dd>The two compilations agree to well inside the 300 m kernel. Positional disagreement between compilations is therefore <em>not</em> the mechanism that produces the correction class; expert re-mapping from higher-resolution data is. The corridor width cannot be read off the public catalogues and must come from H10 (Silver et al. lidar mapping) or from Hermant's measured discrepancies.</dd>
+          <dt>Cost of the test</dt>
+          <dd>One GitHub Actions run on public files. No competition data, no prediction, no submission slot.</dd>
+          <dt>What the test changed anyway</dt>
+          <dd><ol>
+            <li>It corrected this knowledge base's own claim. CG-12's “413 traces inside the data extent” is one compilation's record count, not the catalogue's content; the content is ~6,230 km of fault (<a href="research/catalogue-gaps.html#cg15">CG-15</a>). Several pages had read the count as content.</li>
+            <li>It <strong>weakened H12's mechanism</strong> — H12's “1 mm at 1:250,000 = 250 m” arithmetic over-predicts by an order of magnitude. H12 class (a) is unaffected.</li>
+            <li>It <strong>corroborated H12's observation</strong> on the USGS side: 87.8% of the 5,570 footprint sections carry <code>scale = 1:250,000</code> (<a href="research/catalogue-gaps.html#cg16">CG-16</a>).</li>
+          </ol></dd>
+          <dt>Rejection criterion (pre-stated, met)</dt>
+          <dd>Reject if the two compilations agree to well within the 300 m kernel. They agree to 31.6 m.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" data-filter-item data-tags="H14 recency age prior expert attention catalogue attribute">
+        <h3 id="h14">H14 — The catalogue's own recency attributes mark where expert attention has already been spent</h3>
+        <p><span class="chip untested">untested</span> <span class="chip verified">premise measured</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>Label raster as mask; the catalogue's own recency attribute — USGS <code>age</code>, INGENIOUS <code>REC2023</code> / <code>RCODE2023</code> — as a spatial prior; bands 12, 19 and 3, 6 for the candidate set.</dd>
+          <dt>Physical signature</dt>
+          <dd>None. This is a prior about <em>where geologists have already looked</em>, derived from the catalogue's own metadata rather than from any geophysical layer.</dd>
+          <dt>Why it should catch a gap rather than a known fault</dt>
+          <dd>Measured inside the GeoDAWN footprint (<a href="research/catalogue-gaps.html#cg16">CG-16</a>): of 5,570 USGS sections, <strong>715 (12.8%) are <code>historic</code></strong>, <strong>1,928 (34.6%) <code>latest Quaternary</code></strong>, <strong>2,335 (41.9%) only “undifferentiated Quaternary”</strong>, 562 late Quaternary and 30 middle-to-late Quaternary. Nearly half the catalogue in the survey area records Holocene rupture — that is the material field campaigns, lidar passes and expert mapping have already been spent on (<a href="research/geomorphology.html#gm3">GM-3</a>, <a href="research/geomorphology.html#gm7">GM-7</a>). Where the catalogue can only say “undifferentiated Quaternary”, nobody has done the work that would resolve it, and CG-13's publication gate means that unresolved work is exactly the work most likely to be missing. So unmapped fault should be relatively <em>more</em> likely in the undifferentiated-Quaternary parts of the footprint, not less.</dd>
+          <dt>Expected DTI impact</dt>
+          <dd>Low as a standalone prior; potentially useful as a re-weighting of H1–H3 candidates. It is cheap — the attribute is already in the public shapefile, and the label raster is masked anyway.</dd>
+          <dt>Cost</dt>
+          <dd>Low.</dd>
+          <dt>Validation protocol</dt>
+          <dd><ol>
+            <li><strong>No competition data needed.</strong> Test the prior against the catalogues themselves: are INGENIOUS's <em>updated</em> traces (the ones that differ from the USGS compilation) concentrated in the parts of the footprint where the USGS compilation says “undifferentiated Quaternary”? That is a direct, public-data test of whether recency metadata predicts where re-mapping happened.</li>
+            <li>Once rasters are placed: bin candidate pixels by the recency class of the nearest catalogue trace and measure label density per bin.</li>
+          </ol></dd>
+          <dt>Rejection criterion</dt>
+          <dd>Reject if new-label density per unit area shows no variation with recency class, or if route (1) shows no association between INGENIOUS's updates and the USGS's undifferentiated-Quaternary sections.</dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> for the recency counts (<a href="research/catalogue-gaps.html#cg16">CG-16</a>). <span class="chip unverified">inference</span> for the reasoning that they predict expert attention; route (1) exists precisely to test it.</dd>
+        </dl>
+      </article>
+
       <h2 id="negative">Negative results</h2>
+      <p>
+        <strong>H13 — rejected as a proxy, 2026-09-26.</strong> Measured on public files only
+        (<a href="research/catalogue-gaps.html#cg15">CG-15</a>): the USGS and INGENIOUS compilations agree to ≤ 31.6 m
+        inside the GeoDAWN footprint, far inside the 300 m kernel. The tempting shortcut — reading the
+        correction-class corridor width off the public catalogues — does not work. The measurement still earned its
+        keep: it corrected the “413 traces is the catalogue” reading, weakened H12's scale-arithmetic mechanism, and
+        corroborated H12's coarse-scale observation on the USGS side (<a href="research/catalogue-gaps.html#cg16">CG-16</a>).
+      </p>
       <p>
         <strong>H8 — rejected 2026-09-26</strong> on the public footprint clip (<a href="research/catalogue-gaps.html#cg12">CG-12</a>):
         Inferred = 51.0 km of 6,230.2 km (0.8%), 8 of 413 traces. A <em>data</em> rejection — no model has been trained.
@@ -506,6 +577,9 @@
 
       <h2 id="order">Recommended order once data land</h2>
       <ol>
+        <li><strong>H14 route 1</strong> — needs no competition data at all: test whether INGENIOUS's updated traces
+          concentrate in the USGS compilation's “undifferentiated Quaternary” parts of the footprint (<a href="research/catalogue-gaps.html#cg16">CG-16</a>).
+          The cheapest remaining test in the backlog.</li>
         <li><strong>H7</strong> — needs only public shapefiles, which now download via the <code>public-data</code> GitHub Actions workflow. (H8's polygon clip is done; H8 was rejected — <a href="research/catalogue-gaps.html#cg12">CG-12</a>.) Do before any magnetic model.</li>
         <li><strong>H5's split fix</strong> — move to contiguous spatial blocks before believing any score. Cheap, and it changes the meaning of every other number.</li>
         <li><strong>H4 measurement</strong> — a single quantile-versus-distance table. Half a day, and it either kills or promotes the cheapest prior in the stack.</li>

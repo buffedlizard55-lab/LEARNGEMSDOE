@@ -117,6 +117,9 @@ was empty when read.
 | §1.2 key dates | rules PDF vs hub | PDF defers to the website; **cite the hub for the deadline, not the PDF** (GV-11) |
 | Submission extent | §3.2 vs problem description | "entirety of the GeoDAWN study area" vs "same bounds as the training data" — **unresolved until the raster is placed** (GV-12) |
 | GeoDAWN contents | §2 vs Glen & Earney 2024 | rules call it a "lidar, magnetic, and radiometric study"; the release is magnetic/radiometric with 3DEP lidar as a separate coordinated collection (GV-13) |
+| USGS vs INGENIOUS trace counts | CG-15 / CG-16 | 5,570 USGS sections vs 413 INGENIOUS traces for the same ~6,230 km inside the footprint — granularity, not content. Do not quote "413 traces" as the catalogue |
+| USGS QFFD GIS file size | <https://www.usgs.gov/programs/earthquake-hazards/faults> | page says 16 MB; the file served is 32,371,696 bytes (measured 2026-09-26). Unresolved |
+| Problem-description feature list vs band tags | GV-17 | two layers named in the description have no band tag; two band tags are absent from the description |
 
 ## GV-11 · Rules and forum re-read, 2026-09-26 (session `arena/01a0df88`)
 
@@ -175,6 +178,78 @@ forum — this agent does not post. Flagged for a human to raise if it ever matt
 - **Claim:** Same as GV-11 — Preface change-log table still 5 empty rows, no amendment since September 2026 version; forum still 11 topics newest 11543 (2026-09-25) no new topic since previous session; posts_count unchanged 1 for 11543/11540/11526, 2 for 11499 (pinned + 1 unanswered eligibility), 4 for 11516, 2 for 11536/11529/11528/11524, 10 for 11527, 1 for 11531/11526; rules PDF now served from docs.nlr.gov after redirect, both URLs same content; deadline still Dec 3 2026 11:59 p.m. UTC on hub vs 5 p.m. ET on §A.1 — flagged irregularity remains; eligibility §1.3 re-read no change no team-composition change recorded; metric α=0.2 β=0.8 R=300 m worked example 0.60 re-confirmed; submission format EPSG:32611 100 m float32 [0,1] same bounds null/nan re-confirmed; mask pixel-exact identical to training labels + near-known fully penalized + new-fault can lie within 300 m correction outcome re-confirmed from staff posts 11516/4 and 11536; test-fault provenance declined 11527/7 re-confirmed; weekly rolling window 11524 re-confirmed; external data licence must permit use + sharing 11528 re-confirmed; band-19 bug 11529 re-confirmed; GeoDAWN 149,030 line-km 51,857 km² Area1 200 m/2,000 m 100/150 m Area2 400 m/4,000 m 150/200 m 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah CC0 1.0 variable clearance warning re-confirmed; ScienceBase bbox -120.0024,37.3641,-116.1415,40.7247 re-confirmed; INGENIOUS 22,956 traces re-confirmed.
 - **Relevance:** Time-sensitive governance — confirms no official errata or new staff answers since previous session. Any decision based on previous reads remains valid today.
 - **Confidence:** verified — all items fetched and read this session via fetch_page, not recalled.
+
+## GV-15 · Re-verification pass — 2026-09-26, session `arena/01a0dfe6-learngemsdoe`
+
+- **Sources, each fetched and read this session (not recalled):** competition hub; problem description page 967 (both
+  chunks); About page 968; official rules PDF <https://www.nlr.gov/docs/fy26osti/96647.pdf> (served from `docs.nlr.gov`)
+  chunks covering the Preface, §1.1–§1.4, §2 and §3.1–§3.2; forum category JSON (both chunks); thread
+  [11516](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516.json)
+  (all four posts) and thread
+  [11536](https://community.drivendata.org/t/where-do-you-draw-the-line/11536.json) (both posts); NBMG layer-0 JSON and a
+  `returnCountOnly` query; ScienceBase item `?format=json&fields=spatial`; INGENIOUS GDR 1391 resource list; the USGS
+  faults page (chunks 0–2, including the sections not previously read); the USGS GeoDAWN data page (read in full);
+  Hermant et al. (2025) (all eight chunks); the reference-solution README.
+- **Claim — nothing has changed.** The Preface change-log table still has five empty rows: no recorded amendment since
+  the September 2026 version. The forum still holds **11 topics**, the newest still **11543 (2026-09-25)**, with
+  `posts_count` unchanged (11516: 4, last post 2026-09-21; 11536: 2, 2026-09-23; 11527: 10, 2026-09-23; 11528, 11529,
+  11524: 2 each; 11531, 11526, 11540, 11543: 1 each; 11499 pinned: 2). No staff reply has appeared on 11540, 11526,
+  11543, or the eligibility question inside 11499.
+- **Newly recorded verbatim — the complete staff answer in 11516 post 4 (2026-09-21):**
+  1. "The mask is indeed pixel-exact - it is identical to the provided set of training fault labels."
+  2. "Only new-fault ground truth is considered for scoring purposes. A predicted pixel that is near a known fault trace
+     but far from a new-fault ground truth pixel will be fully penalized, i.e., the buffer does not apply to known
+     faults."
+  3. "A new-fault ground truth pixel can indeed lie within 300m of a known fault trace. Such pixels would constitute
+     corrections or modifications to existing fault traces. Identifying these corrections is one outcome we are aiming
+     for as part of this competition. **Such corrections may already exist in the new-fault set, and may also exist in
+     the final round evaluation set.**"
+  The final sentence was not previously captured in this library. It matters for H1 and H12: corrections are not only an
+  Initial-Round phenomenon — staff say they may also be in the Final-Round evaluation set, so near-trace geometry can pay
+  twice.
+- **Also newly recorded from the rules PDF this session:** §1.1 states "There will be two phases of prize awards", with
+  Phase 1 "$50,000 … distributed equally among the top five competitors, as judged by their performance on the private
+  test set of fault labels" and Phase 2 "$250,000 … among the top five competitors, as judged by their performance on all
+  fault labels in this updated label set", and "a total of up to 10 awards"; §3 states the prize "is part of the
+  American-Made program … administered by NLR"; §1.2 again defers dates to `gems.drivendata.org`; and footnote 3 cites
+  GeoDAWN as "Accessed December 22, 2025".
+- **Confidence:** verified — everything above was fetched and read this session.
+
+## GV-16 · The official escalation channel for the two open discrepancies
+
+- **Source:** <https://www.drivendata.org/competitions/306/competition-doe-gems/> (read 2026-09-26)
+- **Claim (verbatim):** "If you are ever unsure whether your solution meets the competition rules, ask the challenge
+  organizers in the competition forum or send an email to gemsprize@nlr.gov."
+- **Relevance.** GV-12 (submission extent) and GV-13 (what GeoDAWN contains) are cases of two official documents
+  disagreeing with each other. This agent does not post to the forum — that constraint is recorded in every
+  AI-usage-log entry — so the escalation path belongs to a human: a new forum thread, or that mailbox. Recorded here so
+  the decision is not lost between sessions. Neither question blocks research; both could block a submission.
+- **Confidence:** verified for the quotation.
+
+## GV-17 · The problem description's feature list and the notebook's 19 band tags do not line up
+
+- **Sources:** <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features> (read
+  2026-09-26); band tags as printed by the reference-solution notebook (see the [feature stack](../feature-stack.html)).
+- **Claim — problem description, verbatim:** "The GeoTIFF has many layers: Surface conductivity and depth to conductive
+  base surface · Detrended elevation and the slope of detrended elevation · Dilatation rate, shear strain rate, and the
+  second invariant of the strain rate tensor · Isostatic gravity anomaly and the slope of the isostatic gravity anomaly ·
+  Magnetics including reduced-to-pole magnetic anomaly, total magnetic intensity, the vertical and horizontal slope of
+  total magnetic intensity, and the top-of-crustal magnetic source depth estimate · Density of earthquakes."
+- **Claim — band tags, verbatim examples:** band 6 "Tilt angle or total curvature — magnetic field derivative for edge
+  detection"; band 10 "Distance to earthquake (n=100km radius, a=15° azimuth parameters)"; band 15 "Depth to basement
+  surface — thickness of sedimentary cover".
+- **The mismatch, stated precisely.** The problem description names a **"depth to conductive base surface"** and a
+  **"top-of-crustal magnetic source depth estimate"**; no band tag matches either name. Conversely, band 6 (tilt angle /
+  total curvature) and band 10 (distance to earthquake) have no counterpart in the problem description's list. The
+  remaining items map onto bands plausibly but not provably (e.g. "surface conductivity" ↔ band 17).
+- **Why it is not pedantry.** Band 6 is already an edge detector, so whether it exists changes what H2 must build; the
+  two unnamed depth surfaces would change the cover-conditioning argument (PF-6); and if the problem description's list
+  is the authoritative inventory, the notebook's tags are a display convention and the band numbering used across this
+  site could be shifted by the position of the unlisted layers.
+- **Action:** resolve by comparing `data/inventory.json` (written by `scripts/prepare_data.py`) against the
+  [feature-stack page](../feature-stack.html) once the rasters are placed. Until then, every band number on this site is
+  cited as "the tag printed by the reference notebook", which is what the feature-stack page states up front.
+- **Confidence:** verified for both texts. The mismatch is arithmetic on them; the consequences are **inference**.
 
 ## GV-10 · Forum re-read 2026-09-26 (session arena/01a0df77)
 

@@ -16,6 +16,51 @@ record rather than reconstructed at the deadline.
 
 ---
 
+## 2026-09-26 · session `arena/01a0dfe6-learngemsdoe`
+
+- **Tool:** Arena.ai Agent Mode (an AI coding agent; underlying model not disclosed by the platform), with bash, git,
+  `gh`, a web-page fetch tool, and GitHub Actions in this repository. No other generative-AI service was called. No
+  image, audio or video generation. No prediction GeoTIFF was produced, scored or submitted, and no weekly submission
+  slot was used. No DrivenData account was created and no credentials were requested or stored.
+- **Did — source verification.** Fetched and read (not recalled): the competition hub; problem description page 967
+  (both chunks); About page 968; the official rules PDF from `docs.nlr.gov` (Preface, §1.1–§1.4, §2, §3.1–§3.2); the
+  forum category JSON (both chunks) and threads 11516 (all four posts) and 11536 (both posts); the NBMG layer-0 JSON and
+  a `returnCountOnly` query; the ScienceBase item's spatial JSON; INGENIOUS GDR 1391's resource list; the USGS
+  Quaternary Fault and Fold Database page (chunks 0–2); the USGS GeoDAWN data page (full); Hermant et al. (2025) (all
+  eight chunks); and the reference-solution README.
+- **Did — measurement.** Extended `scripts/public_census.py` and `scripts/download_competition_data.sh` to also fetch the
+  public USGS QFFD GIS distribution, and ran the public-data workflow three times on GitHub runners —
+  [36277677626](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277677626),
+  [36277792332](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277792332),
+  [36277952393](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36277952393) — reading results back from
+  the check-run annotations API. The first run's USGS-layer annotations were silently dropped because GitHub keeps at most
+  ~10 annotations per step; the workflow was changed to emit dense notices and the run repeated. Every number written
+  into CG-15 and CG-16 was copied from those annotations, and the census JSON is the `public-census` run artifact.
+- **Did — writing.** Added catalogue-gap entries CG-13…CG-16, GM-10, PF-10, ST-8, PA-9, PA-10, GV-15…GV-17; added
+  hypotheses H13 and H14; corrected the "413 traces" reading, H12's mechanism and PA-2's figure attribution; appended this
+  log and the changelog. Existing entries were extended, not duplicated.
+- **Did not:** create an account; request or store credentials; touch competition rasters; generate, validate or submit a
+  prediction; use a submission slot; post to the forum; create a second site, repo or registration.
+- **Fabrication controls used this session.**
+  - Every quotation was copied from a page fetched in this session. Where a source could not be read in full, the entry
+    says so and is marked `unverified` (e.g. the two paywalled potential-field methods papers, Miller & Singh 1994 and
+    Verduzco et al. 2004, remain bibliographic-record-only).
+  - Every measured number names the run and the file it came from, with byte counts and sha256 for each downloaded file
+    so a reviewer can confirm the same bytes were used.
+  - Derived quantities are labelled arithmetic or inference: the 0.18% length difference, the mean trace lengths
+    (1,120.5 m and 15,084.3 m), the shares in the CG-16 table, and the "≥ 0.51% of grid pixels" figure (6,230.2 km of
+    trace ÷ 100 m ÷ 12,279,160 pixels, assuming a one-pixel-wide rasterisation).
+  - Two discrepancies were recorded rather than resolved: the USGS page's "16 MB" against the 32,371,696-byte file
+    actually served, and the problem description's feature list against the notebook's band tags.
+  - A claim inherited from the task instructions — that the full train→inference→validate pipeline is "ready to run" —
+    was checked against `scripts/`, found false, and left flagged rather than smoothed over.
+- **Human-owned checks:** open run 36277952393 and confirm the annotations; open
+  <https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip> and confirm the 32,371,696-byte download and the
+  16 MB statement on the faults page; confirm eligibility against rules §1.3 if team composition or affiliations change;
+  decide whether to raise GV-12, GV-13 and GV-17 with the organisers (forum or <gemsprize@nlr.gov>, GV-16).
+
+---
+
 ## 2026-09-26 · session `arena/01a0dfd3-learngemsdoe`
 
 - **Tool:** Arena.ai Agent Mode (an AI coding agent; underlying model not disclosed by the platform), with bash, git,

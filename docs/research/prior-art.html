@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 5 of 6 · 8 entries · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 5 of 6 · 10 entries · re-verified 2026-09-26</p>
 
       <h1>Prior art</h1>
       <p class="lede">
@@ -311,6 +311,53 @@
             <span class="chip unverified">unverified</span>: the paper's contents have not been read, and it is
             <strong>not</strong> established that its fault mapping is distributed as data. A lead, not an asset.
           </dd>
+        </dl>
+      </article>
+
+      <h2 id="pa9">PA-9 · Hermant et al. §3.3, read verbatim 2026-09-26</h2>
+      <article class="entry" id="pa9-entry">
+        <h3><span class="id">PA-9</span> The reason they stopped trusting the catalogue, and the four visual criteria their mappers used</h3>
+        <p><span class="chip verified">verified</span> verbatim</p>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Hermant et al. (2025)</a> §3.3 (read 2026-09-26). Full reading in <a href="geomorphology.html#gm10">GM-10</a>.</dd>
+          <dt>Verbatim</dt>
+          <dd><blockquote class="quote">As the USGS Quaternary fault mapping is sometimes inaccurate at small scales or of
+            variable precision, we created a new manual mapping of faults over the eastern half of the study area … The
+            remaining half was reserved for prediction<cite>Hermant et al. §3.3</cite></blockquote>
+            <blockquote class="quote">we created a fault label dataset containing 1100 faults with a cumulative length of
+              264 km<cite>Hermant et al. §3.3</cite></blockquote></dd>
+          <dt>Note on the two quotable wordings</dt>
+          <dd>§3.3 says “sometimes inaccurate at small scales or of variable precision”; the Introduction says “occasionally imprecise at small scale or of variable and heterogeneous accuracy at large scale” (<a href="prior-art.html#pa2">PA-2</a>). Both exist verbatim in the same paper. Cite each in its own section; do not blend them.</dd>
+        </dl>
+      </article>
+
+      <h2 id="pa10">PA-10 · Figure 7's epoch tables — the mid-training and final numbers, read separately</h2>
+      <article class="entry" id="pa10-entry">
+        <h3><span class="id">PA-10</span> Epoch 17.5 vs 20: which numbers to quote, and what the thresholds show</h3>
+        <p><span class="chip verified">verified</span> read from the figure tables this session</p>
+        <dl>
+          <dt>Source</dt>
+          <dd>Same paper, Figure 7 (per-epoch tables), §6 prose and the weighted-Focal-IoU threshold discussion. Read 2026-09-26.</dd>
+          <dt>The two sets, labelled by which they are</dt>
+          <dd><div class="table-wrap"><table>
+            <thead><tr><th>Number</th><th>Figure 7 table (epoch 17.5)</th><th>§6 prose (20 epochs)</th></tr></thead>
+            <tbody>
+              <tr><td>FaultSEG PR-AUC (three folds)</td><td>0.88 / 0.59</td><td><strong>0.902 / 0.610 / 0.595</strong></td></tr>
+              <tr><td>siUNET PR-AUC</td><td>0.56 / 0.47</td><td><strong>0.574 / 0.463 / 0.449</strong></td></tr>
+              <tr><td>FaultSEG loss (train / val)</td><td>0.0028 / 0.0073</td><td>not reported</td></tr>
+              <tr><td>siUNET loss (train / val)</td><td>0.0055 / 0.0061</td><td>not reported</td></tr>
+            </tbody>
+          </table></div>
+          <p class="small">PA-2 and GM-3 quote the <strong>prose</strong> figures — the final 20-epoch result. Quote those for performance; quote the Figure 7 pair only when discussing the training trajectory.</p></dd>
+          <dt>Weighted-Focal-IoU thresholds, verbatim in substance</dt>
+          <dd><ul>
+            <li>FaultSEG: “weighted-Focal-IoU below 0.3 in most epochs” (best fold ≥0.879 / 0.594 / 0.580).</li>
+            <li>siUNET: “below 0.2 in most epochs” (0.600 / 0.498 / 0.453).</li>
+          </ul>
+          <p>Read as a calibration warning, not as a score: with a 6.5% positive fraction and a 50 m buffer, the best model's IoU stays under 0.3 for most of training. A high DTI on an early checkpoint is not evidence of a good model.</p></dd>
+          <dt>How it is used</dt>
+          <dd>In H9 (train against incompleteness) and in the training-plan notes for PA-7: the epoch at which val loss turns is before the epoch at which PR-AUC peaks, so checkpoint selection must be on the metric, not on the loss curve.</dd>
         </dl>
       </article>
 

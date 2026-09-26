@@ -109,6 +109,38 @@ margins, lithologic benches, road and fence lines, playa edges.
   later cites the rules as evidence that GeoDAWN itself distributed lidar.
 - **Confidence:** verified for both texts.
 
+## GM-10 · What an expert actually looks for, in the authors' own words
+
+- **Source:** Hermant et al. (2025) §3.3, read this session — <https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf>
+- **Claim (verbatim):**
+  > "As the USGS Quaternary fault mapping is sometimes inaccurate at small scales or of variable precision, we created a
+  > new manual mapping of faults over the eastern half of the study area using elevation and slope data, and satellite
+  > imagery. The remaining half was reserved for prediction."
+- **The four visual criteria they list (verbatim):**
+  1. "A fault often appears as a generally straight line on the image, creating a strong visual contrast with the
+     surrounding areas"
+  2. "Active or recent faults can affect the topography: the areas on either side of the fault will have a different
+     elevation and the fault zone itself will have a steeper slope."
+  3. "Faults can affect the surrounding vegetation, creating a noticeable variation in vegetation on different parts of
+     the Earth's surface."
+  4. "Geological features can also be associated with the presence of faults in the area, such as areas of weathered rock
+     or fractures along hillsides or mountains."
+- **Also (verbatim):** "Using these criteria, we created a fault label dataset containing 1100 faults with a cumulative
+  length of 264 km." And on the label raster: "a buffer value of 50 m was used, implying a thickness of the fault
+  signature in the data 100 m."
+- **Why it matters here.** Three things. (1) This is a published, worked statement of why a team would discard the
+  catalogue as a training target and build its own — the same conclusion as H5 and H9, reached independently, in this
+  region, from this data. (2) Criterion 3 (vegetation) is a modality the 19-band stack does not contain at all (PA-1);
+  criterion 4 (weathered rock, hillside fractures) is what the conductivity and magnetic bands weakly proxy. (3) Criterion
+  1 — a generally straight line with strong visual contrast — is the confuser generator: ditches, roads, shorelines and
+  channel margins are all straight, high-contrast lines. The catalogue resolved that ambiguity with field evidence and
+  put the non-tectonic ones in **Class D** (CG-14); a model cannot, which is why H11 prices confusers instead of deleting
+  them.
+- **Note on the quotation.** The sentence quoted above is where the shorter phrase quoted in PA-2 ("the USGS Quaternary
+  fault mapping is sometimes inaccurate at small scales or of variable precision") comes from. It was read verbatim from
+  §3.3 this session, so PA-2's quotation is confirmed rather than inferred.
+- **Confidence:** verified — read from the PDF this session.
+
 ## Blocked-on
 
 1. Read `1m_DEM_links.csv` — count tiles, coverage, volume.
