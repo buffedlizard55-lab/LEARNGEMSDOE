@@ -98,8 +98,10 @@ def main() -> int:
         idx = [i for i, g in enumerate(fault_geoms) if g.intersects(poly)]
         inter = [fault_geoms[i] for i in idx]
         inside_len = sum(g.intersection(poly).length for g in inter)
-        ftype, mapscale = {}, {}
+        ftype, mapscale, ftype_len = {}, {}, {}
         for i in idx:
+            fl = str(fault_recs[i].get("FTYPE_", "")).strip() or "(blank)"
+            ftype_len[fl] = ftype_len.get(fl, 0.0) + fault_geoms[i].intersection(poly).length
             f = str(fault_recs[i].get("FTYPE_", "")).strip() or "(blank)"
             m = str(fault_recs[i].get("MAPSCALE", "")).strip() or "(blank)"
             ftype[f] = ftype.get(f, 0) + 1
@@ -111,6 +113,7 @@ def main() -> int:
             "polygon_area_in_fault_crs_units2": round(poly.area, 1),
             "ftype_counts": dict(sorted(ftype.items())),
             "mapscale_counts": dict(sorted(mapscale.items())),
+            "ftype_clipped_length_m": {a: round(b, 1) for a, b in sorted(ftype_len.items())},
         }
     report["qfaults_total_records"] = len(fault_geoms)
     OUT.write_text(json.dumps(report, indent=2))
