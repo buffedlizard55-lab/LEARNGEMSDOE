@@ -41,17 +41,30 @@ jobs:
           if not p.exists():
               print("::warning title=census::public_census.json not written"); raise SystemExit
           r = json.loads(p.read_text())
-          for k, v in r["layers"].items():
-              if k != "qfaults":
-                  print(f"::notice title=layer {k}::records={v['records']} crs={v['crs']} attrs={json.dumps(v.get('attributes'))}")
-          for k, v in r["clip"].items():
-              print(f"::notice title=clip {k}::{json.dumps(v)}")
-          print("::notice title=files::" + " ; ".join(f"{v['name']} bytes={v['bytes']} sha256={v['sha256']}" for v in r["files"].values()))
+          # GitHub keeps at most ~10 annotations per step, so each notice below is dense
+          # and the full JSON is also uploaded as the `public-census` artifact.
+          print("::notice title=files::" + " ; ".join(
+              f"{v['name']} bytes={v['bytes']} sha256={v['sha256']}" for v in r["files"].values()))
           print(f"::notice title=total::qfaults_total_records={r['qfaults_total_records']}")
+          clip = {}
+          for k, v in r["clip"].items():
+              clip[k] = {kk: vv for kk, vv in v.items()
+                         if kk in ("traces_intersecting", "clipped_length_in_fault_crs_units",
+                                   "polygon_area_in_fault_crs_units2", "ftype_counts",
+                                   "mapscale_counts", "ftype_clipped_length_m")}
+          print("::notice title=clip::" + json.dumps(clip))
           o = r.get("offsets") or {}
-          print("::notice title=offsets::" + json.dumps(dict((k, v) for k, v in o.items() if k != "usgs_layers")))
+          print("::notice title=offsets::" + json.dumps(
+              dict((k, v) for k, v in o.items() if k != "usgs_layers")))
           for name, layer in (o.get("usgs_layers") or {}).items():
-              print(f"::notice title=usgs layer {name}::" + json.dumps(layer)[:900])
+              keep = {kk: vv for kk, vv in layer.items() if kk != "fields"}
+              a = layer.get("ingenious_footprint_trace_to_nearest_usgs") or {}
+              b = layer.get("usgs_extent_trace_to_nearest_ingenious") or {}
+              print(f"::notice title=usgs {name}::" + json.dumps(keep) +
+                    f" | ING->USGS median={a.get('median_m')} p90={a.get('p90_m')} max={a.get('max_m')}"
+                    f" le300m={a.get('share_le_300m')} gt1000m={a.get('share_gt_1000m')}"
+                    f" | USGS->ING median={b.get('median_m')} p90={b.get('p90_m')} max={b.get('max_m')}"
+                    f" le300m={b.get('share_le_300m')} gt1000m={b.get('share_gt_1000m')}")
           PY
       - name: INGENIOUS v2 field definitions (MAPSCALE semantics)
         if: always()
