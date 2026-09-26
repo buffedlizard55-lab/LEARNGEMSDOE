@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -78,6 +82,17 @@
         </table>
       </div>
       <p class="small">JSON endpoints opened: <a href="https://community.drivendata.org/t/11540.json">11540.json</a>, <a href="https://community.drivendata.org/t/11526.json">11526.json</a>, <a href="https://community.drivendata.org/t/11543.json">11543.json</a>. Each had <code>posts_count</code> 1 and a single post in <code>post_stream.posts</code>.</p>
+
+      <div class="banner info">
+        <h3>Re-read 2026-09-26, session <code>arena/01a0df88</code></h3>
+        <p>
+          The <a href="https://community.drivendata.org/c/gems-prize-challenge/111.json">category JSON</a> was fetched in
+          full: <strong>11 topics</strong>, newest <strong>11543 (2026-09-25)</strong>. <strong>No new topic and no new
+          staff reply since the previous session's re-read.</strong> <code>posts_count</code> is unchanged for every
+          thread listed above, and for the staff-answered threads below (11527 is still the busiest at 10 posts).
+          Full record: <a href="research/governance.html#gv11">GV-11</a>.
+        </p>
+      </div>
 
       <h2 id="answered">Staff-answered threads (not re-quoted here)</h2>
       <p>Full quotations remain on <a href="research/governance.html">governance</a>. Category index this session still listed:</p>

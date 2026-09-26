@@ -10,16 +10,24 @@ prediction GeoTIFFs, and it does **not** use weekly submission slots.
 
 ## Site
 
-GitHub Pages is served from `docs/` (the workflow deploys on push to `main`).
+GitHub Pages is published at <https://buffedlizard55-lab.github.io/LEARNGEMSDOE/>.
+
+**Two deploy paths are configured, and that is worth knowing.** `.github/workflows/pages.yml` uploads `docs/` on every
+push to `main`, while the repository's Pages setting is still the legacy "build from the `main` branch, path `/`" — which
+is the one currently serving, so live URLs carry a `/docs/` segment (the root `index.html` redirects there). Both work,
+because every link in the site is relative. If you would rather the site be served at the bare subpath, switch
+**Settings → Pages → Source** to **GitHub Actions**; that is a repository-owner action (an integration token cannot
+change it) and it is the one manual step left in the site setup.
 
 | Page | File | What it holds |
 | --- | --- | --- |
-| Overview | [docs/index.html](docs/index.html) | Competition facts table, what is scored, domain index, flagged irregularities |
+| Overview | [docs/index.html](docs/index.html) | Reading order, competition facts table, what is scored, domain index, flagged irregularities, how the site checks itself |
+| Search | [docs/search.html](docs/search.html) | One box over every research entry, hypothesis card and page; generated index |
 | Explainer | [docs/executive-summary.html](docs/executive-summary.html) | Geologist-facing narrative of the problem |
 | Requirements | [docs/requirements.html](docs/requirements.html) | Full checklist: constraints, re-read facts, counted catalogue attributes, open items |
-| Research library | [docs/research/](docs/research/) | Six domains, numbered entries, each with source / citation / claim / relevance / confidence |
+| Research library | [docs/research/](docs/research/) | Six domains, 57 numbered entries, each with source / citation / claim / relevance / confidence |
 | Feature stack | [docs/feature-stack.html](docs/feature-stack.html) | All 19 bands, raster geometry, GeoDAWN acquisition, missing layers, pitfalls |
-| Hypothesis backlog | [docs/hypotheses.html](docs/hypotheses.html) | H1–H8 cards with layers, signature, gap reasoning, expected DTI impact, cost, validation, rejection |
+| Hypothesis backlog | [docs/hypotheses.html](docs/hypotheses.html) | H1–H11 cards with layers, signature, gap reasoning, expected DTI impact, cost, validation, rejection |
 | Sources | [docs/sources.html](docs/sources.html) | Every source, with what was read and what remains unverified |
 | Pipeline | [docs/pipeline.html](docs/pipeline.html) | Data-placement blocker, what runs today, the submission gate |
 | Governance | [docs/research/governance.html](docs/research/governance.html) | Rules section by section, staff clarifications, open questions |
@@ -56,9 +64,17 @@ and correct that page if they disagree.
 ## What runs today, with no competition data
 
 ```bash
-python3 scripts/metrics.py --selftest   # 11 numeric checks, CPU, standard library only
-python3 scripts/metrics.py --demo       # worked example as JSON
+python3 scripts/metrics.py --selftest            # 11 numeric checks, CPU, standard library only
+python3 scripts/metrics.py --demo                # worked example as JSON
+python3 scripts/check_site.py                    # links, anchors, assets, source allowlist — offline
+python3 scripts/build_search_index.py            # regenerate the search index
+python3 scripts/build_search_index.py --check    # fail if the committed index is stale
 ```
+
+`scripts/check_site.py` enforces part of the no-hallucinated-sources rule mechanically: every external link anywhere on
+the site must also appear on [docs/sources.html](docs/sources.html), or the check fails. It fetches nothing.
+`scripts/build_search_index.py` regenerates `docs/assets/search-index.js` from the markdown mirrors, and its `--check`
+mode fails if the committed index has drifted. Both run in CI on every push and pull request.
 
 `scripts/metrics.py` implements the official distance-weighted Tversky index (α=0.2, β=0.8, R=300 m), a Tversky loss,
 and a pixel-exact masked variant matching the staff-confirmed scoring mask. It has one documented assumption: distances

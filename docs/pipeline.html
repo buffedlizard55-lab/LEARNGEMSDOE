@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -73,6 +77,16 @@
           <code>GeoDAWN_area1_outline.zip</code> at 1,190 bytes and <code>GeoDAWN_area2_outline.zip</code> at 1,497 bytes.
         </li>
       </ol>
+      <p class="small">
+        <strong>Re-run 2026-09-26, session <code>arena/01a0df88</code>:</strong> both commands were run from this
+        workspace. The download script again returned <code>STATUS: no competition GeoTIFF/CSV in data/ — training remains
+        blocked</code> with <code>Public-outline attempt ok=0</code>; all four public files failed with curl exit 35
+        (ScienceBase, GDR). <code>prepare_data.py</code> again wrote <code>blocked_no_data</code> with all five expected
+        filenames absent. Nothing changed, and nothing was invented to fill the gap. Note that HTTPS from this sandbox
+        reaches <code>github.com</code> but not the public data hosts, while HTML and JSON were still readable through a
+        separate fetch path — which is why the research pages can quote primary sources that <code>curl</code> cannot
+        reach.
+      </p>
       <p>On an unrestricted, enrolled machine:</p>
       <pre><code>bash scripts/download_competition_data.sh   # never logs in; also tries the small public outlines
 python scripts/prepare_data.py              # writes data/inventory.json — inspection only</code></pre>
@@ -110,6 +124,20 @@ python scripts/prepare_data.py              # writes data/inventory.json — ins
               <td>Python 3; rasterio optional</td>
               <td>Reports “blocked_no_data” and writes an inventory recording the absence</td>
               <td><span class="chip verified">runs; exits 2 — no data</span></td>
+            </tr>
+            <tr>
+              <td><code>python3 scripts/check_site.py</code></td>
+              <td>Python 3 standard library</td>
+              <td>Offline site verification: internal links and anchors, local assets, page structure, and that every
+                external link is recorded on the <a href="sources.html">sources page</a></td>
+              <td><span class="chip verified">passes, 18 pages</span></td>
+            </tr>
+            <tr>
+              <td><code>python3 scripts/build_search_index.py</code></td>
+              <td>Python 3 standard library</td>
+              <td>Regenerates <code>docs/assets/search-index.js</code> from <code>research/*.md</code>;
+                <code>--check</code> reports drift</td>
+              <td><span class="chip verified">passes, 99 items</span></td>
             </tr>
           </tbody>
         </table>

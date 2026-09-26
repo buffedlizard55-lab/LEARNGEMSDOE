@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -44,11 +48,32 @@
 
       <div class="stats">
         <div class="stat"><div class="n">6</div><div class="l">Research domains</div></div>
-        <div class="stat"><div class="n">8</div><div class="l">Hypotheses</div></div>
+        <div class="stat"><div class="n">11</div><div class="l">Hypotheses</div></div>
         <div class="stat"><div class="n">19</div><div class="l">Feature bands</div></div>
         <div class="stat"><div class="n">100 m</div><div class="l">Grid / 3730×3292</div></div>
         <div class="stat"><div class="n">300 m</div><div class="l">Metric kernel R</div></div>
         <div class="stat"><div class="n">$300k</div><div class="l">Prize pool</div></div>
+      </div>
+
+      <div class="banner ok">
+        <h3>Latest pass — 2026-09-26, session <code>arena/01a0df88</code></h3>
+        <ul>
+          <li><strong>The GeoDAWN-box catalogue census is measured.</strong>
+            <a href="research/catalogue-gaps.html#cg9">CG-9</a>: 1,179 of 22,956 INGENIOUS traces intersect the published
+            GeoDAWN bounding box — 739 well constrained, 351 moderately constrained, 89 inferred. Every number is a
+            re-runnable query.</li>
+          <li><strong>Hermant et al. (2025) is now read end to end</strong>, including the results in prose, the
+            discussion and the reference list — <a href="research/prior-art.html#pa6">PA-6</a>,
+            <a href="research/prior-art.html#pa7">PA-7</a>, <a href="research/prior-art.html#pa8">PA-8</a>.
+            One consequence: they report model-found faults <em>confirmed by experts on lidar</em> in this region
+            (<a href="research/geomorphology.html#gm7">GM-7</a>).</li>
+          <li><strong>Three new hypotheses</strong> — <a href="hypotheses.html#h9">H9</a> (train against label
+            incompleteness), <a href="hypotheses.html#h10">H10</a> (an independent lidar validation anchor),
+            <a href="hypotheses.html#h11">H11</a> (soft confusers).</li>
+          <li><strong>New site features</strong> — <a href="search.html">search</a> across every entry, and an offline
+            <a href="#verification">verification script</a> that fails the build if a link breaks or an unrecorded source
+            appears.</li>
+        </ul>
       </div>
 
       <div class="banner info">
@@ -72,6 +97,28 @@
           and the <a href="forum.html">forum watch</a>.
         </p>
       </div>
+
+      <h2 id="start">Start here — a reading order</h2>
+      <p class="small">Five stops, in the order that makes the rest make sense. About 25 minutes.</p>
+      <ol class="reading-order">
+        <li><strong><a href="executive-summary.html">The problem, in geological terms</a></strong> — what is actually
+          being scored, and why reproducing the published map earns nothing.</li>
+        <li><strong><a href="research/catalogue-gaps.html">Catalogue-gap reasoning</a></strong> — how the USGS and
+          INGENIOUS catalogues were really built. This is the scored target, not a side note: read
+          <a href="research/catalogue-gaps.html#cg1">CG-1</a>, <a href="research/catalogue-gaps.html#cg2">CG-2</a>,
+          <a href="research/catalogue-gaps.html#cg9">CG-9</a> and <a href="research/catalogue-gaps.html#cg7">CG-7</a>.</li>
+        <li><strong><a href="feature-stack.html">The 19 bands</a></strong> — what you have to work with, and what is
+          missing from it.</li>
+        <li><strong><a href="hypotheses.html">Hypothesis backlog</a></strong> — eleven cards, each with the layers, the
+          signature, why it targets a <em>gap</em>, and how it would be rejected.</li>
+        <li><strong><a href="pipeline.html">Pipeline status</a></strong> — what runs today, what is blocked, and the gate
+          on submission generation.</li>
+      </ol>
+      <p class="small">
+        Looking for something specific? <a href="search.html">Search</a> covers every entry, hypothesis and page.
+        Every claim is traceable from <a href="sources.html">sources</a>, and every session is logged in the
+        <a href="ai-usage.html">AI-usage log</a> as rules §3.2 requires.
+      </p>
 
       <h2 id="facts">The competition in one table</h2>
       <p class="small">Every row below was read out of the linked primary source on 2026-09-26. Nothing here is paraphrased from memory.</p>
@@ -165,32 +212,32 @@
         <a class="card" href="research/catalogue-gaps.html">
           <h3>1 · Catalogue-gap reasoning</h3>
           <p>How the USGS and INGENIOUS catalogues were actually built — and where that process is structurally incomplete. Highest-leverage domain.</p>
-          <p class="card-meta">8 entries · highest leverage</p>
+          <p class="card-meta">11 entries · highest leverage</p>
         </a>
         <a class="card" href="research/potential-field.html">
           <h3>2 · Potential-field geophysics</h3>
           <p>RTP/TMI, gradients, tilt derivative, isostatic gravity — edges that survive under basin fill where no scarp exists.</p>
-          <p class="card-meta">7 entries</p>
+          <p class="card-meta">9 entries</p>
         </a>
         <a class="card" href="research/geomorphology.html">
           <h3>3 · DEM structural geomorphology</h3>
           <p>Detrended elevation and slope at 100&nbsp;m, 1&nbsp;m lidar via 3DEP, and what a subtle Basin-and-Range scarp looks like in each.</p>
-          <p class="card-meta">6 entries</p>
+          <p class="card-meta">9 entries</p>
         </a>
         <a class="card" href="research/seismotectonics.html">
           <h3>4 · Seismotectonics and strain</h3>
           <p>Strain-rate invariants, earthquake density, conductivity — where independent signals agree and where they part company.</p>
-          <p class="card-meta">6 entries</p>
+          <p class="card-meta">7 entries</p>
         </a>
         <a class="card" href="research/prior-art.html">
           <h3>5 · Prior art</h3>
           <p>Mattéo 2021, Hermant 2025 and the official Lipor U-Net reference — including where the reference likely falls short.</p>
-          <p class="card-meta">5 entries</p>
+          <p class="card-meta">8 entries</p>
         </a>
         <a class="card" href="research/governance.html">
           <h3>6 · Competition governance</h3>
           <p>Rules sections, forum clarifications and errata, open eligibility questions, and time-sensitive items.</p>
-          <p class="card-meta">9 entries</p>
+          <p class="card-meta">13 entries</p>
         </a>
       </div>
       <p class="small">
@@ -216,6 +263,9 @@
             <tr><td class="nowrap"><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td></tr>
             <tr><td class="nowrap"><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td></tr>
             <tr><td class="nowrap"><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale traces mark the edge of the map — not a positive class</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong><a href="hypotheses.html#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Medium</td></tr>
+            <tr><td class="nowrap"><strong><a href="hypotheses.html#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as an independent lidar validation anchor</td><td class="nowrap">Low–med</td></tr>
+            <tr><td class="nowrap"><strong><a href="hypotheses.html#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td></tr>
           </tbody>
         </table>
       </div>
@@ -282,7 +332,51 @@
             <code>&lt;15,000</code>-style bins and bare numbers such as <code>8400</code>. Do not normalize them until
             the field-definition text is read. Counts: <a href="requirements.html#catalogue">requirements page</a>.
           </li>
+          <li>
+            <strong>Two instructions for how much area the GeoTIFF must cover.</strong> Rules §3.2 says “for the entirety
+            of the GeoDAWN study area”; the problem description says “the same bounds as the training data”. The grid
+            bounding box is roughly 2.4× the surveyed area, so these are not obviously the same instruction. Unresolvable
+            until the raster is placed — <a href="research/governance.html#gv12">GV-12</a>.
+          </li>
+          <li>
+            <strong>Official documents disagree about whether GeoDAWN includes lidar.</strong> Rules §2 calls it “a
+            high-resolution lidar, magnetic, and radiometric study”; the data release is titled “Airborne magnetic and
+            radiometric surveys” and describes the 3DEP lidar as a coordinated but separate collection. No scoring
+            consequence is known — <a href="research/geomorphology.html#gm9">GM-9</a> /
+            <a href="research/governance.html#gv13">GV-13</a>.
+          </li>
         </ol>
+      </div>
+
+      <h2 id="verification">How this site checks itself</h2>
+      <p>
+        “No hallucinated sources” is a claim about process, so it is enforced mechanically where it can be:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Check</th><th>Command</th><th>What it guarantees</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Site integrity</td>
+              <td><code>python3 scripts/check_site.py</code></td>
+              <td>Every internal link and anchor resolves, every local asset exists, every page carries the nav, and every
+                external link on the site is recorded as a source on the <a href="sources.html">sources page</a>. Offline:
+                it fetches nothing.</td>
+            </tr>
+            <tr>
+              <td>Search index freshness</td>
+              <td><code>python3 scripts/build_search_index.py --check</code></td>
+              <td>The committed search index matches the markdown mirrors, so search results cannot drift silently away
+                from the library.</td>
+            </tr>
+            <tr>
+              <td>Metric correctness</td>
+              <td><code>python3 scripts/metrics.py --selftest</code></td>
+              <td>The distance-weighted Tversky index, the kernel and the masked variant behave as the problem description
+                specifies. Eleven numeric checks, CPU only.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <h2 id="official">Official links for manual review</h2>

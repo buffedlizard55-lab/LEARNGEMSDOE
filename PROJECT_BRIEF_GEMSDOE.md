@@ -111,7 +111,25 @@ re-running extends existing entries rather than duplicating them.
 End of each session, report: what was added and where, hypothesis backlog and status, what is still unverified, what is
 blocking progress, and the single highest-value next research question.
 
-## Current blockers (as of 2026-09-26, session arena/01a0df77)
+## Current blockers (as of 2026-09-26, session `arena/01a0df88`)
+
+1. **Competition rasters are not in `data/`.** Both data scripts were re-run this session and again reported
+   `blocked_no_data`. Nothing can move from `untested` until they are placed.
+2. **The catalogue census is measured against the bounding box, not the footprint.** CG-9 counts 1,179 INGENIOUS traces
+   inside the published GeoDAWN box (ScienceBase `fields=spatial`). The outline polygons are the remaining step, and
+   they still fail TLS from this machine. Treat the box counts as upper bounds.
+3. **No training or inference code** — deliberately. A prior handoff claimed a complete train→inference→validate
+   pipeline was "ready to run"; it is not present. Re-checked again this session.
+4. **Unanswered forum questions** — re-read 2026-09-26: 11 topics, newest 11543 (2026-09-25), no new staff reply.
+   11540, 11526, 11543 and 11499's eligibility question are still unanswered.
+5. **Unread sources** — Hermant et al. chunks 7+ (tail of the reference list); the body of Mattéo et al. 2021; the
+   INGENIOUS Qfaults v2 field-definition text; two paywalled potential-field methods papers.
+6. **Two official-document discrepancies** are open and flagged: submission extent (GV-12) and whether GeoDAWN includes
+   lidar (GM-9 / GV-13).
+
+### Superseded (kept for continuity, resolved by a later session)
+
+**Previous blockers list (session `arena/01a0df77`):**
 
 1. **Competition rasters are not in `data/`** — the data tab requires a DrivenData login (re-confirmed redirect).
    No hypothesis can move from `untested` until they are placed and `prepare_data.py` is run. No account was created.

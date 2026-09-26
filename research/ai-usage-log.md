@@ -16,6 +16,48 @@ record rather than reconstructed at the deadline.
 
 ---
 
+## 2026-09-26 · session `arena/01a0df88-learngemsdoe`
+
+**Tool.** Arena.ai Agent Mode — a coding agent with web fetch, web search, file read/write and shell execution in this
+repository. No other generative-AI service was called. No image, audio or video generation. No prediction GeoTIFF was
+produced, scored or submitted, and no weekly submission slot was used.
+
+**Did — source verification (fetched and read, not recalled).** Competition hub; problem description page 967 (both
+chunks); About page 968; the official rules PDF (Preface, §1.1–§1.4, §2, §3.1–§3.2); the forum category JSON (both
+chunks); the ScienceBase GeoDAWN item including its `fields=spatial` bounding box; six NBMG ArcGIS count queries plus
+the layer metadata; the USGS Quaternary Fault and Fold Database page including its History section; the USGS GeoDAWN
+data page; Hermant et al. (2025) PDF chunks 4–6; Drenth & Grauch (2019) Table 1; and the reference-solution README via
+the GitHub API. Two DOIs discovered in Hermant's reference list were resolved before being cited
+(10.1130/GES00673.1 → Geosphere 7(6):1357; 10.1029/2019EO120449 → Eos).
+
+**Did — measurement.** Counted the INGENIOUS fault compilation inside the published GeoDAWN bounding box by attribute
+class (CG-9): 1,179 traces — 739 Well Constrained, 351 Moderately Constrained, 89 Inferred, 0 Poor/Other/blank. Every
+count is reproducible from a linked query URL. No total fault length is asserted because the service reports
+`supportsStatistics: false` and refuses the sum.
+
+**Did — writing.** Added 15 numbered research entries and three hypothesis cards; added the search page, its generated
+index, a two-tier navigation, a reading order and a verification section; added CI and footer/explainer-gate links;
+corrected PA-2 in favour of PA-6's prose-sourced figures; made Pass 2–3 review corrections to coordinates, citation
+form, counts, and markup; and appended this log and the changelog entry in the same session. Existing entries were
+extended, not duplicated.
+
+**Did — code.** Wrote `scripts/check_site.py` (offline link, anchor, asset, source-allowlist, and count verification)
+and `scripts/build_search_index.py` (search-index generator with a `--check` drift mode); added
+`.github/workflows/verify.yml`; extended `check_site.py` during review to cover overview cards and domain-meta counts;
+re-ran `scripts/metrics.py --selftest` (11 checks pass) and both data-placement scripts (still blocked).
+
+**Did not.** Create or use a DrivenData account or credentials. Generate, validate or submit a prediction raster. Ask
+the forum anything — this agent does not post. Create a second site, repository, account or registration, including for
+staging. Transcribe a number from a source whose labels were not legible — the Figure 7 table was left untranscribed
+for exactly that reason.
+
+**Human review still required.** Open every linked primary URL and confirm the quotations; confirm the eligibility
+position against rules §1.3 if team composition or affiliations change; decide whether to raise GV-12 (submission
+extent) and GV-13 (GeoDAWN contents) on the official forum; place the competition rasters and run the six CG-9 queries
+against the outline polygons.
+
+---
+
 ## 2026-09-26 · session `arena/01a0df77-learngemsdoe`
 
 **Tool.** Arena.ai Agent Mode — coding agent with web fetch, file read/write and shell. No other generative-AI

@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -78,7 +82,7 @@
             <tr>
               <td>Hypothesis cards state layers, physical signature, why the target is a catalogue gap rather than a known fault, expected DTI impact, cost, and status. Negative results stay.</td>
               <td><span class="chip verified">met</span></td>
-              <td><a href="hypotheses.html">H1–H8</a></td>
+              <td><a href="hypotheses.html">H1–H11</a></td>
             </tr>
             <tr>
               <td>Rules §3.2 AI-usage log, built incrementally, not reconstructed at the deadline.</td>
@@ -276,22 +280,44 @@
         <li>INGENIOUS v2 field-definition text inside the zip — unread. TLS to <code>gdr.openei.org</code> failed from this machine.</li>
         <li>GeoDAWN outline shapefiles — listed on ScienceBase (Area 1 outline 1,190 bytes, Area 2 outline 1,497 bytes, extent 2,774 bytes) but not downloaded. TLS to <code>sciencebase.gov</code> failed. The metadata CSV get-URL returned HTTP 500 via the page fetcher; the catalog still lists the file.</li>
         <li>Miller &amp; Singh 1994 and Verduzco et al. 2004 — still unread method papers.</li>
-        <li>Hermant et al. 2025 PDF chunks 4–7, and the body of Mattéo et al. 2021.</li>
+        <li>Hermant et al. 2025 PDF chunks 7+, and the body of Mattéo et al. 2021. <strong>Partly closed 2026-09-26:</strong> chunks 4–6 were read (results in prose, Figures 7–9, discussion, conclusion, reference list).</li>
         <li>Whether code <code>10</code> / <code>24</code> / <code>100</code> / <code>250</code> are thousands-denominator map scales.</li>
         <li>The full <code>REC2023</code> value list.</li>
-        <li>Any spatial overlap between these 22,956 traces and the GeoDAWN outline.</li>
+        <li>
+          Any spatial overlap between these 22,956 traces and the GeoDAWN <strong>outline</strong>.
+          <strong>Partly closed 2026-09-26:</strong> the <em>bounding-box</em> overlap is now measured —
+          <a href="research/catalogue-gaps.html#cg9">CG-9</a> — at 1,179 traces (739 well constrained, 351 moderately
+          constrained, 89 inferred). The envelope is a rectangle and the footprint is not, so this is an upper bound.
+        </li>
+        <li>
+          Submission extent: rules §3.2 says “the entirety of the GeoDAWN study area”, the problem description says “the
+          same bounds as the training data”. Cannot be settled until the raster is placed
+          (<a href="research/governance.html#gv12">GV-12</a>).
+        </li>
+        <li>
+          Whether Silver et al. (2011) distribute their lidar fault mapping — the DOI resolves, the paper has not been
+          opened (<a href="research/prior-art.html#pa8">PA-8</a>, <a href="hypotheses.html#h10">H10</a>).
+        </li>
       </ul>
 
       <h2 id="next">Highest-value next question</h2>
       <div class="banner ok">
         <p>
-          Clip <code>FTYPE_</code> and <code>MAPSCALE</code> to the official GeoDAWN outlines
-          (<a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a>)
-          and measure two numbers: how much Inferred trace-length sits inside the survey, and where Well Constrained
-          traces simply stop. That is the first catalogue-gap map that does not need a DrivenData login. It was blocked
-          this session by TLS, not by a missing source.
+          <strong>Clip the census to the outline, not the box.</strong>
+          <a href="research/catalogue-gaps.html#cg9">CG-9</a> measured the GeoDAWN <em>bounding box</em>: 1,179 traces,
+          89 of them Inferred. The survey footprint is irregular and about 42% of that box, so the box over-counts.
+          Repeat the same six queries against the Area 1 and Area 2 outline polygons
+          (<a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a>) and the
+          gap map stops being an upper bound. It needs no DrivenData login; it was blocked this session by TLS, not by a
+          missing source.
         </p>
       </div>
+
+      <h2 id="verify">Verification commands for this checklist</h2>
+      <p>Run all three from the repository root. They are offline and read-only.</p>
+      <pre><code>python3 scripts/check_site.py            # links, anchors, assets, source allowlist
+python3 scripts/build_search_index.py --check
+python3 scripts/metrics.py --selftest</code></pre>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
   </div>

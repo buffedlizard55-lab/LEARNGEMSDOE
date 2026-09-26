@@ -13,26 +13,30 @@
     <div class="wrap">
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="../index.html">Overview</a>
-        <a href="../requirements.html">Requirements</a>
-        <a href="../executive-summary.html">Explainer</a>
-        <a href="index.html">Library</a>
-        <a href="../feature-stack.html">Feature stack</a>
-        <a href="../hypotheses.html">Hypotheses</a>
-        <a href="../sources.html">Sources</a>
-        <a href="../pipeline.html">Pipeline</a>
-        <a href="governance.html">Governance</a>
-        <a href="../forum.html">Forum</a>
-        <a href="../changelog.html">Changelog</a>
-        <a href="../ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="../index.html">Overview</a>
+          <a href="../research/index.html">Research library</a>
+          <a href="../hypotheses.html">Hypotheses</a>
+          <a href="../feature-stack.html">Feature stack</a>
+          <a href="../requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="../research/governance.html">Governance</a>
+          <a href="../sources.html">Sources</a>
+          <a href="../pipeline.html">Pipeline</a>
+          <a href="../forum.html">Forum watch</a>
+          <a href="../changelog.html">Changelog</a>
+          <a href="../ai-usage.html">AI-usage log</a>
+          <a href="../search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 3 of 6 · 6 entries · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 3 of 6 · 9 entries · re-verified 2026-09-26</p>
 
       <h1>DEM structural geomorphology</h1>
       <p class="lede">
@@ -221,6 +225,113 @@
         </dl>
       </article>
 
+      <h2 id="gm7">GM-7 · The premise is demonstrated, not assumed: experts confirmed model-found faults</h2>
+      <article class="entry">
+        <h3><span class="id">GM-7</span> Hermant et al. report new faults found by a model and confirmed by geologists</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>
+            Hermant, Kiersnowski &amp; Bellanger (2025), §6 and the Figure 9 caption —
+            <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf">Stanford PDF</a>, read this
+            session (chunks 4–6 of 8; the earlier session had read 0–3).
+          </dd>
+          <dt>What it claims</dt>
+          <dd>
+            <blockquote class="quote">New faults are also detected (Figure 9, area A), mainly by FaultSEG and later
+              confirmed by experts looking at the LIDAR data.<cite>Hermant et al. (2025), §6</cite></blockquote>
+            <blockquote class="quote">… some discrepancies &gt; 150 m are observed with a clear offset between the USGS
+              fault line and the topographic break visible on the slope data (Figure 9, area B).<cite>same
+              section</cite></blockquote>
+            <p><strong>Location check.</strong> Figure 9 is the Leach Hot Springs area, printed with 40°36′N and
+            longitudes 117°36′–117°42′W; Figure 8 (Rye Patch, western Humboldt Range) prints 40°30′–40°33′N. Both fall
+            inside the GeoDAWN bounding box (−120.0024 to −116.1415 E, 37.3641 to 40.7247 N —
+            <a href="catalogue-gaps.html#cg9">CG-9</a>). "Inside the box" is <strong>not</strong> "inside the flight
+            footprint"; the footprint is irregular and that has not been tested.</p>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The whole project rests on one premise: that faults exist which the catalogue lacks and which a geologist
+            will confirm. Hermant et al. report exactly that outcome in this region, from lidar, with a U-Net-family
+            model. It also gives a local scale for catalogue error: a &gt;150 m positional discrepancy is half the 300 m
+            scoring kernel, and the same order as the 400 m figure in CG-5.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for both quotations and for the coordinates as printed in the
+            figures. The bounding-box containment is arithmetic on a verified box. Footprint containment is
+            <span class="chip unverified">unverified</span>.
+          </dd>
+        </dl>
+      </article>
+
+      <h2 id="gm8">GM-8 · The confuser list is observed, not invented</h2>
+      <article class="entry">
+        <h3><span class="id">GM-8</span> Paleo-shorelines, canyons and streams were measured as false positives here</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>Hermant et al. (2025), Figures 8–9 and §7, read this session.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            <blockquote class="quote">… both siUNET and FaultSEG models detect non faulted objects described by Silver et
+              al. (2011), such as the paleo-shoreline or the Rec Area scarp.<cite>Figure 8 caption</cite></blockquote>
+            <blockquote class="quote">… the detection of a canyon boundary (Figure 9, area B) and stream boundary (Figure
+              9, area A) raises questions as they are aligned with USGS Quaternary faults.<cite>§6</cite></blockquote>
+            <blockquote class="quote">… we know that in some cases, faults can be co-located with a paleo-shoreline … or
+              with a canyon boundary … An approach to differentiate between them may therefore miss some of these
+              co-located structures.<cite>§7</cite></blockquote>
+            <blockquote class="quote">It has been decided to take the risk of predicting too many faults, even if this
+              means deleting them manually afterwards with an expert analysis, rather than missing or incorrectly mapping
+              certain faults.<cite>§7</cite></blockquote>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Paleo-shorelines, canyon and stream boundaries are <em>measured</em> false positives in this terrain, and the
+            authors warn that a dedicated confuser class can delete real faults because the two co-occur — the argument
+            for soft suppression over hard negative classes (<a href="../hypotheses.html#h11">H11</a>). Their deliberate
+            over-prediction is also the right posture under α = 0.2 / β = 0.8.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span>.</dd>
+        </dl>
+      </article>
+
+      <h2 id="gm9">GM-9 · The rules call the 1 m DEM <em>feature data</em></h2>
+      <article class="entry">
+        <h3><span class="id">GM-9</span> Officially provided, and officially in scope — plus a definitional discrepancy</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>
+            Rules §2 — <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">https://www.nlr.gov/docs/fy26osti/96647.pdf</a>
+            (redirects to <code>docs.nlr.gov</code>), read this session.
+          </dd>
+          <dt>What it claims</dt>
+          <dd>
+            <blockquote class="quote">The feature data for this prize come from the recently released Geoscience Data
+              Acquisition for Western Nevada (GeoDAWN) dataset, a high-resolution lidar, magnetic, and radiometric study
+              of western Nevada and eastern California … In addition, the feature data also contain U.S. Geological
+              Survey (USGS) Digital Elevation Model (DEM) elevation data at 1-m resolution.<cite>Official Rules,
+              §2 Background</cite></blockquote>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            The 1 m DEM is described as <strong>feature data</strong> — in scope and officially provided, not external
+            data needing a licence judgement. That strengthens H3 and removes the main objection to spending effort on
+            lidar.
+          </dd>
+          <dt>Irregularity flagged, not smoothed</dt>
+          <dd>
+            The rules call GeoDAWN a "lidar, magnetic, and radiometric study"; the data release (Glen &amp; Earney, 2024,
+            <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a>) is titled "Airborne magnetic and radiometric
+            surveys" and describes the lidar as a <strong>separate, coordinated</strong> 3DEP collection over "a similar
+            extent". Two official DOE / USGS documents describe the same programme differently. No scoring consequence is
+            known. Recorded so that nobody later cites the rules as evidence that GeoDAWN itself distributed lidar. See
+            <a href="governance.html#gv13">GV-13</a>.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> for both texts.</dd>
+        </dl>
+      </article>
+
       <h2>Blocked-on, and what to do the moment data land</h2>
       <ol>
         <li><strong>Read <code>1m_DEM_links.csv</code></strong> and count tiles, coverage and total volume before committing to H3.</li>
@@ -234,7 +345,7 @@
 
   <footer class="site">
     <div class="wrap">
-      <a href="potential-field.html">← Potential-field geophysics</a> · <a href="index.html">Library</a> · next: <a href="seismotectonics.html">Seismotectonics and strain</a>
+      <a href="potential-field.html">← Potential-field geophysics</a> · <a href="index.html">Library</a> · next: <a href="seismotectonics.html">Seismotectonics and strain</a> · <a href="../executive-summary.html">the problem, explained</a> · <a href="../pipeline.html">submission gate</a>
     </div>
   </footer>
   <script src="../assets/nav.js"></script>

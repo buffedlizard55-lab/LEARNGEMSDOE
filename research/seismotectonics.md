@@ -50,6 +50,23 @@ spatial priors that re-weight candidates produced elsewhere, never as a standalo
 - **Relevance:** Computed **for known faults**, so it cannot discover. Its value is as a plausibility filter on candidates: is a proposed strand oriented such that the regional stress field would activate it? That is a geological argument a Phase 2 reviewer can engage with.
 - **Confidence:** verified for the description. **Unverified:** not downloaded; no field-level claim.
 
+## ST-7 · A native strain-rate-tensor source for the geodetic bands (citation located; paper not read)
+
+- **Source of the citation:** Hermant et al. (2025) reference list, read this session —
+  <https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf>.
+- **Citation as printed there:** Kreemer, C., Blewitt, G., Hammond, W.C., Oldow, J., & Cashman, P. (2009). *Geodetic
+  constraints on contemporary deformation in the northern Walker Lane: 2. Velocity and strain rate tensor analysis.*
+  In: Late Cenozoic Structure and Evolution of the Great Basin–Sierra Nevada Transition, **GSA Special Paper 447**,
+  17–31. No DOI is printed in that reference list and none is asserted here.
+- **Why it matters.** Bands 4, 7 and 8 are strain-rate quantities whose provenance the competition never documents. If
+  they derive from a Walker Lane velocity/strain-rate tensor analysis, then the station density, smoothing and reference
+  frame behind them are knowable — and the northern Walker Lane sits inside the GeoDAWN bounding box (CG-9). Kreemer is
+  also a co-author of the INGENIOUS compilation that supplies the labels (ST-3), so the same group's products appear on
+  both sides of the model.
+- **Confidence:** the citation is **verified as printed** in a read source. The paper itself has **not been read**; no
+  claim from it is reproduced. The suggestion that it underlies the competition's geodetic bands is **unverified
+  inference** — it is a place to look, not a finding.
+
 ## Agreement / disagreement matrix (working tool, not a sourced claim)
 
 | Signal combination | Reading | Action |

@@ -60,6 +60,55 @@ alluvial channels, sometimes expressed only as a vegetation or tonal line.
 Named confusers: irrigation and drainage ditches, pluvial shorelines and wave-cut benches, alluvial-fan channel
 margins, lithologic benches, road and fence lines, playa edges.
 
+## GM-7 · The premise is demonstrated, not assumed: experts confirmed model-found faults
+
+- **Source:** Hermant et al. (2025), §6 and the Figure 9 caption — <https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2025/Hermant.pdf>, read this session.
+- **Claim (verbatim):** "New faults are also detected (Figure 9, area A), mainly by FaultSEG and later confirmed by
+  experts looking at the LIDAR data." Same section: "some discrepancies > 150 m are observed with a clear offset between
+  the USGS fault line and the topographic break visible on the slope data (Figure 9, area B)."
+- **Location check.** Figure 9 is the Leach Hot Springs area, printed with 40°36′N and longitudes 117°36′–117°42′W;
+  Figure 8 (Rye Patch, western Humboldt Range) prints 40°30′–40°33′N. Both fall inside the GeoDAWN bounding box
+  (−120.0024 to −116.1415 E, 37.3641 to 40.7247 N — CG-9). "Inside the box" is **not** "inside the flight footprint";
+  the footprint is irregular and that has not been tested.
+- **Why it matters.** The entire project rests on one premise: that faults exist which the catalogue lacks and which a
+  geologist will confirm. Hermant et al. report exactly that outcome in this region, from lidar, using a U-Net-family
+  model. It also supplies a local scale for catalogue error: >150 m positional discrepancy is half the 300 m scoring
+  kernel, which is the same order as Hermant's 400 m figure in CG-5.
+- **Confidence:** verified for both quotations and for the coordinates as printed in the figures. The bounding-box
+  containment is arithmetic on a verified box. Footprint containment is **unverified**.
+
+## GM-8 · The confuser list is observed, not invented
+
+- **Source:** Hermant et al. (2025), Figures 8–9 and §7, read this session.
+- **Claim (verbatim):** "both siUNET and FaultSEG models detect non faulted objects described by Silver et al. (2011),
+  such as the paleo-shoreline or the Rec Area scarp"; "the detection of a canyon boundary (Figure 9, area B) and stream
+  boundary (Figure 9, area A) raises questions as they are aligned with USGS Quaternary faults"; and on a possible fix:
+  "we know that in some cases, faults can be co-located with a paleo-shoreline … or with a canyon boundary … An approach
+  to differentiate between them may therefore miss some of these co-located structures."
+- **Also (verbatim, §7):** "It has been decided to take the risk of predicting too many faults, even if this means
+  deleting them manually afterwards with an expert analysis, rather than missing or incorrectly mapping certain faults."
+- **Why it matters.** Paleo-shorelines, canyon and stream boundaries are *measured* false positives in this terrain, and
+  the authors warn that a dedicated confuser class can delete real faults because the two co-occur. That is an argument
+  for soft suppression channels over hard negative classes (H11). Their deliberate over-prediction is also the right
+  posture under α=0.2 / β=0.8.
+- **Confidence:** verified.
+
+## GM-9 · The rules call the 1 m DEM *feature data* — and describe GeoDAWN differently from the data release
+
+- **Source:** rules §2 — <https://www.nlr.gov/docs/fy26osti/96647.pdf> (redirects to `docs.nlr.gov`), read this session.
+- **Claim (verbatim):** "The feature data for this prize come from the recently released Geoscience Data Acquisition for
+  Western Nevada (GeoDAWN) dataset, a high-resolution lidar, magnetic, and radiometric study of western Nevada and
+  eastern California … In addition, the feature data also contain U.S. Geological Survey (USGS) Digital Elevation Model
+  (DEM) elevation data at 1-m resolution."
+- **Why it matters.** The 1 m DEM is described as **feature data**, i.e. in scope and officially provided — not external
+  data requiring a licence judgement. That strengthens H3 and removes the main objection to spending on lidar.
+- **Irregularity flagged, not smoothed.** The rules call GeoDAWN a "lidar, magnetic, and radiometric study"; the data
+  release (Glen & Earney, 2024, <https://doi.org/10.5066/P93LGLVQ>) is titled "Airborne magnetic and radiometric
+  surveys" and describes the lidar as a **separate, coordinated** 3DEP collection over "a similar extent". Two official
+  DOE/USGS documents describe the same programme differently. No scoring consequence is known. Recorded so that nobody
+  later cites the rules as evidence that GeoDAWN itself distributed lidar.
+- **Confidence:** verified for both texts.
+
 ## Blocked-on
 
 1. Read `1m_DEM_links.csv` — count tiles, coverage, volume.

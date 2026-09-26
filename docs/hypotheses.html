@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -47,7 +51,9 @@
           <strong>Every card is untested.</strong> No spatial holdout has been run in this repository because the
           competition rasters are not placed in <code>data/</code>
           (see <a href="pipeline.html">pipeline status</a>). “Untested” here means “not measured”, not “plausible but
-          unexamined” — the reasoning is sourced, the numbers are not.
+          unexamined” — the reasoning is sourced, the numbers are not. Two cards are additionally <strong>blocked</strong>
+          on their own inputs: H3 (the 1 m DEM links as well as the rasters) and H10 (an external lidar fault mapping,
+          independent of the competition data).
         </p>
       </div>
 
@@ -68,7 +74,10 @@
             <tr><td><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster the scorer masks out</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td><td class="nowrap">Rasters</td></tr>
             <tr><td><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td><td class="nowrap">Public shapefiles</td></tr>
-            <tr><td><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — do not treat them as positives</td><td class="nowrap">Low</td><td class="nowrap">GeoDAWN clip</td></tr>
+            <tr><td><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — do not treat them as positives</td><td class="nowrap">Low</td><td class="nowrap">GeoDAWN polygon clip (envelope done)</td></tr>
+            <tr><td><strong><a href="#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
+            <tr><td><strong><a href="#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as an independent lidar validation anchor</td><td class="nowrap">Low–med</td><td class="nowrap">Silver et al. 2011 mapping</td></tr>
+            <tr><td><strong><a href="#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td><td class="nowrap">External public layers</td></tr>
           </tbody>
         </table>
       </div>
@@ -77,7 +86,7 @@
 
       <div id="cards">
       <article class="entry" data-filter-item data-tags="H1 extension splay correction mask geometry">
-        <h3>H1 — Newly mapped geometry of existing systems</h3>
+        <h3 id="h1">H1 — Newly mapped geometry of existing systems</h3>
         <p><span class="chip untested">untested</span></p>
         <dl>
           <dt>Layers</dt>
@@ -116,7 +125,7 @@
       </article>
 
       <article class="entry" data-filter-item data-tags="H2 buried gravity magnetic cover basement geophysics">
-        <h3>H2 — Buried intra-basin structures under cover</h3>
+        <h3 id="h2">H2 — Buried intra-basin structures under cover</h3>
         <p><span class="chip untested">untested</span></p>
         <dl>
           <dt>Layers</dt>
@@ -150,7 +159,7 @@
       </article>
 
       <article class="entry" data-filter-item data-tags="H3 lidar dem scarp slope 3dep blocked">
-        <h3>H3 — 1 m lidar scarps absent from the compiled map</h3>
+        <h3 id="h3">H3 — 1 m lidar scarps absent from the compiled map</h3>
         <p><span class="chip blocked">blocked</span> <span class="chip untested">untested</span></p>
         <dl>
           <dt>Layers</dt>
@@ -178,7 +187,7 @@
       </article>
 
       <article class="entry" data-filter-item data-tags="H4 strain seismicity earthquake invariant orphan prior">
-        <h3>H4 — Kinematic orphans</h3>
+        <h3 id="h4">H4 — Kinematic orphans</h3>
         <p><span class="chip untested">untested</span></p>
         <dl>
           <dt>Layers</dt>
@@ -209,7 +218,7 @@
       </article>
 
       <article class="entry" data-filter-item data-tags="H5 training design unet label leakage split">
-        <h3>H5 — Do not train to reproduce the raster the scorer removes</h3>
+        <h3 id="h5">H5 — Do not train to reproduce the raster the scorer removes</h3>
         <p><span class="chip untested">untested</span></p>
         <dl>
           <dt>Layers</dt>
@@ -238,7 +247,7 @@
       </article>
 
       <article class="entry" data-filter-item data-tags="H6 conductivity mt corroboration multiplier">
-        <h3>H6 — Conductivity as corroboration, not detection</h3>
+        <h3 id="h6">H6 — Conductivity as corroboration, not detection</h3>
         <p><span class="chip untested">untested</span></p>
         <dl>
           <dt>Layers</dt>
@@ -259,7 +268,7 @@
       </article>
 
       <article class="entry" data-filter-item data-tags="H7 control artefact geodawn survey block mosaic">
-        <h3>H7 — Control: the GeoDAWN flight-spec mosaic</h3>
+        <h3 id="h7">H7 — Control: the GeoDAWN flight-spec mosaic</h3>
         <p><span class="chip untested">untested</span></p>
         <dl>
           <dt>Layers</dt>
@@ -286,8 +295,8 @@
       </article>
 
       <article class="entry" data-filter-item data-tags="H8 inferred mapscale catalogue constraint prior">
-        <h3>H8 — Inferred and blank-scale traces mark the edge of the map, not a positive class</h3>
-        <p><span class="chip untested">untested</span></p>
+        <h3 id="h8">H8 — Inferred and blank-scale traces mark the edge of the map, not a positive class</h3>
+        <p><span class="chip untested">untested</span> <span class="chip verified">envelope census measured 2026-09-26</span></p>
         <dl>
           <dt>Layers</dt>
           <dd>
@@ -307,13 +316,25 @@
             scores nothing if they are in the pixel-exact mask, and predicting next to them is fully penalised when no
             new-fault label is there (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">11516 post 4</a>).
             The gap is the opposite of the ink: where an Inferred trace ends, and where the survey has no trace at all.
-            The 22,956 count is the regional service, not the GeoDAWN raster. No clip has been run, so it is not yet
-            known whether the Inferred population even sits in the scored area.
+            The 22,956 count is the regional service, not the GeoDAWN raster.
+          </dd>
+          <dt>What the census changed (2026-09-26)</dt>
+          <dd>
+            The envelope clip is now measured — <a href="research/catalogue-gaps.html#cg9">CG-9</a>: inside the GeoDAWN
+            bounding box the compilation holds <strong>1,179</strong> traces — Well Constrained 739, Moderately
+            Constrained 351, Inferred <strong>89</strong>, and <strong>zero</strong> Poor / Other / blank; blank
+            <code>MAPSCALE</code> also zero. The polygon clip is still missing, so these remain upper bounds on the
+            footprint.
+            <p><span class="chip unverified">inference</span> Inside the box, Inferred is 7.5% of traces against 23.0%
+            regionally. If that survives the polygon clip, the GeoDAWN area is <em>better</em> mapped than the region as
+            a whole, and this card's value shifts: less "a stock of poorly constrained traces to extend", more "the
+            well-constrained traces here are the ones to trust positionally — concentrate on geometry they do not contain
+            at all", i.e. CG-7 classes 2–3 over class 4.</p>
           </dd>
           <dt>Expected DTI impact</dt>
-          <dd>Harmful if used as a positive class. Useful only as a spatial prior for H1, and only after the GeoDAWN clip shows a non-trivial Inferred population inside the survey.</dd>
+          <dd>Harmful if used as a positive class. Useful only as a spatial prior for H1, and only after the GeoDAWN <em>polygon</em> clip shows a non-trivial Inferred population inside the survey.</dd>
           <dt>Cost</dt>
-          <dd>Low. The attribute query is public. The clip needs the ScienceBase outline shapefiles, which this session could not download (TLS).</dd>
+          <dd>Low. The attribute queries are public and linked from CG-9. The polygon clip needs the ScienceBase outline shapefiles, which this machine still cannot download (TLS).</dd>
           <dt>Validation protocol</dt>
           <dd>Clip trace length by <code>FTYPE_</code> to the official GeoDAWN outlines. Reject the prior if almost all Inferred length lies outside the survey. If it does not, measure distance from Inferred endpoints to the nearest Well Constrained trace, inside the outline only.</dd>
           <dt>Rejection criterion</dt>
@@ -322,6 +343,124 @@
       </article>
 
       </div>
+
+      <article class="entry" data-filter-item data-tags="H9 incomplete labels label noise adversarial loss PU learning training design">
+        <h3 id="h9">H9 — Train against label <em>incompleteness</em>, not only label position</h3>
+        <p><span class="chip untested">untested</span> <span class="chip untested">design hypothesis</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>All 19 bands; the label raster used as the scoring <strong>mask</strong> and as a <em>noisy</em> positive
+            set. No external data.</dd>
+          <dt>Physical signature</dt>
+          <dd>None. This is a training-target hypothesis and it is written as one — it should not be dressed up as a
+            geophysical claim.</dd>
+          <dt>Why a gap, not a known fault</dt>
+          <dd>
+            The QFFD is defined by demonstrable coseismic surface deformation in the past 1.6 Ma
+            (<a href="research/catalogue-gaps.html#cg1">CG-1</a>); its compilers were told to prefer published, recent,
+            detailed-scale studies (<a href="research/catalogue-gaps.html#cg2">CG-2</a>); and Hermant et al. report
+            model-found faults in this region that experts then confirmed on lidar
+            (<a href="research/geomorphology.html#gm7">GM-7</a>). The label raster is therefore a <em>biased, incomplete
+            sample</em> of the fault population, not the population. A model trained to reproduce it learns the
+            catalogue's accessibility and publication biases — the inverse of the scored target. Hermant et al. propose
+            precisely the countermeasures proposed here: "inform the model that any part of the study area may contain
+            some faults, even if they are not present in the fault label", via an adversarial loss term or label noise
+            (<a href="research/prior-art.html#pa7">PA-7</a>).
+          </dd>
+          <dt>Expected DTI impact</dt>
+          <dd>
+            Not measurable alone; it is the mechanism that lets H1–H3 candidates carry probability mass outside catalogue
+            corridors. The asymmetry helps: α = 0.2 prices a false positive at a quarter of a false negative, so the
+            error this introduces is the cheap kind. The risk is specific: label noise could degrade the near-known-trace
+            corrections that staff describe as "one outcome we are aiming for"
+            (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">11516
+            post 4</a>) — the most valuable pixels in the submission.
+          </dd>
+          <dt>Cost</dt>
+          <dd>Medium — one retrain, and a hyperparameter (noise rate or adversarial weight) that cannot be read off the data statistics.</dd>
+          <dt>Validation protocol</dt>
+          <dd>
+            Two models identical except for the incompleteness term, scored with <code>scripts/metrics.py</code>
+            (α = 0.2, β = 0.8, R = 300 m, pixel-exact mask) on <strong>contiguous geographic blocks</strong> held out.
+            With no private labels locally, measure three proxies: (1) the share of predicted mass outside the 300 m
+            corridor of known traces; (2) a hand-audit of 50 random high-probability non-catalogue pixels against 1 m
+            lidar and imagery; (3) recall on deliberately withheld catalogue traces, as a check that the noise has not
+            destroyed the ability to find faults at all.
+          </dd>
+          <dt>Rejection criterion</dt>
+          <dd>Reject if the added out-of-corridor mass is dominated by survey or block-boundary geometry (H7) or by GM-8's
+            confuser list. Reject specifically as a <em>noise</em> method if withheld-trace recall falls faster than
+            out-of-corridor precision rises.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" data-filter-item data-tags="H10 Rye Patch Humboldt lidar Silver 2011 validation anchor independent truth">
+        <h3 id="h10">H10 — An independent lidar validation anchor at Rye Patch / western Humboldt Range</h3>
+        <p><span class="chip blocked">blocked</span> <span class="chip untested">untested</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>
+            Silver et al. (2011) lidar-derived fault mapping
+            (<a href="https://doi.org/10.1130/GES00673.1">doi:10.1130/GES00673.1</a>); bands 12 and 19; the officially
+            provided 1 m DEM; the label raster as a mask only.
+          </dd>
+          <dt>Physical signature</dt>
+          <dd>Faults mapped from lidar in that study that are absent from, or displaced relative to, the USGS catalogue.</dd>
+          <dt>Why a gap, not a known fault</dt>
+          <dd>
+            It is an <em>independent</em> expert lidar mapping that predates this competition, inside the GeoDAWN
+            bounding box — Hermant et al.'s Figure 9 prints 40°36′ N with longitudes 117°36′–117°42′ W, Figure 8 prints
+            40°30′–40°33′ N, and both sit inside the box recorded in
+            <a href="research/catalogue-gaps.html#cg9">CG-9</a>. Longitudes for Figure 8 are not printed in the figure,
+            so no longitude is claimed for the Rye Patch panel. Running a candidate detector there and asking "did it
+            recover faults the catalogue lacks?" is a genuine out-of-sample test of gap-finding behaviour that costs no
+            submission slot and touches no private label.
+          </dd>
+          <dt>Expected DTI impact</dt>
+          <dd>None directly. Its job is to de-risk H1 and H3 with a local truth set before any scoring budget is spent.</dd>
+          <dt>Cost</dt>
+          <dd>Low to medium, entirely gated on whether the mapping is distributed.</dd>
+          <dt>Validation protocol</dt>
+          <dd>
+            Treat Silver et al.'s lidar faults as truth; score detectors with <code>scripts/metrics.py</code> under two
+            masks — the catalogue alone (what we have) and the catalogue plus Silver (what a better catalogue looks
+            like). A detector whose score improves sharply under the second mask is finding real un-catalogued faults,
+            not artefacts.
+          </dd>
+          <dt>Rejection criterion</dt>
+          <dd>Reject as an anchor if the mapping is not obtainable, or if its footprint falls outside the actual GeoDAWN flight lines rather than merely outside the bounding box.</dd>
+          <dt>Open risk</dt>
+          <dd>Neither the paper nor any accompanying data has been obtained. It is a lead (<a href="research/prior-art.html#pa8">PA-8</a>), not an asset.</dd>
+        </dl>
+      </article>
+
+      <article class="entry" data-filter-item data-tags="H11 confuser shoreline canyon stream channel soft negative precision">
+        <h3 id="h11">H11 — Soft confuser channels instead of hard negative classes</h3>
+        <p><span class="chip untested">untested</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>Drainage / channel network and pluvial-shoreline elevations as continuous channels (external, public);
+            bands 12 and 19 for the candidate set; the label raster as a mask only.</dd>
+          <dt>Physical signature</dt>
+          <dd>A candidate lineament that coincides with a channel margin or with a paleo-shoreline elevation contour.</dd>
+          <dt>Why a gap, not a known fault</dt>
+          <dd>
+            Hermant et al. measured paleo-shorelines, canyon boundaries and stream boundaries being detected <em>as</em>
+            faults in this terrain — and warned that a dedicated confuser class "may therefore miss some of these
+            co-located structures", because "faults can be co-located with a paleo-shoreline … or with a canyon boundary"
+            (<a href="research/geomorphology.html#gm8">GM-8</a>). A soft channel suppresses the confuser without deleting
+            the fault that happens to run along it, which is the case a geologist would most want kept.
+          </dd>
+          <dt>Expected DTI impact</dt>
+          <dd>Small and positive — precision at matched recall, with the false-positive term priced at α = 0.2. Not a headline gain; a way to spend less of the audit budget on ditches.</dd>
+          <dt>Cost</dt>
+          <dd>Low to medium. The layers are public; the engineering is a channel concatenation.</dd>
+          <dt>Validation protocol</dt>
+          <dd>Precision at matched recall on a contiguous-block holdout, with and without the channels — plus an explicit check that candidates co-located with mapped faults are <em>not</em> suppressed, which is the failure mode Hermant et al. warn about.</dd>
+          <dt>Rejection criterion</dt>
+          <dd>Reject if precision at matched recall does not improve, or if it removes H1 near-trace correction candidates — the most valuable pixels in the whole submission.</dd>
+        </dl>
+      </article>
 
       <h2 id="negative">Negative results</h2>
       <p>
@@ -334,12 +473,18 @@
 
       <h2 id="order">Recommended order once data land</h2>
       <ol>
-        <li><strong>H8's clip, then H7</strong> — both need only public shapefiles. H8 asks where the catalogue says it is least constrained. H7 asks whether survey boundaries fake structure. Neither could be downloaded from this machine on 2026-09-26 (TLS). On a machine that can, do these before any magnetic model.</li>
+        <li><strong>H8's polygon clip, then H7</strong> — both need only public shapefiles. H8 asks where the catalogue says it is least constrained; the <em>envelope</em> version is already measured (<a href="research/catalogue-gaps.html#cg9">CG-9</a>), so this is now a smaller job than it was. H7 asks whether survey boundaries fake structure. Neither outline could be downloaded from this machine on 2026-09-26 (TLS). On a machine that can, do these before any magnetic model.</li>
         <li><strong>H5's split fix</strong> — move to contiguous spatial blocks before believing any score. Cheap, and it changes the meaning of every other number.</li>
         <li><strong>H4 measurement</strong> — a single quantile-versus-distance table. Half a day, and it either kills or promotes the cheapest prior in the stack.</li>
         <li><strong>H2 with band-15 conditioning</strong> — the highest-upside geophysical card, and conditioning costs nothing.</li>
         <li><strong>H1</strong> — highest expected value, and the one staff have effectively endorsed; but only after the mask behaviour is confirmed locally.</li>
         <li><strong>H3 last</strong> — highest cost, and gated on lidar-coverage mapping.</li>
+        <li><strong>H10 in parallel, from day one</strong> — it needs no competition data. If Silver et al. (2011)'s
+          mapping is obtainable, it converts every later "is this a real gap?" argument into a measurement.</li>
+        <li><strong>H9 with the first real train</strong> — it is a flag on the training run, not a separate project. Do
+          it while the GPU is already warm for H5.</li>
+        <li><strong>H11 last of all</strong> — a precision tidy-up, only worth doing once there is something worth
+          tidying.</li>
       </ol>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
@@ -348,7 +493,9 @@
   <footer class="site">
     <div class="wrap">
       Backlog maintained session by session. Status changes are recorded in the <a href="changelog.html">changelog</a>;
-      tooling used is recorded in the <a href="ai-usage.html">AI-usage log</a>.
+      tooling used is recorded in the <a href="ai-usage.html">AI-usage log</a>. For the geological framing of the target,
+      see <a href="executive-summary.html">the problem, explained</a>; for the rule that keeps this agent from producing
+      a prediction raster, see the <a href="pipeline.html">submission gate</a>.
     </div>
   </footer>
   <script src="assets/nav.js"></script>

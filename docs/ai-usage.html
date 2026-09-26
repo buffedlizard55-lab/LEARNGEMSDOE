@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -35,6 +39,48 @@
       <p class="meta">Compliance artefact · append a dated block every session that uses generative AI · newest first</p>
 
       <h1>AI-usage log</h1>
+
+      <article class="entry" id="ai-2026-09-26-df88">
+        <h3>2026-09-26 · session <code>arena/01a0df88-learngemsdoe</code></h3>
+        <p><strong>Tool.</strong> Arena.ai Agent Mode — a coding agent with web fetch, web search, file read/write and
+          shell execution in this repository. No other generative-AI service was called. No image, audio or video
+          generation. No prediction GeoTIFF was produced, scored or submitted, and no weekly submission slot was used.</p>
+
+        <p><strong>Did — source verification (fetched and read, not recalled).</strong> Competition hub; problem
+          description page 967 (both chunks); About page 968; the official rules PDF (Preface, §1.1–§1.4, §2, §3.1–§3.2);
+          the forum category JSON (both chunks); the ScienceBase GeoDAWN item including its
+          <code>fields=spatial</code> bounding box; six NBMG ArcGIS count queries plus the layer metadata; the USGS
+          Quaternary Fault and Fold Database page including its History section; the USGS GeoDAWN data page;
+          Hermant et al. (2025) PDF chunks 4–6; Drenth &amp; Grauch (2019) Table 1; and the reference-solution README via
+          the GitHub API. Two DOIs discovered in Hermant's reference list were resolved before being cited
+          (10.1130/GES00673.1 → Geosphere 7(6):1357; 10.1029/2019EO120449 → Eos).</p>
+
+        <p><strong>Did — measurement.</strong> Counted the INGENIOUS fault compilation inside the published GeoDAWN
+          bounding box by attribute class (CG-9). Every count is reproducible from a linked query URL. No total fault
+          length is asserted because the service reports <code>supportsStatistics: false</code> and refuses the sum.</p>
+
+        <p><strong>Did — writing.</strong> Added 15 numbered research entries and three hypothesis cards; added the
+          <a href="search.html">search page</a>, its generated index, a two-tier navigation, a reading order and a
+          verification section; added CI and footer/explainer-gate links; corrected PA-2 in favour of PA-6's
+          prose-sourced figures; made Pass 2–3 review corrections to coordinates, citation form, counts, and markup; and
+          appended this log and the changelog entry in the same session. Existing entries were extended, not duplicated.</p>
+
+        <p><strong>Did — code.</strong> Wrote <code>scripts/check_site.py</code> (offline link, anchor, asset,
+          source-allowlist, and count verification) and <code>scripts/build_search_index.py</code> (search-index
+          generator with a <code>--check</code> drift mode); added <code>.github/workflows/verify.yml</code>; extended
+          <code>check_site.py</code> during review to cover overview cards and domain-meta counts; re-ran
+          <code>scripts/metrics.py --selftest</code> (11 checks pass) and both data-placement scripts (still blocked).</p>
+
+        <p><strong>Did not.</strong> Create or use a DrivenData account or credentials. Generate, validate or submit a
+          prediction raster. Ask the forum anything (this agent does not post). Create a second site, repository, account
+          or registration, including for staging. Transcribe a number from a source whose labels were not legible — the
+          Figure 7 table was left untranscribed for exactly that reason.</p>
+
+        <p><strong>Human review still required.</strong> Open every linked primary URL and confirm the quotations;
+          confirm the eligibility position against rules §1.3 if team composition or affiliations change; decide whether
+          to raise GV-12 (submission extent) and GV-13 (GeoDAWN contents) on the official forum; place the competition
+          rasters and run the six CG-9 queries against the outline polygons.</p>
+      </article>
 
       <article class="entry" id="ai-2026-09-26-df77">
         <h3>2026-09-26 · session <code>arena/01a0df77-learngemsdoe</code></h3>

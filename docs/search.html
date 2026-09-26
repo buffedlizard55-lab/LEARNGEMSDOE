@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search — GEMSDOE research library</title>
+  <meta name="description" content="Search every research entry, hypothesis card and page in the GEMSDOE GEMS Prize knowledge base. Runs entirely in the browser against a generated index.">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <main id="main">
+      <p class="meta">One box over every research entry, hypothesis card and page · generated from <code>research/</code> by <code>scripts/build_search_index.py</code></p>
+
+      <h1>Search the knowledge base</h1>
+      <p class="lede">
+        Type anything — a band number, a method, a rules section, an author, a phrase like "pixel-exact" or "400 m".
+        The index is built from the markdown mirrors, so a hit links straight to the entry on its page.
+      </p>
+
+      <noscript>
+        <div class="banner warn">
+          <p>
+            Search needs JavaScript. Without it, browse the
+            <a href="research/index.html">six research domains</a> directly — every page lists its entries in order, and
+            the <a href="hypotheses.html">hypothesis backlog</a> and <a href="sources.html">sources index</a> are
+            complete on their own pages.
+          </p>
+        </div>
+      </noscript>
+
+      <form class="filter" role="search" onsubmit="return false;">
+        <label for="q">Search</label>
+        <input id="q" type="search" autocomplete="off" placeholder="e.g. band 15, tilt derivative, 11516, lidar, §3.2" style="min-width: 18rem;">
+        <span id="search-count" class="small" aria-live="polite"></span>
+      </form>
+
+      <p class="filter" id="domain-filter" hidden>
+        <label for="domain">Domain</label>
+        <select id="domain">
+          <option value="">All domains</option>
+        </select>
+      </p>
+
+      <ol id="results" class="results"></ol>
+
+      <h2 id="how">How this index is built</h2>
+      <p>
+        <code>scripts/build_search_index.py</code> reads every markdown mirror in <code>research/</code>, splits it into
+        numbered entries, and pulls the <code>&lt;title&gt;</code> and description out of every page under
+        <code>docs/</code>. It writes <code>docs/assets/search-index.js</code>. Nothing is fetched and no data is
+        downloaded — the index is committed, and it is regenerated with:
+      </p>
+      <pre><code>python3 scripts/build_search_index.py          # regenerate
+python3 scripts/build_search_index.py --check  # fail if the committed index is stale</code></pre>
+      <p class="small">
+        If search results look out of date, run the first command and commit the regenerated file. The site also runs
+        <code>scripts/check_site.py</code> to confirm that internal links resolve and that every external link points at
+        a source recorded on the <a href="sources.html">sources page</a>.
+      </p>
+    </main>
+    <aside class="toc" aria-label="Table of contents"></aside>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <a href="research/index.html">Research library</a> ·
+      <a href="hypotheses.html">Hypothesis backlog</a> ·
+      <a href="sources.html">Sources</a> ·
+      <a href="changelog.html">Changelog</a>
+    </div>
+  </footer>
+  <script src="assets/search-index.js"></script>
+  <script src="assets/nav.js"></script>
+  <script>
+  /* Client-side search. Progressive enhancement: the page is readable without it. */
+  (function () {
+    "use strict";
+    var index = window.GEMSDOE_INDEX || [];
+    var input = document.getElementById("q");
+    var select = document.getElementById("domain");
+    var filterRow = document.getElementById("domain-filter");
+    var out = document.getElementById("results");
+    var count = document.getElementById("search-count");
+    if (!input || !out) return;
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"]/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+      });
+    }
+
+    function domainLabel(item) {
+      return item.domain || "Page";
+    }
+
+    function buildDomainOptions() {
+      var seen = {};
+      var labels = [];
+      index.forEach(function (item) {
+        var label = domainLabel(item);
+        if (!seen[label]) { seen[label] = 0; labels.push(label); }
+        seen[label] += 1;
+      });
+      labels.sort(function (a, b) { return seen[b] - seen[a]; });
+      labels.forEach(function (label) {
+        var option = document.createElement("option");
+        option.value = label;
+        option.textContent = label + " (" + seen[label] + ")";
+        select.appendChild(option);
+      });
+      filterRow.hidden = false;
+    }
+
+    function snippet(text, needle) {
+      var lower = text.toLowerCase();
+      var at = needle ? lower.indexOf(needle) : -1;
+      if (at < 0) {
+        return escapeHtml(text.slice(0, 220)) + (text.length > 220 ? "…" : "");
+      }
+      var start = Math.max(0, at - 90);
+      var slice = text.slice(start, start + 260);
+      var safe = escapeHtml(slice);
+      if (needle) {
+        var pattern = new RegExp("(" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+        safe = safe.replace(pattern, "<mark>$1</mark>");
+      }
+      return (start > 0 ? "…" : "") + safe + (start + 260 < text.length ? "…" : "");
+    }
+
+    function render() {
+      var raw = input.value.trim();
+      var needle = raw.toLowerCase();
+      var domain = select ? select.value : "";
+      var hits = index.filter(function (item) {
+        if (domain && domainLabel(item) !== domain) return false;
+        if (!needle) return true;
+        return (item.title + " " + item.text + " " + item.id + " " + item.url).toLowerCase().indexOf(needle) !== -1;
+      });
+
+      out.innerHTML = "";
+      if (!needle && !domain) {
+        count.textContent = index.length + " items indexed · " + hits.length + " shown";
+      } else {
+        count.textContent = hits.length + " of " + index.length + " items";
+      }
+      if (!hits.length) {
+        var li = document.createElement("li");
+        li.className = "result empty";
+        li.textContent = "Nothing matched. Try a band number, an entry id, or a shorter word.";
+        out.appendChild(li);
+        return;
+      }
+      hits.slice(0, 60).forEach(function (item) {
+        var li = document.createElement("li");
+        li.className = "result";
+        var a = document.createElement("a");
+        a.href = item.url;
+        a.innerHTML = escapeHtml(item.title);
+        var meta = document.createElement("span");
+        meta.className = "result-meta";
+        meta.textContent = domainLabel(item) + (item.id ? " · " + item.id : "");
+        var p = document.createElement("p");
+        p.className = "result-snippet";
+        p.innerHTML = snippet(item.text, needle);
+        li.appendChild(a);
+        li.appendChild(meta);
+        li.appendChild(p);
+        out.appendChild(li);
+      });
+      if (hits.length > 60) {
+        var more = document.createElement("li");
+        more.className = "result empty";
+        more.textContent = "Showing the first 60 of " + hits.length + " — narrow the search to see the rest.";
+        out.appendChild(more);
+      }
+    }
+
+    if (select) buildDomainOptions();
+    input.addEventListener("input", render);
+    if (select) select.addEventListener("change", render);
+    render();
+  })();
+  </script>
+</body>
+</html>

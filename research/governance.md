@@ -111,9 +111,63 @@ was empty when read.
 | Team mixing US and non-US residents | 11499 | unanswered |
 | Deadline conflict | §A.1 vs hub | no thread found |
 | Test-fault provenance | 11527 post 7 | declined by staff |
-| Rules change-log table | PDF Preface | empty when read |
+| Rules change-log table | PDF Preface | empty when read; **re-read 2026-09-26, still empty** |
 | Staff about-post links to page 966 | https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/ | duplicate of the hub welcome, not page 967 |
 | Rules PDF host | https://www.nlr.gov/docs/fy26osti/96647.pdf | redirects to docs.nlr.gov (re-fetched 2026-09-26) |
+| §1.2 key dates | rules PDF vs hub | PDF defers to the website; **cite the hub for the deadline, not the PDF** (GV-11) |
+| Submission extent | §3.2 vs problem description | "entirety of the GeoDAWN study area" vs "same bounds as the training data" — **unresolved until the raster is placed** (GV-12) |
+| GeoDAWN contents | §2 vs Glen & Earney 2024 | rules call it a "lidar, magnetic, and radiometric study"; the release is magnetic/radiometric with 3DEP lidar as a separate coordinated collection (GV-13) |
+
+## GV-11 · Rules and forum re-read, 2026-09-26 (session `arena/01a0df88`)
+
+- **Source:** rules PDF <https://www.nlr.gov/docs/fy26osti/96647.pdf> (served from `docs.nlr.gov` after redirect),
+  chunks covering the Preface, §1.1–§1.4, §2 and §3.1–§3.2; forum category JSON
+  <https://community.drivendata.org/c/gems-prize-challenge/111.json> (both chunks).
+- **Claim — nothing has changed.** The Preface change-log table still has five empty rows: no recorded amendment since
+  the September 2026 version was published. The forum holds **11 topics**; the newest is **11543 (2026-09-25)**, i.e.
+  no new topic since the previous session's re-read a few hours earlier. `posts_count` is unchanged at 1 for 11543,
+  11540 and 11526, and 2 for 11499 (the pinned "About" post plus one unanswered eligibility question).
+- **Newly recorded — §1.2 does not restate the deadline (verbatim):** "Please see the competition website
+  gems.drivendata.org for the most current timeline and important dates." Consequence: the **3 December 2026,
+  11:59 p.m. UTC** deadline must be cited to the
+  [DrivenData hub](https://www.drivendata.org/competitions/306/competition-doe-gems/), **not** to the rules PDF. The
+  prize amounts in §1.1 and the hub agree, so the PDF is still the authority for money, not for dates.
+- **Newly recorded — §3.2 restates the submission cap and the AI disclosure in the same section (verbatim):** "You can
+  make multiple submissions, subject to the limits specified on the competition website (three submissions per week)."
+- **Eligibility re-confirmed against the text (§1.3).** The eligible-entity list, the FFRDC carve-out, the federal
+  employee exclusion, the MFTRP / FCOC exclusions and the perjury certification statement were all re-read this session
+  and are unchanged. **No team-composition or affiliation change was recorded**, so this is a re-confirmation against
+  the rules text only, not a verification of any particular team. It must be re-run the moment membership or
+  affiliation changes.
+- **Confidence:** verified for all of the above, read this session.
+
+## GV-12 · Open wording difference: "the entirety of the GeoDAWN study area" vs "the same bounds as the training data"
+
+- **Sources:** rules §3.2 <https://www.nlr.gov/docs/fy26osti/96647.pdf>; problem description
+  <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format>.
+- **Claim (both verbatim).** Rules §3.2: "You must submit a single GeoTIFF with a single raster layer at 100-meter
+  resolution containing your model's predictions of fault locations **for the entirety of the GeoDAWN study area**."
+  Problem description: "Your submission has **the same bounds as the training data**, and data outside the bounds is
+  null or nan."
+- **Why it is a live question, not pedantry.** The prediction grid (3292 × 3730 px at 100 m ≈ 122,800 km² bounding box)
+  is roughly 2.4× the surveyed area (51,857 km² — see the feature-stack page). If the training raster's bounds are that
+  bounding box, then "the entirety of the GeoDAWN study area" and "the same bounds as the training data" are **two
+  different instructions** (the second is larger). If the training raster is clipped to the footprint, they coincide.
+  This cannot be settled without the file.
+- **Action:** once `training_features.tif` is placed, compare its bounds against the GeoDAWN bounding box from
+  ScienceBase (−120.0024, 37.3641, −116.1415, 40.7247) and record the answer here. If they differ, the safe submission
+  is the training-data bounds (the problem description governs format, and staff have confirmed the mask is derived from
+  the provided labels). Until then this stays on the watch list.
+- **Confidence:** verified for both quotations. The size mismatch is the derived observation recorded on the
+  feature-stack page, itself **inference** from two verified numbers.
+
+## GV-13 · The two official documents describe GeoDAWN's contents differently
+
+Recorded in full at **GM-9** and tracked here because it is a governance-grade discrepancy between two official
+sources: rules §2 calls GeoDAWN "a high-resolution lidar, magnetic, and radiometric study", while the data release
+(Glen & Earney, 2024, <https://doi.org/10.5066/P93LGLVQ>) is titled "Airborne magnetic and radiometric surveys" and
+describes lidar as a separate, coordinated 3DEP collection. **No scoring consequence is known.** Not raised on the
+forum — this agent does not post. Flagged for a human to raise if it ever matters.
 
 ## GV-10 · Forum re-read 2026-09-26 (session arena/01a0df77)
 

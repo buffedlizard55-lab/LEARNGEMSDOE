@@ -13,20 +13,24 @@
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="index.html">Overview</a>
-        <a href="requirements.html">Requirements</a>
-        <a href="executive-summary.html">Explainer</a>
-        <a href="research/index.html">Library</a>
-        <a href="feature-stack.html">Feature stack</a>
-        <a href="hypotheses.html">Hypotheses</a>
-        <a href="sources.html">Sources</a>
-        <a href="pipeline.html">Pipeline</a>
-        <a href="research/governance.html">Governance</a>
-        <a href="forum.html">Forum</a>
-        <a href="changelog.html">Changelog</a>
-        <a href="ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="index.html">Overview</a>
+          <a href="research/index.html">Research library</a>
+          <a href="hypotheses.html">Hypotheses</a>
+          <a href="feature-stack.html">Feature stack</a>
+          <a href="requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="research/governance.html">Governance</a>
+          <a href="sources.html">Sources</a>
+          <a href="pipeline.html">Pipeline</a>
+          <a href="forum.html">Forum watch</a>
+          <a href="changelog.html">Changelog</a>
+          <a href="ai-usage.html">AI-usage log</a>
+          <a href="search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
@@ -154,6 +158,24 @@
         <strong>400 m</strong> discrepancy between USGS traces and their own mapping in north-central Nevada, and fault
         density variation that is “not only due to the geological context”.
       </p>
+      <div class="banner ok">
+        <h3>What the catalogue actually holds in the scored area (measured 2026-09-26)</h3>
+        <p>
+          The argument above is structural. It is now paired with a count. Clipping the INGENIOUS compilation — the
+          source of the training labels — to the published GeoDAWN bounding box returns
+          <strong>1,179 fault traces</strong>: 739 well constrained, 351 moderately constrained, 89 inferred
+          (<a href="research/catalogue-gaps.html#cg9">CG-9</a>, each figure a re-runnable query).
+        </p>
+        <p>
+          Two things follow, and they pull in different directions. The scored area holds only about
+          <strong>5%</strong> of the regional compilation, so the labels are sparse. But the <em>quality mix</em> here is
+          better than the regional mix — 7.5% inferred inside the box against 23% regionally — which says the GeoDAWN
+          area is comparatively well mapped. If that survives the polygon clip, the remaining gaps are more likely
+          subtle or hidden than obvious: cover-masked structures and scarps nobody has published, rather than unmapped
+          range fronts. That is a reason to weight geophysics and lidar over simple range-front tracing.
+          <span class="chip unverified">inference</span> — the clip is to the rectangle, not the irregular footprint.
+        </p>
+      </div>
 
       <h2 id="approach">What follows for method</h2>
       <p>

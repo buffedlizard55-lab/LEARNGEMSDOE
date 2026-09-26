@@ -13,26 +13,30 @@
     <div class="wrap">
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav">
-        <a href="../index.html">Overview</a>
-        <a href="../requirements.html">Requirements</a>
-        <a href="../executive-summary.html">Explainer</a>
-        <a href="index.html">Library</a>
-        <a href="../feature-stack.html">Feature stack</a>
-        <a href="../hypotheses.html">Hypotheses</a>
-        <a href="../sources.html">Sources</a>
-        <a href="../pipeline.html">Pipeline</a>
-        <a href="governance.html">Governance</a>
-        <a href="../forum.html">Forum</a>
-        <a href="../changelog.html">Changelog</a>
-        <a href="../ai-usage.html">AI log</a>
-      </nav>
+      <div class="navs">
+        <nav id="site-nav" aria-label="Primary">
+          <a href="../index.html">Overview</a>
+          <a href="../research/index.html">Research library</a>
+          <a href="../hypotheses.html">Hypotheses</a>
+          <a href="../feature-stack.html">Feature stack</a>
+          <a href="../requirements.html">Requirements</a>
+        </nav>
+        <nav class="nav-secondary" aria-label="Secondary">
+          <a href="../research/governance.html">Governance</a>
+          <a href="../sources.html">Sources</a>
+          <a href="../pipeline.html">Pipeline</a>
+          <a href="../forum.html">Forum watch</a>
+          <a href="../changelog.html">Changelog</a>
+          <a href="../ai-usage.html">AI-usage log</a>
+          <a href="../search.html">Search</a>
+        </nav>
+      </div>
     </div>
   </header>
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 1 of 6 · 8 entries · highest leverage · attribute counts measured 2026-09-26</p>
+      <p class="meta">Library · domain 1 of 6 · 11 entries · highest leverage · attribute counts measured, GeoDAWN-box census measured 2026-09-26</p>
 
       <h1>Catalogue-gap reasoning</h1>
       <p class="lede">
@@ -335,11 +339,162 @@
         </dl>
       </article>
 
+      <h2 id="cg9">CG-9 · The GeoDAWN-box catalogue census, measured 2026-09-26</h2>
+      <article class="entry">
+        <h3><span class="id">CG-9</span> 1,179 of 22,956 traces fall inside the GeoDAWN bounding box</h3>
+        <p class="small">This is the clip CG-8 was waiting for, done against the published bounding box rather than the
+          outline polygon. Every number below is one re-runnable query.</p>
+        <dl>
+          <dt>Extent source</dt>
+          <dd>
+            <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json&amp;fields=spatial">ScienceBase
+            item 657e1d85d34e23d3533209f7, <code>fields=spatial</code></a> →
+            <code>{"boundingBox":{"minX":-120.0024,"maxX":-116.1415,"minY":37.3641,"maxY":40.7247}}</code>, WGS 84.
+          </dd>
+          <dt>Fault source</dt>
+          <dd>
+            NBMG layer <code>Qfaults [INGENIOUS 6-27-2023]</code> — the INGENIOUS compilation cited by rules §3.3,
+            DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>.
+          </dd>
+          <dt>What it claims</dt>
+          <dd>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>What</th><th class="num">Count in the GeoDAWN box</th><th class="nowrap">Query</th></tr></thead>
+                <tbody>
+                  <tr><td>All traces</td><td class="num"><strong>1,179</strong></td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=1%3D1&amp;geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&amp;geometryType=esriGeometryEnvelope&amp;inSR=4326&amp;spatialRel=esriSpatialRelIntersects&amp;returnCountOnly=true&amp;f=json">count</a></td></tr>
+                  <tr><td><code>FTYPE_</code> Well Constrained</td><td class="num"><strong>739</strong></td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Well%20Constrained%27&amp;geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&amp;geometryType=esriGeometryEnvelope&amp;inSR=4326&amp;spatialRel=esriSpatialRelIntersects&amp;returnCountOnly=true&amp;f=json">count</a></td></tr>
+                  <tr><td><code>FTYPE_</code> Moderately Constrained</td><td class="num"><strong>351</strong></td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Moderately%20Constrained%27&amp;geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&amp;geometryType=esriGeometryEnvelope&amp;inSR=4326&amp;spatialRel=esriSpatialRelIntersects&amp;returnCountOnly=true&amp;f=json">count</a></td></tr>
+                  <tr><td><code>FTYPE_</code> Inferred</td><td class="num"><strong>89</strong></td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%3D%27Inferred%27&amp;geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&amp;geometryType=esriGeometryEnvelope&amp;inSR=4326&amp;spatialRel=esriSpatialRelIntersects&amp;returnCountOnly=true&amp;f=json">count</a></td></tr>
+                  <tr><td>Any other <code>FTYPE_</code> (Poor / Other / blank)</td><td class="num"><strong>0</strong></td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=FTYPE_%20NOT%20IN%20%28%27Well%20Constrained%27%2C%27Moderately%20Constrained%27%2C%27Inferred%27%29&amp;geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&amp;geometryType=esriGeometryEnvelope&amp;inSR=4326&amp;spatialRel=esriSpatialRelIntersects&amp;returnCountOnly=true&amp;f=json">count</a></td></tr>
+                  <tr><td><code>MAPSCALE</code> blank or null</td><td class="num"><strong>0</strong></td><td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=MAPSCALE%3D%27%27&amp;geometry=-120.0024%2C37.3641%2C-116.1415%2C40.7247&amp;geometryType=esriGeometryEnvelope&amp;inSR=4326&amp;spatialRel=esriSpatialRelIntersects&amp;returnCountOnly=true&amp;f=json">count</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>739 + 351 + 89 = 1,179 exactly, and the <code>NOT IN</code> query independently returns 0, so the
+            partition closes.</p>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            <p>Two readings, both about the scored target.</p>
+            <ol>
+              <li>The GeoDAWN box holds <strong>1,179 of 22,956</strong> traces — <strong>5.1%</strong> of the regional
+                compilation. Whatever the label raster contains, it is a small, spatially concentrated sample.</li>
+              <li>The <em>quality mix</em> inside the box is better than the regional mix: <strong>Inferred is 89/1,179 =
+                7.5%</strong> here against 5,280/22,956 = <strong>23.0%</strong> regionally (CG-8). If that survives the
+                polygon clip, the GeoDAWN area is comparatively <em>well</em> mapped — so the remaining gaps are less
+                likely to be obvious unmapped range fronts and more likely to be subtle, cover-masked, or off-template.
+                That is the CG-7 class 2/3 argument, not class 4.
+                <span class="chip unverified">inference</span> from two verified counts.</li>
+            </ol>
+          </dd>
+          <dt>Caveats, stated first</dt>
+          <dd>
+            <ol>
+              <li>The envelope is a <strong>rectangle</strong>, not the flight footprint. The footprint is irregular and
+                covers 51,857 km² inside a grid bounding box of roughly 122,800 km²
+                (<a href="../feature-stack.html#grid">feature stack</a>). Envelope counts are an <strong>upper
+                bound</strong>: counted traces may lie outside the flown area.</li>
+              <li>This is the <strong>NBMG service snapshot dated 2023-06-27</strong>, not the rasterised labels on the
+                data tab. The two may differ — reconciling them is an open item.</li>
+              <li>The service reports <code>supportsStatistics: false</code>, so
+                <code>groupByFieldsForStatistics</code> and <code>outStatistics</code> return HTTP 400; every class was
+                counted with its own <code>where</code> clause. For the same reason <strong>no total trace length is
+                asserted anywhere on this site</strong> — it could not be summed.</li>
+            </ol>
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for the bounding box, the query results and the closure
+            arithmetic. <span class="chip unverified">inference</span> for the "comparatively well mapped" reading and
+            for anything claimed about the footprint interior.
+          </dd>
+        </dl>
+      </article>
+
+      <h2 id="cg10">CG-10 · The catalogue is a literature compilation, not a survey</h2>
+      <article class="entry">
+        <h3><span class="id">CG-10</span> Completeness tracks publication and state-survey capacity</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>
+            <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS Quaternary Fault and Fold Database
+            page</a> — "Background" and "History", read 2026-09-26.
+          </dd>
+          <dt>What it claims</dt>
+          <dd>
+            <p>Verbatim:</p>
+            <blockquote class="quote">This database was used to create the fault-source characterization in the National
+              Seismic Hazard Maps … For the hazard maps, both the fault surface trace and the metadata are simplified
+              representations of the geometry and behavior of the fault, based on geologic interpretation.<cite>USGS,
+              Quaternary Fault and Fold Database page</cite></blockquote>
+            <blockquote class="quote">Starting in the early 1970s, mainly in response to national concerns about the
+              siting of nuclear reactors, scientists needed to locate active and Quaternary faults and document their
+              characteristics.<cite>same page, "History"</cite></blockquote>
+            <blockquote class="quote">These map compilations, however, did not provide much supporting data. Subsequent
+              state-scale compilations, such as those by Johns and others, (1982), Stickney and Bartholemew (1987), and
+              Hecker (1993) provided some supporting database and were the first true fault compilations.<cite>same
+              page</cite></blockquote>
+            <blockquote class="quote">In 1993, the U.S. Geological Survey began developing a database for Quaternary
+              faults and folds for the United States in earnest, largely supported by NEHRP but with significant support
+              from many State surveys.<cite>same page</cite></blockquote>
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Completeness tracks <strong>what was published and which state survey had capacity</strong>, not the actual
+            fault population. Joined to CG-2 — compilers were told to prefer published, recent, detailed-scale topical
+            studies — this is the mechanism that produces CG-7 class 4. A fault in an unfashionable quadrangle is absent
+            for reasons that have nothing to do with whether it exists.
+          </dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> — read from the USGS page this session.</dd>
+        </dl>
+      </article>
+
+      <h2 id="cg11">CG-11 · Nevada's contribution runs through one state agency</h2>
+      <article class="entry">
+        <h3><span class="id">CG-11</span> NBMG is the Nevada cooperator — and hosts the label compilation</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>
+            <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS faults page</a>, "List of
+            cooperators": "Nevada - Nevada Bureau of Mines and Geology". Service host for the INGENIOUS update:
+            <a href="https://web2.nbmg.unr.edu/">web2.nbmg.unr.edu</a> (University of Nevada, Reno).
+          </dd>
+          <dt>What it claims</dt>
+          <dd>
+            The QFFD is a cooperative federal–state compilation with one named cooperator per participating state. For
+            Nevada that is NBMG, which also hosts the INGENIOUS Qfaults update used as the training labels (CG-8, CG-9).
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            Where the Nevada catalogue is thin is partly a statement about NBMG's mapping history — which programmes
+            were funded, which quadrangles were prioritised, and when. That is what makes gap class 4
+            <em>measurable</em> rather than rhetorical.
+          </dd>
+          <dt>Next measurement (not done)</dt>
+          <dd>
+            Intersect trace density with NBMG's published geologic-map coverage per quadrangle. The map index has
+            <strong>not</strong> been read this session, so no statement is made about what it contains.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for the cooperator listing and the service host. The
+            mapping-history argument is <span class="chip unverified">inference</span>.
+          </dd>
+        </dl>
+      </article>
+
       <h2>Next actions for this domain</h2>
       <ol>
-        <li>On a machine that can complete TLS to ScienceBase, download the Area 1 and Area 2 outline zips (1,190 and 1,497 bytes in the ScienceBase file list) and clip CG-8 to that outline.</li>
+        <li>Clip CG-8 to the GeoDAWN <strong>outline polygon</strong>, not the bounding box. CG-9 (2026-09-26) did the
+          envelope version; the polygon version needs the Area 1 / Area 2 outline zips, which still fail TLS from this
+          machine.</li>
         <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text. Until then, do not translate <code>MAPSCALE</code> codes into denominators.</li>
         <li>Once rasters are placed, compute distance-to-nearest-label for high-strain, high-seismicity, and high-gradient pixels. That converts CG-7 from reasoning into a measurement on the scored grid.</li>
+        <li>Reconcile the 1,179 envelope count against the actual label raster. If the shipped labels hold materially
+          more or fewer traces than the 2023-06-27 service inside the same box, record it as a provenance discrepancy
+          rather than smoothing it over.</li>
       </ol>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
@@ -347,7 +502,7 @@
 
   <footer class="site">
     <div class="wrap">
-      <a href="index.html">← Research library</a> · domain 1 of 6 · next: <a href="potential-field.html">potential-field geophysics</a>
+      <a href="index.html">← Research library</a> · domain 1 of 6 · next: <a href="potential-field.html">potential-field geophysics</a> · <a href="../executive-summary.html">the problem, explained</a> · <a href="../pipeline.html">submission gate</a>
     </div>
   </footer>
   <script src="../assets/nav.js"></script>

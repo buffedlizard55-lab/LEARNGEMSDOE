@@ -56,6 +56,49 @@ that responds to structure *under* cover.
 - **Relevance:** All three produce linear, fault-shaped features, and β=0.8 makes over-prediction cheap enough to hide the mistake. The control is public: the GeoDAWN release ships Esri shapefiles of flight paths and survey outlines.
 - **Confidence:** verified for the facts and the quotation; that the artefacts appear in the derived bands is **inference**.
 
+## PF-8 · What "rank 1" actually certifies — and what it does not
+
+- **Sources:** GeoDAWN text naming the criteria —
+  <https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and> and
+  <https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7>; the criteria themselves —
+  Drenth, B.J., & Grauch, V.J.S. (2019), *Finding the Gaps in America's Magnetic Maps*, **Eos** (2019),
+  <https://doi.org/10.1029/2019EO120449> (Table 1 verified); the criteria as re-stated by USGS for the national survey
+  inventory — <https://data.usgs.gov/datacatalog/metadata/USGS.5d38aac0e4b01d82ce8b940a.xml>.
+- **Claim (verbatim, GeoDAWN):** Area 1 "was flown with rank 1 specifications (following criteria outlined by Drenth and
+  Grauch, 2019) that met EarthMRI survey requirements"; Area 2 used "lower resolution flight specifications …
+  (falling between rank 1 and 2)".
+- **What rank 1 requires (verbatim from Table 1, survey-specifications row):** "TC < 152 meters and ratio ≤ 2", where
+  TC is terrain clearance and the ratio is "of flight line spacing to typical distance above shallowest magnetic sources
+  in the survey area". Ranks run 1 (best) to 5 (worst), and the overall rank is the worst of three categories (data
+  type, survey specifications, data issues).
+- **Why it matters.** GeoDAWN Area 1 is 200 m line spacing at ~100 m clearance; rank 1 therefore certifies that the
+  spacing-to-source-distance ratio is ≤ 2 — i.e. the survey is designed to image sources no shallower than about half
+  the line spacing. Area 2, at 400 m spacing, is explicitly *below* that standard. Two consequences for H2:
+  (a) a "buried structure" expressed only in the shallowest magnetic layer may be undersampled in Area 2 by design;
+  (b) gridding to 100 m does not create information the 400 m sampling never captured — the 100 m product grid
+  oversamples Area 2 in the across-strike direction. (a) is a documented specification; (b) is the standard sampling
+  argument, labelled **inference**.
+- **Confidence:** verified for the GeoDAWN wording, the Table 1 criteria, and the Eos DOI (title and figure/table read).
+  **Unverified:** the exact byline of the Eos article (the USGS survey-inventory metadata credits the ranking to Drenth
+  and Grauch, 2019; the article credits "coauthor Tien Grauch" and an image to Benjamin J. Drenth — the full author
+  list was not captured). The resolution consequences are **inference**.
+
+## PF-9 · Acquisition geometry has an azimuth, and Basin-and-Range structures do too
+
+- **Source:** GeoDAWN text (same two URLs as PF-8).
+- **Claim (verbatim):** Area 1 "Flight lines were spaced 200 m apart at an azimuth of 90 degrees, and tie lines were
+  spaced 2000 m apart at an azimuth of 180 degrees." Area 2: "flight lines spaced 400 m apart at an azimuth of 90
+  degrees, and tie lines spaced 4000 m apart at an azimuth of 180 degrees."
+- **Why it matters.** Flight lines run **E–W (090°)** and tie lines **N–S (180°)**. Sampling is therefore anisotropic by
+  a factor of 10 (200 m vs 2,000 m in Area 1; 400 m vs 4,000 m in Area 2). A N–S-trending structure is crossed every
+  200–400 m; an E–W-trending one is crossed by tie lines only every 2–4 km. Basin-and-Range normal faults trend
+  broadly N–NE (well sampled); Walker Lane dextral structures and many range-front splays trend NW to WNW (obliquely to
+  poorly sampled). Any comparison of "how strong does a lineament look" across orientations is comparing different
+  sampling densities unless this is corrected for.
+- **Confidence:** verified for the azimuths and spacings. The orientation-specific sampling consequence and the regional
+  trend generalisation are **inference** — the trend claim should be checked against the actual trace orientations in
+  the label raster once data are placed, which is a half-hour measurement.
+
 ## Cheapest next experiments
 
 1. Confirm numerically what band 6 is, from bands 3, 9, 14.

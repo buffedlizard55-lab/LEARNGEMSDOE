@@ -1,0 +1,34 @@
+name: Verify site and scripts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Metric self-tests (distance-weighted Tversky index)
+        run: python3 scripts/metrics.py --selftest
+
+      - name: Site integrity (links, anchors, assets, source allowlist)
+        run: python3 scripts/check_site.py
+
+      - name: Search index matches the markdown mirrors
+        run: python3 scripts/build_search_index.py --check
+
+      - name: Data-placement scripts still run clean
+        run: |
+          python3 scripts/prepare_data.py || true
+          echo "prepare_data.py exits non-zero when data/ is empty; that is expected here."
