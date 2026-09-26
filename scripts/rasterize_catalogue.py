@@ -50,8 +50,8 @@ GRID = {
 try:
     import shapefile  # pyshp
     from pyproj import CRS, Transformer
-    from shapely.geometry import shape
-    from shapely.ops import transform
+    from shapely.geometry import LineString, box, shape
+    from shapely.ops import transform, unary_union
 except ImportError as exc:  # pragma: no cover
     print(f"missing dependency: {exc}. pip install pyshp shapely pyproj", file=sys.stderr)
     sys.exit(3)
@@ -117,6 +117,37 @@ GRID_BBOX = (GRID["origin_x"], GRID["origin_y"] - GRID["height"] * GRID["res"],
              GRID["origin_x"] + GRID["width"] * GRID["res"], GRID["origin_y"])
 
 
+def polygon_mask(poly_utm):
+    """Rasterise a UTM polygon to a uint8 bytearray (1 = interior) by scanline fill.
+
+    For each grid row, intersect the polygon with the horizontal line through the
+    row's centre and fill the columns whose CENTRES fall inside the intersection
+    intervals (centroid convention). O(rows x polygon complexity); no per-pixel
+    shapely calls."""
+    mask = bytearray(GRID["width"] * GRID["height"])
+    x0, _, x1, _ = GRID_BBOX
+    if not poly_utm.intersects(box(*GRID_BBOX)):
+        return mask
+    for r in range(GRID["height"]):
+        yc = GRID["origin_y"] - (r + 0.5) * GRID["res"]
+        inter = poly_utm.intersection(LineString([(x0, yc), (x1, yc)]))
+        if inter.is_empty:
+            continue
+        stack = list(getattr(inter, "geoms", [inter]))
+        off = r * GRID["width"]
+        for part in stack:
+            if part.geom_type != "LineString":
+                continue
+            xs = [p[0] for p in part.coords]
+            xa, xb = min(xs), max(xs)
+            # column centre x0 + (c + 0.5) * res must lie in [xa, xb]
+            c0 = max(0, math.ceil((xa - x0) / GRID["res"] - 0.5))
+            c1 = min(GRID["width"] - 1, math.floor((xb - x0) / GRID["res"] - 0.5))
+            for c in range(c0, c1 + 1):
+                mask[off + c] = 1
+    return mask
+
+
 def rasterise_layer(shp_path, bitmap, value, to_utm_cache):
     geoms, crs, n, fields, recs = load_shp(shp_path)
     if crs is None:
@@ -158,6 +189,21 @@ def main() -> int:
     cache = {}
     report = {"grid": GRID, "layers": {}}
 
+    # Footprint mask from the public extent polygon (centroid convention), so the
+    # stamped catalogue can be counted inside vs outside the surveyed area — the
+    # reconciliation quantities GV-12/GV-17 will need against any placed label raster.
+    extent_shp = unzip_shps(need["extent"], work)[0]
+    egeoms, ecrs, _, _, _ = load_shp(extent_shp)
+    if ecrs is None:
+        return 4
+    ekey = ecrs.to_string()
+    if ekey not in cache:
+        cache[ekey] = Transformer.from_crs(ecrs, "EPSG:32611", always_xy=True).transform
+    extent_utm = unary_union([transform(cache[ekey], g) for g in egeoms])
+    fp = polygon_mask(extent_utm)
+    report["grid"]["footprint_mask_px"] = sum(fp)
+    report["grid"]["footprint_mask_km2"] = round(sum(fp) * GRID["res"] ** 2 / 1e6, 1)
+
     for shp in unzip_shps(need["ingenious"], work)[:1]:
         report["layers"]["ingenious_qfaults_v2"] = rasterise_layer(shp, bitmap, 1, cache)
     for shp in unzip_shps(need["usgs"], work):
@@ -167,13 +213,23 @@ def main() -> int:
     ing = sum(1 for b in bitmap if b in (1, 3))
     usgs = sum(1 for b in bitmap if b in (2, 3))
     both = sum(1 for b in bitmap if b == 3)
+    union = sum(1 for b in bitmap if b)
+    inside_masks = [i for i in range(npix) if fp[i]]
+    ing_in = sum(1 for i in inside_masks if bitmap[i] in (1, 3))
+    usgs_in = sum(1 for i in inside_masks if bitmap[i] in (2, 3))
+    union_in = sum(1 for i in inside_masks if bitmap[i])
     report["grid"]["pixels"] = {
         "total": npix,
         "ingenious_stamped": ing,
         "usgs_stamped": usgs,
-        "union": sum(1 for b in bitmap if b),
+        "union": union,
         "intersection": both,
-        "intersection_share_of_union": round(both / max(1, sum(1 for b in bitmap if b)), 4),
+        "intersection_share_of_union": round(both / max(1, union), 4),
+        "inside_extent_polygon": {
+            "ingenious_stamped": ing_in,
+            "usgs_stamped": usgs_in,
+            "union": union_in,
+        },
         "reference_figure_label_raster_catalogue_px": 60988,
         "reference_figure_source": "published sibling-site baseline table + site header (2026-09), "
                                    "NOT measured here — competition labels are not in this repository",
