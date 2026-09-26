@@ -65,13 +65,13 @@
           </tr>
           <tr>
             <td>Weekly cap</td>
-            <td>Three submissions per rolling window</td>
-            <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2 / §3.4</a> · <a href="https://community.drivendata.org/t/weekly-submissions/11524">forum</a></td>
+            <td>Three submissions per week; reset is a rolling window, not a calendar week</td>
+            <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2 / §3.4</a> · <a href="https://community.drivendata.org/t/weekly-submissions/11524">forum 11524</a></td>
           </tr>
           <tr>
             <td>Scoring mask</td>
-            <td>Known USGS/INGENIOUS pixels excluded (pixel-exact, not 300 m buffered)</td>
-            <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Staff clarification</a></td>
+            <td>Known USGS/INGENIOUS pixels masked/excluded from scoring (staff 11516); the 300 m kernel is for new-fault ground-truth distance, not a known-fault buffer</td>
+            <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Staff clarification 11516</a></td>
           </tr>
         </tbody>
       </table>
@@ -108,7 +108,7 @@
     <h2>Hypothesis backlog (status)</h2>
     <p>All hypotheses below are <span class="chip untested">untested</span> — no spatial holdout has been run in this repository because competition rasters are not placed. Full cards: <a href="hypotheses.html">hypothesis backlog</a>.</p>
     <ul>
-      <li><strong>H1</strong> — Along-strike extensions and splays of mapped traces (pixel-exact mask; 300 m kernel can still score nearby new geometry).</li>
+      <li><strong>H1</strong> — Along-strike extensions and splays of mapped traces (known pixels masked; 300 m kernel can still score nearby new geometry).</li>
       <li><strong>H2</strong> — Intra-basin buried structures from gravity/magnetic edges under cover that QFFD never intended to map.</li>
       <li><strong>H3</strong> — 1 m lidar scarps too subtle or too recently imaged for the compiled catalogue.</li>
       <li><strong>H4</strong> — Strain-rate / seismicity highs with no catalogue trace.</li>

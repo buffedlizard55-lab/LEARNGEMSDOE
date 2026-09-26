@@ -4,7 +4,7 @@ Canonical HTML (full cards): [`docs/hypotheses.html`](../docs/hypotheses.html)
 
 | ID | Status | Summary |
 | --- | --- | --- |
-| H1 | untested | Along-strike extensions / splays of mapped traces (staff: new geometry counts; mask is pixel-exact) |
+| H1 | untested | Along-strike extensions / splays of mapped traces (staff: new geometry counts; known pixels masked) |
 | H2 | untested | Intra-basin buried gravity/magnetic edges under cover (QFFD is surface-deformation by design). Staff will not publish test-fault protocol (11527/7); keep as Phase 2 component. |
 | H3 | untested | 1 m lidar scarps missing from compiled maps. Blocked on DEM placement. |
 | H4 | untested | Strain/seismicity highs >300 m from catalogue pixels (prior, not a standalone map) |

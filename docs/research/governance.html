@@ -89,12 +89,12 @@
       <h3>GV-5 · Scoring mask (staff, binding for strategy)</h3>
       <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
       <p><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Thread 11516</a>:</p>
-      <ul>
-        <li>Known USGS/INGENIOUS pixels masked in both rounds; do not contribute to penalty terms.</li>
-        <li>Mask is pixel-exact, identical to the training-label raster — not a 300 m buffer.</li>
-        <li>Only new-fault ground truth is used for DTI; a prediction 1–3 px from a known trace but far from a new fault is fully penalized.</li>
-        <li>New-fault pixels may lie within 300 m of known traces (corrections/modifications). Identifying those is an intended outcome and some may already be in the new-fault set.</li>
-      </ul>
+    <ul>
+      <li>Known USGS/INGENIOUS pixels are masked/excluded from evaluation in both rounds and do not contribute to the penalty terms (staff 11516).</li>
+      <li>The 300 m triangular kernel measures distance to <em>new-fault</em> ground truth, not a buffer around known faults; a prediction beside a known trace but far from any new-fault pixel is still fully penalized.</li>
+      <li>Staff did not explicitly state the exact masking implementation (pixel-exact vs. a small buffer) in the fetched posts. The provided training-label raster encodes the known faults, so the practical effect is the same for strategy — but treat "pixel-exact" as an inference, not a staff quote.</li>
+      <li>New-fault pixels may lie within 300 m of known traces (corrections/modifications). Identifying those is an intended outcome and some may already be in the new-fault set.</li>
+    </ul>
     </article>
 
     <article class="entry">
