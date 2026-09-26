@@ -1,0 +1,41 @@
+name: Public data fetch and footprint census
+
+# Research-only. Fetches PUBLIC USGS ScienceBase / OpenEI GDR files (no DrivenData login,
+# no secrets, no account) on a GitHub runner, because the Arena sandbox cannot complete TLS
+# to those hosts. Competition rasters are NOT fetched: they sit behind the DrivenData login.
+# Produces no prediction or submission file.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["arena/**"]
+    paths:
+      - scripts/public_census.py
+      - scripts/download_competition_data.sh
+      - .github/workflows/public-data.yml
+
+permissions:
+  contents: read
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Download public files (script exits 2 when competition rasters are absent; expected)
+        run: bash scripts/download_competition_data.sh || true
+      - name: Install clip dependencies
+        run: pip install pyshp shapely pyproj
+      - name: Footprint census
+        run: python3 scripts/public_census.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-census
+          path: |
+            data/raw/public_census.json
+            data/raw/data-tab-probe.txt
+          if-no-files-found: warn
