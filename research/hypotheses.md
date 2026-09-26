@@ -142,7 +142,8 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
 - **Physical signature:** faults mapped from lidar in that study that are absent from, or displaced relative to, the
   USGS catalogue.
 - **Why it catches a gap rather than a known fault.** It is an *independent* expert lidar mapping that predates this
-  competition, inside the GeoDAWN bounding box (≈40°30′–40°36′ N, 117°36′–118° W, against the box in CG-9). Running a
+  competition, inside the GeoDAWN bounding box — Figure 9 prints 40°36′ N and 117°36′–117°42′ W, Figure 8 prints
+  40°30′–40°33′ N, and both sit inside the box recorded in CG-9. Running a
   candidate detector there and asking "did it recover faults the catalogue lacks?" is a genuine out-of-sample test of
   gap-finding behaviour that costs no submission slot and touches no private label.
 - **Expected DTI impact:** none directly. Its job is to de-risk H1 and H3 by giving them a local truth set before any

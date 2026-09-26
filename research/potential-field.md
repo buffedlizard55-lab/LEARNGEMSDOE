@@ -61,7 +61,7 @@ that responds to structure *under* cover.
 - **Sources:** GeoDAWN text naming the criteria —
   <https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and> and
   <https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7>; the criteria themselves —
-  Drenth, B.J., & Grauch, V.J.S. (2019), *Finding the Gaps in America's Magnetic Maps*, **Eos** 100,
+  Drenth, B.J., & Grauch, V.J.S. (2019), *Finding the Gaps in America's Magnetic Maps*, **Eos** (2019),
   <https://doi.org/10.1029/2019EO120449> (Table 1 verified); the criteria as re-stated by USGS for the national survey
   inventory — <https://data.usgs.gov/datacatalog/metadata/USGS.5d38aac0e4b01d82ce8b940a.xml>.
 - **Claim (verbatim, GeoDAWN):** Area 1 "was flown with rank 1 specifications (following criteria outlined by Drenth and

@@ -134,6 +134,11 @@ was empty when read.
   prize amounts in §1.1 and the hub agree, so the PDF is still the authority for money, not for dates.
 - **Newly recorded — §3.2 restates the submission cap and the AI disclosure in the same section (verbatim):** "You can
   make multiple submissions, subject to the limits specified on the competition website (three submissions per week)."
+- **Eligibility re-confirmed against the text (§1.3).** The eligible-entity list, the FFRDC carve-out, the federal
+  employee exclusion, the MFTRP / FCOC exclusions and the perjury certification statement were all re-read this session
+  and are unchanged. **No team-composition or affiliation change was recorded**, so this is a re-confirmation against
+  the rules text only, not a verification of any particular team. It must be re-run the moment membership or
+  affiliation changes.
 - **Confidence:** verified for all of the above, read this session.
 
 ## GV-12 · Open wording difference: "the entirety of the GeoDAWN study area" vs "the same bounds as the training data"

@@ -10,7 +10,14 @@ prediction GeoTIFFs, and it does **not** use weekly submission slots.
 
 ## Site
 
-GitHub Pages is served from `docs/` (the workflow deploys on push to `main`).
+GitHub Pages is published at <https://buffedlizard55-lab.github.io/LEARNGEMSDOE/>.
+
+**Two deploy paths are configured, and that is worth knowing.** `.github/workflows/pages.yml` uploads `docs/` on every
+push to `main`, while the repository's Pages setting is still the legacy "build from the `main` branch, path `/`" — which
+is the one currently serving, so live URLs carry a `/docs/` segment (the root `index.html` redirects there). Both work,
+because every link in the site is relative. If you would rather the site be served at the bare subpath, switch
+**Settings → Pages → Source** to **GitHub Actions**; that is a repository-owner action (an integration token cannot
+change it) and it is the one manual step left in the site setup.
 
 | Page | File | What it holds |
 | --- | --- | --- |
