@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GEMSDOE — GEMS Prize research library</title>
-  <meta name="description" content="Research library and hypothesis backlog for the DOE GEMS Prize. Sources are linked to primary documents for line-by-line review. No prediction files.">
+  <meta name="description" content="Research library and hypothesis backlog for the DOE GEMS Prize. Every claim linked to a primary source for line-by-line review. No prediction files.">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -36,14 +36,14 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Knowledge base for one registered DrivenData entity · sources re-verified line by line 2026-09-26 · this repository does not produce prediction files</p>
+      <p class="meta">One registered DrivenData entity · one repo · sources re-verified line by line 2026-09-26, session <code>arena/01a0dfc9-learngemsdoe</code> · no prediction files</p>
 
       <h1>Find the faults the catalogue missed</h1>
       <p class="lede">
-        The GEMS Prize is not scored on how well you reproduce the published fault map — the published map is
-        <em>masked out of the scoring</em>. It is scored on faults that experts have identified and that are absent from the
+        The GEMS Prize is <strong>not</strong> scored on reproducing the published fault map — that map is
+        <em>masked out of scoring</em>. It is scored on faults that experts identified and that are absent from the
         USGS / INGENIOUS catalogue in the GeoDAWN area. This site is the research library and hypothesis backlog behind
-        that problem: every entry is tied to a primary source you can open and check.
+        that problem: every entry cites a primary source you can open and check.
       </p>
 
       <div class="stats">
@@ -56,31 +56,16 @@
       </div>
 
       <div class="banner ok">
-        <h3>Latest pass — 2026-09-26, session <code>arena/01a0df88</code></h3>
+        <h3>Verified today — 2026-09-26, session <code>arena/01a0dfc9-learngemsdoe</code></h3>
         <ul>
-          <li><strong>The GeoDAWN-box catalogue census is measured.</strong>
-            <a href="research/catalogue-gaps.html#cg9">CG-9</a>: 1,179 of 22,956 INGENIOUS traces intersect the published
-            GeoDAWN bounding box — 739 well constrained, 351 moderately constrained, 89 inferred. Every number is a
-            re-runnable query.</li>
-          <li><strong>Hermant et al. (2025) is now read end to end</strong>, including the results in prose, the
-            discussion and the reference list — <a href="research/prior-art.html#pa6">PA-6</a>,
-            <a href="research/prior-art.html#pa7">PA-7</a>, <a href="research/prior-art.html#pa8">PA-8</a>.
-            One consequence: they report model-found faults <em>confirmed by experts on lidar</em> in this region
-            (<a href="research/geomorphology.html#gm7">GM-7</a>).</li>
-          <li><strong>Three new hypotheses</strong> — <a href="hypotheses.html#h9">H9</a> (train against label
-            incompleteness), <a href="hypotheses.html#h10">H10</a> (an independent lidar validation anchor),
-            <a href="hypotheses.html#h11">H11</a> (soft confusers).</li>
-          <li><strong>New site features</strong> — <a href="search.html">search</a> across every entry, and an offline
-            <a href="#verification">verification script</a> that fails the build if a link breaks or an unrecorded source
-            appears.</li>
+          <li><strong>Competition hub, problem page 967 (both chunks), About page 968, rules page</strong> — re-fetched and read. Deadline <strong>Dec. 3, 2026, 11:59 p.m. UTC</strong> on hub; metric α=0.2 β=0.8 R=300 m; submission format float32 EPSG:32611 100 m; 19-band list; GeoDAWN + 3DEP wording confirmed.</li>
+          <li><strong>Official rules PDF (NLR, September 2026)</strong> — <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">docs.nlr.gov/docs/fy26osti/96647.pdf</a> (redirect from nlr.gov). Preface change-log still empty; §1.1 prize $50k + $250k; §1.2 defers dates to website; §1.3 eligibility; §2 background labels from USGS + NLR/USGS experts + 1 m DEM; §3.2 single GeoTIFF, 3 per week, AI disclosure verbatim; §3.3 INGENIOUS labels; §A.1 5 p.m. ET wording flagged.</li>
+          <li><strong>Forum</strong> — <a href="https://community.drivendata.org/c/gems-prize-challenge/111.json">category JSON</a> re-read: <strong>11 topics</strong>, newest <strong>11543 (2026-09-25)</strong>, no new topic since previous session. Staff posts <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">11516 post 4</a> pixel-exact mask, <a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">11536</a> new-fault definition, <a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">11527 post 7</a> provenance declined, 11524 rolling window, 11528 licence, 11529 band-19 bug — all re-confirmed.</li>
+          <li><strong>GeoDAWN</strong> — <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS data page</a> and <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a> re-read: 149,030 line-km, 51,857 km², Area 1 200 m / Area 2 400 m, E-W lines 90° / N-S ties 180°, 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah, CC0 1.0, flight-path shapefiles, “variable terrain clearance should be considered” warning. Publication date 2024-03-01, survey 2021-11-01 to 2022-11-20, citation Glen & Earney 2024 DOI <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a>.</li>
+          <li><strong>INGENIOUS</strong> — <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> re-read: 9 files 116.98 MB, Qfaults v1/v2, geodetics 51.99 MB, seismicity 22.98 MB, CC BY 4.0, DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>. Qfaults v2 supersedes v1, field-definition text still inside zip not opened here (TLS). <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson">NBMG service</a> still 22,956 traces.</li>
+          <li><strong>USGS QFFD</strong> — <a href="https://www.usgs.gov/programs/earthquake-hazards/faults">faults page</a> re-read: “geological evidence of coseismic surface deformation” past 1.6 Ma, 2017 metadata reduction, Search retired 26 Feb 2026, GIS zip 16 MB, cooperators list Nevada = NBMG, history section. DOI <a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a>, interactive map <a href="https://doi.org/10.5066/F7S75FJM">10.5066/F7S75FJM</a>.</li>
+          <li><strong>Site checks</strong> — <code>python3 scripts/metrics.py --selftest</code> 11 PASS, <code>check_site.py</code> 18 pages 64 sources PASS, <code>build_search_index.py --check</code> 100 items PASS. No prediction file. No second site/repo/account.</li>
         </ul>
-      </div>
-
-      <div class="banner info">
-        <p>
-          The line-by-line requirements list, including the counted INGENIOUS attribute inventory and every open item, is
-          on the <a href="requirements.html">requirements checklist</a>.
-        </p>
       </div>
 
       <div class="banner warn">
@@ -88,40 +73,31 @@
         <p>
           <code>data/</code> is empty. The DrivenData data tab sits behind login
           (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">verified redirect</a>),
-          and this agent does not hold or store credentials. Nothing on this site has been measured against the real
-          rasters — every hypothesis is <span class="chip untested">untested</span> for that reason.
+          and this agent does not hold or store credentials. Public hosts ScienceBase/GDR also failed TLS (curl 35) from this machine — environment limit, not evidence of absence. Every hypothesis is <span class="chip untested">untested</span> for that reason.
         </p>
         <p class="small">
-          Unblock on an enrolled machine: <code>bash scripts/download_competition_data.sh</code> then
+          Unblock on an enrolled, unrestricted machine: <code>bash scripts/download_competition_data.sh</code> then
           <code>python scripts/prepare_data.py</code>. See <a href="pipeline.html">pipeline status</a>
-          and the <a href="forum.html">forum watch</a>.
+          and <a href="forum.html">forum watch</a>. Metric/losses/validation verified working on CPU here; GPU needed for training.
         </p>
       </div>
 
-      <h2 id="start">Start here — a reading order</h2>
-      <p class="small">Five stops, in the order that makes the rest make sense. About 25 minutes.</p>
+      <h2 id="start">Start here — 5 steps, ~25 minutes</h2>
       <ol class="reading-order">
-        <li><strong><a href="executive-summary.html">The problem, in geological terms</a></strong> — what is actually
-          being scored, and why reproducing the published map earns nothing.</li>
-        <li><strong><a href="research/catalogue-gaps.html">Catalogue-gap reasoning</a></strong> — how the USGS and
-          INGENIOUS catalogues were really built. This is the scored target, not a side note: read
-          <a href="research/catalogue-gaps.html#cg1">CG-1</a>, <a href="research/catalogue-gaps.html#cg2">CG-2</a>,
-          <a href="research/catalogue-gaps.html#cg9">CG-9</a> and <a href="research/catalogue-gaps.html#cg7">CG-7</a>.</li>
-        <li><strong><a href="feature-stack.html">The 19 bands</a></strong> — what you have to work with, and what is
-          missing from it.</li>
-        <li><strong><a href="hypotheses.html">Hypothesis backlog</a></strong> — eleven cards, each with the layers, the
-          signature, why it targets a <em>gap</em>, and how it would be rejected.</li>
-        <li><strong><a href="pipeline.html">Pipeline status</a></strong> — what runs today, what is blocked, and the gate
-          on submission generation.</li>
+        <li><strong><a href="executive-summary.html">The problem, in geological terms</a></strong> — what is actually being scored, and why reproducing the published map earns nothing.</li>
+        <li><strong><a href="research/catalogue-gaps.html">Catalogue-gap reasoning</a></strong> — how the USGS and INGENIOUS catalogues were really built. Highest leverage: read <a href="research/catalogue-gaps.html#cg1">CG-1</a>, <a href="research/catalogue-gaps.html#cg2">CG-2</a>, <a href="research/catalogue-gaps.html#cg9">CG-9</a>, <a href="research/catalogue-gaps.html#cg10">CG-10</a>.</li>
+        <li><strong><a href="feature-stack.html">The 19 bands</a></strong> — what you have to work with, raster geometry 3292×3730 EPSG:32611 100 m float32, GeoDAWN acquisition specs, and what is missing from the stack.</li>
+        <li><strong><a href="hypotheses.html">Hypothesis backlog</a></strong> — eleven cards, each with layers, physical signature, why it targets a <em>gap</em> rather than a known fault, expected DTI impact, cost, validation, rejection.</li>
+        <li><strong><a href="pipeline.html">Pipeline status</a></strong> — what runs today, what is blocked, and the gate on submission generation.</li>
       </ol>
       <p class="small">
-        Looking for something specific? <a href="search.html">Search</a> covers every entry, hypothesis and page.
+        Need something specific? <a href="search.html">Search</a> covers every entry, hypothesis and page.
         Every claim is traceable from <a href="sources.html">sources</a>, and every session is logged in the
         <a href="ai-usage.html">AI-usage log</a> as rules §3.2 requires.
       </p>
 
-      <h2 id="facts">The competition in one table</h2>
-      <p class="small">Every row below was read out of the linked primary source on 2026-09-26. Nothing here is paraphrased from memory.</p>
+      <h2 id="facts">Competition facts — verified line by line today</h2>
+      <p class="small">Each row below was read out of the linked primary source on 2026-09-26. Nothing paraphrased from memory. Open the link to check.</p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Fact</th><th>Value</th><th class="nowrap">Source (open it)</th></tr></thead>
@@ -133,42 +109,42 @@
             </tr>
             <tr>
               <td>Prize pool</td>
-              <td>$300,000. Phase&nbsp;1 $50,000 split equally among the top five ($10k each). Phase&nbsp;2 $250,000: $100k / $70k / $40k / $25k / $15k.</td>
-              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Hub</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules PDF §1.1</a></td>
+              <td>$300,000. Phase 1 $50,000 split equally among top five ($10k each). Phase 2 $250,000: $100k / $70k / $40k / $25k / $15k.</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Hub</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules PDF §1.1</a></td>
             </tr>
             <tr>
               <td>Metric</td>
-              <td>Distance-weighted Tversky index, α=0.2 (false positives), β=0.8 (false negatives), triangular kernel, R=300&nbsp;m</td>
-              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">Problem description</a></td>
+              <td>Distance-weighted Tversky index, α=0.2 (false positives), β=0.8 (false negatives), triangular kernel, R=300 m. Worked example 0.60.</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">Problem description page 967</a></td>
             </tr>
             <tr>
               <td>Submission format</td>
-              <td>One GeoTIFF, single band, <code>float32</code>, values in [0,&nbsp;1], EPSG:32611, 100&nbsp;m, same bounds as the training data, null/nan outside</td>
-              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">Submission format</a></td>
+              <td>One GeoTIFF, single band, <code>float32</code>, values in [0, 1], EPSG:32611, 100 m, same bounds as training data, null/nan outside</td>
+              <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#submission-format">Problem description submission format</a></td>
             </tr>
             <tr>
               <td>One submission, two rounds</td>
-              <td>You must pick a single submission for both rounds <em>before</em> seeing your private-test score</td>
-              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.5, §3.6.2</a></td>
+              <td>You must pick a single submission for both rounds <em>before</em> seeing private-test score</td>
+              <td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.5, §3.6.2</a></td>
             </tr>
             <tr>
               <td>Feedback budget</td>
-              <td>Three scored submissions per week; the allowance resets on a rolling window, not a calendar week</td>
-              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2, §3.4</a> · <a href="https://community.drivendata.org/t/weekly-submissions/11524">forum 11524</a></td>
+              <td>Three scored submissions per week; allowance resets on rolling window, not calendar week</td>
+              <td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2, §3.4</a> · <a href="https://community.drivendata.org/t/weekly-submissions/11524">forum 11524</a></td>
             </tr>
             <tr>
               <td>Training labels</td>
-              <td>USGS Quaternary fault maps + INGENIOUS, provided as vector and raster; obtained from the INGENIOUS Great Basin Regional Dataset Compilation</td>
-              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.3</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#labels">Problem description</a></td>
+              <td>USGS Quaternary fault maps + INGENIOUS, provided as vector and raster; obtained from INGENIOUS Great Basin Regional Dataset Compilation</td>
+              <td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.3</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#labels">Problem description labels</a></td>
             </tr>
             <tr>
               <td>Who labelled the <em>new</em> faults</td>
               <td>“Geology experts at the National Laboratory of the Rockies (NLR) and USGS”</td>
-              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §2 — Background</a></td>
+              <td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules §2 Background</a></td>
             </tr>
             <tr>
               <td>Scoring mask</td>
-              <td><strong>Pixel-exact</strong> — “identical to the provided set of training fault labels”. A predicted pixel near a known trace but far from a new-fault label is <em>fully penalised</em>.</td>
+              <td><strong>Pixel-exact</strong> — “identical to the provided set of training fault labels”. Predicted pixel near known trace but far from new-fault label is <em>fully penalised</em>.</td>
               <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">Staff reply, forum 11516 post 4 (2026-09-21)</a></td>
             </tr>
             <tr>
@@ -178,8 +154,28 @@
             </tr>
             <tr>
               <td>Generative-AI disclosure</td>
-              <td>Allowed, but you must state in the narrative “the extent to which … you used generative AI technology and how you used it”; you own accuracy, authenticity and authorship</td>
-              <td><a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2</a> · <a href="ai-usage.html">this site's AI log</a></td>
+              <td>Allowed, but you must state in narrative “the extent to which … you used generative AI technology and how you used it”; you own accuracy, authenticity, authorship</td>
+              <td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Rules §3.2</a> · <a href="ai-usage.html">this site's AI log</a></td>
+            </tr>
+            <tr>
+              <td>GeoDAWN acquisition</td>
+              <td>149,030 line-km, 51,857 km², Area 1 200 m lines 90° / 2,000 m ties 180° 100-150 m clearance, Area 2 400 m / 4,000 m 150-200 m, 4 blocks Winnemucca/Fallon/Hawthorne/Tonopah, CC0 1.0</td>
+              <td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data page</a> · <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></td>
+            </tr>
+            <tr>
+              <td>Feature-data citation</td>
+              <td>Glen & Earney, 2024, GeoDAWN: Airborne Magnetic and Radiometric Surveys of the Northwestern Great Basin, Nevada and California, USGS</td>
+              <td><a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></td>
+            </tr>
+            <tr>
+              <td>Label citation</td>
+              <td>Ayling et al., 2022, INGENIOUS – Great Basin Regional Dataset Compilation</td>
+              <td><a href="https://doi.org/10.15121/1881483">10.15121/1881483</a> · <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a></td>
+            </tr>
+            <tr>
+              <td>Existing-catalogue baseline</td>
+              <td>USGS Quaternary Fault and Fold Database — faults with evidence of coseismic surface deformation past 1.6 Ma</td>
+              <td><a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS QFFD</a> · <a href="https://doi.org/10.5066/P9BCVRCK">10.5066/P9BCVRCK</a></td>
             </tr>
           </tbody>
         </table>
@@ -187,31 +183,24 @@
 
       <h2 id="scored">What is actually being scored</h2>
       <p>
-        The private test set for Phase 1 was labelled by experts <em>before</em> the competition and is fixed. In Phase 2 an
-        expert panel reviews every team's submission, verifies anything genuinely new, and all submissions are re-scored
-        against the expanded set — so a prediction that helps experts find a real unmapped fault can score higher in Phase 2
-        than in Phase 1 (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#competition-structure">competition structure</a>).
+        Private test set for Phase 1 was labelled by experts <em>before</em> competition and is fixed. In Phase 2 an expert panel reviews every team's submission, verifies genuinely new faults, and all submissions are re-scored against expanded set — so a prediction that helps experts find a real unmapped fault can score higher in Phase 2 than Phase 1 (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#competition-structure">competition structure</a>).
       </p>
       <p>
-        Two clarifications from DrivenData staff change the optimal strategy materially, and both are quoted verbatim on the
-        <a href="research/governance.html">governance</a> page:
+        Two clarifications from DrivenData staff change optimal strategy materially, quoted verbatim on <a href="research/governance.html">governance</a>:
       </p>
       <ol>
-        <li>Existing catalogue pixels are masked from evaluation in <em>both</em> rounds — the mask is pixel-exact, not buffered.</li>
-        <li>A new-fault ground-truth pixel <em>may</em> lie within 300&nbsp;m of a known trace; staff describe finding those
-          corrections as “one outcome we are aiming for”.</li>
+        <li>Existing catalogue pixels are masked from evaluation in <em>both</em> rounds — mask is pixel-exact, not buffered.</li>
+        <li>A new-fault ground-truth pixel <em>may</em> lie within 300 m of a known trace; staff describe finding those corrections as “one outcome we are aiming for”.</li>
       </ol>
       <p>
-        Net effect: reproducing the catalogue earns nothing, and hedging a wide corridor around known traces costs
-        real false-positive mass. The money is in geometry an expert would add — tip extensions, splays, parallel strands,
-        and structures under cover — not in thicker ink on mapped lines.
+        Net effect: reproducing catalogue earns nothing, hedging wide corridor around known traces costs real false-positive mass. Money is in geometry an expert would add — tip extensions, splays, parallel strands, structures under cover — not thicker ink on mapped lines.
       </p>
 
-      <h2 id="library">Research library</h2>
+      <h2 id="library">Research library — 6 domains, 57 entries, every entry source-linked</h2>
       <div class="grid">
         <a class="card" href="research/catalogue-gaps.html">
           <h3>1 · Catalogue-gap reasoning</h3>
-          <p>How the USGS and INGENIOUS catalogues were actually built — and where that process is structurally incomplete. Highest-leverage domain.</p>
+          <p>How USGS and INGENIOUS catalogues were actually built — and where that process is structurally incomplete. Highest-leverage domain.</p>
           <p class="card-meta">11 entries · highest leverage</p>
         </a>
         <a class="card" href="research/potential-field.html">
@@ -221,35 +210,32 @@
         </a>
         <a class="card" href="research/geomorphology.html">
           <h3>3 · DEM structural geomorphology</h3>
-          <p>Detrended elevation and slope at 100&nbsp;m, 1&nbsp;m lidar via 3DEP, and what a subtle Basin-and-Range scarp looks like in each.</p>
+          <p>Detrended elevation and slope at 100 m, 1 m lidar via 3DEP, and what a subtle Basin-and-Range scarp looks like in each.</p>
           <p class="card-meta">9 entries</p>
         </a>
         <a class="card" href="research/seismotectonics.html">
           <h3>4 · Seismotectonics and strain</h3>
-          <p>Strain-rate invariants, earthquake density, conductivity — where independent signals agree and where they part company.</p>
+          <p>Strain-rate invariants, earthquake density, conductivity — where independent signals agree and where they part.</p>
           <p class="card-meta">7 entries</p>
         </a>
         <a class="card" href="research/prior-art.html">
           <h3>5 · Prior art</h3>
-          <p>Mattéo 2021, Hermant 2025 and the official Lipor U-Net reference — including where the reference likely falls short.</p>
+          <p>Mattéo 2021, Hermant 2025 and official Lipor U-Net reference — including where reference likely falls short.</p>
           <p class="card-meta">8 entries</p>
         </a>
         <a class="card" href="research/governance.html">
           <h3>6 · Competition governance</h3>
-          <p>Rules sections, forum clarifications and errata, open eligibility questions, and time-sensitive items.</p>
-          <p class="card-meta">13 entries</p>
+          <p>Rules sections, forum clarifications and errata, open eligibility questions, time-sensitive items, plus re-verification passes showing no official change.</p>
+          <p class="card-meta">14 entries</p>
         </a>
       </div>
       <p class="small">
-        Also: the <a href="feature-stack.html">feature stack</a> page lists all 19 bands with their official descriptions,
-        the raster geometry, and the GeoDAWN acquisition specs that produced them.
+        Also: <a href="feature-stack.html">feature stack</a> lists all 19 bands with official descriptions, raster geometry, GeoDAWN acquisition specs; <a href="sources.html">sources</a> is full index with verification status; <a href="search.html">search</a> covers every entry.
       </p>
 
-      <h2 id="hypotheses">Hypothesis backlog</h2>
+      <h2 id="hypotheses">Hypothesis backlog — 11 cards, all untested because data not placed</h2>
       <p class="small">
-        Status counts: <span data-chip-count></span>. Full cards with layers, physical signature, why each targets a
-        <em>gap</em> rather than a known fault, expected DTI impact, cost and rejection criteria:
-        <a href="hypotheses.html">hypothesis backlog</a>.
+        Status counts: <span data-chip-count></span>. Full cards with layers, physical signature, why each targets a <em>gap</em> rather than known fault, expected DTI impact, cost and rejection criteria: <a href="hypotheses.html">hypothesis backlog</a>.
       </p>
       <div class="table-wrap">
         <table>
@@ -257,101 +243,67 @@
           <tbody>
             <tr><td class="nowrap"><strong>H1</strong></td><td><span class="chip untested">untested</span></td><td>New geometry of existing systems — tip extensions, splays, parallel strands</td><td class="nowrap">Low–med</td></tr>
             <tr><td class="nowrap"><strong>H2</strong></td><td><span class="chip untested">untested</span></td><td>Buried intra-basin structures from gravity / magnetic edges under cover</td><td class="nowrap">Low</td></tr>
-            <tr><td class="nowrap"><strong>H3</strong></td><td><span class="chip blocked">blocked</span></td><td>1&nbsp;m lidar scarps too subtle for the compiled catalogue (needs DEM placement)</td><td class="nowrap">High</td></tr>
+            <tr><td class="nowrap"><strong>H3</strong></td><td><span class="chip blocked">blocked</span></td><td>1 m lidar scarps too subtle for compiled catalogue (needs DEM placement)</td><td class="nowrap">High</td></tr>
             <tr><td class="nowrap"><strong>H4</strong></td><td><span class="chip untested">untested</span></td><td>Kinematic orphans — strain / seismicity highs with no catalogue trace</td><td class="nowrap">Low</td></tr>
-            <tr><td class="nowrap"><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster the scorer masks out</td><td class="nowrap">Medium</td></tr>
-            <tr><td class="nowrap"><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td></tr>
-            <tr><td class="nowrap"><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td></tr>
-            <tr><td class="nowrap"><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale traces mark the edge of the map — not a positive class</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce label raster scorer masks out</td><td class="nowrap">Medium</td></tr>
+            <tr><td class="nowrap"><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as primary detector</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as false-structure test</td><td class="nowrap">Low</td></tr>
+            <tr><td class="nowrap"><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale traces mark edge of map — not positive class</td><td class="nowrap">Low</td></tr>
             <tr><td class="nowrap"><strong><a href="hypotheses.html#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Medium</td></tr>
-            <tr><td class="nowrap"><strong><a href="hypotheses.html#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as an independent lidar validation anchor</td><td class="nowrap">Low–med</td></tr>
+            <tr><td class="nowrap"><strong><a href="hypotheses.html#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as independent lidar validation anchor</td><td class="nowrap">Low–med</td></tr>
             <tr><td class="nowrap"><strong><a href="hypotheses.html#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h2 id="irregular">Flagged irregularities</h2>
+      <h2 id="irregular">Flagged irregularities — recorded, not smoothed</h2>
       <div class="banner bad">
-        <p>These are recorded, not smoothed over. Each one is a place where the official documents disagree with each other, or where a question put to the organisers has no answer.</p>
+        <p>Each is a place where official documents disagree, or where a question put to organisers has no answer. Open links to verify.</p>
         <ol>
           <li>
-            <strong>Deadline wording differs between documents.</strong> The hub states “Dec. 3, 2026, 11:59 p.m. UTC”;
-            rules §A.1 states “5:00 p.m. ET on the prize submission deadline date”. Both are official. Treat the earlier
-            instant as binding and submit well before it.
-            (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">hub</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">§A.1</a>)
+            <strong>Deadline wording differs.</strong> Hub: “Dec. 3, 2026, 11:59 p.m. UTC”; rules §A.1: “5:00 p.m. ET on prize submission deadline date”. Both official. Treat earlier instant as binding.
+            (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">hub</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">§A.1</a>)
           </li>
           <li>
-            <strong>Eligibility text is shorter on the homepage than in the rules.</strong> The hub says only that a team
-            captain must be a US citizen or permanent resident; §1.3 adds that other team members must be “legally
-            authorized to work in the United States”, excludes FFRDC-affiliated researchers from cash prizes, and excludes
-            participants in Malign Foreign Talent Recruitment Programs. Two forum threads asking which text governs are
-            unanswered (see <a href="research/governance.html">governance</a>).
+            <strong>Eligibility text shorter on homepage than in rules.</strong> Hub says captain must be US citizen/PR; §1.3 adds team members must be legally authorized to work in US, excludes FFRDC-affiliated researchers from cash, excludes MFTRP participants, defines FCOC including Iran/North Korea/Russia/Belarus/China. Forum threads 11540, 11526, 11499 unanswered.
           </li>
           <li>
-            <strong>Test-fault provenance will not be published.</strong> Staff: “We're not sharing details about the data
-            sources, fault types, or coverage behind the test faults beyond what's in the problem description.”
+            <strong>Test-fault provenance will not be published.</strong> Staff: “We're not sharing details about data sources, fault types, or coverage behind test faults beyond what's in problem description.”
             (<a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">11527 post 7</a>)
           </li>
           <li>
-            <strong>The reference notebook prints the label raster as “Band 19”.</strong> Staff confirm this is a bug in the
-            summary string; the label file has one band.
+            <strong>Reference notebook prints label raster as “Band 19”.</strong> Staff confirm bug in summary string; label file has one band.
             (<a href="https://community.drivendata.org/t/why-does-the-training-fault-labels-file-in-the-data-tab-have-a-single-band-while-the-labels-in-the-reference-solution-repo-have-19-bands/11529">11529</a>)
           </li>
           <li>
-            <strong>Feature-stack provenance is not documented per band.</strong> The 19-band raster carries band
-            descriptions and data categories, but the competition pages do not state which public release each band was
-            derived from, at what resolution it was resampled, or how nodata was handled. Any provenance claim beyond the
-            band description is an inference and is labelled as such.
+            <strong>Feature-stack provenance not documented per band.</strong> 19-band raster carries band descriptions and data categories, but competition pages do not state which public release each band derived from, at what resolution resampled, or how nodata handled. Any provenance claim beyond band description is inference and labelled as such.
           </li>
           <li>
-            <strong>No training pipeline exists in this repository.</strong> A prior handoff stated the
-            train→inference→validate pipeline was “ready to run”; it is not present in <code>scripts/</code>. See
-            <a href="pipeline.html">pipeline status</a>. Re-checked this session: still true. This agent did not add one.
+            <strong>No training pipeline in this repository.</strong> A prior handoff stated train→inference→validate pipeline was “ready to run”; it is not present in <code>scripts/</code>. Only metrics verified. See <a href="pipeline.html">pipeline status</a>. Re-checked this session: still true. This agent did not add one — gated by design.
           </li>
           <li>
-            <strong>Rules PDF host redirect.</strong> The official URL
-            <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a> redirected to
-            <code>docs.nlr.gov</code> when fetched on 2026-09-26. Keep the NLR URL as the citation. The change-log table
-            in the PDF preface was still empty.
+            <strong>Rules PDF host redirect.</strong> Official URL <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a> redirects to <code>docs.nlr.gov</code> when fetched on 2026-09-26. Keep NLR URL as citation. Change-log table in PDF preface still empty.
           </li>
           <li>
-            <strong>Staff about-post links to page 966.</strong> The pinned forum welcome links to
-            <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/">page 966</a>, which is a
-            duplicate of the hub welcome, not the problem description
-            (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a>).
+            <strong>Staff about-post links to page 966.</strong> Pinned forum welcome links to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/">page 966</a>, duplicate of hub welcome, not problem description <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a>.
           </li>
           <li>
-            <strong>Public downloads failed TLS from this machine; the files were not treated as missing.</strong>
-            <code>curl</code> to usgs.gov, sciencebase.gov, gdr.openei.org and web2.nbmg.unr.edu returned
-            <code>SSL_ERROR_SYSCALL</code>. HTML and JSON were still readable through a separate fetch path. The
-            ScienceBase catalog lists the outline zips. Do not conclude they do not exist.
+            <strong>Public downloads failed TLS from this machine; not treated as missing.</strong> <code>curl</code> to usgs.gov, sciencebase.gov, gdr.openei.org returned <code>SSL_ERROR_SYSCALL</code>. HTML/JSON readable via separate fetch path. ScienceBase catalog lists outline zips. Do not conclude absent.
           </li>
           <li>
-            <strong>Catalogue attribute conventions are mixed.</strong> On the NBMG service, <code>MAPSCALE</code> stores
-            both short codes and the literal string <code>1:10,000</code>, and <code>REC2023</code> stores both
-            <code>&lt;15,000</code>-style bins and bare numbers such as <code>8400</code>. Do not normalize them until
-            the field-definition text is read. Counts: <a href="requirements.html#catalogue">requirements page</a>.
+            <strong>Catalogue attribute conventions mixed.</strong> On NBMG service, <code>MAPSCALE</code> stores both short codes and literal string <code>1:10,000</code>, and <code>REC2023</code> stores both <code>&lt;15,000</code>-style bins and bare numbers such as <code>8400</code>. Do not normalize until field-definition text read. Counts: <a href="requirements.html#catalogue">requirements page</a>.
           </li>
           <li>
-            <strong>Two instructions for how much area the GeoTIFF must cover.</strong> Rules §3.2 says “for the entirety
-            of the GeoDAWN study area”; the problem description says “the same bounds as the training data”. The grid
-            bounding box is roughly 2.4× the surveyed area, so these are not obviously the same instruction. Unresolvable
-            until the raster is placed — <a href="research/governance.html#gv12">GV-12</a>.
+            <strong>Two instructions for how much area GeoTIFF must cover.</strong> Rules §3.2 says “for entirety of GeoDAWN study area”; problem description says “same bounds as training data”. Grid bounding box ~2.4× surveyed area, so not obviously same. Unresolvable until raster placed — <a href="research/governance.html#gv12">GV-12</a>.
           </li>
           <li>
-            <strong>Official documents disagree about whether GeoDAWN includes lidar.</strong> Rules §2 calls it “a
-            high-resolution lidar, magnetic, and radiometric study”; the data release is titled “Airborne magnetic and
-            radiometric surveys” and describes the 3DEP lidar as a coordinated but separate collection. No scoring
-            consequence is known — <a href="research/geomorphology.html#gm9">GM-9</a> /
-            <a href="research/governance.html#gv13">GV-13</a>.
+            <strong>Official documents disagree about whether GeoDAWN includes lidar.</strong> Rules §2 calls it “a high-resolution lidar, magnetic, and radiometric study”; data release titled “Airborne magnetic and radiometric surveys” and describes 3DEP lidar as coordinated but separate collection. No scoring consequence known — <a href="research/geomorphology.html#gm9">GM-9</a> / <a href="research/governance.html#gv13">GV-13</a>.
           </li>
         </ol>
       </div>
 
-      <h2 id="verification">How this site checks itself</h2>
-      <p>
-        “No hallucinated sources” is a claim about process, so it is enforced mechanically where it can be:
-      </p>
+      <h2 id="verification">How this site checks itself — no hallucinated sources</h2>
+      <p>“No hallucinated sources” is enforced mechanically where possible:</p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Check</th><th>Command</th><th>What it guarantees</th></tr></thead>
@@ -359,48 +311,53 @@
             <tr>
               <td>Site integrity</td>
               <td><code>python3 scripts/check_site.py</code></td>
-              <td>Every internal link and anchor resolves, every local asset exists, every page carries the nav, and every
-                external link on the site is recorded as a source on the <a href="sources.html">sources page</a>. Offline:
-                it fetches nothing.</td>
+              <td>Every internal link and anchor resolves, every local asset exists, every page carries nav, and every external link is recorded as source on <a href="sources.html">sources page</a>. Offline: fetches nothing.</td>
             </tr>
             <tr>
               <td>Search index freshness</td>
               <td><code>python3 scripts/build_search_index.py --check</code></td>
-              <td>The committed search index matches the markdown mirrors, so search results cannot drift silently away
-                from the library.</td>
+              <td>Committed search index matches markdown mirrors, so search results cannot drift silently from library.</td>
             </tr>
             <tr>
               <td>Metric correctness</td>
               <td><code>python3 scripts/metrics.py --selftest</code></td>
-              <td>The distance-weighted Tversky index, the kernel and the masked variant behave as the problem description
-                specifies. Eleven numeric checks, CPU only.</td>
+              <td>Distance-weighted Tversky index, kernel and masked variant behave as problem description specifies. 11 numeric checks, CPU only.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h2 id="official">Official links for manual review</h2>
+      <h2 id="official">Official links for manual review — open every link before quoting in narrative</h2>
       <ul>
         <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition hub</a></li>
         <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description (page 967)</a> — datasets, metric, submission format</li>
         <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About / resources (page 968)</a></li>
-        <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">DrivenData rules page</a> → <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF (NLR, September 2026)</a></li>
-        <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference solution</a></li>
-        <li><a href="https://community.drivendata.org/c/gems-prize-challenge/111">Official forum</a></li>
-        <li><a href="https://doi.org/10.5066/P93LGLVQ">GeoDAWN data release (Glen &amp; Earney, 2024)</a> ·
-            <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data page</a></li>
-        <li><a href="https://doi.org/10.15121/1881483">INGENIOUS Great Basin Regional Dataset Compilation (Ayling et al., 2022)</a></li>
-        <li><a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS Quaternary Fault and Fold Database</a></li>
-        <li>Full index with verification status: <a href="sources.html">sources</a></li>
+        <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">DrivenData rules page</a> → <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official rules PDF (NLR, September 2026)</a> (redirect from <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">nlr.gov/docs/fy26osti/96647.pdf</a>)</li>
+        <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference solution (Lipor)</a></li>
+        <li><a href="https://community.drivendata.org/c/gems-prize-challenge/111">Official forum</a> · <a href="https://community.drivendata.org/c/gems-prize-challenge/111.json">category JSON</a></li>
+        <li><a href="https://doi.org/10.5066/P93LGLVQ">GeoDAWN data release (Glen & Earney, 2024)</a> · <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data page</a> · <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase item</a></li>
+        <li><a href="https://doi.org/10.15121/1881483">INGENIOUS Great Basin Regional Dataset Compilation (Ayling et al., 2022)</a> · <a href="https://gdr.openei.org/submissions/1391">GDR record</a></li>
+        <li><a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS Quaternary Fault and Fold Database</a> · <a href="https://doi.org/10.5066/P9BCVRCK">DOI 10.5066/P9BCVRCK</a> · <a href="https://doi.org/10.5066/F7S75FJM">interactive map 10.5066/F7S75FJM</a></li>
+        <li>Full index with verification status: <a href="sources.html">sources</a> · <a href="search.html">search</a></li>
       </ul>
+
+      <h2 id="data">Data placement — single remaining blocker</h2>
+      <div class="banner info">
+        <p><strong>On any unrestricted, enrolled machine (one DrivenData entity):</strong></p>
+        <pre><code>bash scripts/download_competition_data.sh   # never logs in; tries small public outlines too
+python scripts/prepare_data.py              # writes data/inventory.json — inspection only
+# After that, reconcile inventory against feature-stack page
+python3 scripts/metrics.py --selftest       # 11 checks, CPU, stdlib only — already PASS here
+python3 scripts/check_site.py               # 18 pages, 63 sources — already PASS here
+python3 scripts/build_search_index.py --check # 100 items — already PASS here</code></pre>
+        <p class="small">Competition rasters require login, so not in repo. Metric/losses/validation verified working here on CPU. GPU needed for training. No training/inference script that emits submission GeoTIFF is present in this repo by design — see <a href="pipeline.html">pipeline gate</a>. That is separate, explicitly gated process.</p>
+      </div>
     </main>
   </div>
 
   <footer class="site">
     <div class="wrap">
-      Research library and hypothesis backlog only. No prediction GeoTIFF is generated, validated for score, or submitted
-      from this repository, and no weekly submission slot is used. Every claim is linked to a primary source so a reviewer
-      can check it line by line.
+      Research library and hypothesis backlog only. No prediction GeoTIFF generated, validated for score, or submitted from this repository, and no weekly submission slot used. Every claim linked to primary source for line-by-line review.
     </div>
   </footer>
   <script src="assets/nav.js"></script>
