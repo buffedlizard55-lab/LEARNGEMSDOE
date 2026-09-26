@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pipeline status — GEMSDOE</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE research</a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="executive-summary.html">Explainer</a>
+        <a href="research/index.html">Library</a>
+        <a href="hypotheses.html">Hypotheses</a>
+        <a href="research/governance.html">Governance</a>
+        <a href="sources.html">Sources</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Research agent boundary · no weekly-slot use</p>
+    <h1>Data placement and pipeline gates</h1>
+
+    <div class="banner bad">
+      <strong>Single remaining blocker to any local training:</strong> competition rasters are not in this repository.
+      The DrivenData data tab requires login
+      (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">verified redirect</a>).
+      This sandbox cannot complete that download.
+    </div>
+
+    <h2>On an unrestricted, enrolled machine</h2>
+    <pre><code>bash scripts/download_competition_data.sh
+python scripts/prepare_data.py</code></pre>
+    <p>
+      <code>download_competition_data.sh</code> does not scrape DrivenData. It prints the official URLs, checks for files
+      already in <code>data/</code>, and exits 2 if they are missing. Credentials are never stored in git.
+    </p>
+    <p>
+      <code>prepare_data.py</code> opens GeoTIFFs if present, reports CRS/resolution/size/bands, and writes
+      <code>data/inventory.json</code>. It refuses to write a prediction raster.
+    </p>
+
+    <h2>What is intentionally not here</h2>
+    <ul>
+      <li>No inference script that emits a submission GeoTIFF.</li>
+      <li>No DrivenData API submitter.</li>
+      <li>No copy of the Lipor notebook’s training loop (link only: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">reference solution</a>).</li>
+    </ul>
+    <p>
+      After data placement, a <em>separate, explicitly gated</em> process may train. GPU is required for a serious U-Net run
+      (reference README). Metric definition lives on the
+      <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">problem description</a>;
+      this agent does not claim a local DTI implementation has been numerically verified against DrivenData’s scorer
+      (that would require labels we do not have).
+    </p>
+
+    <h2>Public data that can be fetched without DrivenData</h2>
+    <ul>
+      <li>GeoDAWN: <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></li>
+      <li>INGENIOUS: <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a></li>
+      <li>QFFD GIS: <a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a></li>
+    </ul>
+    <p>Those downloads are large and are not stored in git. Use them for catalogue-gap research; if they later enter a prize model, the external-data license (shareable with the sponsor) still applies.</p>
+  </main>
+  <footer class="site"><div class="wrap">Gate: no prediction file from this agent.</div></footer>
+  <script src="assets/nav.js"></script>
+</body>
+</html>

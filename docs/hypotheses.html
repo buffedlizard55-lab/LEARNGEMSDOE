@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hypothesis backlog — GEMSDOE</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="index.html">GEMSDOE research</a>
+      <nav>
+        <a href="index.html">Overview</a>
+        <a href="executive-summary.html">Explainer</a>
+        <a href="research/index.html">Library</a>
+        <a href="hypotheses.html">Hypotheses</a>
+        <a href="research/governance.html">Governance</a>
+        <a href="sources.html">Sources</a>
+        <a href="pipeline.html">Pipeline</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Written for a Phase 2 geologic reviewer · negative results will be kept</p>
+    <h1>Hypothesis backlog</h1>
+    <p class="lede">Each card states layers, physical signature, why it should catch a <em>catalogue gap</em> rather than a known fault, expected DTI impact, cost, and status. None have been run on a spatial holdout in this repository (competition rasters not placed).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Status</th><th>One-line</th></tr></thead>
+        <tbody>
+          <tr><td>H1</td><td><span class="chip untested">untested</span></td><td>Along-strike extensions, splays, parallel strands of mapped traces</td></tr>
+          <tr><td>H2</td><td><span class="chip untested">untested</span></td><td>Intra-basin buried edges in gravity/magnetics under cover</td></tr>
+          <tr><td>H3</td><td><span class="chip untested">untested</span></td><td>1 m lidar scarps missing from the compiled catalogue</td></tr>
+          <tr><td>H4</td><td><span class="chip untested">untested</span></td><td>Strain/seismicity highs farther than 300 m from any catalogue pixel</td></tr>
+          <tr><td>H5</td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster (reference-solution failure mode)</td></tr>
+          <tr><td>H6</td><td><span class="chip untested">untested</span></td><td>Conductivity corroboration as a veto/boost, not a primary detector</td></tr>
+          <tr><td>H7</td><td><span class="chip untested">untested</span></td><td>GeoDAWN Area 1 vs Area 2 resolution change as a false-structure control</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <article class="entry">
+      <h3>H1 — Newly mapped geometry of existing systems</h3>
+      <p><span class="chip untested">untested</span></p>
+      <p><strong>Layers:</strong> training-label raster (mask); 100 m detrended elevation / slope; 1 m DEM if placed; RTP/TMI horizontal gradient.</p>
+      <p><strong>Physical signature:</strong> A slope break or magnetic/gravity edge that continues past the digitized endpoint of a QFFD/INGENIOUS trace, or a parallel strand / splay within a few hundred metres of the mapped line.</p>
+      <p><strong>Why a catalogue gap, not a known fault:</strong> Staff defined “new fault” as any pixel not already captured by USGS/INGENIOUS, explicitly including new geometry of an existing system (<a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">11536</a>). The scoring mask is pixel-exact, so those extra pixels are not free — they cost FP unless they match new-fault labels — but staff also said new-fault pixels <em>may</em> lie within 300 m of known traces and that finding those corrections is an intended outcome (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">11516</a>). Hermant et al. report local QFFD misfit up to 400 m in north-central Nevada, which is larger than the 300 m kernel.</p>
+      <p><strong>Expected DTI impact:</strong> High if private labels include tip extensions (β=0.8 punishes missing them). High FP cost if we thicken every range front indiscriminately (mask does not buffer).</p>
+      <p><strong>Cost:</strong> Low–medium. Morphological extrapolation along strike plus a narrow corridor model; no new data purchase.</p>
+      <p><strong>Status:</strong> Untested. Reject if a spatial holdout shows the extra corridor is mostly cultural/irrigation linears or lithologic contacts.</p>
+    </article>
+
+    <article class="entry">
+      <h3>H2 — Buried intra-basin structures (potential-field edges under cover)</h3>
+      <p><span class="chip untested">untested</span></p>
+      <p><strong>Layers:</strong> isostatic gravity and its gradients; RTP / TMI gradients / tilt-style band; depth-to-basement / magnetic-source depth; <em>not</em> the training-label raster as a positive class.</p>
+      <p><strong>Physical signature:</strong> Linear gravity or magnetic gradient maxima (or tilt-derivative edges) beneath basins where depth-to-basement is large and DEM slope is low — density/susceptibility contrast without a surface scarp.</p>
+      <p><strong>Why a catalogue gap:</strong> USGS QFFD is built on geologic evidence of coseismic <em>surface</em> deformation (<a href="https://www.usgs.gov/programs/earthquake-hazards/faults">USGS faults page</a>). Buried structures without a published surface-rupture study are out of that design. The About page states many GeoDAWN-region faults are hidden and require geophysics (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">page 968</a>). Staff will not say whether private test labels include those structures (<a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7">11527/7</a>).</p>
+      <p><strong>Expected DTI impact:</strong> High if Phase 1 private labels include geophysical faults; harmful (pure FP) if those labels are lidar scarps only. Phase 2 expert review can still credit them even if Phase 1 DTI is weaker (same staff post). Do not spend a weekly slot on an H2-only map.</p>
+      <p><strong>Cost:</strong> Low on 100 m grids; high if reprocessing GeoDAWN line data.</p>
+      <p><strong>Status:</strong> Untested. Protocol will not be published (CG-5); keep as a Phase 2-oriented component, not the whole submission.</p>
+    </article>
+
+    <article class="entry">
+      <h3>H3 — 1 m lidar scarps absent from the compiled map</h3>
+      <p><span class="chip untested">untested</span></p>
+      <p><strong>Layers:</strong> 1 m DEM from <code>1m_DEM_links.csv</code> (not yet downloaded); 100 m detrended elevation as a coarse prior; catalogue mask.</p>
+      <p><strong>Physical signature:</strong> Linear breaks-in-slope, 1–10 m high, persistent along strike, on piedmonts or playa margins; may be invisible at 100 m. Hermant: lidar-derived slope is the usable scarp layer; non-lidar 3DEP slope is artefact-ridden.</p>
+      <p><strong>Why a catalogue gap:</strong> OF 93-338 compilations prefer existing topical literature and mixed map scales. A scarp that became mappable only after 3DEP/GeoDAWN lidar is exactly the class Hermant remapped by hand. QFFD geomorphic-expression examples include 1–2 m scarps — below 100 m resolution.</p>
+      <p><strong>Expected DTI impact:</strong> High if experts used lidar (likely, not verified). Risk: drainage ditches, shorelines, lithologic benches.</p>
+      <p><strong>Cost:</strong> High I/O and compute (tile download, curvature/slope at 1 m, then aggregate to 100 m probability).</p>
+      <p><strong>Status:</strong> Untested. Blocked on DEM placement.</p>
+    </article>
+
+    <article class="entry">
+      <h3>H4 — Kinematic orphans (strain / seismicity without a catalogue trace)</h3>
+      <p><span class="chip untested">untested</span></p>
+      <p><strong>Layers:</strong> dilatation, shear, second invariant; earthquake density / distance-to-earthquake bands; catalogue mask.</p>
+      <p><strong>Physical signature:</strong> High strain-rate invariant and/or earthquake density whose nearest catalogue pixel is &gt;300 m away.</p>
+      <p><strong>Why a catalogue gap:</strong> Geodetic strain and seismicity do not require a published scarp. INGENIOUS compiled these as independent evidence layers (GDR). A kinematic orphan is a place the surface catalogue is silent while the crust is deforming.</p>
+      <p><strong>Expected DTI impact:</strong> Diffuse highs will spray FP (α=0.2 still not free). Use as a <em>spatial prior</em> to up-weight H1–H3, not as a standalone probability map.</p>
+      <p><strong>Cost:</strong> Low (already in the 100 m stack).</p>
+      <p><strong>Status:</strong> Untested. First measurement after <code>prepare_data.py</code>: quantile overlay vs distance-to-label.</p>
+    </article>
+
+    <article class="entry">
+      <h3>H5 — Do not optimize the reference U-Net on catalogue pixels</h3>
+      <p><span class="chip untested">untested</span></p>
+      <p><strong>Layers:</strong> all 19 feature bands; labels used only as a <em>mask and hard-negative near-trace sampler</em>, not as the sole positive class.</p>
+      <p><strong>Physical signature:</strong> n/a — this is a training-design hypothesis.</p>
+      <p><strong>Why a catalogue gap:</strong> The reference solution trains a U-Net to reproduce USGS/INGENIOUS traces (PA-1). Those traces are masked at score time (GV-5). The model can only help if it generalizes off the ink. Proposed alternative: positives = morphological extensions + geophysical edges + lidar scarps that are <em>off</em> the mask; negatives = random and near-trace unmasked pixels.</p>
+      <p><strong>Expected DTI impact:</strong> Necessary condition for any DL approach to beat “copy the catalogue.” Unknown magnitude.</p>
+      <p><strong>Cost:</strong> Medium (retraining). GPU required for a serious run (reference README).</p>
+      <p><strong>Status:</strong> Untested. This agent will not run training or write a submission GeoTIFF.</p>
+    </article>
+
+    <article class="entry">
+      <h3>H6 — Conductivity as corroboration, not a detector</h3>
+      <p><span class="chip untested">untested</span></p>
+      <p><strong>Layers:</strong> surface conductivity, depth to conductive base (competition stack); Peacock &amp; Bedrosian 2022 MT conductance maps if licensed for sharing.</p>
+      <p><strong>Physical signature:</strong> Conductive lineament or shallow conductive base coincident with an H1–H4 candidate.</p>
+      <p><strong>Why a catalogue gap:</strong> Fluids/clays along an unmapped structure can raise conductance without a QFFD entry. Using MT alone will light up basins and geothermal outflow, which are not faults.</p>
+      <p><strong>Expected DTI impact:</strong> Small, as a multiplier. Negative result expected if used as a primary map.</p>
+      <p><strong>Cost:</strong> Low on provided bands.</p>
+      <p><strong>Status:</strong> Untested. Provenance of the competition conductivity band vs USGS MT release is unverified (ST-3).</p>
+    </article>
+
+    <article class="entry">
+      <h3>H7 — Control: GeoDAWN flight-spec mosaic</h3>
+      <p><span class="chip untested">untested</span></p>
+      <p><strong>Layers:</strong> magnetic gradients; GeoDAWN Area 1 vs Area 2 outline (200 m vs 400 m lines — Glen &amp; Earney 2024).</p>
+      <p><strong>Physical signature:</strong> Apparent lineament density jump at the Area 1/Area 2 boundary that is not present in gravity, DEM, or catalogue.</p>
+      <p><strong>Why this is a control, not a gap:</strong> If magnetic “faults” follow the survey mosaic, they are acquisition artifacts. Reject H2 locally where that happens.</p>
+      <p><strong>Expected DTI impact:</strong> Prevents FP. No TP expected.</p>
+      <p><strong>Cost:</strong> Low once survey shapefiles from ScienceBase are downloaded (public).</p>
+      <p><strong>Status:</strong> Untested. Public shapefiles not yet pulled (out of scope for login-walled competition data, but allowed as public USGS).</p>
+    </article>
+  </main>
+  <footer class="site"><div class="wrap">Rejected hypotheses stay on this page with the reason. Do not delete negative results.</div></footer>
+  <script src="assets/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Potential-field geophysics — GEMSDOE</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="../index.html">GEMSDOE research</a>
+      <nav>
+        <a href="../index.html">Overview</a>
+        <a href="../executive-summary.html">Explainer</a>
+        <a href="index.html">Library</a>
+        <a href="../hypotheses.html">Hypotheses</a>
+        <a href="governance.html">Governance</a>
+        <a href="../sources.html">Sources</a>
+        <a href="../pipeline.html">Pipeline</a>
+        <a href="../changelog.html">Changelog</a>
+        <a href="../ai-usage.html">AI log</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <p class="meta">Magnetic (RTP, TMI, gradients) and isostatic gravity · edge detection</p>
+    <h1>Potential-field geophysics</h1>
+    <p class="lede">Buried structural contrasts in the GeoDAWN / Great Basin stack. Methods below are cited to primary papers or official data releases. No derivative grids were computed this session (no local rasters).</p>
+
+    <article class="entry">
+      <h3>PF-1 · GeoDAWN airborne magnetic and radiometric surveys</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
+      <p class="src"><strong>Source:</strong> Glen, J.M.G., and Earney, T.E., 2024, GeoDAWN: Airborne magnetic and radiometric surveys of the northwestern Great Basin, Nevada and California: USGS data release, <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a> · ScienceBase <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">item 657e1d85d34e23d3533209f7</a></p>
+      <p><strong>Claims:</strong> USGS and DOE acquired high-resolution aeromagnetic and aeroradiometric data over northern/western Nevada and eastern California to support geologic and geophysical mapping for geothermal and critical-mineral studies (Walker Lane and western Great Basin). EarthMRI + DOE GTO. Contractor EDCON-PRJ, 1 Nov 2021 – 20 Nov 2022. Two overlapping surveys: Area 1 (Clayton Valley; rank-1 EarthMRI specs; 200 m lines, 2000 m ties, ~100–150 m terrain clearance) and Area 2 (remainder; 400 m lines, 4000 m ties, ~150–200 m clearance). Combined 149,030 line-km, 51,857 km², four blocks (Winnemucca, Fallon, Hawthorne, Tonopah). Magnetic processing: diurnal, aircraft field, tie-line and micro-leveling, IGRF. In steep terrain, actual clearance can deviate from the planned drape; “variable terrain clearance should be considered when modeling and interpreting these data.” Coordinated 3DEP lidar over a similar extent.</p>
+      <p><strong>Relevance:</strong> This is the named feature-data citation in the prize rules (footnote 3). Line-spacing difference (200 m vs 400 m) implies spatially variable resolution of magnetic lineaments — a possible false-positive/false-negative pattern if models treat the mosaic as uniform. Terrain-clearance variation can mimic or mask shallow magnetic edges.</p>
+      <p><strong>Confidence:</strong> High. Flight-spec numbers are from the ScienceBase summary, not reconstructed.</p>
+    </article>
+
+    <article class="entry">
+      <h3>PF-2 · What the competition feature GeoTIFF actually contains (magnetics/gravity)</h3>
+      <p><span class="chip verified">verified</span> <span class="chip med">confidence: medium–high</span></p>
+      <p class="src"><strong>Sources:</strong> <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#provided-features">Problem description — provided features</a>; reference notebook band printout in <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/main/unet-mc-cv-reference-solution.ipynb">unet-mc-cv-reference-solution.ipynb</a>.</p>
+      <p><strong>Problem description list:</strong> isostatic gravity anomaly and its slope; RTP magnetic anomaly; TMI; vertical and horizontal slope of TMI; top-of-crustal magnetic source depth estimate.</p>
+      <p><strong>Notebook tag printout (19 bands, 3730×3292, EPSG:32611, 100 m)</strong> includes, among others: magnetic anomaly; reduced-to-pole; TMI horizontal gradient; “tilt angle or total curvature” (tag text); TMI vertical gradient; TMI; isostatic gravity and its slope, vertical gradient, and horizontal gradient; depth to basement surface.</p>
+      <p><strong>Relevance:</strong> Gradient and tilt-style layers are already in the 100 m stack, so a model can use them without recomputing from line data — but at 100 m, not at flight-line resolution. Depth-to-basement / magnetic-source depth is a cover-thickness proxy for “younger cover masking scarps.”</p>
+      <p><strong>Confidence:</strong> High that those layers exist in the reference run. Medium that DrivenData’s download filename is <code>training_features.tif</code> (problem description) vs <code>numeric_features.tif</code> (notebook) — both names are documented; they may be the same file renamed. Re-check after local download.</p>
+    </article>
+
+    <article class="entry">
+      <h3>PF-3 · Tilt derivative (Miller &amp; Singh, 1994)</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high on the citation; medium on GeoDAWN-specific performance</span></p>
+      <p class="src"><strong>Citation:</strong> Miller, H.G., and Singh, V., 1994, Potential field tilt—a new concept for location of potential field sources: Journal of Applied Geophysics, v. 32, p. 213–217. (Cited as the first tilt-angle filter in later literature, e.g. reviews of balanced edge filters.)</p>
+      <p><strong>Claim (standard definition, as restated in later papers that quote the formula):</strong> TDR = atan( (∂F/∂z) / |∇h F| ), which equalizes amplitude of shallow and deep sources and highlights edges. This session did not fetch the paywalled 1994 PDF itself.</p>
+      <p><strong>Relevance:</strong> The reference notebook’s band 6 tag reads “Tilt angle or total curvature - magnetic field derivative for edge detection.” If that tag is accurate, Miller–Singh-type information is already a feature. Tilt zeros/edges are candidate buried contacts under basins where QFFD has no surface trace.</p>
+      <p><strong>Confidence:</strong> Citation year/title/journal/pages corroborated by multiple secondary citations. Full 1994 PDF not opened here — marked as such. Do not treat a specific TDR threshold as fact.</p>
+    </article>
+
+    <article class="entry">
+      <h3>PF-4 · Total horizontal derivative of tilt (Verduzco et al., 2004)</h3>
+      <p><span class="chip verified">verified as a published method</span> <span class="chip med">confidence: medium (PDF not opened)</span></p>
+      <p class="src"><strong>Citation:</strong> Verduzco, B., Fairhead, J.D., Green, C.M., and MacKenzie, C., 2004, New insights into magnetic derivatives for structural mapping: The Leading Edge, v. 23, p. 116–119.</p>
+      <p><strong>Claim (as restated in later papers):</strong> the total horizontal derivative of the tilt angle (THDR) is an improved edge detector relative to tilt alone.</p>
+      <p><strong>Relevance:</strong> Candidate extra feature if not already identical to the provided “tilt angle or total curvature” band. Computing THDR from 100 m grids is cheap; computing it from GeoDAWN line data is not yet done.</p>
+      <p><strong>Confidence:</strong> Bibliographic identity is consistent across independent citations. The 2004 TLE PDF was not fetched this session.</p>
+    </article>
+
+    <article class="entry">
+      <h3>PF-5 · Regional Great Basin gravity/magnetic maps used by INGENIOUS</h3>
+      <p><span class="chip verified">verified</span> <span class="chip high">confidence: high</span></p>
+      <p class="src"><strong>Citation:</strong> Glen, J.M.G., Earney, T.E., Zielinski, L.A., Schermerhorn, W.D., Dean, B.J., and Hardwick, C., 2022, Regional geophysical maps of the Great Basin, USA: USGS data release, <a href="https://doi.org/10.5066/P9Z6SA1Z">10.5066/P9Z6SA1Z</a></p>
+      <p><strong>Claims:</strong> Provisional regional gravity grid from USGS/UGS, industry, Ponce (1997) Nevada compilation, and Hildenbrand et al. (2002) public-domain gravity; regional magnetic grid from Bankey et al. (2002) North American compilation; depth-to-basement from Shah and Boyd (2018). Compiled to support geothermal characterization and INGENIOUS (DE-EE0009254).</p>
+      <p><strong>Relevance:</strong> Distinguishes <em>regional</em> potential-field compilations (INGENIOUS inputs) from <em>GeoDAWN</em> high-resolution magnetics. Catalogue-gap models should not confuse the two resolutions. Buried basin-bounding structures often show first in gravity; GeoDAWN magnetics may refine them inside the survey outline.</p>
+      <p><strong>Confidence:</strong> High.</p>
+    </article>
+
+    <article class="entry">
+      <h3>PF-6 · Competition About page on gravity/magnetics for hidden faults</h3>
+      <p><span class="chip verified">verified</span></p>
+      <p class="src"><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/#about-the-task">About — the task</a></p>
+      <p><strong>Claim:</strong> “Gravity and magnetic surveys also help infer the presence of faults through density or magnetic anomalies.” The page contrasts clear San Andreas surface traces with GeoDAWN-region faults that are “more subtle, and many are hidden below the surface, requiring geophysical data to detect.”</p>
+      <p><strong>Relevance:</strong> Organizers explicitly expect geophysical detection of hidden faults. Whether the <em>private test set</em> includes those hidden structures is still CG-5 (unverified).</p>
+    </article>
+  </main>
+  <footer class="site"><div class="wrap"><a href="index.html">Library</a></div></footer>
+  <script src="../assets/nav.js"></script>
+</body>
+</html>
