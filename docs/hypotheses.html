@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hypothesis backlog — GEMSDOE</title>
-  <meta name="description" content="Seven hypotheses for finding faults absent from the USGS/INGENIOUS catalogue: layers, physical signature, gap reasoning, expected DTI impact, cost, validation protocol and status.">
+  <meta name="description" content="Eight hypotheses for finding faults absent from the USGS/INGENIOUS catalogue: layers, physical signature, gap reasoning, expected DTI impact, cost, validation protocol and status.">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
+        <a href="requirements.html">Requirements</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
         <a href="feature-stack.html">Feature stack</a>
@@ -65,6 +66,7 @@
             <tr><td><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster the scorer masks out</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td><td class="nowrap">Rasters</td></tr>
             <tr><td><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td><td class="nowrap">Public shapefiles</td></tr>
+            <tr><td><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — do not treat them as positives</td><td class="nowrap">Low</td><td class="nowrap">GeoDAWN clip</td></tr>
           </tbody>
         </table>
       </div>
@@ -281,6 +283,42 @@
         </dl>
       </article>
 
+      <article class="entry" data-filter-item data-tags="H8 inferred mapscale catalogue constraint prior">
+        <h3>H8 — Inferred and blank-scale traces mark the edge of the map, not a positive class</h3>
+        <p><span class="chip untested">untested</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>
+            INGENIOUS 2023-06-27 attributes <code>FTYPE_</code> and <code>MAPSCALE</code> from the
+            <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson">NBMG service</a>.
+            Once rasters exist, the label raster is a mask only. This card is not a detector.
+          </dd>
+          <dt>Physical signature</dt>
+          <dd>
+            Not a geophysical signature. A catalogue-process signature: traces the compiler coded Inferred (5,280 of
+            22,956), Poor (100), Other (27), blank <code>FTYPE_</code> (447), or blank <code>MAPSCALE</code> (4,059).
+            Counts and query links: <a href="requirements.html#catalogue">requirements checklist</a>.
+          </dd>
+          <dt>Why a gap, not a known fault</dt>
+          <dd>
+            These traces are already in the compilation rules §3.3 says the training labels came from. Predicting them
+            scores nothing if they are in the pixel-exact mask, and predicting next to them is fully penalised when no
+            new-fault label is there (<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">11516 post 4</a>).
+            The gap is the opposite of the ink: where an Inferred trace ends, and where the survey has no trace at all.
+            The 22,956 count is the regional service, not the GeoDAWN raster. No clip has been run, so it is not yet
+            known whether the Inferred population even sits in the scored area.
+          </dd>
+          <dt>Expected DTI impact</dt>
+          <dd>Harmful if used as a positive class. Useful only as a spatial prior for H1, and only after the GeoDAWN clip shows a non-trivial Inferred population inside the survey.</dd>
+          <dt>Cost</dt>
+          <dd>Low. The attribute query is public. The clip needs the ScienceBase outline shapefiles, which this session could not download (TLS).</dd>
+          <dt>Validation protocol</dt>
+          <dd>Clip trace length by <code>FTYPE_</code> to the official GeoDAWN outlines. Reject the prior if almost all Inferred length lies outside the survey. If it does not, measure distance from Inferred endpoints to the nearest Well Constrained trace, inside the outline only.</dd>
+          <dt>Rejection criterion</dt>
+          <dd>Reject as a detector immediately. Reject as a prior if the GeoDAWN clip shows the Inferred class is negligible inside the survey, or if endpoint distance does not separate holdout new-fault labels from random azimuths.</dd>
+        </dl>
+      </article>
+
       </div>
 
       <h2 id="negative">Negative results</h2>
@@ -294,7 +332,7 @@
 
       <h2 id="order">Recommended order once data land</h2>
       <ol>
-        <li><strong>H7 first</strong> — it needs only public shapefiles and it de-risks everything magnetic that follows. Can start today.</li>
+        <li><strong>H8's clip, then H7</strong> — both need only public shapefiles. H8 asks where the catalogue says it is least constrained. H7 asks whether survey boundaries fake structure. Neither could be downloaded from this machine on 2026-09-26 (TLS). On a machine that can, do these before any magnetic model.</li>
         <li><strong>H5's split fix</strong> — move to contiguous spatial blocks before believing any score. Cheap, and it changes the meaning of every other number.</li>
         <li><strong>H4 measurement</strong> — a single quantile-versus-distance table. Half a day, and it either kills or promotes the cheapest prior in the stack.</li>
         <li><strong>H2 with band-15 conditioning</strong> — the highest-upside geophysical card, and conditioning costs nothing.</li>

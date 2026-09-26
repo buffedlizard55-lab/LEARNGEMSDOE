@@ -16,9 +16,10 @@ GitHub Pages is served from `docs/` (the workflow deploys on push to `main`).
 | --- | --- | --- |
 | Overview | [docs/index.html](docs/index.html) | Competition facts table, what is scored, domain index, flagged irregularities |
 | Explainer | [docs/executive-summary.html](docs/executive-summary.html) | Geologist-facing narrative of the problem |
-| Research library | [docs/research/](docs/research/) | Six domains, 40 numbered entries, each with source / citation / claim / relevance / confidence |
+| Requirements | [docs/requirements.html](docs/requirements.html) | Full checklist: constraints, re-read facts, counted catalogue attributes, open items |
+| Research library | [docs/research/](docs/research/) | Six domains, numbered entries, each with source / citation / claim / relevance / confidence |
 | Feature stack | [docs/feature-stack.html](docs/feature-stack.html) | All 19 bands, raster geometry, GeoDAWN acquisition, missing layers, pitfalls |
-| Hypothesis backlog | [docs/hypotheses.html](docs/hypotheses.html) | H1–H7 cards with layers, signature, gap reasoning, expected DTI impact, cost, validation, rejection |
+| Hypothesis backlog | [docs/hypotheses.html](docs/hypotheses.html) | H1–H8 cards with layers, signature, gap reasoning, expected DTI impact, cost, validation, rejection |
 | Sources | [docs/sources.html](docs/sources.html) | Every source, with what was read and what remains unverified |
 | Pipeline | [docs/pipeline.html](docs/pipeline.html) | Data-placement blocker, what runs today, the submission gate |
 | Governance | [docs/research/governance.html](docs/research/governance.html) | Rules section by section, staff clarifications, open questions |

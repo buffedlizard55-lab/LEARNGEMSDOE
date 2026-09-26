@@ -15,6 +15,7 @@ Negative results stay in this table.
 | H5 | untested | Do not train to reproduce the label raster the scorer masks out | Med | Rasters + GPU |
 | H6 | untested | Conductivity as corroboration only, never as a detector | Low | Rasters |
 | H7 | untested | Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test | Low | Public shapefiles |
+| H8 | untested | Inferred and blank-scale traces mark the edge of the map — not a positive class | Low | GeoDAWN clip |
 
 **All are untested because the competition rasters are not placed in `data/`.** "Untested" means not measured, not
 unexamined.
@@ -83,6 +84,14 @@ unexamined.
 - **Cost:** low, and the only card startable without competition rasters — the shapefiles are public and CC0.
 - **Validation:** overlay outlines on the gradient bands; test whether maxima cluster along boundary geometry more than under a random-orientation null.
 - **Rejection:** if no boundary association is found, keep it as a passing control and stop spending on it. A clean result is a result.
+
+## H8 — Inferred and blank-scale traces mark the edge of the map
+
+- **Status:** untested. Regional counts are measured (CG-8). The GeoDAWN clip is not.
+- **Layers:** `FTYPE_`, `MAPSCALE` on the NBMG 2023-06-27 service. Label raster as mask only, once placed.
+- **Why a gap, not a known fault:** Inferred (5,280), Poor (100), Other (27) and blank FTYPE (447) traces are already in the compilation the scorer masks. Predicting them scores nothing. The gap is where those traces end, and where the survey has no trace. Not yet known to lie inside GeoDAWN.
+- **Expected DTI impact:** harmful as a positive class. Useful only as a prior for H1 after the clip.
+- **Rejection:** reject as a detector now. Reject as a prior if the clip shows negligible Inferred length inside the survey.
 
 ## Negative results
 

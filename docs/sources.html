@@ -14,6 +14,7 @@
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="index.html">Overview</a>
+        <a href="requirements.html">Requirements</a>
         <a href="executive-summary.html">Explainer</a>
         <a href="research/index.html">Library</a>
         <a href="feature-stack.html">Feature stack</a>
@@ -202,7 +203,17 @@
             <tr data-tags="ingenious qfaults shapefile">
               <td>INGENIOUS Qfaults v2 archive (with field definitions)</td>
               <td><a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">GDR file</a> (5.85 MB)</td>
-              <td><span class="chip unverified">not downloaded</span> — the field-definition document inside is unread</td>
+              <td><span class="chip unverified">zip not downloaded</span> — TLS to gdr.openei.org failed 2026-09-26. The text document inside the zip is still unread.</td>
+            </tr>
+            <tr data-tags="ingenious qfaults nbmg mapserver attributes">
+              <td>NBMG INGENIOUS Qfaults map service (2023-06-27)</td>
+              <td><a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson">MapServer layer 0</a> · points at <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a></td>
+              <td><span class="chip verified">queried</span> — 22,956 features, field list, FTYPE_ and MAPSCALE partitions. Query links on the <a href="requirements.html#catalogue">requirements page</a>. Not a substitute for the unread field-definition text.</td>
+            </tr>
+            <tr data-tags="usgs faq quaternary fault surface">
+              <td>USGS FAQ — What is a Quaternary fault?</td>
+              <td><a href="https://www.usgs.gov/faqs/what-a-quaternary-fault">usgs.gov/faqs/what-a-quaternary-fault</a></td>
+              <td><span class="chip verified">read 2026-09-26</span> — “recognized at the surface” and the 1.6 million year window. Corroborates CG-1. Not a substitute for the database page.</td>
             </tr>
             <tr data-tags="usgs qffd catalogue quaternary">
               <td>USGS Quaternary Fault and Fold Database</td>

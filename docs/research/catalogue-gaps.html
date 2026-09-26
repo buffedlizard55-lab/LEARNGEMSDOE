@@ -14,6 +14,7 @@
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
       <nav>
         <a href="../index.html">Overview</a>
+        <a href="../requirements.html">Requirements</a>
         <a href="../executive-summary.html">Explainer</a>
         <a href="index.html">Library</a>
         <a href="../feature-stack.html">Feature stack</a>
@@ -29,7 +30,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 1 of 6 · 7 entries · highest leverage · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 1 of 6 · 8 entries · highest leverage · attribute counts measured 2026-09-26</p>
 
       <h1>Catalogue-gap reasoning</h1>
       <p class="lede">
@@ -63,6 +64,9 @@
             1.6 million years (Ma).” The page explains the 1.6&nbsp;Ma cutoff is inherited from the 1983 Geologic Time
             Scale in use when the database was established in 1993; the Quaternary has since been redefined several times,
             most recently to 2.58&nbsp;Ma, but the database retains the original definition.
+            The USGS FAQ states the same limit more bluntly: “A Quaternary fault is one that has been recognized at the
+            surface and that has moved in the past 1,600,000 years (1.6 million years).”
+            (<a href="https://www.usgs.gov/faqs/what-a-quaternary-fault">What is a Quaternary fault?</a>, read 2026-09-26.)
           </dd>
           <dt>Why it matters here</dt>
           <dd>
@@ -283,14 +287,57 @@
       <ul>
         <li>If the private label set turns out to be dominated by long, obvious, entirely unmapped range-front faults, then the “corrections and subtle scarps” framing in CG-7 is wrong and detection should be biased toward large, continuous, high-amplitude lineaments.</li>
         <li>If a spatial holdout shows that distance-to-known-fault is a <em>positive</em> predictor of new-fault labels, the gap is diffuse rather than adjacent, and H1 should be demoted relative to H2/H4.</li>
-        <li>If the INGENIOUS v2 field definitions reveal per-fault provenance or mapping-scale attributes, CG-7 class 4 could be measured directly instead of inferred.</li>
+        <li>If the INGENIOUS v2 field definitions reveal per-fault provenance or mapping-scale attributes, CG-7 class 4 could be measured directly instead of inferred. <strong>Partly resolved 2026-09-26:</strong> the live NBMG service exposes <code>FTYPE_</code> and <code>MAPSCALE</code> (<a href="#cg8">CG-8</a>). The remaining test is a clip to the GeoDAWN outline, which has not been run.</li>
       </ul>
+
+      <h2 id="cg8">CG-8 · The 2023 compilation's own constraint codes, counted</h2>
+      <article class="entry">
+        <h3><span class="id">CG-8</span> Constraint class and mapping-scale code are on the live service</h3>
+        <dl>
+          <dt>Source</dt>
+          <dd>
+            <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer?f=pjson">NBMG MapServer Qfaults/Qfaults_INGENIOUS</a>,
+            layer <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0?f=pjson">Qfaults [INGENIOUS 6-27-2023]</a>.
+            The service comment says the shapefile and field definitions are at
+            <a href="https://doi.org/10.15121/1881483">doi:10.15121/1881483</a>.
+          </dd>
+          <dt>Citation</dt>
+          <dd>Ayling et al., 2022, INGENIOUS — Great Basin Regional Dataset Compilation, updated on this service 2023-06-27. Same DOI as the training-label citation in rules §3.3.</dd>
+          <dt>What it claims</dt>
+          <dd>
+            The service returned <a href="https://web2.nbmg.unr.edu/arcgis/rest/services/Qfaults/Qfaults_INGENIOUS/MapServer/0/query?where=1%3D1&amp;returnCountOnly=true&amp;f=json">22,956 polylines</a>.
+            <code>FTYPE_</code> partitions completely into Well Constrained 12,048, Moderately Constrained 5,054,
+            Inferred 5,280, Poor 100, Other 27, and blank/space 447.
+            <code>MAPSCALE</code> partitions completely into the codes listed on the
+            <a href="../requirements.html#catalogue">requirements page</a>, including 4,059 blank/space and 12 traces
+            stored as the literal string <code>1:10,000</code>.
+            <code>returnDistinctValues</code> was ignored (<code>supportsAdvancedQueries: false</code>); counts used
+            <code>returnCountOnly</code> with an explicit <code>where</code>.
+          </dd>
+          <dt>Why it matters here</dt>
+          <dd>
+            These attributes are the compiler's own statement of how well a trace was constrained, which is the
+            measurement CG-7 class 4 was waiting for. They are not a licence to predict the inferred traces: those
+            traces are already in the compilation the scorer masks. The useful question is where an Inferred or
+            blank-scale trace ends, and where the survey has no trace at all. That clip has not been run.
+            The 22,956 count is the INGENIOUS study-area service, not the GeoDAWN label raster.
+          </dd>
+          <dt>Confidence</dt>
+          <dd>
+            <span class="chip verified">verified</span> for the counts and field names, each tied to a query linked from
+            the <a href="../requirements.html#catalogue">requirements page</a>.
+            <span class="chip unverified">unverified</span> for what the short <code>MAPSCALE</code> codes mean, and for
+            any statement that a named fault lies inside or outside GeoDAWN.
+            The field-definition text inside the GDR zip is still unread.
+          </dd>
+        </dl>
+      </article>
 
       <h2>Next actions for this domain</h2>
       <ol>
-        <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text document; replace CG-4's unverified note with the actual field list.</li>
-        <li>Pull <a href="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip">Qfaults_GIS.zip</a> and the <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">GeoDAWN survey outlines</a>; build a catalogue-density surface and a lidar-coverage surface, then look for their mismatch.</li>
-        <li>Once rasters are placed, compute the single most informative statistic in the project: the distribution of distance-to-nearest-label for high-strain, high-seismicity, high-gradient pixels. That converts CG-7 from reasoning into measurement.</li>
+        <li>On a machine that can complete TLS to ScienceBase, download the Area 1 and Area 2 outline zips (1,190 and 1,497 bytes in the ScienceBase file list) and clip CG-8 to that outline.</li>
+        <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text. Until then, do not translate <code>MAPSCALE</code> codes into denominators.</li>
+        <li>Once rasters are placed, compute distance-to-nearest-label for high-strain, high-seismicity, and high-gradient pixels. That converts CG-7 from reasoning into a measurement on the scored grid.</li>
       </ol>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
