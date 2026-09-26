@@ -37,15 +37,18 @@ echo
 # Small public files verified from the ScienceBase item JSON on 2026-09-26.
 # Sizes and MD5s are from that JSON, not from a local download.
 # https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7?format=json
+# The USGS QFFD GIS zip URL and 16 MB size were read off the official USGS faults page
+# https://www.usgs.gov/programs/earthquake-hazards/faults on 2026-09-26.
 echo "-- public outline attempt (no DrivenData login) --"
 declare -A PUBLIC
 PUBLIC[GeoDAWN_area1_outline.zip]="https://www.sciencebase.gov/catalog/file/get/657e1d85d34e23d3533209f7?f=__disk__09%2Ff1%2Fa5%2F09f1a519280068416e999b331e3596b7e38e8a93"
 PUBLIC[GeoDAWN_area2_outline.zip]="https://www.sciencebase.gov/catalog/file/get/657e1d85d34e23d3533209f7?f=__disk__30%2Fc6%2Ff0%2F30c6f052098f41629e63c31e0f9526d9765f4258"
 PUBLIC[GeoDAWN_data_extent.zip]="https://www.sciencebase.gov/catalog/file/get/657e1d85d34e23d3533209f7?f=__disk__2d%2F0e%2F73%2F2d0e73bd2517f5bcc9dfc5dd3271fe302ed66537"
 PUBLIC[qfaults_v2.zip]="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip"
+PUBLIC[Qfaults_GIS.zip]="https://earthquake.usgs.gov/static/lfs/nshm/qfaults/Qfaults_GIS.zip"
 
 public_ok=0
-for name in GeoDAWN_area1_outline.zip GeoDAWN_area2_outline.zip GeoDAWN_data_extent.zip qfaults_v2.zip; do
+for name in GeoDAWN_area1_outline.zip GeoDAWN_area2_outline.zip GeoDAWN_data_extent.zip qfaults_v2.zip Qfaults_GIS.zip; do
   dest="$RAW/$name"
   if [[ -s "$dest" ]]; then
     echo "already present: $dest"

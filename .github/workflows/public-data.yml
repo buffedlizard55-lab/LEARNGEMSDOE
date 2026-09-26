@@ -48,6 +48,10 @@ jobs:
               print(f"::notice title=clip {k}::{json.dumps(v)}")
           print("::notice title=files::" + " ; ".join(f"{v['name']} bytes={v['bytes']} sha256={v['sha256']}" for v in r["files"].values()))
           print(f"::notice title=total::qfaults_total_records={r['qfaults_total_records']}")
+          o = r.get("offsets") or {}
+          print("::notice title=offsets::" + json.dumps(dict((k, v) for k, v in o.items() if k != "usgs_layers")))
+          for name, layer in (o.get("usgs_layers") or {}).items():
+              print(f"::notice title=usgs layer {name}::" + json.dumps(layer)[:900])
           PY
       - name: INGENIOUS v2 field definitions (MAPSCALE semantics)
         if: always()
