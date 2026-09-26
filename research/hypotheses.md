@@ -91,7 +91,12 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
 
 ## H8 — Inferred and blank-scale traces mark the edge of the map
 
-- **Status:** untested. Regional counts are measured (CG-8). **The envelope-clipped counts are now measured too (CG-9,
+- **Status: rejected 2026-09-26 (as detector and as prior), by its own pre-stated criterion.** CG-12 measured the
+  footprint clip: Inferred traces are **8 of 413**, **51.0 km of 6,230.2 km clipped length (0.8%)**; there are **zero**
+  Poor / Other / blank-`FTYPE_` and zero blank-`MAPSCALE` traces inside the data extent. "Negligible Inferred length inside
+  the survey" is met. The regional stock of poorly-constrained traces this card relied on is simply not in the GeoDAWN
+  area. Superseded by H12. Previous status text kept below for provenance.
+- **Previous status:** untested. Regional counts are measured (CG-8). **The envelope-clipped counts are now measured too (CG-9,
   2026-09-26):** inside the GeoDAWN bounding box the compilation holds 1,179 traces — Well Constrained 739, Moderately
   Constrained 351, Inferred 89, and **zero** Poor / Other / blank. The polygon clip is still missing.
 - **Layers:** `FTYPE_`, `MAPSCALE` on the NBMG 2023-06-27 service. Label raster as mask only, once placed.
@@ -177,9 +182,37 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
 - **Rejection:** reject if precision at matched recall does not improve, or if it removes H1 near-trace correction
   candidates — the most valuable pixels in the whole submission.
 
+## H12 — Coarse-scale compilation: the gap is below 1:250k resolution and inside the positional error
+
+- **Status:** untested. Motivated by a verified measurement (CG-12). **Rejection condition (1) cleared 2026-09-26:** the
+  v2 field-definition README confirms `250` = 1:250,000 and `100` = 1:100,000. The mechanism remains **inference**.
+- **Layers:** label raster (mask only); 1 m DEM tiles via `1m_DEM_links.csv` and 100 m detrended elevation / slope
+  (bands 12, 19); `MAPSCALE` and `FTYPE_` from the INGENIOUS v2 shapefile as metadata.
+- **Physical signature:** (a) short (< a few km), low-relief scarps in the 1 m DEM that have no catalogue trace at all;
+  (b) a scarp in the 1 m DEM running sub-parallel to a catalogue trace but offset from it by more than the 300 m kernel.
+- **Why a gap, not a known fault.** Every one of the 413 traces inside the footprint carries `MAPSCALE` code `250` or
+  `100`; none carries the regionally dominant `10` or `24` (CG-12, verified). The v2 field-definition README defines these as
+  1:250,000 and 1:100,000 and says such faults "could be more discontinuous than continuous" (verified, CG-12).
+  At 1:250k, 1 mm on the source map is 250 m on the ground, so digitising and generalisation error alone is of the order
+  of the 300 m kernel (arithmetic, not a measured error). Hermant et al. measured catalogue misfit up to 400 m in
+  north-central Nevada (see H1). Both classes (a) and (b) are, by construction, pixels the mask does not contain — exactly
+  what staff defined as "new" (forum 11536, 11516 post 4).
+- **Expected DTI impact:** potentially large for (b) because it rides on H1's staff-confirmed class; moderate for (a).
+  Risk: the mask is pixel-exact, so near-trace predictions that are *not* on a new label are fully penalised.
+- **Cost:** medium — 1 m DEM tile download (URLs in the competition CSV, behind login) and a scarp detector.
+- **Validation:** contiguous-block spatial holdout; histogram of distance from high-curvature 1 m scarps to the nearest
+  catalogue trace, stratified by `MAPSCALE`. The prediction is a heavier >300 m tail for code-250 traces than for
+  code-100 traces within the footprint.
+- **Rejection:** reject if (1) the v2 field definitions show `MAPSCALE` is not a scale denominator, or (2) the
+  scarp-to-trace distance distribution shows no >300 m tail relative to a random-offset control.
+
 ## Negative results
 
-None yet — nothing has been run. This section exists so the first negative result has somewhere to live. Rejected
+- **H8 — rejected 2026-09-26.** Measured on the public footprint clip (CG-12): Inferred = 51.0 km of 6,230.2 km (0.8%),
+  8 of 413 traces; zero Poor/Other/blank. Its rejection criterion ("negligible Inferred length inside the survey") is
+  met. This is a *data* rejection, not a model run — no model has been trained.
+
+This section exists so every negative result has somewhere to live. Rejected
 hypotheses stay on the page with their rejection reason and date, marked `rejected`. They are not deleted: "we tried
 this and it did not work, here is the measurement" is evidence a Phase 2 reviewer respects.
 

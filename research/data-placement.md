@@ -32,3 +32,11 @@ python3 scripts/metrics.py --selftest       # exit 0, 11 checks passed, pure Pyt
 ## What was measured without those files
 
 The NBMG map service was queried through a fetch path that can read JSON even when curl cannot complete TLS. Counts are on [docs/requirements.html](../docs/requirements.html#catalogue). They are not a substitute for the competition rasters.
+
+## Re-run — 2026-09-26, session `arena/01a0dfd3`
+
+- Sandbox: `download_competition_data.sh` → curl exit 35 on all four public files; `prepare_data.py` → exit 2,
+  `blocked_no_data`. Data tab re-fetched → login redirect.
+- **GitHub Actions runner** ([run](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276586563)): all four public files downloaded — 1,190 / 1,497 / 2,774 / 6,131,182 bytes,
+  matching the ScienceBase and GDR listings. Footprint census in CG-12. Files are not committed (gitignored, runner-only).
+- Competition rasters: still require the registered account's login. Not attempted beyond the probe.

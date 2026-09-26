@@ -74,10 +74,11 @@
             <tr><td><strong>H5</strong></td><td><span class="chip untested">untested</span></td><td>Do not train to reproduce the label raster the scorer masks out</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong>H6</strong></td><td><span class="chip untested">untested</span></td><td>Conductivity as corroboration only, never as a primary detector</td><td class="nowrap">Low</td><td class="nowrap">Rasters</td></tr>
             <tr><td><strong>H7</strong></td><td><span class="chip untested">untested</span></td><td>Control: GeoDAWN Area 1 / Area 2 flight-spec mosaic as a false-structure test</td><td class="nowrap">Low</td><td class="nowrap">Public shapefiles</td></tr>
-            <tr><td><strong>H8</strong></td><td><span class="chip untested">untested</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — do not treat them as positives</td><td class="nowrap">Low</td><td class="nowrap">GeoDAWN polygon clip (envelope done)</td></tr>
+            <tr><td><strong>H8</strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — rejected: Inferred is 0.8% of clipped length in the footprint (<a href="research/catalogue-gaps.html#cg12">CG-12</a>)</td><td class="nowrap">Low</td><td class="nowrap">— (superseded by H12)</td></tr>
             <tr><td><strong><a href="#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong><a href="#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as an independent lidar validation anchor</td><td class="nowrap">Low–med</td><td class="nowrap">Silver et al. 2011 mapping</td></tr>
             <tr><td><strong><a href="#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td><td class="nowrap">External public layers</td></tr>
+            <tr><td><strong><a href="#h12">H12</a></strong></td><td><span class="chip untested">untested</span></td><td>Coarse-scale compilation: every footprint trace is <code>MAPSCALE</code> 250/100 — gaps below 1:250k resolution and inside positional error</td><td class="nowrap">Medium</td><td class="nowrap">1 m DEM (login)</td></tr>
           </tbody>
         </table>
       </div>
@@ -296,7 +297,11 @@
 
       <article class="entry" data-filter-item data-tags="H8 inferred mapscale catalogue constraint prior">
         <h3 id="h8">H8 — Inferred and blank-scale traces mark the edge of the map, not a positive class</h3>
-        <p><span class="chip untested">untested</span> <span class="chip verified">envelope census measured 2026-09-26</span></p>
+        <p><span class="chip rejected">rejected 2026-09-26</span> <span class="chip verified">footprint census measured</span></p>
+        <p class="callout"><strong>Rejected by its own pre-stated criterion.</strong> The footprint clip
+          (<a href="research/catalogue-gaps.html#cg12">CG-12</a>) finds Inferred = <strong>8 of 413</strong> traces,
+          <strong>51.0 km of 6,230.2 km (0.8%)</strong>, and zero Poor/Other/blank. The poorly-constrained stock this card
+          relied on is not in the GeoDAWN area. Superseded by <a href="#h12">H12</a>. Original reasoning kept below.</p>
         <dl>
           <dt>Layers</dt>
           <dd>
@@ -462,10 +467,38 @@
         </dl>
       </article>
 
+      <article class="entry" data-filter-item data-tags="H12 mapscale 250 coarse compilation positional error 1 m DEM scarp">
+        <h3 id="h12">H12 — Coarse-scale compilation: the gap is below 1:250k resolution and inside the positional error</h3>
+        <p><span class="chip untested">untested</span> <span class="chip verified">motivating count verified (CG-12)</span> <span class="chip unverified">mechanism: inference</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>Label raster (mask only); 1 m DEM tiles via <code>1m_DEM_links.csv</code>; 100 m detrended elevation and slope (bands 12, 19); INGENIOUS v2 <code>MAPSCALE</code> / <code>FTYPE_</code> as metadata.</dd>
+          <dt>Physical signature</dt>
+          <dd>(a) Short, low-relief scarps in the 1 m DEM with no catalogue trace; (b) a 1 m scarp sub-parallel to a catalogue trace but offset from it by more than the 300 m kernel.</dd>
+          <dt>Why a gap, not a known fault</dt>
+          <dd>All 413 footprint traces carry <code>MAPSCALE</code> 250 or 100; none carries the regionally dominant 10 or 24
+            (<a href="research/catalogue-gaps.html#cg12">CG-12</a>, verified). The v2 field-definition README defines these as 1:250,000 and 1:100,000
+            and says such faults "could be more discontinuous than continuous" (verified; rejection condition 1 cleared 2026-09-26).
+            At 1:250k, 1 mm on the source map is 250 m on the ground, so generalisation error alone is of the order of the
+            300 m kernel (arithmetic, not a measured error). Hermant et al. measured catalogue misfit up to 400 m in
+            north-central Nevada (H1). Both classes are pixels the mask does not contain — staff's definition of "new"
+            (<a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">11536</a>).</dd>
+          <dt>Expected DTI impact</dt>
+          <dd>Potentially large for (b), riding on H1's staff-confirmed class; moderate for (a). Risk: the pixel-exact mask fully penalises near-trace predictions that are not on a new label.</dd>
+          <dt>Cost</dt>
+          <dd>Medium — 1 m DEM tiles (URLs in the login-gated competition CSV) plus a scarp detector.</dd>
+          <dt>Validation protocol</dt>
+          <dd>Contiguous-block spatial holdout; distance from high-curvature 1 m scarps to nearest catalogue trace, stratified by <code>MAPSCALE</code>. Prediction: a heavier &gt;300 m tail for code-250 traces than for code-100 traces.</dd>
+          <dt>Rejection criterion</dt>
+          <dd>Reject if the v2 field definitions show <code>MAPSCALE</code> is not a scale denominator, or if the distance distribution shows no &gt;300 m tail versus a random-offset control.</dd>
+        </dl>
+      </article>
+
       <h2 id="negative">Negative results</h2>
       <p>
-        None yet — because nothing has been run. This section exists so that the first negative result has somewhere to
-        live. When a hypothesis is rejected it stays on this page with its rejection reason and the date, and the card is
+        <strong>H8 — rejected 2026-09-26</strong> on the public footprint clip (<a href="research/catalogue-gaps.html#cg12">CG-12</a>):
+        Inferred = 51.0 km of 6,230.2 km (0.8%), 8 of 413 traces. A <em>data</em> rejection — no model has been trained.
+        This section exists so every negative result has somewhere to live. When a hypothesis is rejected it stays on this page with its rejection reason and the date, and the card is
         marked <span class="chip rejected">rejected</span>. Rejected hypotheses are not deleted: “we tried this and it did
         not work, here is the measurement” is evidence, and it is exactly the kind of evidence a Phase 2 reviewer
         respects.
@@ -473,7 +506,7 @@
 
       <h2 id="order">Recommended order once data land</h2>
       <ol>
-        <li><strong>H8's polygon clip, then H7</strong> — both need only public shapefiles. H8 asks where the catalogue says it is least constrained; the <em>envelope</em> version is already measured (<a href="research/catalogue-gaps.html#cg9">CG-9</a>), so this is now a smaller job than it was. H7 asks whether survey boundaries fake structure. Neither outline could be downloaded from this machine on 2026-09-26 (TLS). On a machine that can, do these before any magnetic model.</li>
+        <li><strong>H7</strong> — needs only public shapefiles, which now download via the <code>public-data</code> GitHub Actions workflow. (H8's polygon clip is done; H8 was rejected — <a href="research/catalogue-gaps.html#cg12">CG-12</a>.) Do before any magnetic model.</li>
         <li><strong>H5's split fix</strong> — move to contiguous spatial blocks before believing any score. Cheap, and it changes the meaning of every other number.</li>
         <li><strong>H4 measurement</strong> — a single quantile-versus-distance table. Half a day, and it either kills or promotes the cheapest prior in the stack.</li>
         <li><strong>H2 with band-15 conditioning</strong> — the highest-upside geophysical card, and conditioning costs nothing.</li>

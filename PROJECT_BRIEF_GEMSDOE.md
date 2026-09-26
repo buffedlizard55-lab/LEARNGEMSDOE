@@ -111,7 +111,20 @@ re-running extends existing entries rather than duplicating them.
 End of each session, report: what was added and where, hypothesis backlog and status, what is still unverified, what is
 blocking progress, and the single highest-value next research question.
 
-## Current blockers (as of 2026-09-26, session `arena/01a0df88`)
+## Current blockers (as of 2026-09-26, session `arena/01a0dfd3`)
+
+1. **Competition rasters are not in `data/`** — login-gated; re-confirmed redirect. Only a human on the registered
+   account (or an owner-added repo secret for a separately authorised workflow) can place them.
+2. **Public files: unblocked** via `.github/workflows/public-data.yml` (GitHub runners have egress). Footprint census
+   done — CG-12 (413 traces). Sandbox itself still fails TLS; artifacts/logs are also unreachable, so results are read
+   through check-run annotations (max 10 per step).
+3. **`MAPSCALE` semantics — resolved for 250/100** from the v2 README (CG-12). Codes `10`, `50`, `60`, `62.5`, `125`,
+   `155`, `700`, `1:10,000` are undocumented there (flagged).
+4. **No training or inference code** — deliberately; "pipeline ready" claim still false.
+5. **Forum** — 11 topics, newest 11543; 11540, 11526, 11543 and 11499's eligibility question unanswered.
+6. **Open discrepancies**: GV-12 (submission extent), GM-9/GV-13 (lidar), and new: 51,857 km² vs 51,695.2 km².
+
+### Superseded (session `arena/01a0df88`)
 
 1. **Competition rasters are not in `data/`.** Both data scripts were re-run this session and again reported
    `blocked_no_data`. Nothing can move from `untested` until they are placed.

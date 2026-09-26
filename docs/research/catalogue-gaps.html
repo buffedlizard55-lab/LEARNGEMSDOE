@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 1 of 6 · 11 entries · highest leverage · attribute counts measured, GeoDAWN-box census measured 2026-09-26</p>
+      <p class="meta">Library · domain 1 of 6 · 12 entries · highest leverage · attribute counts measured, GeoDAWN footprint census measured 2026-09-26</p>
 
       <h1>Catalogue-gap reasoning</h1>
       <p class="lede">
@@ -334,7 +334,7 @@
             the <a href="../requirements.html#catalogue">requirements page</a>.
             <span class="chip unverified">unverified</span> for what the short <code>MAPSCALE</code> codes mean, and for
             any statement that a named fault lies inside or outside GeoDAWN.
-            The field-definition text inside the GDR zip is still unread.
+            <strong>Update 2026-09-26:</strong> the field-definition README was read (<a href="#cg12">CG-12</a>) — it defines 24, 63, 100, 250, 316, 500; <code>10</code>, <code>50</code>, <code>60</code>, <code>62.5</code>, <code>125</code>, <code>155</code>, <code>700</code>, <code>1:10,000</code> remain undocumented (flagged).
           </dd>
         </dl>
       </article>
@@ -342,6 +342,7 @@
       <h2 id="cg9">CG-9 · The GeoDAWN-box catalogue census, measured 2026-09-26</h2>
       <article class="entry">
         <h3><span class="id">CG-9</span> 1,179 of 22,956 traces fall inside the GeoDAWN bounding box</h3>
+        <p class="callout"><strong>Superseded for footprint questions by <a href="#cg12">CG-12</a></strong> (413 traces inside the actual data extent). Kept for provenance.</p>
         <p class="small">This is the clip CG-8 was waiting for, done against the published bounding box rather than the
           outline polygon. Every number below is one re-runnable query.</p>
         <dl>
@@ -409,6 +410,79 @@
             arithmetic. <span class="chip unverified">inference</span> for the "comparatively well mapped" reading and
             for anything claimed about the footprint interior.
           </dd>
+        </dl>
+      </article>
+
+      <h2 id="cg12">CG-12 · The GeoDAWN footprint census, measured from the public files 2026-09-26</h2>
+      <article class="entry" id="cg12-entry">
+        <h3><span class="id">CG-12</span> 413 INGENIOUS traces intersect the GeoDAWN data extent — all at <code>MAPSCALE</code> code 250 or 100</h3>
+        <p><span class="chip verified">verified</span> <span class="chip unverified">inference</span> for the interpretation</p>
+        <p class="small">Closes CG-9's open item: clipped against the published outline polygons, not the bounding box.</p>
+        <dl>
+          <dt>How it was run</dt>
+          <dd>The sandbox cannot complete TLS to ScienceBase or the GDR, so the public files were fetched on a GitHub
+            Actions runner in <em>this</em> repository — no new account, no secrets, no DrivenData login.
+            <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/blob/main/.github/workflows/public-data.yml">Workflow</a> · <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/blob/main/scripts/public_census.py">script</a> · <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276586563">run 36276586563</a>.
+            No competition raster was touched and no prediction was produced.</dd>
+          <dt>Inputs (primary)</dt>
+          <dd>Area 1 / Area 2 outlines and data-extent polygon from
+            <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase 657e1d85d34e23d3533209f7</a>
+            (Glen &amp; Earney 2024, <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a>);
+            <code>qfaults_ingenious_nad83conus117_2023-06-27.zip</code> from
+            <a href="https://gdr.openei.org/submissions/1391">GDR 1391</a>
+            (Ayling et al. 2022, <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>).</dd>
+          <dt>File checks</dt>
+          <dd><div class="table-wrap"><table>
+            <thead><tr><th>File</th><th class="num">Bytes</th><th>Matches listing</th><th>SHA-256</th></tr></thead>
+            <tbody>
+              <tr><td>GeoDAWN_area1_outline.zip</td><td class="num">1,190</td><td>yes</td><td><code class="small">6a63cccdd7ebe51bc009eca5cc7ac83c959bf4876385813e73cebe442f850131</code></td></tr>
+              <tr><td>GeoDAWN_area2_outline.zip</td><td class="num">1,497</td><td>yes</td><td><code class="small">20916d6c2f74039254dc8d134cb79d380aee5ab66e5de89209ab4a8f4e0d2c27</code></td></tr>
+              <tr><td>GeoDAWN_data_extent.zip</td><td class="num">2,774</td><td>yes</td><td><code class="small">a27b484332fd1b75345cc63a0fa5353861db5812c5c846a494c566938c0c2ddb</code></td></tr>
+              <tr><td>qfaults_v2.zip</td><td class="num">6,131,182</td><td>yes (5.85 MiB)</td><td><code class="small">c7b091c9ac8bca140ad89ee6bb2bd63dd3ac12e3013acbfd8373d11c9faee59d</code></td></tr>
+            </tbody></table></div>
+            Outlines are EPSG:32611; faults are NAD83 Contiguous USA Albers (equal-area, metres).</dd>
+          <dt>Cross-checks (all pass)</dt>
+          <dd><ol>
+            <li>GDR zip holds <strong>22,956</strong> records — exactly CG-8's NBMG MapServer count.</li>
+            <li>Computed extent area <strong>51,678.8 km²</strong> vs the shapefile's own <code>SqKm</code> <strong>51,695.2</strong> (0.03%).</li>
+            <li>Computed Area 1 <strong>2,413.4 km²</strong> vs its <code>ENCLOSED_A</code> "2411.7 sq km".</li>
+          </ol></dd>
+          <dt>What it claims</dt>
+          <dd><div class="table-wrap"><table>
+            <thead><tr><th>Polygon</th><th class="num">Traces</th><th>Well / Mod. / Inferred</th><th class="num">Clipped length</th><th class="num">Inferred length</th><th><code>MAPSCALE</code></th></tr></thead>
+            <tbody>
+              <tr><td>Data extent</td><td class="num"><strong>413</strong></td><td>276 / 129 / 8</td><td class="num">6,230.2 km</td><td class="num">51.0 km (0.8%)</td><td>250: 393 · 100: 20</td></tr>
+              <tr><td>Area 2</td><td class="num">405</td><td>271 / 127 / 7</td><td class="num">5,974.1 km</td><td class="num">46.7 km</td><td>250: 385 · 100: 20</td></tr>
+              <tr><td>Area 1 (Clayton Valley)</td><td class="num">19</td><td>12 / 6 / 1</td><td class="num">311.6 km</td><td class="num">4.3 km</td><td>250: 19</td></tr>
+            </tbody></table></div>
+            <p>Partitions close (276+129+8 = 413; 393+20 = 413). No Poor / Other / blank <code>FTYPE_</code>, no blank <code>MAPSCALE</code>.</p></dd>
+          <dt>What changed versus CG-9</dt>
+          <dd><ol>
+            <li><strong>The box over-counted ~2.9×</strong> (1,179 → 413). Do not quote 1,179 as "traces in the GeoDAWN area".</li>
+            <li>Density ≈ <strong>0.12 km of mapped trace per km²</strong> (6,230 km / 51,679 km²).</li>
+            <li><strong>Mapping scale:</strong> regionally code <code>10</code> dominates (11,334) and <code>24</code> is next (3,025)
+              (<a href="../requirements.html">requirements page</a>). Inside the footprint there are <strong>zero</strong>
+              traces at <code>10</code> or <code>24</code>. Regionally <code>250</code> is 2,229 traces (9.7%); the footprint holds 393 of them (17.6%).</li>
+          </ol></dd>
+          <dt>Why it matters here</dt>
+          <dd><p><strong>Scale codes confirmed</strong> from the primary field-definition file inside the GDR v2 zip
+            (<code>README_fielddefinitions_qfaults_ingenious_nad83conus117_2023-06-27.txt</code>, 112 lines, sha256
+            <code class="small">94bda0c28a98475285047e97644d732cb2a4322ed218d6c442709edb89716cec</code>, printed verbatim in <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276864491">run 36276864491</a>):</p>
+            <blockquote><code>250</code> — "1:250,000, fault could be more discontinuous than continuous and mapping is accurate at >1:125,000 scale."<br><code>100</code> — "1:100,000, fault could be more discontinuous than continuous and mapping is accurate at >50,000 scale."</blockquote>
+            <p>So the whole GeoDAWN catalogue is compiled at 1:100,000–1:250,000, and the compilers say such traces
+            "could be more discontinuous than continuous". That predicts (a) short or low-relief scarps below 1:250k resolution and
+            (b) positional misfit large enough to leave true fault pixels outside the 300 m kernel — the H1 class staff
+            confirmed is scored. <code>FTYPE_</code> says <em>constrained</em>; <code>MAPSCALE</code> says <em>coarse</em>.
+            <span class="chip unverified">inference</span> See <a href="../hypotheses.html#h12">H12</a>.</dd>
+          <dt>Caveats and irregularity flagged</dt>
+          <dd><ol>
+            <li>2023-06-27 compilation, not the data-tab label raster.</li>
+            <li>"Intersecting" counts partial traces once; use the length column for extent.</li>
+            <li><strong>Flag — undocumented codes:</strong> the README's <code>MAPSCALE</code> table defines only 24, 63, 100, 250, 316, 500. The regionally dominant <code>10</code> (11,334 traces) and <code>50</code>, <code>60</code>, <code>62.5</code>, <code>125</code>, <code>155</code>, <code>700</code>, literal <code>1:10,000</code> are undefined; 63/316/500 never occur. Footprint unaffected.</li>
+            <li><strong>Flag:</strong> the USGS data page states 51,857 km²; the extent shapefile's attribute says 51,695.2 km² (0.3% lower). Unresolved.</li>
+          </ol></dd>
+          <dt>Confidence</dt>
+          <dd>Verified — computed from primary files and the field-definition README. Gap-class predictions: inference.</dd>
         </dl>
       </article>
 
@@ -487,10 +561,8 @@
 
       <h2>Next actions for this domain</h2>
       <ol>
-        <li>Clip CG-8 to the GeoDAWN <strong>outline polygon</strong>, not the bounding box. CG-9 (2026-09-26) did the
-          envelope version; the polygon version needs the Area 1 / Area 2 outline zips, which still fail TLS from this
-          machine.</li>
-        <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text. Until then, do not translate <code>MAPSCALE</code> codes into denominators.</li>
+        <li><s>Clip CG-8 to the GeoDAWN outline polygon.</s> <strong>Done 2026-09-26 — <a href="#cg12">CG-12</a></strong> (413 traces, via GitHub Actions).</li>
+        <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text. <strong>Done 2026-09-26 (<a href="#cg12">CG-12</a>)</strong> — 250 = 1:250,000, 100 = 1:100,000; code <code>10</code> undocumented (flagged).</li>
         <li>Once rasters are placed, compute distance-to-nearest-label for high-strain, high-seismicity, and high-gradient pixels. That converts CG-7 from reasoning into a measurement on the scored grid.</li>
         <li>Reconcile the 1,179 envelope count against the actual label raster. If the shipped labels hold materially
           more or fewer traces than the 2023-06-27 service inside the same box, record it as a provenance discrepancy
