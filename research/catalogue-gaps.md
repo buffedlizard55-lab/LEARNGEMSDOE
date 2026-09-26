@@ -78,7 +78,7 @@ Mapping to signals: classes 1–2 → topography (bands 12, 19, 1 m lidar); clas
 - **Citation:** same DOI as CG-4, service updated 2023-06-27. Counts and query links: [`docs/requirements.html`](../docs/requirements.html#catalogue).
 - **Claim:** 22,956 polylines. `FTYPE_` partitions into Well Constrained 12,048 / Moderately Constrained 5,054 / Inferred 5,280 / Poor 100 / Other 27 / blank 447. `MAPSCALE` partitions into the codes on the requirements page, including 4,059 blank and 12 literal `1:10,000`.
 - **Relevance:** this is the measurement CG-7 class 4 was waiting for, at regional scale. It is not the GeoDAWN label raster. Do not predict Inferred traces; they are already in the compilation the scorer masks.
-- **Confidence:** verified for the counts. Unverified for what the short `MAPSCALE` codes mean. The zip's field-definition text is still unread (TLS).
+- **Confidence:** verified for the counts. **Update 2026-09-26:** the field-definition README was read (CG-12) — it defines 24, 63, 100, 250, 316, 500 as scale denominators; `10`, `50`, `60`, `62.5`, `125`, `155`, `700` and `1:10,000` remain **undocumented** (flagged).
 
 ## CG-9 · The GeoDAWN-box catalogue census, measured (2026-09-26)
 
@@ -170,10 +170,20 @@ Closes the open item from CG-9: the clip is now against the published outline po
      requirements page), with `24` next (3,025). **Inside the footprint there are zero traces with code `10` or `24`**;
      every trace carries `250` or `100`. Regionally `250` is only 2,229 of 22,956 traces (9.7%); the footprint alone holds
      393 of those 2,229 (17.6%).
-- **Why it matters for the scored target (inference — labelled as such).** Reading the codes as map-scale denominators
-  in thousands (1:250,000 / 1:100,000) is the natural interpretation but is *not yet confirmed* against the v2 field-
-  definition text (see Next actions). If it holds, the entire GeoDAWN catalogue was compiled from the coarsest source
-  maps in the compilation. That predicts two specific gap classes: (a) short or low-relief scarps below the resolution
+- **Scale codes — confirmed from the primary field-definition file**
+  (`README_fielddefinitions_qfaults_ingenious_nad83conus117_2023-06-27.txt` inside the GDR v2 zip; 112 lines, sha256
+  `94bda0c28a98475285047e97644d732cb2a4322ed218d6c442709edb89716cec`; printed verbatim in [run 36276864491](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276864491)):
+  - `250` — "1:250,000, fault could be more discontinuous than continuous and mapping is accurate at >1:125,000 scale."
+  - `100` — "1:100,000, fault could be more discontinuous than continuous and mapping is accurate at >50,000 scale."
+  - The same table defines `24`, `63`, `316`, `500`. `FCODE2023` values 1–2 say mapping "is accurate at given
+    \"MAPSCALE\" value".
+- **Irregularity flagged — undocumented codes.** The README's `MAPSCALE` table lists only 24, 63, 100, 250, 316, 500. The
+  regionally dominant code **`10` (11,334 traces)** and codes `50`, `60`, `62.5`, `125`, `155`, `700` and the literal
+  `1:10,000` (requirements page) are **not defined** there; conversely 63, 316 and 500 do not appear in the service
+  counts. The footprint is unaffected (only 250/100 occur), but nobody should guess what `10` means regionally.
+- **Why it matters for the scored target.** The entire GeoDAWN catalogue is compiled at 1:100,000–1:250,000 — the
+  coarsest codes present in the footprint's compilation — and the compilers state such traces "could be more
+  discontinuous than continuous" (verified quote). The gap-class reasoning that follows is **inference**. That predicts two specific gap classes: (a) short or low-relief scarps below the resolution
   of a 1:250k source, and (b) positional misfit of mapped traces large enough to leave true fault pixels outside the
   300 m kernel — the H1 "newly mapped geometry" class staff confirmed is scored. It also reframes CG-9's "comparatively
   well mapped" reading: `FTYPE_` says *constrained*, `MAPSCALE` says *coarse*. Those are different properties.
@@ -182,8 +192,8 @@ Closes the open item from CG-9: the clip is now against the published outline po
   (3) The USGS data page states the survey covers **51,857 km²**; the extent shapefile's own attribute says
   **51,695.2 km²** (0.3% lower). Small, but a real discrepancy between two official artefacts — **flagged, not
   resolved.**
-- **Confidence:** verified (computed from primary files, reproducible by re-running the workflow). The scale-code
-  interpretation and the gap-class predictions are **inference**.
+- **Confidence:** verified (computed from primary files, reproducible by re-running the workflow); scale-code meaning
+  verified from the field-definition README. The gap-class predictions are **inference**.
 
 ## CG-10 · The catalogue is a literature compilation, not a survey
 
@@ -220,8 +230,8 @@ Closes the open item from CG-9: the clip is now against the published outline po
 ## Next actions
 
 1. ~~Clip CG-8 to the GeoDAWN outline polygon.~~ **Done 2026-09-26 — CG-12** (413 traces, via GitHub Actions).
-2. Read the field-definition text in the v2 zip before translating `MAPSCALE` codes. **Now the top item** — CG-12's
-   strongest finding depends on it. The zip downloads fine on the runner; extend `public_census.py` to print its text.
+2. ~~Read the field-definition text in the v2 zip.~~ **Done 2026-09-26 (CG-12)** — 250 = 1:250,000, 100 = 1:100,000;
+   code `10` is undocumented (flagged).
 3. Once rasters are placed: distance-to-nearest-label for high-strain / high-seismicity / high-gradient pixels.
 4. Reconcile the 413 footprint count (CG-12; the 1,179 envelope count is superseded) against the actual label raster. If the shipped labels contain materially more or
    fewer traces than the 2023-06-27 service inside the same box, that is a provenance discrepancy worth recording, not

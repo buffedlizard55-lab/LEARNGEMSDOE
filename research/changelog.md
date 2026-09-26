@@ -26,7 +26,13 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 
 **Re-verified (fetched)**: data tab → login redirect; forum category JSON — 11 topics, newest still 11543, no new staff reply.
 
-**Next**: print the v2 field-definition text in the workflow to confirm `MAPSCALE` semantics (gates H12).
+**Pass 3 (same session)**: printed the v2 field-definition README on the runner ([run](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276864491)). Confirmed `250` =
+1:250,000 and `100` = 1:100,000 (verbatim quotes in CG-12); H12 rejection condition (1) cleared. **Flagged:** codes `10`
+(11,334 traces), `50`, `60`, `62.5`, `125`, `155`, `700`, `1:10,000` are undocumented in that README. CG-8 and the
+requirements page updated.
+
+**Next**: rasterise the 413 footprint traces to the 100 m EPSG:32611 grid and diff against the competition label raster
+once it is placed (provenance check); in parallel, build H7's flight-spec control from the Area 1/2 outlines.
 
 ---
 

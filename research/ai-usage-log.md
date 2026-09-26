@@ -28,6 +28,8 @@ record rather than reconstructed at the deadline.
 - **Fabrication controls:** every number in CG-12 is copied from run annotations; totals cross-checked against
   independent sources (CG-8 service count, shapefile area attributes, official file sizes). Scale-code meaning is
   labelled inference until the field-definition text is read.
+- **Pass 3:** extended the workflow to print the v2 field-definition README verbatim ([run](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276864491)); quotes in CG-12 are
+  copied from that output.
 - **Human-owned checks:** open the run link and confirm the annotations; confirm the 51,857 vs 51,695.2 km² discrepancy
   before quoting either.
 

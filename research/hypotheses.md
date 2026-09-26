@@ -184,14 +184,15 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
 
 ## H12 — Coarse-scale compilation: the gap is below 1:250k resolution and inside the positional error
 
-- **Status:** untested. Motivated by a verified measurement (CG-12); the mechanism is **inference**.
+- **Status:** untested. Motivated by a verified measurement (CG-12). **Rejection condition (1) cleared 2026-09-26:** the
+  v2 field-definition README confirms `250` = 1:250,000 and `100` = 1:100,000. The mechanism remains **inference**.
 - **Layers:** label raster (mask only); 1 m DEM tiles via `1m_DEM_links.csv` and 100 m detrended elevation / slope
   (bands 12, 19); `MAPSCALE` and `FTYPE_` from the INGENIOUS v2 shapefile as metadata.
 - **Physical signature:** (a) short (< a few km), low-relief scarps in the 1 m DEM that have no catalogue trace at all;
   (b) a scarp in the 1 m DEM running sub-parallel to a catalogue trace but offset from it by more than the 300 m kernel.
 - **Why a gap, not a known fault.** Every one of the 413 traces inside the footprint carries `MAPSCALE` code `250` or
-  `100`; none carries the regionally dominant `10` or `24` (CG-12, verified). If those codes are map-scale denominators in
-  thousands (unconfirmed — v2 field-definition text still unread), the GeoDAWN catalogue was compiled at 1:100k–1:250k.
+  `100`; none carries the regionally dominant `10` or `24` (CG-12, verified). The v2 field-definition README defines these as
+  1:250,000 and 1:100,000 and says such faults "could be more discontinuous than continuous" (verified, CG-12).
   At 1:250k, 1 mm on the source map is 250 m on the ground, so digitising and generalisation error alone is of the order
   of the 300 m kernel (arithmetic, not a measured error). Hermant et al. measured catalogue misfit up to 400 m in
   north-central Nevada (see H1). Both classes (a) and (b) are, by construction, pixels the mask does not contain — exactly

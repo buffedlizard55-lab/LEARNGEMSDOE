@@ -78,7 +78,7 @@
             <tr><td><strong><a href="#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong><a href="#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as an independent lidar validation anchor</td><td class="nowrap">Low–med</td><td class="nowrap">Silver et al. 2011 mapping</td></tr>
             <tr><td><strong><a href="#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td><td class="nowrap">External public layers</td></tr>
-            <tr><td><strong><a href="#h12">H12</a></strong></td><td><span class="chip untested">untested</span></td><td>Coarse-scale compilation: every footprint trace is <code>MAPSCALE</code> 250/100 — gaps below 1:250k resolution and inside positional error</td><td class="nowrap">Medium</td><td class="nowrap">v2 field-definition text; 1 m DEM (login)</td></tr>
+            <tr><td><strong><a href="#h12">H12</a></strong></td><td><span class="chip untested">untested</span></td><td>Coarse-scale compilation: every footprint trace is <code>MAPSCALE</code> 250/100 — gaps below 1:250k resolution and inside positional error</td><td class="nowrap">Medium</td><td class="nowrap">1 m DEM (login)</td></tr>
           </tbody>
         </table>
       </div>
@@ -477,8 +477,8 @@
           <dd>(a) Short, low-relief scarps in the 1 m DEM with no catalogue trace; (b) a 1 m scarp sub-parallel to a catalogue trace but offset from it by more than the 300 m kernel.</dd>
           <dt>Why a gap, not a known fault</dt>
           <dd>All 413 footprint traces carry <code>MAPSCALE</code> 250 or 100; none carries the regionally dominant 10 or 24
-            (<a href="research/catalogue-gaps.html#cg12">CG-12</a>, verified). If those are scale denominators in thousands
-            (<strong>unconfirmed</strong> — v2 field-definition text unread), the GeoDAWN catalogue was compiled at 1:100k–1:250k.
+            (<a href="research/catalogue-gaps.html#cg12">CG-12</a>, verified). The v2 field-definition README defines these as 1:250,000 and 1:100,000
+            and says such faults "could be more discontinuous than continuous" (verified; rejection condition 1 cleared 2026-09-26).
             At 1:250k, 1 mm on the source map is 250 m on the ground, so generalisation error alone is of the order of the
             300 m kernel (arithmetic, not a measured error). Hermant et al. measured catalogue misfit up to 400 m in
             north-central Nevada (H1). Both classes are pixels the mask does not contain — staff's definition of "new"

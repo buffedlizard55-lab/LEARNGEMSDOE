@@ -334,7 +334,7 @@
             the <a href="../requirements.html#catalogue">requirements page</a>.
             <span class="chip unverified">unverified</span> for what the short <code>MAPSCALE</code> codes mean, and for
             any statement that a named fault lies inside or outside GeoDAWN.
-            The field-definition text inside the GDR zip is still unread.
+            <strong>Update 2026-09-26:</strong> the field-definition README was read (<a href="#cg12">CG-12</a>) — it defines 24, 63, 100, 250, 316, 500; <code>10</code>, <code>50</code>, <code>60</code>, <code>62.5</code>, <code>125</code>, <code>155</code>, <code>700</code>, <code>1:10,000</code> remain undocumented (flagged).
           </dd>
         </dl>
       </article>
@@ -465,9 +465,12 @@
               traces at <code>10</code> or <code>24</code>. Regionally <code>250</code> is 2,229 traces (9.7%); the footprint holds 393 of them (17.6%).</li>
           </ol></dd>
           <dt>Why it matters here</dt>
-          <dd>Reading the codes as scale denominators in thousands (1:250,000 / 1:100,000) is natural but <strong>not yet
-            confirmed</strong> against the v2 field-definition text. If it holds, the whole GeoDAWN catalogue comes from the
-            coarsest sources in the compilation. That predicts (a) short or low-relief scarps below 1:250k resolution and
+          <dd><p><strong>Scale codes confirmed</strong> from the primary field-definition file inside the GDR v2 zip
+            (<code>README_fielddefinitions_qfaults_ingenious_nad83conus117_2023-06-27.txt</code>, 112 lines, sha256
+            <code class="small">94bda0c28a98475285047e97644d732cb2a4322ed218d6c442709edb89716cec</code>, printed verbatim in <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36276864491">run 36276864491</a>):</p>
+            <blockquote><code>250</code> — "1:250,000, fault could be more discontinuous than continuous and mapping is accurate at >1:125,000 scale."<br><code>100</code> — "1:100,000, fault could be more discontinuous than continuous and mapping is accurate at >50,000 scale."</blockquote>
+            <p>So the whole GeoDAWN catalogue is compiled at 1:100,000–1:250,000, and the compilers say such traces
+            "could be more discontinuous than continuous". That predicts (a) short or low-relief scarps below 1:250k resolution and
             (b) positional misfit large enough to leave true fault pixels outside the 300 m kernel — the H1 class staff
             confirmed is scored. <code>FTYPE_</code> says <em>constrained</em>; <code>MAPSCALE</code> says <em>coarse</em>.
             <span class="chip unverified">inference</span> See <a href="../hypotheses.html#h12">H12</a>.</dd>
@@ -475,10 +478,11 @@
           <dd><ol>
             <li>2023-06-27 compilation, not the data-tab label raster.</li>
             <li>"Intersecting" counts partial traces once; use the length column for extent.</li>
+            <li><strong>Flag — undocumented codes:</strong> the README's <code>MAPSCALE</code> table defines only 24, 63, 100, 250, 316, 500. The regionally dominant <code>10</code> (11,334 traces) and <code>50</code>, <code>60</code>, <code>62.5</code>, <code>125</code>, <code>155</code>, <code>700</code>, literal <code>1:10,000</code> are undefined; 63/316/500 never occur. Footprint unaffected.</li>
             <li><strong>Flag:</strong> the USGS data page states 51,857 km²; the extent shapefile's attribute says 51,695.2 km² (0.3% lower). Unresolved.</li>
           </ol></dd>
           <dt>Confidence</dt>
-          <dd>Verified — computed from primary files, reproducible by re-running the workflow. Interpretation: inference.</dd>
+          <dd>Verified — computed from primary files and the field-definition README. Gap-class predictions: inference.</dd>
         </dl>
       </article>
 
@@ -558,7 +562,7 @@
       <h2>Next actions for this domain</h2>
       <ol>
         <li><s>Clip CG-8 to the GeoDAWN outline polygon.</s> <strong>Done 2026-09-26 — <a href="#cg12">CG-12</a></strong> (413 traces, via GitHub Actions).</li>
-        <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text. Until then, do not translate <code>MAPSCALE</code> codes into denominators. <strong>Now the top item</strong> — CG-12's strongest finding depends on it; the zip downloads fine on the Actions runner.</li>
+        <li>Download <a href="https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip">INGENIOUS Qfaults v2</a> and read the field-definition text. <strong>Done 2026-09-26 (<a href="#cg12">CG-12</a>)</strong> — 250 = 1:250,000, 100 = 1:100,000; code <code>10</code> undocumented (flagged).</li>
         <li>Once rasters are placed, compute distance-to-nearest-label for high-strain, high-seismicity, and high-gradient pixels. That converts CG-7 from reasoning into a measurement on the scored grid.</li>
         <li>Reconcile the 1,179 envelope count against the actual label raster. If the shipped labels hold materially
           more or fewer traces than the 2023-06-27 service inside the same box, record it as a provenance discrepancy

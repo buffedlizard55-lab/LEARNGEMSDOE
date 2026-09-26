@@ -118,7 +118,8 @@ blocking progress, and the single highest-value next research question.
 2. **Public files: unblocked** via `.github/workflows/public-data.yml` (GitHub runners have egress). Footprint census
    done — CG-12 (413 traces). Sandbox itself still fails TLS; artifacts/logs are also unreachable, so results are read
    through check-run annotations (max 10 per step).
-3. **`MAPSCALE` semantics unconfirmed** — the v2 field-definition text has not been printed yet; gates H12.
+3. **`MAPSCALE` semantics — resolved for 250/100** from the v2 README (CG-12). Codes `10`, `50`, `60`, `62.5`, `125`,
+   `155`, `700`, `1:10,000` are undocumented there (flagged).
 4. **No training or inference code** — deliberately; "pipeline ready" claim still false.
 5. **Forum** — 11 topics, newest 11543; 11540, 11526, 11543 and 11499's eligibility question unanswered.
 6. **Open discrepancies**: GV-12 (submission extent), GM-9/GV-13 (lidar), and new: 51,857 km² vs 51,695.2 km².
