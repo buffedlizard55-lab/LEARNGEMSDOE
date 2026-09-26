@@ -12,7 +12,8 @@
   <header class="site">
     <div class="wrap">
       <a class="brand" href="index.html">GEMSDOE <span>research</span></a>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav">
         <a href="index.html">Overview</a>
         <a href="requirements.html">Requirements</a>
         <a href="executive-summary.html">Explainer</a>
@@ -22,6 +23,7 @@
         <a href="sources.html">Sources</a>
         <a href="pipeline.html">Pipeline</a>
         <a href="research/governance.html">Governance</a>
+        <a href="forum.html">Forum</a>
         <a href="changelog.html">Changelog</a>
         <a href="ai-usage.html">AI log</a>
       </nav>
@@ -33,6 +35,22 @@
       <p class="meta">Dated, append-only · passes are idempotent — extend entries, never duplicate · newest first</p>
 
       <h1>Changelog</h1>
+
+      <article class="entry" id="2026-09-26-df77">
+        <h3>2026-09-26 · session <code>arena/01a0df77-learngemsdoe</code> — re-verify, forum watch, Pages UX</h3>
+        <p><strong>Verified this session, from pages fetched in the session:</strong></p>
+        <ul>
+          <li>Competition hub: deadline Dec. 3, 2026, 11:59 p.m. UTC; prize pool $300,000 as tabulated.</li>
+          <li>Problem page 967 both chunks: DTI α=0.2, β=0.8, R=300 m; worked example TI_w = 0.60; EPSG 32611, 100 m.</li>
+          <li>About page 968: GeoDAWN + 3DEP lidar “over a similar extent”; Hermant 2025 and Mattéo 2021 listed.</li>
+          <li>Forum category JSON: no topic newer than 11543. Thread JSON 11540, 11526, 11543 still <code>posts_count</code> 1.</li>
+          <li>USGS QFFD page: coseismic surface deformation past 1.6 Ma; Database Search retired 26 February 2026 (already in CG-3).</li>
+          <li>INGENIOUS GDR 1391 resource list (Qfaults v2 still listed). NBMG count query <code>{"count":22956}</code>.</li>
+        </ul>
+        <p><strong>Added.</strong> <a href="forum.html">Forum watch</a> page. GV-10. Mobile menu. Library filter. This log entry and the matching AI-usage block.</p>
+        <p><strong>Not done.</strong> Competition rasters still absent. No GeoDAWN clip of FTYPE_/MAPSCALE. No prediction file. No second site or account.</p>
+        <p><strong>Next.</strong> Clip INGENIOUS constraint codes to GeoDAWN outlines on a machine that can complete TLS to ScienceBase.</p>
+      </article>
 
       <article class="entry" id="2026-09-26-df46">
         <h3>2026-09-26 · session <code>arena/01a0df46-learngemsdoe</code> — catalogue counts, requirements list, data-placement attempt</h3>

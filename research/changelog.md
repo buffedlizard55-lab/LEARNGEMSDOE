@@ -6,6 +6,27 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 
 ---
 
+## 2026-09-26 · session `arena/01a0df77-learngemsdoe` — Pass 1–3: re-verify, forum watch, Pages UX
+
+**Verified against primary sources this session (fetched and read):**
+
+- Hub, problem 967 (both chunks), About 968.
+- Forum category JSON; threads 11540, 11526, 11543 (each `posts_count` 1).
+- USGS QFFD landing page; INGENIOUS GDR 1391; NBMG `returnCountOnly` = 22956.
+
+**Added**
+
+- `docs/forum.html` — unanswered-thread table with JSON links.
+- GV-10. Mobile nav toggle. Library domain filter.
+- This changelog block and the AI-usage log block.
+
+**Still open / next**
+
+- Clip `FTYPE_` / `MAPSCALE` to GeoDAWN outlines.
+- Place competition rasters only on an enrolled machine.
+
+---
+
 ## 2026-09-26 · session `arena/01a0df46-learngemsdoe` — Pass 1–3: catalogue counts, requirements list, data-placement attempt
 
 **Verified against primary sources this session (fetched and read; not copied from the previous session's notes):**

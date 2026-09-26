@@ -111,7 +111,7 @@ re-running extends existing entries rather than duplicating them.
 End of each session, report: what was added and where, hypothesis backlog and status, what is still unverified, what is
 blocking progress, and the single highest-value next research question.
 
-## Current blockers (as of 2026-09-26, session arena/01a0df46)
+## Current blockers (as of 2026-09-26, session arena/01a0df77)
 
 1. **Competition rasters are not in `data/`** — the data tab requires a DrivenData login (re-confirmed redirect).
    No hypothesis can move from `untested` until they are placed and `prepare_data.py` is run. No account was created.

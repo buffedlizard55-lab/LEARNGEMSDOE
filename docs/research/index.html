@@ -12,7 +12,8 @@
   <header class="site">
     <div class="wrap">
       <a class="brand" href="../index.html">GEMSDOE <span>research</span></a>
-      <nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav">
         <a href="../index.html">Overview</a>
         <a href="../requirements.html">Requirements</a>
         <a href="../executive-summary.html">Explainer</a>
@@ -22,6 +23,7 @@
         <a href="../sources.html">Sources</a>
         <a href="../pipeline.html">Pipeline</a>
         <a href="governance.html">Governance</a>
+        <a href="../forum.html">Forum</a>
         <a href="../changelog.html">Changelog</a>
         <a href="../ai-usage.html">AI log</a>
       </nav>
@@ -55,7 +57,12 @@
       </div>
 
       <h2>Domains</h2>
-      <div class="grid">
+      <p class="filter">
+        <label for="lib-filter">Filter</label>
+        <input id="lib-filter" type="search" data-filter="#lib-grid" data-filter-mode="cards" data-filter-count="#lib-count" placeholder="e.g. gravity, rules, lidar">
+        <span id="lib-count" class="small"></span>
+      </p>
+      <div class="grid" id="lib-grid">
         <a class="card" href="catalogue-gaps.html">
           <h3>1 · Catalogue-gap reasoning</h3>
           <p>How the USGS QFFD and INGENIOUS were actually compiled — the 1993 guidelines, the surface-deformation

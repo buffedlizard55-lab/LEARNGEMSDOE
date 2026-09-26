@@ -114,3 +114,10 @@ was empty when read.
 | Rules change-log table | PDF Preface | empty when read |
 | Staff about-post links to page 966 | https://www.drivendata.org/competitions/306/competition-doe-gems/page/966/ | duplicate of the hub welcome, not page 967 |
 | Rules PDF host | https://www.nlr.gov/docs/fy26osti/96647.pdf | redirects to docs.nlr.gov (re-fetched 2026-09-26) |
+
+## GV-10 · Forum re-read 2026-09-26 (session arena/01a0df77)
+
+- **Source:** category JSON <https://community.drivendata.org/c/gems-prize-challenge/111.json>; thread JSON 11540, 11526, 11543.
+- **Claim:** No new topic since 11543 (created 2026-09-25). `posts_count` remains 1 for 11540, 11526, 11543. NBMG Qfaults layer 0 `returnCountOnly` still returns `{"count":22956}` — same as CG-8.
+- **Relevance:** Time-sensitive governance. An unanswered eligibility question is not an answer.
+- **Confidence:** verified for the JSON fields named above. HTML pages: [`docs/forum.html`](../docs/forum.html).
