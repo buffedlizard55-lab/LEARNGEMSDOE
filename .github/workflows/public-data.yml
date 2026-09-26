@@ -57,7 +57,10 @@ jobs:
           print("::notice title=offsets::" + json.dumps(
               dict((k, v) for k, v in o.items() if k != "usgs_layers")))
           for name, layer in (o.get("usgs_layers") or {}).items():
-              keep = {kk: vv for kk, vv in layer.items() if kk != "fields"}
+              keep = {kk: vv for kk, vv in layer.items()
+                      if kk in ("shapefile", "records", "crs", "traces_intersecting_extent",
+                                "clipped_length_in_extent_m", "distinct_geometries_in_extent",
+                                "attribute_value_counts_in_extent", "fields")}
               a = layer.get("ingenious_footprint_trace_to_nearest_usgs") or {}
               b = layer.get("usgs_extent_trace_to_nearest_ingenious") or {}
               print(f"::notice title=usgs {name}::" + json.dumps(keep) +

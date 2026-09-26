@@ -135,6 +135,29 @@ def distance_stats(values):
     }
 
 
+def attribute_counts(records, idx, max_distinct=25, max_fields=6):
+    """Value counts for the low-cardinality attributes of the selected records.
+
+    Generic on purpose: the USGS GIS distribution's field names are not assumed. Only fields
+    with a small number of distinct values are reported, so a long free-text field never
+    floods the output.
+    """
+    out = {}
+    candidates = []
+    if not idx:
+        return out
+    keys = [k for k in records[idx[0]].keys() if k.upper() not in {"FID", "SHAPE", "SHAPE_LENG", "SHAPE_LENGTH"}]
+    for key in keys:
+        vals = [str(records[i].get(key, "")).strip() for i in idx]
+        distinct = sorted(set(vals))
+        if 1 < len(distinct) <= max_distinct:
+            candidates.append((len(distinct), key, {v: vals.count(v) for v in distinct}))
+    candidates.sort(key=lambda t: (t[0], t[1]))
+    for _, key, counts in candidates[:max_fields]:
+        out[key] = dict(sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])))
+    return out
+
+
 def main() -> int:
     need = {
         "area1": RAW / "GeoDAWN_area1_outline.zip",
@@ -218,14 +241,15 @@ def main() -> int:
         poly = unary_union([transform(tf, g) for g in geoms])
         footprint_idx = [i for i, g in enumerate(fault_geoms) if g.intersects(poly)]
         footprint_geoms = [fault_geoms[i] for i in footprint_idx]
+        footprint_len = sum(g.intersection(poly).length for g in footprint_geoms)
         layers = {}
         for shp, members in unzip_all_shps(usgs_zip, work):
-            ugeoms, ucrs, n, ufields, _ = load_shp(shp)
+            ugeoms, ucrs, n, ufields, urecs = load_shp(shp)
             entry = {
                 "shapefile": str(shp.relative_to(work)),
                 "records": n,
                 "crs": ucrs.to_string() if ucrs else None,
-                "fields": ufields[:14],
+                "fields": ufields,
             }
             if ucrs is None:
                 entry["status"] = "no .prj — skipped rather than guessing a CRS"
@@ -233,20 +257,26 @@ def main() -> int:
                 continue
             ut = Transformer.from_crs(ucrs, fault_crs, always_xy=True).transform
             ugeoms_fc = [transform(ut, g) for g in ugeoms]
-            u_in = [g for g in ugeoms_fc if g.intersects(poly)]
+            in_idx = [i for i, g in enumerate(ugeoms_fc) if g.intersects(poly)]
+            u_in = [ugeoms_fc[i] for i in in_idx]
             entry["traces_intersecting_extent"] = len(u_in)
+            entry["clipped_length_in_extent_m"] = round(sum(g.intersection(poly).length for g in u_in), 1)
+            entry["distinct_geometries_in_extent"] = len({g.wkb for g in u_in})
             entry["ingenious_footprint_trace_to_nearest_usgs"] = distance_stats(
                 nearest_distances(ugeoms_fc, footprint_geoms)
             )
             entry["usgs_extent_trace_to_nearest_ingenious"] = distance_stats(
                 nearest_distances(fault_geoms, u_in)
             )
+            entry["ingenious_footprint_clipped_length_m"] = round(footprint_len, 1)
+            entry["attribute_value_counts_in_extent"] = attribute_counts(urecs, in_idx)
             layers[shp.stem] = entry
         report["offsets"] = {
             "status": "measured",
             "distance_crs": fault_crs.to_string(),
             "distance_note": "computed in the INGENIOUS layer's Albers equal-area projection (metres), not geodesically",
             "ingenious_footprint_traces": len(footprint_geoms),
+            "ingenious_footprint_clipped_length_m": round(footprint_len, 1),
             "usgs_layers": layers,
         }
 
