@@ -37,7 +37,7 @@ the database, you know which faults were structurally incapable of getting in.
 - **Relevance:** These are the training labels the scorer masks out (rules §3.3). It is an attribute update, so it inherits USGS inclusion criteria rather than fixing them. v2 supersedes v1 — check versions.
 - **Corroboration from the project's own team:** Hart-Wagoner, Coolbaugh, Faulds & Mlawsky (GBCGE / NBMG, University of Nevada, Reno), <https://publications.mygeoenergynow.org/grc/1034813.pdf>: "A Quaternary fault database for the INGENIOUS GBR was collated in Phase I of the INGENIOUS project and included **updated fault locations** and updated fault attributes of **recency** (i.e., age of most recent rupture) and **slip rates**." Independent, project-internal confirmation that the compilation updated locations and attributes rather than re-mapping from new evidence.
 - **Project context** (<https://gbcge.org/current-projects/ingenious/>): PI Bridget Ayling, Co-PI James Faulds; 1 Feb 2021 – 30 Jun 2025; $10,000,000; DOE GTO award DE-EE0009254.
-- **Confidence:** verified for the GDR descriptions, the Hart-Wagoner abstract (read) and the project page (read). **Unverified** — the field-definition document inside the v2 archive has not been unpacked.
+- **Confidence:** verified for the GDR descriptions, the Hart-Wagoner abstract (read) and the project page (read). **Unverified** — the field-definition document inside the v2 archive has not been unpacked. **Update 2026-09-26:** now read — see CG-12.
 
 ## CG-5 · Measured heterogeneity, up to 400 m misfit
 
@@ -110,7 +110,7 @@ This is the clip CG-8 was waiting for, done against the published bounding box r
      5,280/22,956 = **23.0%** regionally (CG-8). Read plainly: the GeoDAWN area is comparatively *well* mapped. If that
      holds inside the actual footprint, the remaining gaps are less likely to be obvious unmapped range fronts and more
      likely to be subtle, cover-masked, or outside the range-front template — which is the CG-7 class 2/3 argument, not
-     class 4. **Inference** from two verified counts; the footprint clip is still pending.
+     class 4. **Inference** from two verified counts; the footprint clip is still pending. **Update 2026-09-26:** done — CG-12.
 - **Three caveats, stated before anyone quotes these numbers.**
   1. The envelope is a **rectangle**, not the flight footprint. The footprint is irregular and covers 51,857 km² inside a
      grid bounding box of roughly 122,800 km² (see the feature-stack page). Envelope counts are an **upper bound**:

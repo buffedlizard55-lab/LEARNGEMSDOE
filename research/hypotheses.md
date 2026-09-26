@@ -98,7 +98,7 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
   area. Superseded by H12. Previous status text kept below for provenance.
 - **Previous status:** untested. Regional counts are measured (CG-8). **The envelope-clipped counts are now measured too (CG-9,
   2026-09-26):** inside the GeoDAWN bounding box the compilation holds 1,179 traces — Well Constrained 739, Moderately
-  Constrained 351, Inferred 89, and **zero** Poor / Other / blank. The polygon clip is still missing.
+  Constrained 351, Inferred 89, and **zero** Poor / Other / blank. The polygon clip is still missing. **Update 2026-09-26:** done — CG-12; H8 rejected (see Status above).
 - **Layers:** `FTYPE_`, `MAPSCALE` on the NBMG 2023-06-27 service. Label raster as mask only, once placed.
 - **Why a gap, not a known fault:** Inferred (5,280 regionally, 89 in the box), Poor (100), Other (27) and blank FTYPE
   (447) traces are already in the compilation the scorer masks. Predicting them scores nothing. The gap is where those
