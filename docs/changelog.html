@@ -89,7 +89,14 @@
           what was removed. (2) Stale counts: README “57 entries / H1–H12” → 79 / H1–H15; overview search-index line
           100 → 127 items. (3) Two new flagged irregularities on the overview: the sibling repo/account entanglement,
           and the stale “no file on this site has been uploaded” statement (two of today's board scores match that
-          site's published artifacts).</p>
+          site's published artifacts). (4) Pass-2 review fixes, applied before
+          the merge: PF-11's “what already exists” was restated from the verbatim band tags — the stack already ships
+          <em>both</em> HGM layers (band 3 magnetic, band 18 gravity), both vertical derivatives (bands 9/11) and one
+          magnetic tilt (band 6), so the derivable gaps reduce to the gravity tilt (atan of 11/18) and the magnetic
+          analytic signal (bands 3/9); ST-9 now quotes both earthquake bands (10 / 16; each “n=100 km radius, a=15°”
+          parameters); CG-17 gained perimeter check 3 — Area 1 + Area 2 = 52,348.8 km² is 670.0 km² more than the
+          51,678.8 km² data extent (per-Area lengths overshoot by 44–55 km), so the acquisition polygons overlap or
+          spill and Area totals must not be summed as disjoint.</p>
         <p><strong>Ran and re-verified.</strong> <code>metrics.py --selftest</code> 11 PASS;
           <code>check_site.py</code> PASS (18 pages, 69 source URLs; caught two card-count mismatches, fixed);
           search index rebuilt (127 items; <code>--check</code> clean). Forum category JSON re-fetched: 11 topics,

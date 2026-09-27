@@ -423,5 +423,11 @@ verified numbers, assuming a one-pixel-wide rasterisation. Compare Hermant et al
   (283.2 km) — matches CG-12's earlier 413/6,230.2 km exactly; Area 1 is entirely code 250. The v2 README documents
   only codes 24/63/100/250/316/500 (re-printed this run); other codes present in the regional data remain undocumented
   (carried-over flag).
+  Second check: the 1,137 bbox records re-state CG-9's 1,179 envelope hits on the tighter grid box. Third — the
+  two acquisition polygons are **not disjoint**: Area 1 (2,413.4 km²) + Area 2 (49,935.4 km²) = 52,348.8 km² is
+  670.0 km² more than the 51,678.8 km² data extent, and the per-Area clipped lengths (311.6 + 5,974.1 = 6,285.7 km
+  INGENIOUS; 311.6 + 5,985.2 = 6,296.8 km USGS) exceed the holdout-domain 6,241.3 km by 44–55 km. The polygons
+  overlap or spill outside the extent; polygon-level densities (per-polygon denominators) are unaffected, but
+  Area-level totals must not be summed as disjoint.
 - **Confidence:** measured (public files only; every number from the named runs). The compiler-density interpretation
   and the label-raster reconciliation are **inference**, and the 60,988 reference figure is a **site claim**.

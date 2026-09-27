@@ -313,8 +313,10 @@
             <a href="https://doi.org/10.1785/0220220153">10.1785/0220220153</a> (record verified; provenance suggestion
             unverified — ST-7's caution).</dd>
           <dt>The resolution budget (verified inputs)</dt>
-          <dd>The earthquake layer's own tag states a 100 km radius with azimuth-distance parameters; MT conductance
-            spans 2–200 km depths; geodetic strain interpolates between GNSS stations. All three are smooth at the
+          <dd>Both earthquake bands carry the parameterisation in their own tags — band 10 “Distance to earthquake
+            (n=100 km radius, a=15° azimuth parameters)” and band 16 “Earthquake intensity or density (n=100 km radius,
+            a=15° parameters)”; MT conductance spans 2–200 km depths; geodetic strain interpolates between GNSS
+            stations. All three are smooth at the
             300 m kernel scale. <strong>Rule: these layers set a prior field over tens of kilometres; they must never
             decide a single pixel.</strong> Valid: sample weighting, fold stratification in spatial CV, candidate
             re-ranking with stated weights. Invalid: emit/no-emit gates; negative screens on quiet areas (ST-8: quiet ≠

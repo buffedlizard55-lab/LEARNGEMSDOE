@@ -748,8 +748,13 @@
           <dd>INGENIOUS inside the extent: 393 traces at MAPSCALE 250 (5,947.0 km) + 20 at code 100 (283.2 km) —
             exactly CG-12's 413 / 6,230.2 km; Area 1 entirely code 250. The v2 README documents only codes
             24/63/100/250/316/500 (re-printed this run); other codes present regionally remain undocumented
-            (carried-over flag). Bitmap and JSON are the run's <code>public-census</code> artifacts, not committed
-            (data/ stays out of git).</dd>
+            (carried-over flag). Check 2: 1,137 bbox records ≈ CG-9's 1,179 envelope hits on the tighter grid
+            box. Check 3 — <strong>the acquisition polygons are not disjoint</strong>: Area 1 (2,413.4 km²) + Area 2
+            (49,935.4 km²) = 52,348.8 km², 670.0 km² more than the 51,678.8 km² data extent, and per-Area clipped
+            lengths (311.6 + 5,974.1 = 6,285.7 km INGENIOUS; 311.6 + 5,985.2 = 6,296.8 km USGS) exceed the holdout
+            domain 6,241.3 km by 44–55 km. Polygons overlap or spill; per-polygon densities above are unaffected,
+            but Area totals must not be summed as disjoint. Bitmap and JSON are the run's
+            <code>public-census</code> artifacts, not committed (data/ stays out of git).</dd>
           <dt>Confidence</dt>
           <dd><span class="chip verified">measured</span> (public files; named runs). The compiler-density
             interpretation and the label-raster reconciliation are <span class="chip unverified">inference</span>; the

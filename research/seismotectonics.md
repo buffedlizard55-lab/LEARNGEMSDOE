@@ -114,9 +114,10 @@ spatial priors that re-weight candidates produced elsewhere, never as a standalo
   conductivity anomaly and earthquake density coincide, candidate rank should rise; where they disagree, the
   disagreement matrix above applies. The point of this entry is that "cross-referencing" is a statistical operation
   with a resolution budget, not a boolean overlay.
-- **The resolution budget, from verified sources.** The earthquake layer's own tag states a 100 km radius, 15°
-  azimuth-distance parameterisation; the MT conductance layer spans 2–200 km depth ranges; the geodetic strain field
-  is a continuum interpolation between GNSS stations. All three are smooth on the scale of the 300 m scoring kernel.
+- **The resolution budget, from verified sources.** Both earthquake bands carry the parameterisation in their own
+  tags — band 10 "Distance to earthquake (n=100 km radius, a=15° azimuth parameters)" and band 16 "Earthquake
+  intensity or density (n=100 km radius, a=15° parameters)"; the MT conductance layer spans 2–200 km depth ranges;
+  the geodetic strain field is a continuum interpolation between GNSS stations. All three are smooth on the scale of the 300 m scoring kernel.
   Consequence, stated as a rule: **these layers set a prior field over tens of kilometres; they must never decide a
   single pixel.** Valid uses: sample weighting in training, fold stratification in spatial CV, and candidate
   re-ranking with explicitly stated weights. Invalid uses: hard emit/no-emit gates, negative screens on quiet areas

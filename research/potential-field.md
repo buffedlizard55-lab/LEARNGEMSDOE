@@ -147,20 +147,25 @@ that responds to structure *under* cover.
   amplitude — the forms introduced for edges by Miller &amp; Singh (1994) and popularised for display by Verduzco et
   al. (2004). The formula-level details are deliberately not reproduced here from memory; both papers are on the
   unread-source list and the definitions above are marked **inference from the citations' scope**, not from the texts.
-- **What already exists, verified from the band tags.** Band 6 is tagged "Tilt angle or total curvature — magnetic
-  field derivative for edge detection" and band 15 is a depth-to-basement surface; there is also a band carrying the
-  "vertical slope of total magnetic intensity" (feature-stack page). So the stack already ships exactly one magnetic
-  edge derivative and no gravity edge derivative — the isostatic gravity anomaly appears only raw and as its slope.
+- **What already exists, verified from the band tags** (feature-stack page, quoted here from the tags verbatim):
+  magnetics — band 1 anomaly, band 2 reduced-to-pole, band 3 "Total magnetic intensity horizontal gradient", band 9
+  "vertical gradient", band 6 "Tilt angle or total curvature — magnetic field derivative for edge detection", band 14
+  TMI. Gravity — band 13 isostatic anomaly, band 5 slope, band 11 "vertical gradient", band 18 "horizontal gradient".
+  So **the priority's derivative ask is already largely shipped**: both HGM layers exist (3 magnetic, 18 gravity),
+  both vertical derivatives exist (9, 11), and one tilt layer exists (6, magnetic). The two derivable gaps are the
+  **gravity tilt** (computable as atan(band 11 / band 18)) and the **analytic-signal amplitude** (from bands 3 and 9).
+  Band 15 remains the depth-to-basement cover surface.
 - **What the sibling field implements (site claims, not re-run here).** The 6GEMSDOE methodology note advertises
   "derived horizontal-gradient magnitude, analytic-signal amplitude, tilt derivative, multi-scale curvature,
   break-in-slope and structure-tensor lineament features" over "the 19 official GeoDAWN/USGS bands", 88 channels in
   total; GEMSDOE4 describes 63 lineament features (multi-scale Sato ridgeness, structure-tensor coherence) on the six
   bands it judged edge-bearing. Published as text on their sites; this repository holds neither build.
 - **The open, score-relevant questions.**
-  1. **Does derived HGM/TDR add anything over band 6?** If band 6 is the tilt derivative of TMI, then re-deriving TDR
-     is redundant by construction and the marginal channel is *gravity* HGM/TDR (basement density edges under cover)
-     and the analytic signal (less dependent on magnetisation direction). "Cheapest next experiments" item 4 on this
-     page already anticipated this; it is unmeasured because the rasters are unplaced.
+  1. **Do the re-derived transforms add anything over the shipped bands?** If band 6 is the tilt derivative
+     (bands 9/3 recombined), it is redundant by construction; the marginal channels are the *gravity* tilt
+     (bands 11/18) and the magnetic analytic signal (bands 3/9), the latter being tolerant of magnetisation
+     direction. "Cheapest next experiments" item 4 on this page already anticipated this; it is unmeasured because
+     the rasters are unplaced.
   2. **Cross-layer edge coincidence.** A magnetic edge and a gravity edge at the same line are two independent
      physical contrasts supporting one buried structure (see ST-6's agreement matrix). Confluence is the discriminator
      between a fault and a lithologic contact, and it cannot be faked by a single-band edge detector.

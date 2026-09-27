@@ -82,6 +82,16 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 - **Stale counts**: README said "57 numbered entries" and "H1–H12" (actual was 71 / H1–H14 before this session);
   both fixed (79 / H1–H15). Overview "100 items" search-index line updated to 127.
 
+- **Pass-2 review fixes (same session, before merge)**: PF-11's "what already exists" was restated from the
+  verbatim band tags after a line-by-line re-read — the stack already ships *both* HGM layers (band 3 magnetic,
+  band 18 gravity), both vertical derivatives (bands 9/11) and one magnetic tilt (band 6); the genuinely derivable
+  gaps reduce to the **gravity tilt** (atan of 11/18) and the **magnetic analytic signal** (bands 3/9). ST-9 now
+  quotes both earthquake bands (10: "Distance to earthquake (n=100 km radius, a=15° azimuth parameters)"; 16:
+  "Earthquake intensity or density (n=100 km radius, a=15° parameters)"). CG-17 gained perimeter check 3: Area 1
+  (2,413.4 km²) + Area 2 (49,935.4 km²) = 52,348.8 km² is 670.0 km² more than the 51,678.8 km² data extent, and
+  per-Area clipped lengths exceed the holdout-domain 6,241.3 km by 44–55 km — the acquisition polygons overlap or
+  spill, so Area-level totals must not be summed as disjoint (per-polygon densities unaffected).
+
 **Verified again (re-run, not recalled)**
 
 - `python3 scripts/metrics.py --selftest` → 11 PASS. `python3 scripts/check_site.py` → PASS (18 pages, 69 source

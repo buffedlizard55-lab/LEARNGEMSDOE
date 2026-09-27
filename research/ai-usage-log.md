@@ -50,6 +50,12 @@ record rather than reconstructed at the deadline.
   agent never posts). No external data fetched from login-gated or TLS-blocked hosts; public files were fetched only
   on GitHub runners via the existing workflow.
 
+**Pass-2 review (same session):** line-by-line re-read caught and fixed an overclaim in PF-11 (the stack already
+ships both HGM bands 3/18, both vertical derivatives 9/11 and magnetic tilt 6 — gaps reduce to the gravity tilt and
+the analytic signal), corrected ST-9's earthquake sentence to quote both bands 10/16, and added CG-17 perimeter
+check 3 (acquisition polygons overlap by ~670 km²; totals not disjoint). `# 127 items` verification line and page
+metas refreshed; all checks re-run and PASS before the second commit.
+
 ---
 
 ## 2026-09-26 · session `arena/01a0dfe6-learngemsdoe`
