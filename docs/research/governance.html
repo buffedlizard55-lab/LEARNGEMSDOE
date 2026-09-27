@@ -36,7 +36,7 @@
 
   <div class="shell has-toc">
     <main id="main">
-      <p class="meta">Library · domain 6 of 6 · 17 entries · whole rules PDF read end to end 2026-09-26, re-verified again 2026-09-26 session <code>arena/01a0dfe6-learngemsdoe</code></p>
+      <p class="meta">Library · domain 6 of 6 · 20 entries · whole rules PDF read end to end 2026-09-26, re-verified again 2026-09-26 session <code>arena/01a0dfe6-learngemsdoe</code></p>
 
       <h1>Competition governance</h1>
       <p class="lede">
@@ -542,6 +542,120 @@
           <dd>Time-sensitive governance — confirms no official errata or new staff answers since GV-11. Any decision based on previous reads remains valid today.</dd>
           <dt>Confidence</dt>
           <dd><span class="chip verified">verified</span> — all items fetched and read this session via fetch_page, not recalled. <span class="chip staff">staff</span> for forum, <span class="chip rules">rules</span> for PDF.</dd>
+        </dl>
+      </article>
+      <h2 id="gv18">GV-18 · Site and account ownership audit</h2>
+      <article class="entry" id="gv18-entry">
+        <h3><span class="id">GV-18</span> 12 competition-named repositories, five leaderboard accounts, and what cannot be verified from public data</h3>
+        <p><span class="chip verified">repository list, commit authors, leaderboard, artifact identity, ToU — verified</span> · relationships among the five accounts <span class="chip unverified">unresolvable from here</span></p>
+        <dl>
+          <dt>Source</dt>
+          <dd>GitHub API repository list and per-repo commit authors (via <code>gh api</code>, this session); the public
+            <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>
+            (both pages, 2026-09-26); the six sibling sites under
+            <code>buffedlizard55-lab.github.io</code> (GEMSDOE, GEMSDOE2, GEMSDOE3, GEMSDOE4, 5GEMSDOE, 6GEMSDOE — all
+            read this session); <a href="https://www.drivendata.org/termsofuse/">DrivenData Terms of Use</a>.</dd>
+          <dt>Measured — repositories</dt>
+          <dd>The hosting account holds <strong>twelve</strong> repositories named for this one competition
+            (GEMSDOE, GEMSDOE2, GEMSDOE3, GEMSDOE4, 5GEMSDOE through 8GEMSDOE, GEMSDOE9, GEMSDOE10, 11GEMSDOE, plus
+            LEARNGEMSDOE). Eleven were created in one batch on 2026-09-25 (18:16–18:34 UTC). Commit authors on all are
+            the same set: the account owner, the Arena coding-agent bot, and GitHub Actions. On GitHub there is
+            <strong>one operator</strong>. Several sibling sites publish ready-to-upload, sha-pinned submission GeoTIFFs.</dd>
+          <dt>Measured — leaderboard accounts</dt>
+          <dd><ul>
+            <li><strong>0.1563</strong> — <code>extradr19</code> (#24, 2 submissions) <em>and</em> <code>SDCF9</code> (#25, 2 submissions). GEMSDOE's recall-union artifact sha <code>7f00890a…</code> is pinned byte-identical by 5GEMSDOE's site.</li>
+            <li><strong>0.1560</strong> — <code>smashi34</code> (#26, 1 submission) — GEMSDOE2's advertised dual-family union score.</li>
+            <li><strong>0.1193</strong> — <code>smrtdoog5</code> (#42, 1 submission); <strong>0.0830</strong> — <code>wbg1</code> (#52, 2 submissions) — GEMSDOE3's Pindrop files.</li>
+            <li>A third GEMSDOE3 score reported to us, 0.1152, is <strong>not on today's board</strong> — consistent with a superseded best (two of the 0.1563 accounts show exactly two submissions).</li>
+            <li>Field high: <strong>0.3049</strong> (GV-19).</li>
+          </ul></dd>
+          <dt>The ownership question, answered precisely</dt>
+          <dd>What public data verifies ends there. Whether those five accounts are one natural person or five is
+            <strong>not determinable from this sandbox</strong>: DrivenData profiles are login-gated (redirect verified
+            today), and this agent holds no credentials and creates none. Artifact entanglement is strong — one GitHub
+            operator ships the files; five accounts' best scores match those files' advertised scores — but that is not
+            proof of shared ownership, and this library records only what was verified.</dd>
+          <dt>The rules exposure, stated without adjudicating it</dt>
+          <dd>(a) Rules §3.4–§3.5: one final submission per team; team members may not submit separately. (b) §A.3: a
+            single prize amount to the designated primary submitter. (c) §A.12: risk review; elimination not appealable.
+            (d) DrivenData ToU: the account “is personal to you” and credentials may not be shared. If several of the
+            five accounts are one person, the prize's one-entity structure is compromised; if they are five people
+            downloading the same public artifacts, each is an independent entrant whose lineage is a shared public site.
+            This agent does not assert either case — <strong>but the second would mean other entrants' registrations
+            are feeding on sibling sites, which the guardrails forbid treating as our data.</strong></dd>
+          <dt>This repository's own position, re-stated</dt>
+          <dd>One repository (this one), one site, zero submissions, zero weekly slots, zero accounts operated by this
+            agent. None of the five accounts is claimed as ours, and <strong>none of the scores
+            0.1563/0.1560/0.1193/0.0830/0.1152 is recorded anywhere in this repository as our history</strong>.</dd>
+          <dt>Action for the account holder (human)</dt>
+          <dd>Decide which single DrivenData account is the entity; archive or delete the duplicate repositories
+            (6GEMSDOE's own audit reached the same conclusion 2026-09-25); route uncertainty through GV-16's channel
+            (forum or <code>gemsprize@nlr.gov</code>).</dd>
+        </dl>
+      </article>
+
+      <h2 id="gv19">GV-19 · Field position, live leaderboard 2026-09-26</h2>
+      <article class="entry" id="gv19-entry">
+        <h3><span class="id">GV-19</span> Where the field stands and where the sibling-attributed scores sit inside it</h3>
+        <p><span class="chip verified">names, scores, ranks, submission counts</span> · interpretation <span class="chip unverified">inference</span></p>
+        <dl>
+          <dt>Source</dt>
+          <dd><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Leaderboard</a>,
+            both pages, read 2026-09-26.</dd>
+          <dt>Snapshot (public best DW-Tversky)</dt>
+          <dd>#1 <code>DARD</code> 0.3049 (10 submissions); #2 <code>alexoktaba</code> 0.2993 (13); #3
+            <code>HardcoreTechGod</code> 0.2854 (6); #4 <code>mzoorob</code> 0.2843 (15); #5 <code>joeyfezster</code>
+            0.2589 (12); #6–#10: 0.2504 / 0.2367 / 0.2340 / 0.2262 / 0.2220. ≥76 teams; #75 0.0427 and falling.</dd>
+          <dt>Where the sibling-attributed scores sit</dt>
+          <dd>0.1563 ⇒ #24–25 of ≥76; 0.1560 ⇒ #26; 0.1193 ⇒ #42; 0.0830 ⇒ #52. The band #22–#26 spans
+            0.1590–0.1560: five teams within 0.003, so thousandths move ranks there.</dd>
+          <dt>Interpretation (inference)</dt>
+          <dd>The sibling pack leads the loose midfield at ~51% of the field leader, inside a cluster where
+            emission-policy tweaks plausibly move rank but not tier. The ~2× gap to the 0.2589–0.3049 tier is a
+            <em>detection</em> problem — finding faults others miss — not an emission problem; consistent with GV-5/GV-6
+            (the scored population is the unmapped one) and with the backlog's prioritisation of genuinely new
+            detections (H1, H2, H12). Also measured: the #1 score has been static ~4 days while #2 and #4 were active
+            within 2 — the top tier is still moving.</dd>
+        </dl>
+      </article>
+
+      <h2 id="gv20">GV-20 · Sibling pipeline documentation audit</h2>
+      <article class="entry" id="gv20-entry">
+        <h3><span class="id">GV-20</span> What the sibling pages claim for CV, placement, validation and the submission recipe — and what this library vouches for</h3>
+        <p><span class="chip verified">quotations read this session</span> · all sibling technical claims are <span class="chip unverified">site claims</span> unless a verified rule or the H15 measurement is named</p>
+        <dl>
+          <dt>Source</dt>
+          <dd>6GEMSDOE index (experiments + 13-check gate table); GEMSDOE3 index and executive summary; GEMSDOE and
+            GEMSDOE2 indices and how-to-submit pages; 5GEMSDOE and GEMSDOE4 indices — all read 2026-09-26.</dd>
+          <dt>Cross-validation (task: blocked &amp; buffered, never random)</dt>
+          <dd>6GEMSDOE advertises “spatially blocked, buffered folds (300 m buffer)” / “4×4 blocks, buffer 3 px = 300 m”;
+            GEMSDOE3 discloses a rotated partition (offset [256,256] px; train [0,3], tune 1, audit 2).
+            <strong>Site claims</strong> — no sibling repository is checked out from this one, by design. Consistent
+            with this library's H5 protocol as described.</dd>
+          <dt>Metric-aware placement (~4–5 px)</dt>
+          <dd>GEMSDOE3 derives spacing/2 &lt; R ⇒ ≤ 5 px and publishes k = 4. <strong>Verified locally this session with
+            our own metric</strong> (<code>scripts/placement_check.py</code>, <a href="../hypotheses.html#h15">H15</a>):
+            the advantage reproduces on near-axis traces, <em>fails on 45° traces under square suppression</em> (0.5764
+            vs dense 0.6176), and is restored orientation-robustly by disc suppression (0.7257). The published
+            worst-case figure (“gap 2.0 px”) is a 4-connected bound.</dd>
+          <dt>The format gate</dt>
+          <dd>6GEMSDOE publishes a 13-check table including <code>NAN-INSIDE-FOOTPRINT</code> as a hard gate (“the exact
+            condition that makes the submission form answer 'Predicted values must be in range [0, 1]'”), against an
+            official sample-submission sha256; GEMSDOE/GEMSDOE2 publish similar 10-check tables and a template
+            conformance note “enforced by scripts/validate_submission.py since 2026-09-25”. The published check list
+            matches every verified format rule (EPSG:32611; 100 m; shape (3730, 3292); geotransform (100, 0, 243350, 0,
+            −100, 4508550); float32; [0, 1]; NaN only outside the valid region). <strong>Internally consistent site
+            claims</strong>; nothing here re-runs them — this repo has no submission generator to gate (pipeline page).</dd>
+          <dt>Executive summary / how-to-submit accuracy</dt>
+          <dd>Checked line by line today: metric constants (α 0.2, β 0.8, R 300 m), 3 submissions/week, one final
+            selection, two-phase structure on GEMSDOE3's summary and GEMSDOE2's index <strong>match the verified
+            rules</strong>. <strong>One stale statement flagged, not smoothed:</strong> GEMSDOE3's pages state “no file
+            on this site has been uploaded” while the board (GV-18) shows two current best scores matching that site's
+            published Pindrop artifacts and a third superseded — stale for any entrant who did upload them.</dd>
+          <dt>Also flagged</dt>
+          <dd>6GEMSDOE's homepage self-declares “the one canonical entry” while every sibling site equally publishes “the
+            file to submit”. At most one of those can govern; GV-18 is the audit of the multiplicity, and resolution
+            belongs to the account holder.</dd>
         </dl>
       </article>
     </main>

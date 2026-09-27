@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 2 of 6 · 10 entries · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 2 of 6 · 11 entries · re-verified 2026-09-26</p>
 
       <h1>Potential-field geophysics</h1>
       <p class="lede">
@@ -334,7 +334,7 @@
           </ul></dd>
           <dt>What it settles</dt>
           <dd><ul>
-            <li><strong>Azimuth, verified:</strong> Area 1 lines flown at 22° (NNE); Area 2 at 310°. That is the acquisition geometry behind PF-9.</li>
+            <li><strong>Azimuth, corrected 2026-09-26 (this entry previously mis-stated the verified text).</strong> The data page specifies, verbatim, flight lines at an azimuth of <strong>90°</strong> and tie lines at <strong>180°</strong> for <em>both</em> Area 1 (200 m / 2,000 m spacing) and Area 2 (400 m / 4,000 m) — the geometry behind PF-9. An earlier rendering of this entry claimed “Area 1 lines flown at 22° (NNE); Area 2 at 310°”; that sentence is unsupported by the page and contradicts PF-9’s verbatim quotation, and is removed. The 22° figure that page does contain is the maximum climb/descent angle of the drape surface, a different quantity. The correction is recorded in the changelog rather than silently reversed.</li>
             <li><strong>Two different surveys with different specifications feed the same raster.</strong> Area 1 is finer and lower; Area 2 is coarser and higher. PF-7's seam question is therefore not hypothetical — there are four blocks and two flight geometries inside one grid.</li>
             <li><strong>A band-provenance route now exists.</strong> Because the release ships geoTIFF grids and a contractor's report, the notebook's 19 band tags can be checked against the delivered grids and processing descriptions without touching the competition raster. This is the cheapest way to close GV-17 and to confirm which bands are raw data and which are derived.</li>
           </ul></dd>
@@ -350,6 +350,51 @@
         <li>Stratify every magnetic and gravity edge candidate by band 15 (cover thickness) and report detection statistics per cover class.</li>
         <li>Compute the analytic-signal amplitude and the tilt's total horizontal derivative, and test whether either adds information over band 6 alone against held-out catalogue faults — a sanity check before trusting it on unknowns.</li>
       </ol>
+      <h2 id="pf11">PF-11 · Horizontal-gradient and tilt derivatives: priority vs. reality</h2>
+      <article class="entry" id="pf11-entry">
+        <h3><span class="id">PF-11</span> HGM / TDR / analytic signal — what exists, what is claimed, what is still unmeasured</h3>
+        <p><span class="chip verified">band tags + DOIs verified</span> · derivative definitions <span class="chip unverified">inference until the papers are read</span> · sibling feature lists are site claims</p>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band tags as printed by the reference notebook (see the <a href="../feature-stack.html">feature stack</a>);
+            Miller &amp; Singh (1994), <a href="https://doi.org/10.1016/0926-9851(94)90022-1">10.1016/0926-9851(94)90022-1</a>
+            (record verified, paper unread); Verduzco et al. (2004),
+            <a href="https://doi.org/10.1190/1.1651454">10.1190/1.1651454</a> (same qualification); sibling sites
+            6GEMSDOE / GEMSDOE4 methodology notes (read 2026-09-26).</dd>
+          <dt>What the priority asks</dt>
+          <dd>Horizontal-gradient magnitude (HGM) maxima sit over susceptibility/density contrasts; the tilt derivative
+            normalises the vertical derivative by the horizontal gradient so shallow and deep edges plot comparably;
+            the analytic-signal amplitude is magnetisation-direction tolerant. Introduced for edges by Miller &amp;
+            Singh and popularised by Verduzco et al. — formula-level content is deliberately <em>not</em> reproduced
+            from memory; both papers are on the unread list.</dd>
+          <dt>What already exists (verified, tags quoted verbatim)</dt>
+          <dd>Magnetics: band 1 anomaly, band 2 RTP, band 3 “Total magnetic intensity horizontal gradient”, band 9
+            “vertical gradient”, band 6 “Tilt angle or total curvature — magnetic field derivative for edge detection”,
+            band 14 TMI. Gravity: band 13 isostatic anomaly, band 5 slope, band 11 “vertical gradient”, band 18
+            “horizontal gradient”. <strong>The priority's derivative ask is already largely shipped</strong> — both HGM
+            layers (3, 18), both vertical derivatives (9, 11), one magnetic tilt (6). The derivable gaps are the
+            <strong>gravity tilt</strong> (atan of band 11 / band 18) and the <strong>analytic-signal amplitude</strong>
+            (bands 3 and 9). Band 15 remains the depth-to-basement cover surface.</dd>
+          <dt>What the sibling field implements (site claims)</dt>
+          <dd>6GEMSDOE lists derived HGM, analytic-signal amplitude, tilt derivative, multi-scale curvature,
+            break-in-slope and structure-tensor lineaments (88 channels); GEMSDOE4 lists 63 lineament features on six
+            edge-bearing bands. Neither build is held here; recorded as published text.</dd>
+          <dt>Open, score-relevant questions</dt>
+          <dd><ol>
+            <li>If band 6 <em>is</em> the recombination of bands 3/9, re-deriving TDR is redundant; the marginal
+              channels are the <strong>gravity tilt</strong> (bands 11/18) and the analytic signal (bands 3/9) —
+              the latter tolerant of magnetisation direction. Unmeasured — rasters not placed.</li>
+            <li><strong>Cross-layer edge coincidence</strong> (magnetic edge + gravity edge at one line) is the
+              discriminator between a buried fault and a lithologic contact; no single-band edge detector can supply it.</li>
+            <li>Derivatives amplify line-parallel acquisition noise (PF-9); the H7 artefact screen must run
+              <em>after</em> derivation, not before.</li>
+          </ol></dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> for the band tags' existence as printed and the two DOIs;
+            <span class="chip unverified">inference</span> for the definitions and the redundancy/confluence arguments;
+            sibling feature lists are site claims.</dd>
+        </dl>
+      </article>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
   </div>

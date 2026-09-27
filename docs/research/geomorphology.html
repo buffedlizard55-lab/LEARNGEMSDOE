@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 3 of 6 · 10 entries · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 3 of 6 · 12 entries · re-verified 2026-09-26</p>
 
       <h1>DEM structural geomorphology</h1>
       <p class="lede">
@@ -372,6 +372,87 @@
         <li><strong>Check whether bands 12/19 match</strong> the detrended-elevation release at <a href="https://doi.org/10.5066/P9MQRCBY">10.5066/P9MQRCBY</a> once resampled. If they do, the detrending method is documented and the blind spots become computable.</li>
         <li><strong>Do not compute slope from non-lidar 3DEP.</strong> Hermant et al. tried it and found it artefact-ridden; that is a published negative result and it is free to respect.</li>
       </ol>
+      <h2 id="gm11">GM-11 · Curvature and slope-break on the DEM</h2>
+      <article class="entry" id="gm11-entry">
+        <h3><span class="id">GM-11</span> Second derivatives of topography: what exists, what is claimed, what is still unmeasured</h3>
+        <p><span class="chip verified">band existence + Hermant quotation verified</span> · scale/kernel analysis <span class="chip unverified">inference</span> · sibling lists are site claims</p>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band tags (feature-stack page, verified); Hermant et al. (2025) §3.3 (GM-10); Mattéo et al. (2021),
+            <a href="https://doi.org/10.1029/2020JB021269">10.1029/2020JB021269</a> (citation verified; methods unread);
+            6GEMSDOE / GEMSDOE4 notes (site claims); the artefact warning recorded below on this page (“Do not compute
+            slope from non-lidar 3DEP — Hermant et al. found it artefact-ridden”).</dd>
+          <dt>What the priority asks</dt>
+          <dd>Plan/profile curvature to pick out break lines — a normal-fault scarp is a curvature couplet (convex crest
+            over concave toe): the geometric content of Hermant criterion 2 (“areas on either side of the fault will have
+            a different elevation and the fault zone itself will have a steeper slope”, verbatim, GM-10).</dd>
+          <dt>What already exists (verified)</dt>
+          <dd>Detrended elevation and the slope of detrended elevation — first derivatives only. No curvature band; the
+            1 m DEM is a separate link-listed download (716 tiles — sibling census, site claim), not a band.</dd>
+          <dt>What the sibling field implements (site claims)</dt>
+          <dd>6GEMSDOE lists “multi-scale curvature, break-in-slope”; GEMSDOE4 structure-tensor lineaments on six
+            edge-bearing bands. Recorded as published text; neither build is held here.</dd>
+          <dt>Open, score-relevant questions</dt>
+          <dd><ol>
+            <li><strong>Provenance first.</strong> The Hermant artefact warning only binds once the elevation bands'
+              source is known, and GV-17 records that the description and the band tags disagree on the inventory.
+              Curvature amplifies exactly the artefacts in question — build it only where verified lidar exists.</li>
+            <li><strong>Scale.</strong> A 100 m cell averages out metre-scale scarp faces; the couplet survives as a
+              broad sign change over 2–4 cells, overlapping hillslope/channel curvature. Slope-break at the band's own
+              scale is the band-native channel; 1 m curvature belongs to the lidar fraction (H3, blocked).</li>
+            <li><strong>Detrending.</strong> The detrend kernel sets the largest structure curvature can describe; the
+              tag does not state it (feature-stack “pitfalls”). <span class="chip unverified">inference</span> until placed.</li>
+          </ol></dd>
+        </dl>
+      </article>
+
+      <h2 id="gm12">GM-12 · Candidate-fault reasoning ledger</h2>
+      <article class="entry" id="gm12-entry">
+        <h3><span class="id">GM-12</span> The geological write-up that must accompany any flagged pixel set — five classes, pre-stated</h3>
+        <p><span class="chip verified">each class grounds only in verified entries</span> · the taxonomy is <span class="chip unverified">inference</span> until measured</p>
+        <dl>
+          <dt>Source</dt>
+          <dd>Composed from CG-14, CG-15, GM-5, GM-10, GV-5, GV-6, GV-15, PF-6, PF-9, PF-10, PF-11, the ST agreement
+            matrix, and rules §3.2 (narrative requirement, GV-2) — all verified entries elsewere on this site.</dd>
+          <dt>Why this entry exists</dt>
+          <dd>Both prize phases are scored against expert-mapped <em>new</em> faults, and Phase 2 labels are revised by
+            experts after seeing predictions (GV-15). A flagged candidate is therefore an argument to a geologist, not
+            a pixel mask. This ledger fixes the reasoning per candidate class in advance. Per class, because this
+            repository holds no model output — per-pixel instances belong to whichever single canonical entry the
+            account holder settles (<a href="governance.html#gv18">GV-18</a>).</dd>
+          <dt>C1 — buried catalogue-gap lineament (magnetic + gravity edge, under cover)</dt>
+          <dd>Basin-and-Range normal faulting juxtaposes basement of different susceptibility and density, so a covered
+            fault is still a linear HGM maximum with a gravity-gradient counterpart (PF-11; cover context from band 15,
+            PF-6). No scarp expected under cover (GM-5); the short seismic record cannot veto it (ST-8). <em>Required:</em>
+            two edges collinear over multi-km length; not trackline-parallel within the PF-9 tolerance (H7 screen).
+            <em>Confuser:</em> lithologic contact — confluence decides, never one band.</dd>
+          <dt>C2 — trace-end extension of a mapped fault</dt>
+          <dd>Displacement dies out at tips into distributed deformation; the catalogue trace ends where expression stops
+            being convincing. Staff: corrections/extensions “may already exist in the new-fault set, and may also exist
+            in the final round evaluation set” (GV-15) and “can include newly mapped geometry of an existing fault
+            system” (GV-6). <em>Required:</em> same strike, same geophysical expression. <em>Warning:</em> no buffer near
+            known traces (GV-5) — the extension must be the right continuation, not a corridor.</dd>
+          <dt>C3 — parallel strand / stepover, Walker Lane dextral-normal array</dt>
+          <dd>En echelon arrays transfer slip across stepovers; play-fairway exploration treats such zones as
+            dilatational hosts (the verified premise of the INGENIOUS project). A sub-parallel lineament within ~1 km
+            inside a stepover is a candidate, not a duplicate. <em>Required:</em> kinematic fit (N–NE normal, NW
+            dextral — PF-9). <em>Limited by:</em> CG-15 — compilation agreement ≤ 31.6 m, so “parallel strand” claims
+            under ~100 m offset are unsupported by public data (H13's lesson).</dd>
+          <dt>C4 — E–W to WNW cross-structure</dt>
+          <dd>Accommodation zones sit in the worst-sampled acquisition orientation (E–W flight lines, 2–4 km tie lines —
+            PF-9 verbatim), so genuine gaps plausibly concentrate there — and the same gap manufactures line-parallel
+            artefacts. <em>Required:</em> stricter H7 screen than N–S candidates, presence in two independent layers.
+            <em>Confuser:</em> levelling seams between the four acquisition blocks (PF-10, PF-7).</dd>
+          <dt>C5 — straight, high-contrast morphology-only lineament</dt>
+          <dd>Hermant criterion 1 (“generally straight line … strong visual contrast”, verbatim GM-10) is necessary, not
+            sufficient: roads, ditches, shorelines, channel margins share it; the catalogue filed its own lookalikes as
+            Class D (CG-14). <em>Required:</em> an explicit non-tectonic rejection attempt plus one independent physical
+            layer; the Phase 2 narrative must argue why each flagged line is tectonic (GV-2).</dd>
+          <dt>Use</dt>
+          <dd>Every emitted candidate class gets one ledger paragraph in the submission narrative. Candidates matching
+            no class are not emitted: “the model said so” is not reasoning.</dd>
+        </dl>
+      </article>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
   </div>

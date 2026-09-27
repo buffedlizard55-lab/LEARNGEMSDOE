@@ -25,9 +25,9 @@ change it) and it is the one manual step left in the site setup.
 | Search | [docs/search.html](docs/search.html) | One box over every research entry, hypothesis card and page; generated index |
 | Explainer | [docs/executive-summary.html](docs/executive-summary.html) | Geologist-facing narrative of the problem |
 | Requirements | [docs/requirements.html](docs/requirements.html) | Full checklist: constraints, re-read facts, counted catalogue attributes, open items |
-| Research library | [docs/research/](docs/research/) | Six domains, 57 numbered entries, each with source / citation / claim / relevance / confidence |
+| Research library | [docs/research/](docs/research/) | Six domains, 79 numbered entries, each with source / citation / claim / relevance / confidence |
 | Feature stack | [docs/feature-stack.html](docs/feature-stack.html) | All 19 bands, raster geometry, GeoDAWN acquisition, missing layers, pitfalls |
-| Hypothesis backlog | [docs/hypotheses.html](docs/hypotheses.html) | H1–H12 cards (H8 rejected) with layers, signature, gap reasoning, expected DTI impact, cost, validation, rejection |
+| Hypothesis backlog | [docs/hypotheses.html](docs/hypotheses.html) | H1–H15 cards (H8 and H13 rejected; H15 partially validated on synthetic tiles) with layers, signature, gap reasoning, expected DTI impact, cost, validation, rejection |
 | Sources | [docs/sources.html](docs/sources.html) | Every source, with what was read and what remains unverified |
 | Pipeline | [docs/pipeline.html](docs/pipeline.html) | Data-placement blocker, what runs today, the submission gate |
 | Governance | [docs/research/governance.html](docs/research/governance.html) | Rules section by section, staff clarifications, open questions |
@@ -67,6 +67,8 @@ and correct that page if they disagree.
 ```bash
 python3 scripts/metrics.py --selftest            # 11 numeric checks, CPU, standard library only
 python3 scripts/metrics.py --demo                # worked example as JSON
+python3 scripts/placement_check.py               # dense vs node emission under our metric — synthetic, prints JSON
+python3 scripts/rasterize_catalogue.py           # stamps public catalogues onto the 100 m grid (needs pyshp shapely pyproj + public files)
 python3 scripts/check_site.py                    # links, anchors, assets, source allowlist — offline
 python3 scripts/build_search_index.py            # regenerate the search index
 python3 scripts/build_search_index.py --check    # fail if the committed index is stale

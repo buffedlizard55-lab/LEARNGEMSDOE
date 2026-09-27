@@ -283,6 +283,42 @@ rasters) and H10 (needs an external lidar fault mapping, independent of the comp
 - **Confidence in the premise:** the recency counts are **verified** (CG-16). The reasoning that they predict expert
   attention is **inference**, and route (1) exists precisely to test it.
 
+## H15 · Metric-aware node placement — directionally validated under our metric, with a measured diagonal failure mode and its fix
+
+- **Status: partially validated, 2026-09-26** — validated as geometry on synthetic tiles with this repository's own
+  DTI implementation (`scripts/placement_check.py`, pure-python backend); not validated against any real label set.
+- **The claim under test.** The metric credits each truth pixel from its single best prediction inside a 300 m
+  triangular kernel and charges every emitted pixel that covers nothing. Therefore, at a fixed pixel budget, emitting
+  *spaced nodes* along a candidate trace should beat a dense ridge prefix whenever there is more trace than budget —
+  "placement beats mass". The sibling Pindrop page (site claim) publishes square-suppressed nodes at spacing k = 4
+  from the derivation spacing/2 < R ⇒ spacing ≤ 5.
+- **What the measurement shows (truth 72 px, budget 40 px, all pixels at 1.0, all on the truth trace, straight
+  traces).** Axis-aligned: dense 0.6231 vs square-suppressed s4 0.7058 — the published advantage reproduces. Oblique
+  (1:2, 26.6°): 0.6202 vs 0.6570 — advantage holds but shrinks. **45° diagonal: 0.6176 vs 0.5764 — the published
+  policy scores *below* the dense control.** Square suppression (Chebyshev ≥ 4) forces diagonal nodes 5.66 px apart;
+  the midpoint sits 2.83 px from the nearest node and earns kernel credit 0.0572 — a near-miss. On the same diagonal,
+  **disc (Euclidean) suppression at the same spacing scores 0.7257 — above the axis win** (0.7058) — because it
+  spends more nodes on diagonal segments, matching the isotropic kernel.
+- **The regime condition, measured.** At budget = trace length, dense scores 1.000 and s4 nodes 0.6989: the placement
+  advantage exists only when coverage is the binding constraint. The real competition regime is exactly that
+  (hidden truth sparse vs budget), but the condition must be stated before the policy is trusted.
+- **Also measured:** on a single trace, square suppression spends only ceil(L/s) of the budget; the remainder must
+  come from other candidates/rays (the sibling files have many). Worst-case kernel credits: axis s=4 → 0.3333 (the
+  published "gap 2.0 px < 3" bound — true only for 4-connected geometry); diagonal square s=4 → 0.0572; s=6 axis
+  → 0.0000 (coverage hole, as derived).
+- **Expected DTI impact:** policy-level, potentially a few hundredths of DTI either way *at fixed detections* —
+  positive on near-axis traces, negative on diagonal ones under the published rule; orientation-robust under disc
+  suppression. It moves no tier by itself (GV-19: the tier gap is a detection problem).
+- **Cost:** trivial; one suppression functor.
+- **Validation ahead:** re-run on the real candidate mask once a canonical entry is settled (GV-18): split the
+  emission by local trace orientation and score per segment. Predicted outcome under the published square rule:
+  segment-level DTI rises with |orientation − axis|.
+- **Rejection:** if the orientation effect does not reproduce on real geometry, the synthetic model is
+  over-simplified and this card moves to Negative results with its numbers.
+- **Confidence:** measured under our metric on synthetic tiles (script output reproducible: `python3
+  scripts/placement_check.py`); the transfer to real traces is **inference**; the sibling pages' implementation
+  details are **site claims**.
+
 ## Negative results
 
 - **H13 — rejected as a proxy, 2026-09-26.** Measured on public files only (CG-15): the USGS and INGENIOUS

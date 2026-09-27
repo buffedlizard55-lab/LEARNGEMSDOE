@@ -40,6 +40,76 @@
 
       <h1>Changelog</h1>
 
+      <article class="entry" id="2026-09-26-dffe">
+        <h3>2026-09-26 · session <code>arena/01a0dffe-learngemsdoe</code> — ownership audit, field position, placement measurement, eight new entries, H15 measured, one fabrication corrected</h3>
+        <p><strong>Previous session's next steps, read first per instructions:</strong> (1) compiler-vs-geology split —
+          done, measured (CG-17); (2) rasterise both public compilations to the 100 m grid — done (script + two Actions
+          runs); (3) place competition rasters on an enrolled machine — still human-blocked; (4) Silver et al. (2011)
+          — still unobtained.</p>
+        <p><strong>Ownership, resolved as far as public data allows (GV-18).</strong> All six sibling sites and the
+          public leaderboard (both pages) were read this session. The hosting GitHub account holds <strong>12
+          competition-named repositories</strong> (eleven created in one batch on 2026-09-25) with one operator in the
+          commit record. Five DrivenData participants' best scores match artifacts the sibling sites publish: 0.1563 =
+          <code>extradr19</code> (#24, 2 submissions) and <code>SDCF9</code> (#25, 2); 0.1560 = <code>smashi34</code>
+          (#26, 1); 0.1193 = <code>smrtdoog5</code> (#42, 1); 0.0830 = <code>wbg1</code> (#52, 2); the reported 0.1152
+          is not on today's board (consistent with a superseded best). Whether those five accounts are one person is
+          <strong>not determinable from public data</strong> (profiles are login-gated; this agent holds no
+          credentials). 5GEMSDOE pins the byte-identical artifact as GEMSDOE (sha 7f00890a…). <strong>This repository
+          claims none of the five accounts and records none of the scores as our history.</strong> Field high
+          re-confirmed: 0.3049 (<code>DARD</code>).</p>
+        <p><strong>Measured with our own metric (task 3).</strong> New <code>scripts/placement_check.py</code>: truth
+          72 px, budget 40 px — axis: dense 0.6231 vs square-suppressed s=4 0.7058 (published advantage reproduces); oblique
+          1:2: 0.6202 vs 0.6570; <strong>45° diagonal: 0.6176 vs 0.5764 — nodes lose to dense</strong> (Chebyshev
+          suppression spaces diagonal nodes 5.66 px; midpoint kernel credit 0.0572); <strong>disc suppression restores
+          the win: 0.7257</strong>. Regime condition: at budget = trace length, dense 1.000 vs nodes 0.6989 — placement
+          wins only when coverage is the binding constraint. Recorded as <a href="hypotheses.html#h15">H15</a>
+          (partially validated, synthetic tiles).</p>
+        <p><strong>Measured on GitHub Actions (public files only; runs
+          <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36279828363">36279828363</a>,
+          <a href="https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36280128042">36280128042</a>).</strong>
+          Catalogue density 0.1291 km/km² (Area 1) vs 0.1196–0.1199 (Area 2) while the dominant compiler flips
+          (97% USGS by length in Area 1; 76% Piedmont Geosciences in Area 2) — no strong compiler→density signal at
+          polygon level. Catalogue stamped on the documented grid: union 216,111 px full-grid, 97.46% intersection;
+          inside the extent polygon 78,213 px vs the published label figure 60,988 (1.28×, convention-consistent;
+          inference). Details: <a href="research/catalogue-gaps.html#cg17">CG-17</a>.</p>
+        <p><strong>Added.</strong> Entries <a href="research/catalogue-gaps.html#cg17">CG-17</a>,
+          <a href="research/potential-field.html#pf11">PF-11</a>, <a href="research/geomorphology.html#gm11">GM-11</a>,
+          <a href="research/geomorphology.html#gm12">GM-12</a> (candidate-fault reasoning ledger — geological reasoning
+          per flagged class, task 6), <a href="research/seismotectonics.html#st9">ST-9</a>,
+          <a href="research/governance.html#gv18">GV-18</a>, <a href="research/governance.html#gv19">GV-19</a>,
+          <a href="research/governance.html#gv20">GV-20</a> (sibling CV / placement / format-gate / exec-summary audit —
+          tasks 2, 4, 5), and hypothesis <a href="hypotheses.html#h15">H15</a>. Library is now 79 entries / 15
+          hypotheses (2 rejected, 1 partially validated). New scripts: <code>placement_check.py</code>,
+          <code>rasterize_catalogue.py</code>; census extended; workflow publishes both summaries. Four new rows on the
+          sources page (leaderboard, Terms of Use, submissions page, sibling sites).</p>
+        <p><strong>Corrected, not smoothed.</strong> (1) A fabricated sentence in
+          <a href="research/potential-field.html#pf10">PF-10's HTML mirror</a> — “Area 1 lines flown at 22° (NNE); Area
+          2 at 310°” — contradicted the verified data-page azimuth specification (90°/180°, both areas; PF-9) and
+          apparently conflated the 22° drape climb/descent angle; replaced with the verified text, and the entry states
+          what was removed. (2) Stale counts: README “57 entries / H1–H12” → 79 / H1–H15; overview search-index line
+          100 → 127 items. (3) Two new flagged irregularities on the overview: the sibling repo/account entanglement,
+          and the stale “no file on this site has been uploaded” statement (two of today's board scores match that
+          site's published artifacts). (4) Pass-2 review fixes, applied before
+          the merge: PF-11's “what already exists” was restated from the verbatim band tags — the stack already ships
+          <em>both</em> HGM layers (band 3 magnetic, band 18 gravity), both vertical derivatives (bands 9/11) and one
+          magnetic tilt (band 6), so the derivable gaps reduce to the gravity tilt (atan of 11/18) and the magnetic
+          analytic signal (bands 3/9); ST-9 now quotes both earthquake bands (10 / 16; each “n=100 km radius, a=15°”
+          parameters); CG-17 gained perimeter check 3 — Area 1 + Area 2 = 52,348.8 km² is 670.0 km² more than the
+          51,678.8 km² data extent (per-Area lengths overshoot by 44–55 km), so the acquisition polygons overlap or
+          spill and Area totals must not be summed as disjoint.</p>
+        <p><strong>Ran and re-verified.</strong> <code>metrics.py --selftest</code> 11 PASS;
+          <code>check_site.py</code> PASS (18 pages, 69 source URLs; caught two card-count mismatches, fixed);
+          search index rebuilt (127 items; <code>--check</code> clean). Forum category JSON re-fetched: 11 topics,
+          newest still 11543 (2026-09-25), counts unchanged — no new staff answer. Two Actions runs green. No
+          prediction GeoTIFF generated, validated or submitted; no slot used; no login; no second site/repo/account;
+          no sibling repository checked out or modified.</p>
+        <p><strong>Next.</strong> (1) Human-held and now the binding constraint: settle one DrivenData account and one
+          entry repository (GV-18); archive or delete the duplicates. (2) If a canonical entry exists: swap square→disc
+          suppression (H15) and emit only GM-12-class candidates with the ledger paragraph in the narrative.
+          (3) H14 route 1 via per-<code>age</code> catalogue subsets — all public. (4) Silver et al. (2011) for H10.
+          (5) Re-check the four unanswered forum threads and the rules change-log (nothing moved today).</p>
+      </article>
+
       
       <article class="entry" id="2026-09-26-df6e">
         <h3>2026-09-26 · session <code>arena/01a0dfe6-learngemsdoe</code> — USGS-vs-INGENIOUS census, four new catalogue entries, H13 rejected</h3>

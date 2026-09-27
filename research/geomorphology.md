@@ -147,3 +147,89 @@ margins, lithologic benches, road and fence lines, playa edges.
 2. Build a lidar-coverage mask and intersect with the GeoDAWN outline; test whether catalogue completeness jumps at coverage boundaries.
 3. Check whether bands 12/19 match 10.5066/P9MQRCBY once resampled.
 4. **Do not compute slope from non-lidar 3DEP** — Hermant et al. found it artefact-ridden. A published negative result, free to respect.
+
+## GM-11 · Curvature and slope-break on the DEM: what the priority asks vs. what exists and what is documented
+
+- **Sources:** band tags as printed by the reference notebook (feature-stack page, verified); Hermant et al. (2025)
+  §3.3 (verified, GM-10); Mattéo et al. (2021), DOI <https://doi.org/10.1029/2020JB021269> (citation verified; methods
+  unread); 6GEMSDOE public methodology note and GEMSDOE4 feature description (site claims, read 2026-09-26); prior
+  session record in this file ("Do not compute slope from non-lidar 3DEP — Hermant et al. found it artefact-ridden").
+- **What the research priority asks.** Curvature and slope-break analysis on the DEM: plan and profile curvature to
+  pick out break lines (scarp crest and toe), thresholded curvature sign changes as slope-break candidates, and
+  multi-scale versions so a 100 m product and a 1 m lidar tile are not asked the same question. A Quaternary scarp on
+  a normal fault is a break in slope with a characteristic curvature couplet (convex crest over concave toe); that is
+  the geometric content of Hermant criterion 2 ("the areas on either side of the fault will have a different elevation
+  and the fault zone itself will have a steeper slope" — verbatim, GM-10).
+- **What already exists, verified from the band tags.** Detrended elevation and the slope of detrended elevation.
+  First derivatives only: no curvature band, no morphometric-break band, and the 1 m DEM that would carry scarp-scale
+  curvature is a separate, link-listed download (716 tiles confirmed by the sibling census — site claim), not a band.
+- **What the sibling field implements (site claims).** The 6GEMSDOE note lists "multi-scale curvature,
+  break-in-slope"; GEMSDOE4 lists structure-tensor lineament features on the six edge-bearing bands. Neither build is
+  held here; both claims are recorded as text read on their sites.
+- **Open, score-relevant questions.**
+  1. **Which DEM do the elevation bands actually come from?** The artefact warning recorded above (Hermant et al. on
+     resampled non-lidar 3DEP) only binds if the bands' provenance is known — feature-stack says provenance is
+     undocumented beyond the tags (and GV-17: the problem description and the tags disagree on the inventory).
+     Curvature amplifies exactly the artefacts the warning is about; until provenance is settled, curvature channels
+     must be built only where verified lidar exists.
+  2. **Curvature at 100 m sees scarps only weakly.** A 100 m cell averages out metre-scale scarp faces; the curvature
+     couplet survives as a broad sign change over 2–4 cells, which overlaps the curvature of hillslopes and channel
+     margins. This argues for slope-break *at the band's own scale* (second-derivative zero-crossings on the detrended
+     elevation) as the band-native channel, with 1 m curvature reserved for the lidar-covered fraction (H3, blocked).
+  3. **Detrending is a double-edged gift.** The detrended-elevation band removes the regional gradient — helpful for
+     scarps on range slopes — but the detrend kernel size sets the largest structure curvature can describe. The tag
+     does not state the kernel; inference until the raster is placed (feature-stack, "pitfalls").
+- **Confidence:** verified for band existence and the Hermant quotation; the scale and kernel analyses are
+  **inference**; the sibling feature lists are **site claims**.
+
+## GM-12 · Candidate-fault reasoning ledger — the geology write-up that must accompany any flagged pixel set
+
+- **Why this entry exists.** The scoring population is expert-mapped *new* faults (GV-5, GV-6), and Phase 2 is judged
+  against a label set that experts revise after seeing predictions (§1.1/§3.2, GV-15). A candidate flagged by any
+  model is therefore an argument to a geologist, not just a pixel mask. This ledger fixes the geological reasoning for
+  each candidate *class* in advance, grounded only in verified entries. It is written per class because this
+  repository holds no model output of its own — per-pixel instances of these classes belong to whichever single
+  canonical entry the account holder settles (GV-18), and the reasoning below is the required companion material.
+- **Class C1 — buried catalogue-gap lineament (magnetic + gravity edge, under cover).** *Reasoning:* Basin-and-Range
+  normal faulting offsets basement; a covered fault still juxtaposes blocks of different magnetic susceptibility and
+  density, so its trace is a linear HGM maximum on the magnetic grid with a gravity-gradient counterpart (PF-11 on
+  the transforms; band 15 depth-to-basement gives the cover context — PF-6). Cover means no scarp is expected (the
+  detrended-elevation band emphasises only local relief — GM-5) and the short
+  seismic record cannot be asked to veto it (ST-8). *Required evidence:* both edges collinear over multi-km length;
+  the line must not parallel a trackline within the PF-9 tolerance (H7 screen). *Chief confuser:* a lithologic contact
+  — discriminated by confluence with structural context (ST agreement matrix, row 4), never by a single band.
+- **Class C2 — trace-end extension of a mapped fault.** *Reasoning:* fault displacement dies out toward the tips into
+  distributed, sub-mapping-resolution deformation; the catalogue trace ends where geomorphic expression stops being
+  convincing to the mapper, not where the structure ends. Staff confirmed corrections/extensions "may already exist in
+  the new-fault set, and may also exist in the final round evaluation set" (11516 post 4, GV-15) and that new faults
+  "can include newly mapped geometry of an existing fault system" (GV-6). *Required evidence:* the extension
+  continues the strike of the mapped segment and shows the same geophysical expression as it. *Chief confuser:* none
+  — but the buffer does not soften scoring near the known trace (GV-5 point 2), so an extension must be the *right*
+  continuation, not a corridor.
+- **Class C3 — parallel strand / stepover in a Walker Lane dextral-normal array.** *Reasoning:* dextral-normal
+  systems form en echelon arrays with slip transferred across stepovers, and play-fairway geothermal exploration
+  treats such zones as dilatational hosts (the premise of the INGENIOUS project itself — verified from its project
+  page and resource list). A sub-parallel lineament within ~1 km of a mapped fault inside a stepover is a structural
+  candidate, not a duplicate. *Required evidence:* kinematic consistency — the strand must fit the regional
+  dextral-normal regime (PF-9's trend caveat: N–NE normal, NW dextral). *Chief confuser:* the mapped fault's own
+  uncertainty — CG-15 measured compilation-to-compilation agreement ≤ 31.6 m, so "parallel strand" claims under
+  ~100 m offset are unsupported by the public data (H13's lesson).
+- **Class C4 — E–W to WNW cross-structure linking range fronts.** *Reasoning:* accommodation zones and cross faults
+  are expected structurally, and they sit in the worst-sampled orientation of the GeoDAWN acquisition (E–W flight
+  lines, 2–4 km tie-line spacing — PF-9 verbatim geometry), so genuine catalogue gaps plausibly concentrate there.
+  But the same sampling gap manufactures line-parallel *artefacts* in any derivative of the grids. *Required
+  evidence:* the candidate must survive the H7 artefact screen at *stricter* tolerance than N–S candidates, and must
+  appear in at least two independent layers (magnetic and gravity, or geophysical and DEM). *Chief confuser:*
+  levelling/micro-levelling seams between the four acquisition blocks (PF-10, PF-7).
+- **Class C5 — straight, high-contrast lineament flagged by morphology alone.** *Reasoning:* Hermant criterion 1
+  ("generally straight line … strong visual contrast" — verbatim, GM-10) is necessary but far from sufficient:
+  roads, ditches, shorelines and channel margins share it, and the catalogue filed its own rejected lookalikes under
+  Class D (CG-14). *Required evidence:* an explicit non-tectonic rejection attempt per candidate (anthropogenic
+  corridor? agricultural geometry?) plus one independent physical layer. *Reporting duty in Phase 2:* the narrative
+  must say why each flagged line is tectonic; a bare mask carries no such argument (rules §3.2 narrative requirement,
+  GV-2).
+- **Use.** When — and only when — a single canonical entry exists (GV-18), every emitted candidate class gets one
+  paragraph of this ledger cited against it in the submission narrative. Candidates that match no class are not
+  emitted: "the model said so" is not reasoning.
+- **Confidence:** each class derives only from verified entries (linked in-line). The class taxonomy itself is
+  **inference** and stays marked so until measured against new-label evidence.

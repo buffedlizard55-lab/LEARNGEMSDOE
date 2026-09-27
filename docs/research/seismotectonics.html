@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Library · domain 4 of 6 · 8 entries · re-verified 2026-09-26</p>
+      <p class="meta">Library · domain 4 of 6 · 9 entries · re-verified 2026-09-26</p>
 
       <h1>Seismotectonics and strain</h1>
       <p class="lede">
@@ -301,6 +301,44 @@
         <li>Overlay the declustered earthquake-density grid from <a href="https://gdr.openei.org/files/1391/seismicity_INGENIOUS_regional_data.zip">the INGENIOUS archive</a> on band 16 and confirm which one the stacked band corresponds to.</li>
         <li>Build the agreement matrix above as an actual raster stack, then measure label density per cell of the matrix on a spatial holdout.</li>
       </ol>
+      <h2 id="st9">ST-9 · Cross-referencing strain-rate, conductivity and earthquake density</h2>
+      <article class="entry" id="st9-entry">
+        <h3><span class="id">ST-9</span> Confluence protocol — a statistical operation with a resolution budget, not a boolean overlay</h3>
+        <p><span class="chip verified">band tags, resource list, licences, ST-8 quotation</span> · protocol usefulness <span class="chip unverified">inference until measured</span></p>
+        <dl>
+          <dt>Source</dt>
+          <dd>Band tags (feature-stack, verified); INGENIOUS GDR 1391 resource list (geodetic shear/dilation — Nevada
+            Geodetic Lab; MT conductance, five depth ranges 2–200 km; earthquake density, independent and dependent —
+            all verified, CC BY 4.0); ST-8; Kreemer &amp; Young (2022),
+            <a href="https://doi.org/10.1785/0220220153">10.1785/0220220153</a> (record verified; provenance suggestion
+            unverified — ST-7's caution).</dd>
+          <dt>The resolution budget (verified inputs)</dt>
+          <dd>Both earthquake bands carry the parameterisation in their own tags — band 10 “Distance to earthquake
+            (n=100 km radius, a=15° azimuth parameters)” and band 16 “Earthquake intensity or density (n=100 km radius,
+            a=15° parameters)”; MT conductance spans 2–200 km depths; geodetic strain interpolates between GNSS
+            stations. All three are smooth at the
+            300 m kernel scale. <strong>Rule: these layers set a prior field over tens of kilometres; they must never
+            decide a single pixel.</strong> Valid: sample weighting, fold stratification in spatial CV, candidate
+            re-ranking with stated weights. Invalid: emit/no-emit gates; negative screens on quiet areas (ST-8: quiet ≠
+            fault-free — the database says so itself).</dd>
+          <dt>The confluence test (no model needed, blocked on rasters)</dt>
+          <dd><ol>
+            <li>Quantile-bin each layer on the footprint.</li>
+            <li>Build the signal cube (3×3×3 or pairwise 3×3); compute catalogue-label density per cell on
+              <strong>held-out spatial blocks only</strong> (H5 protocol: blocked and buffered, or the number says nothing).</li>
+            <li>“Do unmapped faults cluster where the three priors coincide?” is answered by the density gradient across
+              cells — not by a lift curve on training blocks.</li>
+            <li>Report nulls: flat density ⇒ confluence adds nothing; demote these layers to sample weights. A null here
+              is a publishable negative result, not a failure.</li>
+          </ol></dd>
+          <dt>Conductivity caveat (carried from H6)</dt>
+          <dd>Basin fill, salinity and outflow plumes are also conductive. Structurally enforced in the cube:
+            conductivity modifies structural candidates; it never generates them (agreement matrix refusal kept).</dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">verified</span> for parameterisations, list contents, licences, quotations;
+            <span class="chip unverified">inference</span> for usefulness until step 3 is measured.</dd>
+        </dl>
+      </article>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
   </div>

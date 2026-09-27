@@ -36,7 +36,7 @@
 
   <div class="shell">
     <main id="main">
-      <p class="meta">Written for a Phase 2 geologic reviewer · negative results are kept, never deleted · 14 hypotheses, 2 rejected · re-verified 2026-09-26</p>
+      <p class="meta">Written for a Phase 2 geologic reviewer · negative results are kept, never deleted · 15 hypotheses, 2 rejected · re-verified 2026-09-26</p>
 
       <h1>Hypothesis backlog</h1>
       <p class="lede">
@@ -48,7 +48,7 @@
 
       <div class="banner warn">
         <p>
-          <strong>Every card is untested.</strong> No spatial holdout has been run in this repository because the
+          <strong>Every card except H15 is untested against any label set.</strong> H15 is measured on synthetic tiles only (geometry under the metric, not labels). For all other cards, no spatial holdout has been run in this repository because the
           competition rasters are not placed in <code>data/</code>
           (see <a href="pipeline.html">pipeline status</a>). “Untested” here means “not measured”, not “plausible but
           unexamined” — the reasoning is sourced, the numbers are not. Two cards are additionally <strong>blocked</strong>
@@ -77,6 +77,7 @@
             <tr><td><strong>H8</strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Inferred and blank-scale catalogue traces mark the edge of the map — rejected: Inferred is 0.8% of clipped length in the footprint (<a href="research/catalogue-gaps.html#cg12">CG-12</a>), and 1.5% of USGS sections (<a href="research/catalogue-gaps.html#cg16">CG-16</a>)</td><td class="nowrap">Low</td><td class="nowrap">— (superseded by H12)</td></tr>
             <tr><td><strong><a href="#h13">H13</a></strong></td><td><span class="chip rejected">rejected 2026-09-26</span></td><td>Compilation-to-compilation offsets as a proxy for the correction class — rejected: the two compilations agree to ≤31.6 m (<a href="research/catalogue-gaps.html#cg15">CG-15</a>)</td><td class="nowrap">Low</td><td class="nowrap">— (measured on public data)</td></tr>
             <tr><td><strong><a href="#h14">H14</a></strong></td><td><span class="chip untested">untested</span></td><td>The catalogue's own recency attributes mark where expert attention has already been spent</td><td class="nowrap">Low</td><td class="nowrap">Public data</td></tr>
+            <tr><td><strong><a href="#h15">H15</a></strong></td><td><span class="chip validated">measured · directional</span></td><td>Metric-aware node placement beats dense emission only when coverage-constrained; square suppression fails on diagonal traces, disc suppression restores the win</td><td class="nowrap">Trivial</td><td class="nowrap">Measured synthetics</td></tr>
             <tr><td><strong><a href="#h9">H9</a></strong></td><td><span class="chip untested">untested</span></td><td>Train against label <em>incompleteness</em>, not only label position</td><td class="nowrap">Med</td><td class="nowrap">Rasters + GPU</td></tr>
             <tr><td><strong><a href="#h10">H10</a></strong></td><td><span class="chip blocked">blocked</span></td><td>Rye Patch / western Humboldt Range as an independent lidar validation anchor</td><td class="nowrap">Low–med</td><td class="nowrap">Silver et al. 2011 mapping</td></tr>
             <tr><td><strong><a href="#h11">H11</a></strong></td><td><span class="chip untested">untested</span></td><td>Soft confuser channels instead of hard negative classes</td><td class="nowrap">Low–med</td><td class="nowrap">External public layers</td></tr>
@@ -557,6 +558,42 @@
         </dl>
       </article>
 
+      <article class="entry" data-filter-item data-tags="H15 placement nodes spacing suppression metric emission">
+        <h3 id="h15">H15 — Metric-aware node placement: when spaced emission beats dense, and where it fails</h3>
+        <p><span class="chip validated">partially validated 2026-09-26 · synthetic tiles</span> <span class="chip verified">measured with our metric</span> <span class="chip unverified">transfer to real traces: inference</span></p>
+        <dl>
+          <dt>Layers</dt>
+          <dd>None — this is an emission-policy result measured on synthetic traces with this repository's own
+            distance-weighted Tversky implementation (<code>scripts/placement_check.py</code> driving
+            <code>scripts/metrics.py</code>). No competition data consumed; nothing emitted that could be submitted.</dd>
+          <dt>The claim under test</dt>
+          <dd>The metric credits each truth pixel from its single best prediction within a 300 m triangular kernel and
+            charges every emitted pixel that covers nothing, so at a fixed pixel budget, spaced nodes along a candidate
+            trace should beat a dense ridge prefix whenever there is more trace than budget. The sibling Pindrop page
+            (site claim, <a href="research/governance.html#gv20">GV-20</a>) publishes square-suppressed nodes at
+            spacing k = 4, derived from spacing/2 &lt; R ⇒ spacing ≤ 5.</dd>
+          <dt>What was measured (truth 72 px, budget 40 px, hard emission on the trace)</dt>
+          <dd><ul>
+            <li><strong>Axis-aligned trace:</strong> dense DTI 0.6231 vs square-suppressed s=4 <strong>0.7058</strong> — the published advantage reproduces.</li>
+            <li><strong>Oblique 1:2 (26.6°):</strong> 0.6202 vs 0.6570 — the advantage holds but shrinks.</li>
+            <li><strong>45° diagonal:</strong> 0.6176 vs <strong>0.5764 — below the dense control.</strong> Square (Chebyshev) suppression forces diagonal nodes 5.66 px apart; the midpoint sits 2.83 px from the nearest node and earns kernel credit 0.0572.</li>
+            <li><strong>The fix:</strong> disc (Euclidean) suppression at the same spacing scores <strong>0.7257</strong> on the diagonal — above the axis-aligned win — because it spends more nodes on diagonal segments, matching the isotropic kernel.</li>
+            <li><strong>Regime condition:</strong> at budget = trace length, dense scores 1.000 vs s=4 nodes 0.6989 — the placement advantage exists <em>only when coverage is the binding constraint</em>. The competition regime is exactly that (hidden truth sparse vs any pixel budget), but the condition must be stated each time the policy is invoked.</li>
+            <li>Worst-case kernel credits: axis s=4 → 0.3333 (the published bound, true only for 4-connected geometry); diagonal square s=4 → 0.0572; s=6 axis → 0.0000 (a true coverage hole).</li>
+          </ul></dd>
+          <dt>Expected DTI impact</dt>
+          <dd>Policy-level, a few hundredths of DTI either way <em>at fixed detections</em>; it changes no tier by itself (<a href="research/governance.html#gv19">GV-19</a>: the tier gap is a detection problem).</dd>
+          <dt>Cost</dt>
+          <dd>Trivial — one suppression functor.</dd>
+          <dt>Validation protocol</dt>
+          <dd>Once a single canonical entry is settled (<a href="research/governance.html#gv18">GV-18</a>): split any real emission by local trace orientation and score per segment. Prediction under the published square rule: segment DTI rises with |orientation − axis|.</dd>
+          <dt>Rejection criterion</dt>
+          <dd>If the orientation effect does not reproduce on real geometry, the synthetic model is over-simplified; this card then moves to Negative results with its numbers.</dd>
+          <dt>Confidence</dt>
+          <dd><span class="chip verified">measured</span> on synthetic tiles (reproduce: <code>python3 scripts/placement_check.py</code>). Transfer to real traces is <span class="chip unverified">inference</span>; the sibling pages' implementation details are site claims.</dd>
+        </dl>
+      </article>
+
       <h2 id="negative">Negative results</h2>
       <p>
         <strong>H13 — rejected as a proxy, 2026-09-26.</strong> Measured on public files only
@@ -592,7 +629,8 @@
           it while the GPU is already warm for H5.</li>
         <li><strong>H11 last of all</strong> — a precision tidy-up, only worth doing once there is something worth
           tidying.</li>
-      </ol>
+                <li><strong>H15 before the next emission-policy build</strong> — swap square for disc suppression; it is measured here, costs one function, and only matters at emission time.</li>
+        </ol>
     </main>
     <aside class="toc" aria-label="Table of contents"></aside>
   </div>

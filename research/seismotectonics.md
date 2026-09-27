@@ -102,3 +102,38 @@ spatial priors that re-weight candidates produced elsewhere, never as a standalo
 2. Check correlation between bands 10 and 16; if high, use one.
 3. Overlay the declustered grid from <https://gdr.openei.org/files/1391/seismicity_INGENIOUS_regional_data.zip> on band 16.
 4. Build the matrix as a raster stack; measure label density per cell on a spatial holdout.
+
+## ST-9 · Cross-referencing strain-rate, conductivity and earthquake density: confluence protocol, with the resolution warning spelled out
+
+- **Sources:** band tags as printed by the reference notebook (feature-stack page, verified); INGENIOUS GDR 1391
+  resource list (verified: geodetic shear/dilation from the Nevada Geodetic Lab; MT conductance at five depth ranges,
+  2–200 km; earthquake density, independent and dependent; all CC BY 4.0); ST-8 (USGS on the short seismic record);
+  Kreemer & Young (2022), DOI <https://doi.org/10.1785/0220220153> (bibliographic record verified; the suggestion
+  that it underlies the geodetic bands is unverified inference — ST-7's caution applies here too).
+- **What the research priority asks.** Not three separate prior maps but a *confluence* test: where strain-rate,
+  conductivity anomaly and earthquake density coincide, candidate rank should rise; where they disagree, the
+  disagreement matrix above applies. The point of this entry is that "cross-referencing" is a statistical operation
+  with a resolution budget, not a boolean overlay.
+- **The resolution budget, from verified sources.** Both earthquake bands carry the parameterisation in their own
+  tags — band 10 "Distance to earthquake (n=100 km radius, a=15° azimuth parameters)" and band 16 "Earthquake
+  intensity or density (n=100 km radius, a=15° parameters)"; the MT conductance layer spans 2–200 km depth ranges;
+  the geodetic strain field is a continuum interpolation between GNSS stations. All three are smooth on the scale of the 300 m scoring kernel.
+  Consequence, stated as a rule: **these layers set a prior field over tens of kilometres; they must never decide a
+  single pixel.** Valid uses: sample weighting in training, fold stratification in spatial CV, and candidate
+  re-ranking with explicitly stated weights. Invalid uses: hard emit/no-emit gates, negative screens on quiet areas
+  (ST-8: quiet ≠ fault-free, the database says so itself).
+- **The confluence test itself (measurable once rasters land; no model required).**
+  1. Discretise each layer into quantile bins on the footprint.
+  2. Build the 3×3×3 (or per-pair 3×3) signal cube; for each cell compute catalogue-label density per unit area on
+     *held-out spatial blocks only* (H5's protocol — blocked and buffered, or the number says nothing).
+  3. The question "do new faults cluster where the three priors coincide" is answered by the density gradient across
+     cube cells, not by a lift curve on training blocks.
+  4. Report the nulls: if density is flat across the cube, confluence adds nothing and these layers should be dropped
+     to sample weights only — that is a publishable negative result, not a failure.
+- **Conductivity caveat, carried forward from H6.** A conductivity high is also produced by basin fill, salinity and
+  outflow plumes; the agreement matrix already refuses to promote "conductivity high, no structural evidence". The
+  confluence cube keeps that refusal structurally: conductivity enters only as a *modifier of* structural candidates,
+  never as a candidate generator.
+- **Confidence:** verified for the band-tag parameterisations, resource list contents and licences, and the ST-8
+  quotation. The confluence protocol's usefulness is **inference** until step 3 is measured; it is stated here so the
+  measurement plan exists before the data do.

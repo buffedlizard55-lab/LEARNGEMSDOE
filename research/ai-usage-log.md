@@ -16,6 +16,48 @@ record rather than reconstructed at the deadline.
 
 ---
 
+## 2026-09-26 · session `arena/01a0dffe-learngemsdoe`
+
+- **Tool:** Arena.ai Agent Mode (an AI coding agent; underlying model not disclosed by the platform), with bash, git,
+  `gh`, a web-page fetch tool, image tooling (unused) and GitHub Actions in this repository. No other generative-AI
+  service was called. No prediction GeoTIFF was produced, scored, uploaded or validated against the platform, and no
+  weekly submission slot was used. No DrivenData account was created; no credentials were requested, held or stored;
+  no sibling repository was checked out, modified or interacted with beyond reading its public web pages.
+- **Did — prompt-triage.** Followed the session brief's seven tasks. Resumed from the previous session's changelog
+  "Next" list (read first): items 1–2 completed publicly (CG-17), item 3 remains human-blocked, item 4 (Silver et al.
+  2011) remains unobtained.
+- **Did — source verification.** Fetched and read (not recalled): the six sibling sites (GEMSDOE, GEMSDOE2, GEMSDOE3,
+  GEMSDOE4, 5GEMSDOE, 6GEMSDOE) including the GEMSDOE3 executive summary; the public DrivenData leaderboard (both
+  pages — every name, score, rank and submission count quoted in GV-18/GV-19 comes from those reads); the DrivenData
+  Terms of Use; the DrivenData login redirect (profiles are gated); the forum category JSON (counts re-confirmed; no
+  new staff answer). Read locally: the previous changelog, governance, pipeline, hypotheses, feature-stack-related
+  pages; `scripts/metrics.py`, `scripts/public_census.py`, `scripts/check_site.py`, site HTML.
+- **Did — measurement.** Wrote `scripts/placement_check.py` and ran it locally (pure standard library): dense vs
+  square- vs disc-suppressed node schedules on synthetic traces scored by this repository's own metric; the numbers
+  quoted in H15 are from that run's JSON. Extended `scripts/public_census.py` (compiler × polygon splits) and wrote
+  `scripts/rasterize_catalogue.py`; two `public-data` GitHub Actions runs (36279828363, 36280128042), results read
+  from check-run annotations; the CG-17 numbers are copied from those annotations.
+- **Did — writing.** Added entries CG-17, PF-11, GM-11, GM-12, ST-9, GV-18, GV-19, GV-20 and hypothesis H15
+  (markdown + HTML mirrors); updated overview/research card counts, the pipeline table, the sources page (four new
+  rows), the README; added two flagged-irregularity items (sibling multi-repo/multi-account entanglement; stale
+  "no file uploaded" statements). Rebuilt the search index (127 items).
+- **Did — correction.** Found and corrected a fabricated sentence in `docs/research/potential-field.html` (PF-10's
+  "Area 1 lines flown at 22° (NNE); Area 2 at 310°"), which contradicted the verified data-page azimuth specification;
+  corrected in place, disclosed in the changelog, and the entry now states what was removed.
+- **Boundaries kept.** One repository (this one), one site. None of the five leaderboard accounts entangled with the
+  sibling sites was claimed as ours, and none of their scores was recorded as our history; the unresolvable-from-here
+  ownership question is documented as unresolvable in GV-18 rather than answered by assumption. No forum posts (this
+  agent never posts). No external data fetched from login-gated or TLS-blocked hosts; public files were fetched only
+  on GitHub runners via the existing workflow.
+
+**Pass-2 review (same session):** line-by-line re-read caught and fixed an overclaim in PF-11 (the stack already
+ships both HGM bands 3/18, both vertical derivatives 9/11 and magnetic tilt 6 — gaps reduce to the gravity tilt and
+the analytic signal), corrected ST-9's earthquake sentence to quote both bands 10/16, and added CG-17 perimeter
+check 3 (acquisition polygons overlap by ~670 km²; totals not disjoint). `# 127 items` verification line and page
+metas refreshed; all checks re-run and PASS before the second commit.
+
+---
+
 ## 2026-09-26 · session `arena/01a0dfe6-learngemsdoe`
 
 - **Tool:** Arena.ai Agent Mode (an AI coding agent; underlying model not disclosed by the platform), with bash, git,

@@ -133,3 +133,45 @@ that responds to structure *under* cover.
 2. Overlay the GeoDAWN survey-outline shapefile; test whether band-3/6 maxima cluster along Area 1/2 and block boundaries (H7).
 3. Stratify every edge candidate by band 15 and report detection statistics per cover class.
 4. Compute analytic-signal amplitude and THDR; test whether either adds information over band 6 alone.
+
+## PF-11 · Horizontal-gradient and tilt derivatives: the priority list vs. what the stack already has
+
+- **Sources:** band tags as printed by the reference notebook (feature-stack page, verified); Miller &amp; Singh (1994),
+  DOI <https://doi.org/10.1016/0926-9851(94)90022-1> (bibliographic record verified, paper still unread — paywalled);
+  Verduzco et al. (2004), DOI <https://doi.org/10.1190/1.1651454> (likewise qualified); 6GEMSDOE public site
+  methodology note (site claim, read 2026-09-26).
+- **What the research priority asks.** Derivative layers on the magnetic and gravity grids: horizontal gradient
+  magnitude (HGM), tilt derivative (TDR), and by extension the analytic-signal amplitude. These are the standard
+  source-edge transforms: HGM maxima sit over contrasts in susceptibility (magnetics) or density (gravity), the tilt
+  angle normalises the vertical derivative by the horizontal gradient so shallow and deep edges plot at comparable
+  amplitude — the forms introduced for edges by Miller &amp; Singh (1994) and popularised for display by Verduzco et
+  al. (2004). The formula-level details are deliberately not reproduced here from memory; both papers are on the
+  unread-source list and the definitions above are marked **inference from the citations' scope**, not from the texts.
+- **What already exists, verified from the band tags** (feature-stack page, quoted here from the tags verbatim):
+  magnetics — band 1 anomaly, band 2 reduced-to-pole, band 3 "Total magnetic intensity horizontal gradient", band 9
+  "vertical gradient", band 6 "Tilt angle or total curvature — magnetic field derivative for edge detection", band 14
+  TMI. Gravity — band 13 isostatic anomaly, band 5 slope, band 11 "vertical gradient", band 18 "horizontal gradient".
+  So **the priority's derivative ask is already largely shipped**: both HGM layers exist (3 magnetic, 18 gravity),
+  both vertical derivatives exist (9, 11), and one tilt layer exists (6, magnetic). The two derivable gaps are the
+  **gravity tilt** (computable as atan(band 11 / band 18)) and the **analytic-signal amplitude** (from bands 3 and 9).
+  Band 15 remains the depth-to-basement cover surface.
+- **What the sibling field implements (site claims, not re-run here).** The 6GEMSDOE methodology note advertises
+  "derived horizontal-gradient magnitude, analytic-signal amplitude, tilt derivative, multi-scale curvature,
+  break-in-slope and structure-tensor lineament features" over "the 19 official GeoDAWN/USGS bands", 88 channels in
+  total; GEMSDOE4 describes 63 lineament features (multi-scale Sato ridgeness, structure-tensor coherence) on the six
+  bands it judged edge-bearing. Published as text on their sites; this repository holds neither build.
+- **The open, score-relevant questions.**
+  1. **Do the re-derived transforms add anything over the shipped bands?** If band 6 is the tilt derivative
+     (bands 9/3 recombined), it is redundant by construction; the marginal channels are the *gravity* tilt
+     (bands 11/18) and the magnetic analytic signal (bands 3/9), the latter being tolerant of magnetisation
+     direction. "Cheapest next experiments" item 4 on this page already anticipated this; it is unmeasured because
+     the rasters are unplaced.
+  2. **Cross-layer edge coincidence.** A magnetic edge and a gravity edge at the same line are two independent
+     physical contrasts supporting one buried structure (see ST-6's agreement matrix). Confluence is the discriminator
+     between a fault and a lithologic contact, and it cannot be faked by a single-band edge detector.
+  3. **Acquisition orientation leakage** (PF-9): derivative operators amplify along-track noise anisotropically —
+     HGM computed on an anisotropically sampled grid is not isotropic, and line-parallel artefacts survive every
+     derivative. Any HGM/TDR feature list needs the H7 artefact screen applied *after* derivation, not before.
+- **Confidence:** verified for the band tags' existence as printed by the notebook, the two DOIs, and the sibling
+  sites' published wording. Derivative-definition characterisations are **inference** until Miller &amp; Singh and
+  Verduzco et al. are read; the redundancy and confluence arguments are **inference** pending the rasters.

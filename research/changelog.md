@@ -6,6 +6,129 @@ Append-only. Passes are idempotent — extend entries, never duplicate. Newest f
 
 ---
 
+## 2026-09-26 · session `arena/01a0dffe-learngemsdoe` — ownership audit, field position, placement measurement, eight new entries, H15 measured, one fabrication corrected
+
+**Previous session's next steps — status at start of this session (read first, per instructions)**
+
+1. Compiler-vs-geology density split → **done, measured on public data (CG-17).**
+2. Rasterise both public compilations to the 100 m grid → **done; script + two Actions runs, reconciliation quantities in CG-17.**
+3. Place competition rasters on an enrolled machine → **still blocked; unchanged, human-held.**
+4. Obtain Silver et al. (2011) for H10 → **not obtained this session; still the only route to a local truth set.**
+
+**Prompted guardrail — one account, one repo, verified as far as public data allows (GV-18)**
+
+- Read the sibling reference sites (GEMSDOE, GEMSDOE2, GEMSDOE3, plus the three "ownership-unconfirmed" 5GEMSDOE,
+  GEMSDOE4, 6GEMSDOE) and the **public leaderboard (both pages)** line by line this session.
+- Measured: the hosting GitHub account holds **12 competition-named repositories**; eleven created in one batch on
+  2026-09-25; commit authors on all of them are the account owner + the Arena agent bot + Actions. **One operator on
+  GitHub.** GitHub Pages builds exist on the sibling sites; several publish ready-to-upload submission GeoTIFFs.
+- Measured: the scores the prompt attributes to the sibling sites belong to **five** DrivenData participants on
+  today's board: 0.1563 = `extradr19` (#24, 2 submissions) and `SDCF9` (#25, 2 submissions); 0.1560 = `smashi34`
+  (#26, 1); 0.1193 = `smrtdoog5` (#42, 1); 0.0830 = `wbg1` (#52, 2). The reported third GEMSDOE3 score 0.1152 is **not
+  on today's board** (consistent with a superseded best; two of the 0.1563 accounts show exactly two submissions).
+  Field high re-confirmed: **0.3049** (`DARD`, 10 submissions).
+- **Ownership finding (explicit resolution, as instructed):** whether those five accounts are one natural person or
+  five is **not determinable from public data** — DrivenData profiles are login-gated (redirect verified) and this
+  agent holds no credentials. The sibling sites' own text resolves the *artifact* lineage: 5GEMSDOE pins the
+  byte-identical artifact as GEMSDOE (sha 7f00890a…); GEMSDOE2's site compares against GEMSDOE's 0.1563; 6GEMSDOE's
+  own audit section (2026-09-25) already declared the 11-repo duplication and called itself canonical — while every
+  sibling equally publishes "the file to submit", so that self-declaration does not resolve anything for anyone else.
+  **This repository therefore claims none of the five accounts and records none of the scores as our history.** If
+  several of the accounts are one person, that is a one-entity problem for the account holder to fix from their login;
+  the escalation channel is documented (GV-16: forum or gemsprize@nlr.gov). If they are five people, the sibling
+  sites are public artifacts being downloaded by other entrants — also not ours. Flagged on the overview, not smoothed.
+- Added an irregularity pair to the overview covering the above, including the stale "no file on this site has been
+  uploaded" statement on GEMSDOE3's pages (two of today's board scores match that site's published artifacts).
+
+**Measured — placement, with this repository's own metric (task 3 done where it can be)**
+
+- New `scripts/placement_check.py` drives `scripts/metrics.py` on synthetic traces (pure Python, no data). Truth
+  72 px, budget 40 px, hard emission on the trace: axis — dense DTI 0.6231 vs square-suppressed s=4 **0.7058** (the
+  published "placement beats mass" reproduces); oblique 1:2 — 0.6202 vs 0.6570; **45° diagonal — 0.6176 vs 0.5764
+  (nodes lose to dense)**: Chebyshev suppression spaces diagonal nodes 5.66 px and the midpoint earns kernel credit
+  0.0572. **Disc (Euclidean) suppression at the same spacing restores the win: 0.7257 on the diagonal.** Regime
+  condition measured: at budget = trace length dense scores 1.000 vs s=4 nodes 0.6989 — the advantage exists only
+  when coverage is the binding constraint. Recorded as **H15 (partially validated — synthetic tiles)**.
+
+**Measured — public data, on GitHub Actions (runs 36279828363, 36280128042)**
+
+- Compiler-per-polygon split: density 0.1291 km/km² (Area 1) vs 0.1196–0.1199 (Area 2) — within ~8% — while the
+  dominant compiler flips (Area 1 97% USGS by length; Area 2 76% Piedmont Geosciences). **No strong
+  compiler→density signal at polygon level** (previous session's next-step 1, answered; caveats in CG-17).
+- Catalogue stamped on the documented grid: full grid INGENIOUS 213,399 / USGS 213,342 / union 216,111 px,
+  97.46% intersection; inside the extent polygon union **78,213 px** vs the published label figure 60,988 (1.28×,
+  consistent with stamping convention; labelled inference). INGENIOUS records within the grid bbox + 1 km: 1,137 ≈
+  CG-9's envelope count 1,179.
+
+**Added**
+
+- Research entries **CG-17** (census + rasterisation), **PF-11** (HGM/TDR/analytic signal — priority vs. stack vs.
+  sibling site claims), **GM-11** (curvature and slope-break), **GM-12** (candidate-fault reasoning ledger: five
+  classes, pre-stated geology, per task 6), **ST-9** (confluence protocol for strain/conductivity/seismicity with the
+  resolution-budget rule), **GV-18** (ownership audit), **GV-19** (field position), **GV-20** (sibling documentation
+  audit: CV, placement, format gate, exec summary — tasks 2, 4, 5 verdicts). Domain now 6 domains / **79** entries /
+  **15** hypotheses (2 rejected, 1 partially validated on synthetics).
+- `scripts/placement_check.py`, `scripts/rasterize_catalogue.py`; `scripts/public_census.py` extended; the
+  `public-data` workflow now runs the rasteriser and publishes both summaries as annotations; artifacts (JSON + zlib
+  bitmap) uploaded as `public-census` run artifacts, not committed.
+
+**Corrected — not smoothed over**
+
+- **A fabricated sentence in `docs/research/potential-field.html` (entry PF-10)**: "Azimuth, verified: Area 1 lines
+  flown at 22° (NNE); Area 2 at 310°" contradicted the verified verbatim data-page specification (flight lines 90°,
+  tie lines 180°, both areas — PF-9) and appears to have conflated the drape surface's 22° climb/descent angle with a
+  flight-line azimuth. Replaced with the verified text; the correction is recorded here, and the entry itself now
+  states what was removed. Found while mirroring this session's PF-11 edit.
+- **Stale counts**: README said "57 numbered entries" and "H1–H12" (actual was 71 / H1–H14 before this session);
+  both fixed (79 / H1–H15). Overview "100 items" search-index line updated to 127.
+
+- **Pass-2 review fixes (same session, before merge)**: PF-11's "what already exists" was restated from the
+  verbatim band tags after a line-by-line re-read — the stack already ships *both* HGM layers (band 3 magnetic,
+  band 18 gravity), both vertical derivatives (bands 9/11) and one magnetic tilt (band 6); the genuinely derivable
+  gaps reduce to the **gravity tilt** (atan of 11/18) and the **magnetic analytic signal** (bands 3/9). ST-9 now
+  quotes both earthquake bands (10: "Distance to earthquake (n=100 km radius, a=15° azimuth parameters)"; 16:
+  "Earthquake intensity or density (n=100 km radius, a=15° parameters)"). CG-17 gained perimeter check 3: Area 1
+  (2,413.4 km²) + Area 2 (49,935.4 km²) = 52,348.8 km² is 670.0 km² more than the 51,678.8 km² data extent, and
+  per-Area clipped lengths exceed the holdout-domain 6,241.3 km by 44–55 km — the acquisition polygons overlap or
+  spill, so Area-level totals must not be summed as disjoint (per-polygon densities unaffected).
+
+**Verified again (re-run, not recalled)**
+
+- `python3 scripts/metrics.py --selftest` → 11 PASS. `python3 scripts/check_site.py` → PASS (18 pages, 69 source
+  URLs; caught and fixed two card-count mismatches this session). `python3 scripts/build_search_index.py` →
+  127 items; `--check` clean after rebuild.
+- Task 2 (CV): sibling sites' blocked+buffered fold claims recorded **as site claims** (GV-20); this repo holds no
+  training harness, and its own H5 protocol position stands.
+- Task 4 (format gate): sibling `validate_submission.py` 13-check output including the NAN-INSIDE-FOOTPRINT hard
+  gate read on 6GEMSDOE's index; check list matches every verified format rule; recorded as site claims — this repo
+  has no submission generator to gate, by design (pipeline page).
+- Task 5 (exec summary / how-to-submit): GEMSDOE3 executive summary and GEMSDOE2 index read line by line; metric
+  constants, 3/week cap, one-final-selection and two-phase structure **match the verified rules**; the one stale
+  sentence is flagged above.
+- Forum category JSON re-fetched: 11 topics, newest still 11543 (2026-09-25), `posts_count` unchanged across the
+  watch list — no staff answer appeared on any open question.
+
+**Ran**
+
+- Two `public-data` Actions runs (listed above): census + rasteriser, all green.
+- No prediction GeoTIFF generated, validated or submitted; no weekly slot used; no login; no second site, repo,
+  account or registration created; no sibling repository checked out or modified.
+
+**Next**
+
+1. **Human-held, blocks everything scored:** settle one DrivenData account and one entry repository (GV-18); archive
+   or delete the duplicate sites (6GEMSDOE's bridge is self-contained); state the decision in next session's changelog.
+2. If/when a canonical entry exists: swap square→disc suppression in its emission (H15), and emit only candidates
+   that match a GM-12 class with the ledger paragraph in the narrative.
+3. Rasterise per-`age` subsets of the public catalogue and test H14 route 1 (updated-trace concentration) — all
+   public data, ready to script.
+4. Obtain Silver et al. (2011) for H10 — still open.
+5. Re-check forum threads 11540/11526/11543/11499 and the rules change-log at next session start. **Re-checked this
+   session** (category JSON, 2026-09-26): still 11 topics, newest still 11543 (2026-09-25), `posts_count` unchanged
+   (1 for 11543/11540/11526, 2 for 11528/11536/11499, 10 for 11527); no new staff reply.
+
+---
+
 ## 2026-09-26 · session `arena/01a0dfe6-learngemsdoe` — USGS-vs-INGENIOUS census, four new catalogue entries, H13 rejected
 
 **Verified this session, each item fetched and read line by line (not recalled)**
