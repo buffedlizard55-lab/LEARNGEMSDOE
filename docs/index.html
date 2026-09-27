@@ -209,27 +209,27 @@
         Net effect: reproducing catalogue earns nothing, hedging wide corridor around known traces costs real false-positive mass. Money is in geometry an expert would add — tip extensions, splays, parallel strands, structures under cover — not thicker ink on mapped lines.
       </p>
 
-      <h2 id="library">Research library — 6 domains, 71 entries, every entry source-linked</h2>
+      <h2 id="library">Research library — 6 domains, 79 entries, every entry source-linked</h2>
       <div class="grid">
         <a class="card" href="research/catalogue-gaps.html">
           <h3>1 · Catalogue-gap reasoning</h3>
           <p>How USGS and INGENIOUS catalogues were actually built — and where that process is structurally incomplete. Highest-leverage domain.</p>
-          <p class="card-meta">16 entries · highest leverage</p>
+          <p class="card-meta">17 entries · highest leverage</p>
         </a>
         <a class="card" href="research/potential-field.html">
           <h3>2 · Potential-field geophysics</h3>
           <p>RTP/TMI, gradients, tilt derivative, isostatic gravity — edges that survive under basin fill where no scarp exists.</p>
-          <p class="card-meta">10 entries</p>
+          <p class="card-meta">11 entries</p>
         </a>
         <a class="card" href="research/geomorphology.html">
           <h3>3 · DEM structural geomorphology</h3>
           <p>Detrended elevation and slope at 100 m, 1 m lidar via 3DEP, and what a subtle Basin-and-Range scarp looks like in each.</p>
-          <p class="card-meta">10 entries</p>
+          <p class="card-meta">12 entries</p>
         </a>
         <a class="card" href="research/seismotectonics.html">
           <h3>4 · Seismotectonics and strain</h3>
           <p>Strain-rate invariants, earthquake density, conductivity — where independent signals agree and where they part.</p>
-          <p class="card-meta">8 entries</p>
+          <p class="card-meta">9 entries</p>
         </a>
         <a class="card" href="research/prior-art.html">
           <h3>5 · Prior art</h3>
@@ -239,14 +239,14 @@
         <a class="card" href="research/governance.html">
           <h3>6 · Competition governance</h3>
           <p>Rules sections, forum clarifications and errata, open eligibility questions, time-sensitive items, plus re-verification passes showing no official change.</p>
-          <p class="card-meta">17 entries</p>
+          <p class="card-meta">20 entries</p>
         </a>
       </div>
       <p class="small">
         Also: <a href="feature-stack.html">feature stack</a> lists all 19 bands with official descriptions, raster geometry, GeoDAWN acquisition specs; <a href="sources.html">sources</a> is full index with verification status; <a href="search.html">search</a> covers every entry.
       </p>
 
-      <h2 id="hypotheses">Hypothesis backlog — 14 cards, 2 rejected on measured public data, the rest untested because data are not placed</h2>
+      <h2 id="hypotheses">Hypothesis backlog — 15 cards, 2 rejected on measured public data, one partially validated on synthetic tiles, the rest untested because data are not placed</h2>
       <p class="small">
         Status counts: <span data-chip-count></span>. Full cards with layers, physical signature, why each targets a <em>gap</em> rather than known fault, expected DTI impact, cost and rejection criteria: <a href="hypotheses.html">hypothesis backlog</a>.
       </p>
@@ -318,6 +318,21 @@
             <strong>The two label catalogues disagree by 13.5× in record count and 0.18% in length.</strong> Inside the GeoDAWN data extent the USGS compilation holds 5,570 sections and INGENIOUS holds 413 traces for the same ~6,230 km of fault. Any sentence of the form “the catalogue holds only N traces here” describes a file, not the crust — <a href="research/catalogue-gaps.html#cg15">CG-15</a>. The USGS page also calls the GIS zip “16 MB”; the file served is 32,371,696 bytes.
           </li>
           <li>
+            <strong>Twelve competition-named repositories and five leaderboard accounts on one GitHub operator; ownership of the accounts unverifiable from public data.</strong>
+            Eleven sibling repos were created in one batch on 2026-09-25; several publish ready-to-upload submission
+            GeoTIFFs. Five DrivenData participants' best scores match artifacts those sites publish (0.1563 ×2,
+            0.1560, 0.1193, 0.0830); a reported 0.1152 is no longer on the board. Whether those accounts are one
+            person or five cannot be determined without credentials this agent does not hold — so none of those scores
+            is recorded here as ours, and any of them may belong to other entrants. Full audit:
+            <a href="research/governance.html#gv18">GV-18</a>; field position: <a href="research/governance.html#gv19">GV-19</a>.
+            Resolution (one entity, one repo) belongs to the account holder, via <code>gemsprize@nlr.gov</code> if needed.
+          </li>
+          <li>
+            <strong>Sibling "no file uploaded" statements are stale.</strong> At least one sibling site states "no file
+            on this site has been uploaded" while the public leaderboard shows best scores matching the artifacts that
+            site publishes (GV-18, GV-20). Recorded as a documentation irregularity.
+          </li>
+          <li>
             <strong>The problem description's feature list and the notebook's band tags do not line up.</strong> “Depth to conductive base surface” and “top-of-crustal magnetic source depth estimate” have no band tag; band 6 (tilt/curvature) and band 10 (distance to earthquake) are absent from the description — <a href="research/governance.html#gv17">GV-17</a>. Resolvable from <code>data/inventory.json</code> once rasters are placed.
           </li>
         </ol>
@@ -370,7 +385,7 @@ python scripts/prepare_data.py              # writes data/inventory.json — ins
 # After that, reconcile inventory against feature-stack page
 python3 scripts/metrics.py --selftest       # 11 checks, CPU, stdlib only — already PASS here
 python3 scripts/check_site.py               # 18 pages, 63 sources — already PASS here
-python3 scripts/build_search_index.py --check # 100 items — already PASS here</code></pre>
+python3 scripts/build_search_index.py --check # 127 items — PASS, this session</code></pre>
         <p class="small">Competition rasters require login, so not in repo. Metric/losses/validation verified working here on CPU. GPU needed for training. No training/inference script that emits submission GeoTIFF is present in this repo by design — see <a href="pipeline.html">pipeline gate</a>. That is separate, explicitly gated process.</p>
       </div>
     </main>

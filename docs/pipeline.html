@@ -144,18 +144,33 @@ python scripts/prepare_data.py              # writes data/inventory.json — ins
               <td><span class="chip verified">runs; exits 2 — no data</span></td>
             </tr>
             <tr>
+              <td><code>python3 scripts/placement_check.py</code></td>
+              <td>Python 3 standard library (uses <code>metrics.py</code>)</td>
+              <td>Dense vs square- vs disc-suppressed node emission on synthetic traces, scored with our metric;
+                prints JSON (<a href="hypotheses.html#h15">H15</a>)</td>
+              <td><span class="chip verified">runs, this session</span></td>
+            </tr>
+            <tr>
+              <td><code>python3 scripts/rasterize_catalogue.py</code></td>
+              <td>pyshp, shapely, pyproj + the public zips (runner; sandbox TLS blocked)</td>
+              <td>Stamps both public compilations onto the documented 100 m EPSG:32611 grid, with an extent-polygon
+                interior mask; JSON + compressed bitmap artifacts (<a href="research/catalogue-gaps.html#cg17">CG-17</a>) — research input for later
+                label-raster reconciliation; not a prediction</td>
+              <td><span class="chip verified">ran on Actions 2026-09-26 (runs 36279828363, 36280128042)</span></td>
+            </tr>
+            <tr>
               <td><code>python3 scripts/check_site.py</code></td>
               <td>Python 3 standard library</td>
               <td>Offline site verification: internal links and anchors, local assets, page structure, and that every
                 external link is recorded on the <a href="sources.html">sources page</a></td>
-              <td><span class="chip verified">passes, 18 pages</span></td>
+              <td><span class="chip verified">passes, this session</span></td>
             </tr>
             <tr>
               <td><code>python3 scripts/build_search_index.py</code></td>
               <td>Python 3 standard library</td>
               <td>Regenerates <code>docs/assets/search-index.js</code> from <code>research/*.md</code>;
                 <code>--check</code> reports drift</td>
-              <td><span class="chip verified">passes, 100 items (session arena/01a0dfc9)</span></td>
+              <td><span class="chip verified">passes, 127 items, this session</span></td>
             </tr>
           </tbody>
         </table>

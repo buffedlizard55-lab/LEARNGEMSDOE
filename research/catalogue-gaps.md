@@ -391,3 +391,37 @@ data extent (5,570 sections; every count is one re-runnable measurement, CG-15):
 verified numbers, assuming a one-pixel-wide rasterisation. Compare Hermant et al.'s 6.5% positive fraction at 10 m with a
 50 m buffer (GM-3): the imbalance here is worse by more than an order of magnitude, and the buffer that produced their
 6.5% is not available to us because the mask is pixel-exact (GV-5).
+
+## CG-17 · Compiler-vs-geology density, per-polygon splits, and the catalogue rasterised to the competition grid
+
+- **Measured on GitHub Actions** — [run 36279828363](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36279828363)
+  and [run 36280128042](https://github.com/buffedlizard55-lab/LEARNGEMSDOE/actions/runs/36280128042) (2026-09-26),
+  scripts `public_census.py` (extended) and `rasterize_catalogue.py` (new). Numbers copied from the run annotations;
+  full JSON in the `public-census` artifacts.
+- **Does catalogue density track the compiler? Measured answer at the GeoDAWN polygon level: no strong signal.**
+  Mapped-fault length density is 0.1291 km/km² in Area 1 (311.6 km over 2,413.4 km²) vs 0.1196–0.1199 km/km² in
+  Area 2 (≈5,980 km over 49,935.4 km²) — within ~8% — while the dominant compiler *flips*: Area 1's content is 97%
+  U.S. Geological Survey by length (303.0 of 311.6 km) and Area 2's is 76% Piedmont Geosciences (4,562.2 of 5,985.2
+  km; USGS 1,193.9, California Geological Survey 229.1). If compilation effort drove apparent fault density, the two
+  polygons would not sit within 8% of each other. Caveat recorded with the result: two polygons is the coarsest
+  possible aggregation; a finer mesh could still show compiler-linked cells, and the near-equality also follows from
+  CG-15's finding that the two compilations are the *same content* restated (≤ 31.6 m), so a single underlying mapping
+  effort is shared across both polygons.
+- **The catalogue on the competition grid.** Both public compilations stamped to the documented 100 m EPSG:32611 grid
+  (3,730 × 3,292, origin 243350 E / 4,508,550 N; densify 25 m, all-touched): full grid — INGENIOUS 213,399 px (1,137
+  records within the grid bbox + 1 km), USGS 213,342 px (14,286 records), union 216,111, intersection 210,630
+  (**97.46% pixel overlap** — CG-15's "same content, differently segmented" now holds at pixel level too).
+  Inside the extent polygon (centroid mask): INGENIOUS 78,132 / USGS 78,105 / union **78,213 px**.
+- **Reconciliation with the published label-raster figure (60,988 catalogue px — site claim, not measured here).**
+  Full-grid stamping (216k px) vs inside-footprint (78.2k px): the ≈2.8× reduction is the GV-12 bounding-box effect
+  measured directly — most public catalogue pixels stamped on the grid are *outside* the surveyed area and cannot be
+  labels. The residual 78,213 vs 60,988 (1.28×) is consistent with stamping conventions (all-touched vs a
+  centroid/narrow rasterisation of the same traces; 1.2–1.4× is the expected factor for long 1-px features) and,
+  possibly, label-side subsetting. **Labelled inference until the label raster is placed;** the convention effect is
+  the larger and the subsetting effect is so far unsupported by any number.
+- **INGENIOUS MAPSCALE perimeter check:** inside the extent, 393 traces at code 250 (5,947.0 km) + 20 at code 100
+  (283.2 km) — matches CG-12's earlier 413/6,230.2 km exactly; Area 1 is entirely code 250. The v2 README documents
+  only codes 24/63/100/250/316/500 (re-printed this run); other codes present in the regional data remain undocumented
+  (carried-over flag).
+- **Confidence:** measured (public files only; every number from the named runs). The compiler-density interpretation
+  and the label-raster reconciliation are **inference**, and the 60,988 reference figure is a **site claim**.

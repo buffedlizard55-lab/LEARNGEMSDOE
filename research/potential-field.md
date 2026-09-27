@@ -133,3 +133,40 @@ that responds to structure *under* cover.
 2. Overlay the GeoDAWN survey-outline shapefile; test whether band-3/6 maxima cluster along Area 1/2 and block boundaries (H7).
 3. Stratify every edge candidate by band 15 and report detection statistics per cover class.
 4. Compute analytic-signal amplitude and THDR; test whether either adds information over band 6 alone.
+
+## PF-11 · Horizontal-gradient and tilt derivatives: the priority list vs. what the stack already has
+
+- **Sources:** band tags as printed by the reference notebook (feature-stack page, verified); Miller &amp; Singh (1994),
+  DOI <https://doi.org/10.1016/0926-9851(94)90022-1> (bibliographic record verified, paper still unread — paywalled);
+  Verduzco et al. (2004), DOI <https://doi.org/10.1190/1.1651454> (likewise qualified); 6GEMSDOE public site
+  methodology note (site claim, read 2026-09-26).
+- **What the research priority asks.** Derivative layers on the magnetic and gravity grids: horizontal gradient
+  magnitude (HGM), tilt derivative (TDR), and by extension the analytic-signal amplitude. These are the standard
+  source-edge transforms: HGM maxima sit over contrasts in susceptibility (magnetics) or density (gravity), the tilt
+  angle normalises the vertical derivative by the horizontal gradient so shallow and deep edges plot at comparable
+  amplitude — the forms introduced for edges by Miller &amp; Singh (1994) and popularised for display by Verduzco et
+  al. (2004). The formula-level details are deliberately not reproduced here from memory; both papers are on the
+  unread-source list and the definitions above are marked **inference from the citations' scope**, not from the texts.
+- **What already exists, verified from the band tags.** Band 6 is tagged "Tilt angle or total curvature — magnetic
+  field derivative for edge detection" and band 15 is a depth-to-basement surface; there is also a band carrying the
+  "vertical slope of total magnetic intensity" (feature-stack page). So the stack already ships exactly one magnetic
+  edge derivative and no gravity edge derivative — the isostatic gravity anomaly appears only raw and as its slope.
+- **What the sibling field implements (site claims, not re-run here).** The 6GEMSDOE methodology note advertises
+  "derived horizontal-gradient magnitude, analytic-signal amplitude, tilt derivative, multi-scale curvature,
+  break-in-slope and structure-tensor lineament features" over "the 19 official GeoDAWN/USGS bands", 88 channels in
+  total; GEMSDOE4 describes 63 lineament features (multi-scale Sato ridgeness, structure-tensor coherence) on the six
+  bands it judged edge-bearing. Published as text on their sites; this repository holds neither build.
+- **The open, score-relevant questions.**
+  1. **Does derived HGM/TDR add anything over band 6?** If band 6 is the tilt derivative of TMI, then re-deriving TDR
+     is redundant by construction and the marginal channel is *gravity* HGM/TDR (basement density edges under cover)
+     and the analytic signal (less dependent on magnetisation direction). "Cheapest next experiments" item 4 on this
+     page already anticipated this; it is unmeasured because the rasters are unplaced.
+  2. **Cross-layer edge coincidence.** A magnetic edge and a gravity edge at the same line are two independent
+     physical contrasts supporting one buried structure (see ST-6's agreement matrix). Confluence is the discriminator
+     between a fault and a lithologic contact, and it cannot be faked by a single-band edge detector.
+  3. **Acquisition orientation leakage** (PF-9): derivative operators amplify along-track noise anisotropically —
+     HGM computed on an anisotropically sampled grid is not isotropic, and line-parallel artefacts survive every
+     derivative. Any HGM/TDR feature list needs the H7 artefact screen applied *after* derivation, not before.
+- **Confidence:** verified for the band tags' existence as printed by the notebook, the two DOIs, and the sibling
+  sites' published wording. Derivative-definition characterisations are **inference** until Miller &amp; Singh and
+  Verduzco et al. are read; the redundancy and confluence arguments are **inference** pending the rasters.
